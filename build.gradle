@@ -1,0 +1,146 @@
+buildscript {
+    apply from: "./script/gradle-script/ext-config.gradle"
+    apply from: "./script/gradle-script/ext-version.gradle"
+    apply from: "./script/gradle-script/ext-func-allprojects.gradle"
+    repositories {
+        mavenLocal()
+//        maven {
+//            url "https://maven.aliyun.com/repository/public-snapshots"
+//        }
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath(app_plugins['spring-boot-gradle-plugin'])
+        classpath(app_plugins['gradle-docker-plugin'])
+    }
+
+}
+
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+
+}
+
+allprojects {
+    group 'com.kylinhunter.nlp'
+//    version '1.0.0-SNAPSHOT'
+    version '1.0.0'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    repositories {
+        mavenLocal()
+//        maven {
+//            url "https://maven.aliyun.com/repository/public-snapshots"
+//        }
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply from: "$rootProject.rootDir/script/gradle-script/ext-func-subprojects.gradle"
+
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+
+    dependencies {
+
+        implementation("ch.qos.logback:logback-classic")
+        implementation("org.projectlombok:lombok")
+        annotationProcessor 'org.projectlombok:lombok'
+
+
+
+
+
+        testImplementation("org.projectlombok:lombok")
+        testAnnotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+
+        testImplementation 'org.junit.platform:junit-platform-suite-api:1.8.2'
+        testImplementation 'org.junit.platform:junit-platform-suite:1.8.2'
+        testImplementation 'org.junit.platform:junit-platform-engine:1.8.2'
+        testImplementation 'org.junit.platform:junit-platform-commons:1.8.2'
+        testImplementation 'org.junit.platform:junit-platform-launcher:1.8.2'
+
+
+        testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.2'
+        testImplementation(rootProject.dep['jmockit'])
+
+    }
+
+    test {
+//        exclude 'com/kylinhunter/**/Suite**'
+        useJUnitPlatform()
+        testLogging {
+            outputs.upToDateWhen { false }
+            showStandardStreams = true
+        }
+
+    }
+
+    task taskChangeActiveProfile {
+        doLast {
+            changeActiveProfile(project.profile)
+        }
+    }
+    classes.finalizedBy(taskChangeActiveProfile)
+    addDockerBuildTask(project.name)
+
+
+    java{
+        withSourcesJar()
+//        withJavadocJar()
+
+    }
+
+
+    // 解决javadoc打包乱码
+    javadoc {
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            author true
+            version true
+        }
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+
+
+
+}
+
+wrapper {
+    gradleVersion = '6.9'
+    archiveBase = 'GRADLE_USER_HOME'
+    archivePath = 'wrapper/dists'
+    distributionBase = 'GRADLE_USER_HOME"'
+    distributionPath = 'wrapper/dists'
+    distributionUrl = 'https://services.gradle.org/distributions/gradle-6.9-bin.zip'
+}

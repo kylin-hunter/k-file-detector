@@ -1,0 +1,20 @@
+ext {
+    profile = "local"
+    //   profile="dev-k8s-share"
+    DEV_DUBBO_GROUP = "bijian"
+    //DEV_DUBBO_HOST="192.168.31.154"
+    //DEV_DUBBO_HOST="172.20.31.50"
+
+    DEV_DUBBO_HOST = ""
+
+    IMAGE_REPO = "私服地址"
+    IMAGE_VERSION = "v1"
+
+
+    config_modules_build_images = [
+            "kylinunter-dic-server"
+    ]
+
+
+}
+

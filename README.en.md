@@ -1,7 +1,7 @@
-# k-file-detector
+# k-dic
 
 #### Description
-文件类型检测工具
+词典服务。
 
 #### Software Architecture
 Software architecture description

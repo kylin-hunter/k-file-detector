@@ -1,0 +1,3 @@
+rootProject.name = 'k-nlp'
+include 'k-file-detector'
+

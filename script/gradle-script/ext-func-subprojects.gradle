@@ -1,0 +1,132 @@
+buildscript {
+    repositories {
+        mavenLocal()
+//        maven {
+//            url "https://maven.aliyun.com/repository/public-snapshots"
+//        }
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+	mavenCentral()
+    }
+    dependencies {
+        classpath(app_plugins['spring-boot-gradle-plugin'])
+        classpath(app_plugins['gradle-docker-plugin'])
+    }
+}
+
+ext {
+    changeActiveProfile = { profile ->
+
+        File applicaitonFile = new File("$buildDir/resources/main/application.yml")
+        if (applicaitonFile.exists()&&applicaitonFile.getAbsolutePath().indexOf("server")>0) {
+            def list = []
+            println("@@ change active profile ==> " + profile)
+            applicaitonFile.withReader('UTF-8') { reader ->
+                reader.eachLine {
+                    if (it.startsWith('    active:')) {
+                        it = "    active: $profile"
+                        println("@@ change spring.profiles.active success ==> " + profile)
+                    }
+                    if (it.startsWith('  devVersion:')) {
+                        it = "  devVersion: $version"
+                        println("@@ change app.devVersion success ==> " + version)
+                    }
+                    list.add(it)
+                }
+                applicaitonFile.withWriter('UTF-8') { writer ->
+                    list.each {
+                        writer.writeLine(it)
+                    }
+                }
+            }
+        }
+
+        File applicaitonDevFile = new File("$buildDir/resources/main/application-dev.yml")
+        if (!"".equals(project.DEV_DUBBO_GROUP)&&applicaitonDevFile.exists()&&applicaitonDevFile.getAbsolutePath().indexOf("server")>0) {
+            def list = []
+            println("@@ change dubbo.group  ==> "+ project.name +":" + project.DEV_DUBBO_GROUP)
+            applicaitonDevFile.withReader('UTF-8') { reader ->
+                reader.eachLine {
+                    if (it.startsWith('    group:')) {
+                        it = "    group: $project.DEV_DUBBO_GROUP"
+                        println("@@ change dubbo.group success ==> " + it)
+                    }
+                    if (it.startsWith('#    host:') &&  !"".equals(project.DEV_DUBBO_HOST)) {
+                        it = "    host: $project.DEV_DUBBO_HOST"
+                        println("@@ change dubbo.host success ==> " + it)
+                    }
+                    list.add(it)
+                }
+                applicaitonDevFile.withWriter('UTF-8') { writer ->
+                    list.each {
+                        writer.writeLine(it)
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    addDockerBuildTask = { projectName ->
+
+        rootProject.config_modules_build_images.each {
+
+            if (it == projectName) {
+//                println it
+
+// Use task types dependsOn: build
+                task dockerImagePrepare(dependsOn: build) {
+
+                    ext {
+
+                        sourceFile= file("$rootProject.buildDir/docker-${project.name}/${project.name}-${project.version}.jar")
+                        distFile  = file("$rootProject.buildDir/docker-${project.name}/${project.name}.jar")
+                    }
+                    doLast {
+
+                        copy {
+                            from distFile
+                            into "$rootProject.buildDir/docker-" + project.name
+                        }
+                        copy {
+                            from 'src/main/resources/docker'
+                            into "$rootProject.buildDir/docker-" + project.name
+                            include 'Dockerfile'
+                            include '/bin/*.sh'
+                        }
+                        copy {
+                            from 'output/libs'
+                            into "$rootProject.buildDir/docker-" + project.name
+                            include '**/*.jar'
+
+
+                        }
+                        copy {
+                            from configurations.compile
+                            into "$rootProject.buildDir/docker-" + project.name + "/lib"
+                        }
+
+                        sourceFile.renameTo(distFile)
+
+
+
+                    }
+
+
+                }
+// Use task types
+                task dockerImageBuild(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage, dependsOn: dockerImagePrepare) {
+                    inputDir = file("$rootProject.buildDir/docker-" + project.name)
+                    images.add(IMAGE_REPO + project.name + ":" + rootProject.IMAGE_VERSION)
+                }
+            }
+        }
+
+
+    }
+
+}
+
+

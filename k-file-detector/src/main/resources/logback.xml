@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true">
+    <property name="application.name" value="k-file-detector"/>
+    <include resource="com/kylinhunter/plat/commons/kylinhunter.xml"/>
+</configuration>
