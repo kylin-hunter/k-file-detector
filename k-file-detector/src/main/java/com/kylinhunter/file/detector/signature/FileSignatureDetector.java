@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author BiJi'an
  * @description 文件magic code检查
- * @date 2022-10-12 14:08
+ * @date 2022-10-02 14:08
  **/
 @Slf4j
 public class FileSignatureDetector {
@@ -38,7 +38,7 @@ public class FileSignatureDetector {
      * @title safe
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 10:23
+     * @date 2022-10-07 10:23
      */
     public static DetectConext detect(byte[] content, String fileName, DetectOption detectOption) {
         String possibleMagicNumber = MagicReader.read(content, fileName, false);
@@ -57,7 +57,7 @@ public class FileSignatureDetector {
      * @title safe
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 10:23
+     * @date 2022-10-07 10:23
      */
 
     public static DetectConext detect(MultipartFile file, DetectOption detectOption) {
@@ -77,7 +77,7 @@ public class FileSignatureDetector {
      * @title safe
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 10:23
+     * @date 2022-10-07 10:23
      */
     public static DetectConext detect(File file, DetectOption detectOption) {
         String possibleMagicNumber = MagicReader.read(file, false);
@@ -92,7 +92,7 @@ public class FileSignatureDetector {
      * @title safe
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 10:23
+     * @date 2022-10-07 10:23
      */
 
     private static DetectConext detect(String possibleMagicNumber, String fileName, DetectOption detectOption) {
@@ -113,7 +113,7 @@ public class FileSignatureDetector {
      * @title check
      * @description
      * @author BiJi'an
-     * @date 2022-10-18 20:19
+     * @date 2022-10-08 20:19
      */
     private static void detect(DetectConext detectConext, Set<Magic> magics) {
         if (magics != null && magics.size() > 0) {  // candidate magic numnbers
@@ -145,7 +145,7 @@ public class FileSignatureDetector {
      * @title isValid
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 10:23
+     * @date 2022-10-07 10:23
      */
     private static void delectDisguiseExtension(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDetectDisguiseExtension()) {
@@ -206,7 +206,7 @@ public class FileSignatureDetector {
      * @title checkDanger
      * @description
      * @author BiJi'an
-     * @date 2022-10-18 20:19
+     * @date 2022-10-08 20:19
      */
     private static void detectDangerConent(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDeletecDangerousContent()) {

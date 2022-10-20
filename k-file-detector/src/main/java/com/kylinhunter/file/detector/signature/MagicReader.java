@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author BiJi'an
  * @description
- * @date 2022-10-12 16:45
+ * @date 2022-10-02 16:45
  **/
 @Slf4j
 public class MagicReader {
@@ -33,7 +33,7 @@ public class MagicReader {
      * @title read
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 17:09
+     * @date 2022-10-04 17:09
      */
     public static String read(byte[] content, String fileName, boolean accurate) {
         if (content != null && content.length > 0) {
@@ -51,7 +51,7 @@ public class MagicReader {
      * @title read magic
      * @description
      * @author BiJi'an
-     * @date 2022-10-12 16:47
+     * @date 2022-10-02 16:47
      */
 
     public static String read(MultipartFile file) {
@@ -67,7 +67,7 @@ public class MagicReader {
      * @title read
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 17:09
+     * @date 2022-10-04 17:09
      */
     public static String read(MultipartFile file, boolean accurate) {
 
@@ -86,7 +86,7 @@ public class MagicReader {
      * @title read
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 10:31
+     * @date 2022-10-04 10:31
      */
     public static String read(File file) {
         return read(file, false);
@@ -100,7 +100,7 @@ public class MagicReader {
      * @title read
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 17:10
+     * @date 2022-10-04 17:10
      */
     public static String read(File file, boolean accurate) {
         try (InputStream is = new FileInputStream(file)) {
@@ -119,7 +119,7 @@ public class MagicReader {
      * @title read
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 10:31
+     * @date 2022-10-04 10:31
      */
     private static String read(InputStream inputStream, String fileName, long fileSize, boolean accurate)
             throws IOException {

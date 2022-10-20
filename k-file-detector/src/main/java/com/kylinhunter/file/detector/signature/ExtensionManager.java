@@ -165,7 +165,7 @@ public class ExtensionManager {
      * @title getFileType
      * @description
      * @author BiJi'an
-     * @date 2022-10-19 16:04
+     * @date 2022-10-09 16:04
      */
     public Set<FileType> getFileTypes(ExtensionRisk risk) {
         if (risk != null) {

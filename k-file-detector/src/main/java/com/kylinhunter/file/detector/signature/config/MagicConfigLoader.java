@@ -16,7 +16,7 @@ import lombok.Data;
 /**
  * @author BiJi'an
  * @description
- * @date 2022-10-12 19:55
+ * @date 2022-10-02 19:55
  **/
 @Data
 public class MagicConfigLoader {
@@ -28,7 +28,7 @@ public class MagicConfigLoader {
      * @title load
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 15:29
+     * @date 2022-10-04 15:29
      */
     public static MagicConfig load() {
         if (cachedData != null) {
@@ -50,7 +50,7 @@ public class MagicConfigLoader {
      * @title load
      * @description
      * @author BiJi'an
-     * @date 2022-10-13 23:14
+     * @date 2022-10-03 23:14
      */
     private static MagicConfig load0() {
 

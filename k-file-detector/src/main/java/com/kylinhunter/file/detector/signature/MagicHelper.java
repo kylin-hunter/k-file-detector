@@ -19,7 +19,7 @@ import lombok.Data;
 /**
  * @author BiJi'an
  * @description 参考 https://www.garykessler.net/library/file_sigs.html
- * @date 2022-10-12 14:42
+ * @date 2022-10-02 14:42
  **/
 @Data
 public class MagicHelper {
@@ -83,7 +83,7 @@ public class MagicHelper {
      * @title get ALL_MAGICS
      * @description
      * @author BiJi'an
-     * @date 2022-10-12 16:21
+     * @date 2022-10-02 16:21
      */
     public static ExtensionMagics getExtensionMagics(String extension) {
         return EXTENSION_MAGICS.get(extension);
@@ -110,7 +110,7 @@ public class MagicHelper {
      * @title getEXPLICIT_EXTENSION_MAGICS
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 15:55
+     * @date 2022-10-04 15:55
      */
     public static Map<String, ExtensionMagics> getAllExtensionMagics() {
         return EXTENSION_MAGICS;
@@ -122,7 +122,7 @@ public class MagicHelper {
      * @title getMagics
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 15:54
+     * @date 2022-10-04 15:54
      */
     public static Map<String, Magic> getAllMagics() {
         return ALL_MAGICS;
@@ -136,7 +136,7 @@ public class MagicHelper {
      * @title getExtensions
      * @description
      * @author BiJi'an
-     * @date 2022-10-13 23:10
+     * @date 2022-10-03 23:10
      */
     public static Magic getMagic(String number) {
         return ALL_MAGICS.get(number);

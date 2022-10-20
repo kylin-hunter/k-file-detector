@@ -23,7 +23,7 @@ public class StringUtil extends StringUtils {
      * @title bytesToHexStringV2
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 00:06
+     * @date 2022-10-04 00:06
      */
     public static String bytesToHexStringV2(byte[] b, int off, int len) {
 
@@ -53,7 +53,7 @@ public class StringUtil extends StringUtils {
      * @title bytesToHexString
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 00:06
+     * @date 2022-10-04 00:06
      */
     public static String bytesToHexString(byte[] bytes, int off, int len) {
         if (bytes == null) {

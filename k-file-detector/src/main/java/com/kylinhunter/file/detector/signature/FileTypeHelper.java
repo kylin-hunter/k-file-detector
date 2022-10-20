@@ -12,7 +12,7 @@ import com.kylinhunter.file.detector.signature.config.FileTypeConfigLoader;
 /**
  * @author BiJi'an
  * @description
- * @date 2022-10-17 16:20
+ * @date 2022-10-07 16:20
  **/
 public class FileTypeHelper {
     private static final ExtensionManager EXTENSION_MANAGER = new ExtensionManager();
@@ -33,7 +33,7 @@ public class FileTypeHelper {
      * @title getFileType
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 16:21
+     * @date 2022-10-07 16:21
      */
     public static FileType getFileType(String extension) {
         return EXTENSION_MANAGER.getFileType(extension);
@@ -46,7 +46,7 @@ public class FileTypeHelper {
      * @title getFileType
      * @description
      * @author BiJi'an
-     * @date 2022-10-17 16:21
+     * @date 2022-10-07 16:21
      */
     public static Set<FileType> getFileTypes(ExtensionFamily fileTypefamily) {
         return EXTENSION_MANAGER.getFileTypes(fileTypefamily);
@@ -59,7 +59,7 @@ public class FileTypeHelper {
      * @title getFileType
      * @description
      * @author BiJi'an
-     * @date 2022-10-19 16:04
+     * @date 2022-10-09 16:04
      */
     public static Set<FileType> getFileTypes(ExtensionRisk risk) {
         return EXTENSION_MANAGER.getFileTypes(risk);

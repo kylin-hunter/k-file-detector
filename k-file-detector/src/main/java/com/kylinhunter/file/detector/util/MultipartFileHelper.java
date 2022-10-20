@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author BiJi'an
  * @description
- * @date 2022-10-14 10:32
+ * @date 2022-10-04 10:32
  **/
 @Slf4j
 public class MultipartFileHelper {
@@ -33,7 +33,7 @@ public class MultipartFileHelper {
      * @title getMultipartFile
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 10:33
+     * @date 2022-10-04 10:33
      */
     public static MultipartFile getMultipartFile(File file) throws IOException {
         return new CommonsMultipartFile(createFileItem(file));
@@ -47,7 +47,7 @@ public class MultipartFileHelper {
      * @title createFileItem
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 10:33
+     * @date 2022-10-04 10:33
      */
     private static FileItem createFileItem(File file) throws IOException {
 

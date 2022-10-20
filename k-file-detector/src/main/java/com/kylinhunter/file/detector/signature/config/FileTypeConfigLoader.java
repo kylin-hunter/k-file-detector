@@ -12,7 +12,7 @@ import lombok.Data;
 /**
  * @author BiJi'an
  * @description
- * @date 2022-10-12 19:55
+ * @date 2022-10-02 19:55
  **/
 @Data
 public class FileTypeConfigLoader {
@@ -24,7 +24,7 @@ public class FileTypeConfigLoader {
      * @title load
      * @description
      * @author BiJi'an
-     * @date 2022-10-14 15:29
+     * @date 2022-10-04 15:29
      */
     public static FileTypeConfig load() {
         if (cachedData != null) {
@@ -46,7 +46,7 @@ public class FileTypeConfigLoader {
      * @title load
      * @description
      * @author BiJi'an
-     * @date 2022-10-13 23:14
+     * @date 2022-10-03 23:14
      */
     private static com.kylinhunter.file.detector.signature.config.FileTypeConfig load0() {
 
