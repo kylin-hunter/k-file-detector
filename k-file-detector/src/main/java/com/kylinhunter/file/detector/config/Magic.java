@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.signature.config;
+package com.kylinhunter.file.detector.config;
 
 import java.util.HashSet;
 import java.util.List;
@@ -6,12 +6,14 @@ import java.util.Set;
 import java.util.StringJoiner;
 
 import com.kylinhunter.file.detector.constant.MagicFamily;
-import com.kylinhunter.file.detector.constant.MagicMatchType;
+import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author BiJi'an
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 public class Magic {
+    /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
     private String number;
     private String desc;
@@ -29,8 +32,10 @@ public class Magic {
     private List<MagicFamily> families;
     private MagicRisk risk;
 
-    private int byteNum;
-    private MagicMatchType matchType;
+    /* ==== extended  properties===*/
+    private int magicLength; //  magic number's bytes size
+    private MagicMatchMode matchMode;
+    @Setter(AccessLevel.NONE)
     private Set<FileType> fileTypes = new HashSet<>();
 
     public void addFileType(FileType fileType) {

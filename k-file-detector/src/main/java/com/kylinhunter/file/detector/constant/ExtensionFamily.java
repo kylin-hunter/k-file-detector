@@ -1,6 +1,6 @@
 package com.kylinhunter.file.detector.constant;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,24 +9,18 @@ import lombok.Getter;
  * @date 2022-10-02 16:24
  **/
 @Getter
-public enum ExtensionFamily  {
-    MS_OFFICE_OLD_DOCUMENT(1, "MS_OFFICE_OLD_DOCUMENT"),
-    MS_OFFICE_97_DOCUMENT(2, "Microsoft Office 97-2003"),
-    MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT(3, "Microsoft Office  Open XML Format document"),
-    PIC(4, "PICTURE"),
-    AV(5, "AV"),
+@AllArgsConstructor
+public enum ExtensionFamily {
+    MS_OFFICE_97_2003(1, "Microsoft Office 97-2003"),
+    MS_OFFICE(2, "Microsoft Office"),
+    PICTURE(3, "picture"),
+    AUDIO_VIDEO(4, "audio or video"),
+    EXECUTABLE_FILE(5, "linux or unix executable file "),
     EXECUTABLE_FILE_WINDOWS(6, "Windows/DOS executable file"),
-    EXECUTABLE_FILE(7, "executable"),
-    DOCUMENT(8, "DOCUMENT"),
-    OTHERS(9, "OTHERS"),
-    UNKNOWN(10, "UNKNOWN");
+    DOCUMENT(7, "common document"),
+    OTHERS(8, "others"),
+    UNKNOWN(9, "unknown");
 
-    private int code;
-    private String desc;
-
-    ExtensionFamily(int code, String desc) {
-        this.code = code;
-        this.desc = desc;
-    }
-
+    private final int code;
+    private final String desc;
 }

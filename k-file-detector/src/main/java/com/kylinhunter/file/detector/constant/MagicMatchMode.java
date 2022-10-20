@@ -10,10 +10,11 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public enum MagicRisk {
-    LOW(1, "LOW"),
-    MIDDLE(2, "MIDDLE"),
-    HIGH(3, "HIGH");
+public enum MagicMatchMode {
+    PREFIX(1, "prefix magic number"),
+    PREFIX_FUZZY(2, "fuzzy prefix  magic number");
+
     private final int code;
     private final String name;
+
 }

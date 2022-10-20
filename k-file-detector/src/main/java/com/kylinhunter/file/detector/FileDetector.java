@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.signature;
+package com.kylinhunter.file.detector;
 
 import java.io.File;
 import java.util.Set;
@@ -9,12 +9,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.file.detector.bean.DetectConext;
 import com.kylinhunter.file.detector.bean.DetectOption;
-import com.kylinhunter.file.detector.constant.MagicMatchType;
+import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.signature.config.ExtensionMagics;
-import com.kylinhunter.file.detector.signature.config.FileType;
-import com.kylinhunter.file.detector.signature.config.Magic;
+import com.kylinhunter.file.detector.config.ExtensionMagics;
+import com.kylinhunter.file.detector.config.FileType;
+import com.kylinhunter.file.detector.config.Magic;
+import com.kylinhunter.file.detector.signature.ExtensionManager;
+import com.kylinhunter.file.detector.signature.FileTypeHelper;
+import com.kylinhunter.file.detector.signature.MagicHelper;
+import com.kylinhunter.file.detector.signature.MagicReader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022-10-02 14:08
  **/
 @Slf4j
-public class FileSignatureDetector {
+public class FileDetector {
 
     public static DetectConext detect(byte[] content, String fileName) {
         return detect(content, fileName, DetectOption.getDefault());
@@ -120,7 +124,7 @@ public class FileSignatureDetector {
             String possibleMagicNumber = detectConext.getPossibleMagicNumber();
             for (Magic magic : magics) {
                 String number = magic.getNumber();
-                if (magic.getMatchType() == MagicMatchType.PREFIX) {
+                if (magic.getMatchMode() == MagicMatchMode.PREFIX) {
                     if (possibleMagicNumber.startsWith(number)) {
                         detectConext.addDetectedMagic(magic);
                     }
@@ -156,7 +160,7 @@ public class FileSignatureDetector {
                 if (explicitFileType != null) { // 支持的扩展名
                     ExtensionMagics explicitExtensionMagics = MagicHelper.getExtensionMagics(explicitFileType);
                     detectConext.setExtensionMagics(explicitExtensionMagics);
-                    detect(detectConext, explicitExtensionMagics.getExplicitMagics());
+                    detect(detectConext, explicitExtensionMagics.getMagics());
                     if (detectConext.isDetected()) {
                         detectConext.setSafeStatus(SafeStatus.SAFE);
                     } else {

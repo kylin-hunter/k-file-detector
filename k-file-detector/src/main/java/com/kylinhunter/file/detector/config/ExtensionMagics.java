@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.signature.config;
+package com.kylinhunter.file.detector.config;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,26 +21,39 @@ public class ExtensionMagics {
     @EqualsAndHashCode.Include
     private String extension;
     @Setter(AccessLevel.NONE)
-    private Set<Magic> explicitMagics = new HashSet<>();
-
+    private Set<Magic> magics = new HashSet<>();
     private Set<String> tolerateExtensions;
-
     @Setter(AccessLevel.NONE)
     private Set<Magic> tolerateMagics;
-
     private int magicMaxLength = 1;
 
     public ExtensionMagics(String extension) {
         this.extension = extension;
     }
 
-    public void addExplicitMagic(Magic magic) {
-        explicitMagics.add(magic);
-        if (magic.getByteNum() > magicMaxLength) {
-            magicMaxLength = magic.getByteNum();
+    /**
+     * @param magic magic
+     * @return void
+     * @title addExplicitMagic
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-21 02:07
+     */
+    public void addMagic(Magic magic) {
+        magics.add(magic);
+        if (magic.getMagicLength() > magicMaxLength) {
+            magicMaxLength = magic.getMagicLength();
         }
     }
 
+    /**
+     * @param magics magics
+     * @return void
+     * @title addTolerateMagics
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-21 02:07
+     */
     public void addTolerateMagics(Set<Magic> magics) {
         if (tolerateMagics == null) {
             tolerateMagics = Sets.newHashSet();

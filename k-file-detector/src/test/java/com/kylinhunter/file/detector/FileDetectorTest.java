@@ -14,13 +14,12 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import com.kylinhunter.file.detector.bean.DetectConext;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.signature.FileSignatureDetector;
 import com.kylinhunter.file.detector.signature.FileTypeHelper;
-import com.kylinhunter.file.detector.signature.config.FileType;
+import com.kylinhunter.file.detector.config.FileType;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class FileSignatureDetectorTest {
+class FileDetectorTest {
 
     @Test
     @Order(1)
@@ -29,7 +28,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 if (FileTypeHelper.isDanger(FilenameUtils.getExtension(file.getName()))) {
                     Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
@@ -48,7 +47,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.DISGUISE, detectConext.getSafeStatus());
             }
@@ -63,7 +62,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.DISGUISE_WARN, detectConext.getSafeStatus());
             }
@@ -77,7 +76,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
             }
@@ -91,7 +90,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile()) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.DANGEROUS_CONTENT, detectConext.getSafeStatus());
             }
@@ -105,7 +104,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.UNKNOWN, detectConext.getSafeStatus());
             }
@@ -119,7 +118,7 @@ class FileSignatureDetectorTest {
         System.out.println(dir.getAbsolutePath());
         for (File file : dir.listFiles()) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileSignatureDetector.detect(file);
+                DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.SAFE, detectConext.getSafeStatus());
             }
@@ -145,7 +144,7 @@ class FileSignatureDetectorTest {
                         FileUtils.copyFile(file, fileTmp);
                     }
 
-                    DetectConext detectConext = FileSignatureDetector.detect(fileTmp);
+                    DetectConext detectConext = FileDetector.detect(fileTmp);
                     System.out.println(fileTmp.getName() + "=>" + detectConext.getSafeStatus());
                 }
             }

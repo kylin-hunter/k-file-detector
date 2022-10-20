@@ -1,18 +1,13 @@
 package com.kylinhunter.file.detector.signature;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.kylinhunter.file.detector.config.ExtensionMagics;
+import com.kylinhunter.file.detector.config.FileType;
+import com.kylinhunter.file.detector.config.Magic;
+import com.kylinhunter.file.detector.config.MagicConfigLoader;
 import com.kylinhunter.file.detector.constant.MagicRisk;
-import com.kylinhunter.file.detector.signature.config.ExtensionMagics;
-import com.kylinhunter.file.detector.signature.config.FileType;
-import com.kylinhunter.file.detector.signature.config.Magic;
-import com.kylinhunter.file.detector.signature.config.MagicConfig;
-import com.kylinhunter.file.detector.signature.config.MagicConfigLoader;
 
 import lombok.Data;
 
@@ -24,55 +19,22 @@ import lombok.Data;
 @Data
 public class MagicHelper {
 
-    // extension > magic number
-
-    private static final Map<String, ExtensionMagics> EXTENSION_MAGICS = new HashMap<>();
-    private static final Map<String, Magic> ALL_MAGICS = Maps.newHashMap();
-    private static MagicConfig magicConfig;
-    private static final Map<MagicRisk, Set<Magic>> RISK_MAGICS = new HashMap<>();
+    private static final MagicManager MAGIC_MANAGER = new MagicManager();
 
     static {
         init();
     }
 
+    /**
+     * @return void
+     * @title init
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-21 02:47
+     */
     private static void init() {
-        magicConfig = MagicConfigLoader.load();
-        magicConfig.getMagics().forEach(magic -> {
-            ALL_MAGICS.put(magic.getNumber(), magic);
-            magic.getFileTypes().forEach(fileType -> EXTENSION_MAGICS
-                    .compute(fileType.getExtension(), (extension, extensionMagics) -> {
-                        if (extensionMagics == null) {
-                            extensionMagics = new ExtensionMagics(extension);
-                        }
-                        extensionMagics.addExplicitMagic(magic);
-                        return extensionMagics;
-                    }));
-
-            RISK_MAGICS.compute(magic.getRisk(), (risk, magics) -> {
-                if (magics == null) {
-                    magics = Sets.newHashSet();
-                }
-                magics.add(magic);
-                return magics;
-            });
-
-        });
-
-        EXTENSION_MAGICS.forEach((extension, extensionMagics) -> {
-
-            Set<String> tolerateExtensions = FileTypeHelper.getFileType(extension).getTolerateExtensions();
-            if (tolerateExtensions != null && tolerateExtensions.size() > 0) {
-                extensionMagics.setTolerateExtensions(tolerateExtensions);
-
-                for (String tolerateExtension : tolerateExtensions) {
-                    ExtensionMagics tmpExtensionMagics = EXTENSION_MAGICS.get(tolerateExtension);
-                    extensionMagics.addTolerateMagics(tmpExtensionMagics.getExplicitMagics());
-
-                }
-
-            }
-
-        });
+        MagicConfigLoader.MagicConfig magicConfig = MagicConfigLoader.load();
+        MAGIC_MANAGER.init(magicConfig);
 
     }
 
@@ -86,26 +48,20 @@ public class MagicHelper {
      * @date 2022-10-02 16:21
      */
     public static ExtensionMagics getExtensionMagics(String extension) {
-        return EXTENSION_MAGICS.get(extension);
+        return MAGIC_MANAGER.getExtensionMagics(extension);
 
     }
 
     public static ExtensionMagics getExtensionMagics(FileType fileType) {
-        if (fileType != null) {
-            return EXTENSION_MAGICS.get(fileType.getExtension());
-        }
-        return null;
+        return MAGIC_MANAGER.getExtensionMagics(fileType);
     }
 
     public static Set<Magic> getMagics(MagicRisk magicRisk) {
-        if (magicRisk != null) {
-            return RISK_MAGICS.getOrDefault(magicRisk, Collections.EMPTY_SET);
-        }
-        return Collections.EMPTY_SET;
+        return MAGIC_MANAGER.getMagics(magicRisk);
     }
 
     /**
-     * @return java.util.Map<java.lang.String, java.util.Set < com.kylinhunter.file.detector.signature.config.Magic>>
+     * @return java.util.Map<java.lang.String, java.util.Set < com.kylinhunter.file.detector.config.Magic>>
      * @throws
      * @title getEXPLICIT_EXTENSION_MAGICS
      * @description
@@ -113,11 +69,11 @@ public class MagicHelper {
      * @date 2022-10-04 15:55
      */
     public static Map<String, ExtensionMagics> getAllExtensionMagics() {
-        return EXTENSION_MAGICS;
+        return MAGIC_MANAGER.getAllExtensionMagics();
     }
 
     /**
-     * @return java.util.Map<java.lang.String, com.kylinhunter.file.detector.signature.config.Magic>
+     * @return java.util.Map<java.lang.String, com.kylinhunter.file.detector.config.Magic>
      * @throws
      * @title getMagics
      * @description
@@ -125,7 +81,7 @@ public class MagicHelper {
      * @date 2022-10-04 15:54
      */
     public static Map<String, Magic> getAllMagics() {
-        return ALL_MAGICS;
+        return MAGIC_MANAGER.getAllMagics();
 
     }
 
@@ -139,10 +95,10 @@ public class MagicHelper {
      * @date 2022-10-03 23:10
      */
     public static Magic getMagic(String number) {
-        return ALL_MAGICS.get(number);
+        return MAGIC_MANAGER.getMagic(number);
     }
 
     public static int getMagicMaxLength() {
-        return magicConfig.getMagicMaxLength();
+        return MAGIC_MANAGER.getMagicMaxLength();
     }
 }

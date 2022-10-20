@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.file.detector.constant.MagicRisk;
 import com.kylinhunter.file.detector.signature.MagicHelper;
-import com.kylinhunter.file.detector.signature.config.ExtensionMagics;
-import com.kylinhunter.file.detector.signature.config.Magic;
+import com.kylinhunter.file.detector.config.ExtensionMagics;
+import com.kylinhunter.file.detector.config.Magic;
 
 class MagicHelperTest {
 
@@ -22,7 +22,7 @@ class MagicHelperTest {
             System.out.println("extension: " + k);
 
             System.out.println(
-                    "\t magic number: " + extensionMagics.getExplicitMagics().stream().map(Magic::getNumber)
+                    "\t magic number: " + extensionMagics.getMagics().stream().map(Magic::getNumber)
                             .collect(Collectors.toSet()));
 
             if (extensionMagics.getTolerateExtensions() != null) {
@@ -76,7 +76,7 @@ class MagicHelperTest {
         System.out.println(MagicHelper.getMagicMaxLength());
 
         Assertions.assertEquals(
-                allExtensionMagics.values().stream().flatMap(e -> e.getExplicitMagics().stream())
+                allExtensionMagics.values().stream().flatMap(e -> e.getMagics().stream())
                         .collect(Collectors.toSet()).size(),
                 allMagics.keySet().size());
     }

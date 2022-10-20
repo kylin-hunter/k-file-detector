@@ -9,7 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.file.detector.signature.config.ExtensionMagics;
+import com.kylinhunter.file.detector.config.ExtensionMagics;
 import com.kylinhunter.file.detector.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;

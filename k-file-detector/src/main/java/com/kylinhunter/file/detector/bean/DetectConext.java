@@ -5,8 +5,8 @@ import java.util.StringJoiner;
 
 import com.google.common.collect.Sets;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.signature.config.ExtensionMagics;
-import com.kylinhunter.file.detector.signature.config.Magic;
+import com.kylinhunter.file.detector.config.ExtensionMagics;
+import com.kylinhunter.file.detector.config.Magic;
 
 import lombok.Data;
 
@@ -19,11 +19,9 @@ import lombok.Data;
 public class DetectConext {
 
     private SafeStatus safeStatus = SafeStatus.UNKNOWN;
-    private final String possibleMagicNumber;
-    private final String extension;
-
-    private Set<Magic> detectedMagics;
-    /* debug msg */
+    private final String possibleMagicNumber; // potential magic numbers
+    private final String extension; // explicit extension
+    private Set<Magic> detectedMagics; // the detected magic messages
 
     private Set<String> dangerousExtensions;
     private ExtensionMagics extensionMagics;
@@ -35,9 +33,8 @@ public class DetectConext {
         detectedMagics.add(magic);
     }
 
-    public DetectConext setSafeStatus(SafeStatus safeStatus) {
+    public void setSafeStatus(SafeStatus safeStatus) {
         this.safeStatus = safeStatus;
-        return this;
     }
 
     public boolean isDetected() {

@@ -1,6 +1,6 @@
 package com.kylinhunter.file.detector.constant;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,17 +9,13 @@ import lombok.Getter;
  * @date 2022-10-02 16:24
  **/
 @Getter
-public enum ExtensionRisk  {
+@AllArgsConstructor
+public enum ExtensionRisk {
     LOW(1, "LOW"),
     MIDDLE(2, "MIDDLE"),
     HIGH(3, "HIGH");
 
-    private int code;
-    private String name;
-
-    ExtensionRisk(int code, String name) {
-        this.code = code;
-        this.name = name;
-    }
+    private final int code;
+    private final String name;
 
 }

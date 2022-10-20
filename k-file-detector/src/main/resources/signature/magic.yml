@@ -1,30 +1,30 @@
 magics:
   - number: "0D444F43"
     families:
-      - MS_OFFICE_OLD_DOCUMENT
+      - MS_OFFICE_OLD
     risk: LOW
     desc: "DeskMate Document file"
     extensions:
       - doc
   - number: "DBA52D00"
     families:
-      - MS_OFFICE_OLD_DOCUMENT
+      - MS_OFFICE_OLD
     risk: LOW
     desc: "Word 2.0 file"
     extensions:
       - doc
   - number: "CF11E0A1B11AE100"
     families:
-      - MS_OFFICE_OLD_DOCUMENT
+      - MS_OFFICE_OLD
     risk: LOW
     desc: "Perfect Office document"
     extensions:
       - doc
   - number: "D0CF11E0A1B11AE1"
     families:
-      - MS_OFFICE_97_DOCUMENT
+      - MS_OFFICE_97_2003
     risk: LOW
-    desc: "MS_OFFICE_97_DOCUMENT"
+    desc: "MS_OFFICE_97_2003"
     extensions:
       - pps
       - ppt
@@ -33,9 +33,9 @@ magics:
 
   - number: "504B030414000600"
     families:
-      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+      - MS_OFFICE
     risk: LOW
-    desc: "MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT"
+    desc: "MS_OFFICE"
     extensions:
       - pptx
       - xlsx
@@ -45,14 +45,14 @@ magics:
 
   - number: "47494638"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Graphics interchange format file"
     extensions:
       - gif
   - number: "FFD8FF"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Generic JPEGimage file"
     extensions:
@@ -62,21 +62,21 @@ magics:
       - JPE
   - number: "424D"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Windows (or device-independent) bitmap image"
     extensions:
       - bmp
   - number: "89504E470D0A1A0A"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Portable Network Graphics file"
     extensions:
       - PNG
   - number: "4D4D002B"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Tagged Image File Format file"
     extensions:
@@ -84,7 +84,7 @@ magics:
       - TIFF
   - number: "4D4D002A"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Tagged Image File Format file"
     extensions:
@@ -92,7 +92,7 @@ magics:
       - TIFF
   - number: "49492A00"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Tagged Image File Format file"
     extensions:
@@ -100,7 +100,7 @@ magics:
       - TIFF
   - number: "492049"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "Tagged Image File Format file"
     extensions:
@@ -108,7 +108,7 @@ magics:
       - TIFF
   - number: "0000000C6A5020200D0A"
     families: 
-      - PIC
+      - PICTURE
     risk: LOW
     desc: "JPEG-2000 image file formats"
     extensions:
@@ -116,7 +116,7 @@ magics:
 
   - number: "________667479704D344120"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "Apple Lossless Audio Codec file"
     extensions:
@@ -124,28 +124,28 @@ magics:
       - M4A
   - number: "________6674797069736F6D"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "ISO Base Media file (MPEG-4) v1"
     extensions:
       - mp4
   - number: "52494646________415649204C495354"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: " Resource Interchange File Format -- Windows Audio Video Interleave file"
     extensions:
       - avi
   - number: "________706E6F74"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "1A45DFA3"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "Matroska stream file"
     extensions:
@@ -153,14 +153,14 @@ magics:
       - WEBM
   - number: "494433"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG-1 Audio Layer 3 (MP3) audio file"
     extensions:
       - MP3
   - number: "3026B2758E66CF11A6D900AA0062CE6C"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "Microsoft Windows Media Audio/Video File"
     extensions:
@@ -169,7 +169,7 @@ magics:
       - WMA
   - number: "________667479704D345620"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "ISO Media, MPEG v4 system, or iTunes AVC-LC file"
     extensions:
@@ -178,7 +178,7 @@ magics:
       - M4V
   - number: "000001B_"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG video file"
     extensions:
@@ -186,35 +186,35 @@ magics:
       - MPG
   - number: "________6674797071742020"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "________66726565"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "________6D6F6F76"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "________667479704D534E56"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG-4 video file"
     extensions:
       - mp4
   - number: "2E524D46"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "RealMedia streaming media file"
     extensions:
@@ -222,7 +222,7 @@ magics:
       - RM
   - number: "________667479706D703432"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG-4 video|QuickTime file"
     extensions:
@@ -230,14 +230,14 @@ magics:
       - M4V
   - number: "________6D646174"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "000001BA"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG video file"
     extensions:
@@ -246,21 +246,21 @@ magics:
       - VOB
   - number: "464C5601"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "Flash video file"
     extensions:
       - FLV
   - number: "________77696465"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
       - MOV
   - number: "FFF_"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "MPEG video file"
     extensions:
@@ -269,7 +269,7 @@ magics:
       - MPG
   - number: "________736B6970"
     families: 
-      - AV
+      - AUDIO_VIDEO
     risk: LOW
     desc: "QuickTime movie file"
     extensions:
@@ -374,28 +374,28 @@ magics:
       - NONE
   - number: "CFFAEDFE"
     families: 
-      - EXECUTABLE_FILE_APPLE
+      - EXECUTABLE_FILE_MAC
     risk: HIGH
     desc: "Apple OS X ABI Mach-O binary file(64-bit)"
     extensions:
       - NONE
   - number: "CEFAEDFE"
     families: 
-      - EXECUTABLE_FILE_APPLE
+      - EXECUTABLE_FILE_MAC
     risk: HIGH
     desc: "Apple OS X ABI Mach-O binary file (32-bit)"
     extensions:
       - NONE
   - number: "FEEDFACF"
     families: 
-      - EXECUTABLE_FILE_APPLE
+      - EXECUTABLE_FILE_MAC
     risk: HIGH
     desc: "Apple OS X ABI Mach-O binary file(64-bit)"
     extensions:
       - NONE
   - number: "FEEDFACE"
     families: 
-      - EXECUTABLE_FILE_APPLE
+      - EXECUTABLE_FILE_MAC
     risk: HIGH
     desc: "Apple OS X ABI Mach-O binary file (32-bit)"
     extensions:

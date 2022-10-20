@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.signature.config;
+package com.kylinhunter.file.detector.config;
 
 import java.util.List;
 import java.util.Set;
@@ -18,12 +18,15 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FileType {
+    /* ==== from yaml  ===*/
+
     @EqualsAndHashCode.Include
     private String extension;
     private List<ExtensionFamily> families;
     private String tolerateGroup;
     private ExtensionRisk risk;
 
+    /* ==== extended  properties===*/
     private Set<String> tolerateExtensions;
 
     @Override
@@ -32,6 +35,7 @@ public class FileType {
                 .add("extension='" + extension + "'")
                 .add("families=" + families)
                 .add("tolerateGroup='" + tolerateGroup + "'")
+                .add("risk=" + risk)
                 .toString();
     }
 }

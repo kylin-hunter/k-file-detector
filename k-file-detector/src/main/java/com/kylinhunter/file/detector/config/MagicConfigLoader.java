@@ -1,12 +1,13 @@
-package com.kylinhunter.file.detector.signature.config;
+package com.kylinhunter.file.detector.config;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import com.kylinhunter.file.detector.constant.MagicMatchType;
+import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.exception.DetectException;
 import com.kylinhunter.file.detector.signature.FileTypeHelper;
 import com.kylinhunter.file.detector.util.ResourceHelper;
@@ -20,33 +21,32 @@ import lombok.Data;
  **/
 @Data
 public class MagicConfigLoader {
-    private static MagicConfig cachedData;
+    private static MagicConfig CACHED_DATA;
+    private static final String MAGIC_LOCATION = "signature/magic.yml";
 
     /**
-     * @return com.kylinhunter.file.detector.signature.config.MagicConfig
-     * @throws
+     * @return com.kylinhunter.file.detector.config.MagicConfig
      * @title load
      * @description
      * @author BiJi'an
      * @date 2022-10-04 15:29
      */
     public static MagicConfig load() {
-        if (cachedData != null) {
-            return cachedData;
+        if (CACHED_DATA != null) {
+            return CACHED_DATA;
         } else {
             synchronized(MagicConfigLoader.class) {
-                if (cachedData != null) {
-                    return cachedData;
+                if (CACHED_DATA != null) {
+                    return CACHED_DATA;
                 }
-                cachedData = load0();
-                return cachedData;
+                CACHED_DATA = load0();
+                return CACHED_DATA;
             }
         }
     }
 
     /**
-     * @return com.kylinhunter.file.detector.signature.config.MagicConfig
-     * @throws
+     * @return com.kylinhunter.file.detector.config.MagicConfig
      * @title load
      * @description
      * @author BiJi'an
@@ -54,20 +54,15 @@ public class MagicConfigLoader {
      */
     private static MagicConfig load0() {
 
-        InputStream resource = ResourceHelper.getInputStreamInClassPath("signature/magic.yml");
+        InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_LOCATION);
         Objects.requireNonNull(resource);
         MagicConfig magicConfig = new Yaml().loadAs(resource, MagicConfig.class);
         Objects.requireNonNull(magicConfig);
 
         magicConfig.getMagics().forEach(magic -> {
 
-            if (magic.getFamilies() == null) {
-                throw new DetectException("magic.getFamilies is null");
-            }
-
-            if (magic.getRisk() == null) {
-                throw new DetectException("magic.getRisk is null");
-            }
+            Objects.requireNonNull(magic.getFamilies(), "magic.getFamilies is null");
+            Objects.requireNonNull(magic.getRisk(), "magic.getRisk is null");
             String number = magic.getNumber();
             if (StringUtils.isEmpty(number)) {
                 return;
@@ -80,13 +75,12 @@ public class MagicConfigLoader {
                 throw new DetectException("magic number must be even");
             }
 
-            int byteNum = numberLen / 2;
-            magic.setByteNum(byteNum);
-
-            if (number.indexOf("_") >= 0) {
-                magic.setMatchType(MagicMatchType.PREFIX_FUZZY);
+            int magicLength = numberLen / 2;
+            magic.setMagicLength(magicLength);
+            if (number.contains("_")) {
+                magic.setMatchMode(MagicMatchMode.PREFIX_FUZZY);
             } else {
-                magic.setMatchType(MagicMatchType.PREFIX);
+                magic.setMatchMode(MagicMatchMode.PREFIX);
 
             }
 
@@ -99,12 +93,22 @@ public class MagicConfigLoader {
 
             });
 
-            if (byteNum > magicConfig.getMagicMaxLength()) {
-                magicConfig.setMagicMaxLength(byteNum);
+            if (magicLength > magicConfig.getMagicMaxLength()) {
+                magicConfig.setMagicMaxLength(magicLength);
             }
         });
-        cachedData = magicConfig;
         return magicConfig;
     }
 
+    /**
+     * @author BiJi'an
+     * @description
+     * @date 2022-10-02 19:55
+     **/
+    @Data
+    public static class MagicConfig {
+        private List<Magic> magics;
+        private int magicMaxLength = 1;
+
+    }
 }

@@ -1,6 +1,6 @@
 package com.kylinhunter.file.detector.constant;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,30 +9,16 @@ import lombok.Getter;
  * @date 2022-10-02 16:24
  **/
 @Getter
-public enum SafeStatus  {
-    UNKNOWN(1, "UNKNOWN"),
-    SAFE(2, "SAFE"),
-    DANGEROUS_EXTENSION(3, "文件可能存在危害"),
-    DISGUISE_WARN(4, "DISGUISE_WARN"),
-    DISGUISE(5, "文件可能存在危害"),
-    DANGEROUS_CONTENT(6, "文件可能存在危害");
+@AllArgsConstructor
+public enum SafeStatus {
+    UNKNOWN(1, "unknown"),
+    SAFE(2, "safe"),
+    DANGEROUS_EXTENSION(3, "dangerous extension"),
+    DISGUISE_WARN(4, "disguise extension warn"),
+    DISGUISE(5, "disguise extension "),
+    DANGEROUS_CONTENT(6, "dangerous content");
 
-    private int code;
-    private String name;
-
-    SafeStatus(int code, String name) {
-        this.code = code;
-        this.name = name;
-    }
-
-    public boolean greaterThan(SafeStatus safeStatus) {
-
-        if (this.code > safeStatus.code) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
+    private final int code;
+    private final String name;
 
 }

@@ -5,9 +5,8 @@ import java.util.Set;
 
 import com.kylinhunter.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
-import com.kylinhunter.file.detector.signature.config.FileType;
-import com.kylinhunter.file.detector.signature.config.FileTypeConfig;
-import com.kylinhunter.file.detector.signature.config.FileTypeConfigLoader;
+import com.kylinhunter.file.detector.config.FileType;
+import com.kylinhunter.file.detector.config.FileTypeConfigLoader;
 
 /**
  * @author BiJi'an
@@ -18,7 +17,7 @@ public class FileTypeHelper {
     private static final ExtensionManager EXTENSION_MANAGER = new ExtensionManager();
 
     static {
-        FileTypeConfig fileTypeConfig = FileTypeConfigLoader.load();
+        FileTypeConfigLoader.FileTypeConfig fileTypeConfig = FileTypeConfigLoader.load();
         EXTENSION_MANAGER.add(fileTypeConfig.getFileTyes());
     }
 
@@ -54,7 +53,7 @@ public class FileTypeHelper {
 
     /**
      * @param risk
-     * @return com.kylinhunter.file.detector.signature.config.FileType
+     * @return com.kylinhunter.file.detector.config.FileType
      * @throws
      * @title getFileType
      * @description

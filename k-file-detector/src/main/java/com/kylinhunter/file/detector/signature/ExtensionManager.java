@@ -10,10 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.file.detector.bean.DetectOption;
+import com.kylinhunter.file.detector.config.FileType;
 import com.kylinhunter.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
 import com.kylinhunter.file.detector.exception.DetectException;
-import com.kylinhunter.file.detector.signature.config.FileType;
 
 import lombok.Data;
 
@@ -33,8 +33,8 @@ public class ExtensionManager {
     private Map<String, Set<String>> tolerateDisguiseGroupDatas = Maps.newHashMap();
 
     private Set<String> dangerousExtensionsDefault = Sets.newHashSet();
-    private Set<String> dangerousExtensionsInclude = Sets.newHashSet();
-    private Set<String> dangerousExtensionsExclude = Sets.newHashSet();
+    private Set<String> detectDangerousExtensionIncludes = Sets.newHashSet();
+    private Set<String> detectDangerousExtensionExcludes = Sets.newHashSet();
     private Set<String> dangerousExtensions = Sets.newHashSet();
 
     public void add(Map<String, FileType> fileTypes) {
@@ -87,57 +87,10 @@ public class ExtensionManager {
                 }
             }
 
-            String tolerateDisguiseGroup = fileType.getTolerateGroup();
-            if (tolerateDisguiseGroup != null) {
 
-                Set<String> tolerateExtensions = tolerateDisguiseGroupDatas.compute(tolerateDisguiseGroup,
-                        (k, v) -> {
-                            if (v == null) {
-                                v = Sets.newHashSet();
-                            }
-                            v.add(fileType.getExtension());
-                            return v;
-                        });
-                fileType.setTolerateExtensions(tolerateExtensions);
-            }
 
         }
 
-    }
-
-    /**
-     * @param extension
-     * @return void
-     * @throws
-     * @title include
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-20 16:12
-     */
-    public void addDangerousExtensionInclude(String extension) {
-        if (!StringUtils.isEmpty(extension)) {
-
-            dangerousExtensionsInclude.add(extension);
-            dangerousExtensions.add(extension);
-        }
-
-    }
-
-    /**
-     * @param extension
-     * @return void
-     * @throws
-     * @title exclude
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-20 16:12
-     */
-
-    public void addDangerousExtensionExclude(String extension) {
-        if (!StringUtils.isEmpty(extension)) {
-            dangerousExtensionsExclude.add(extension);
-            dangerousExtensions.remove(extension);
-        }
     }
 
     /**
@@ -160,7 +113,7 @@ public class ExtensionManager {
 
     /**
      * @param risk
-     * @return com.kylinhunter.file.detector.signature.config.FileType
+     * @return com.kylinhunter.file.detector.config.FileType
      * @throws
      * @title getFileType
      * @description
@@ -196,28 +149,15 @@ public class ExtensionManager {
     }
 
     public void initialize(DetectOption detectOption) {
-        String detectDangerousExtensionIncludes = detectOption.getDetectDangerousExtensionIncludes();
+        this.detectDangerousExtensionIncludes = detectOption.getDetectDangerousExtensionIncludes();
         if (detectDangerousExtensionIncludes != null) {
-            String[] includes = StringUtils.split(detectDangerousExtensionIncludes, ",");
-            if (includes != null && includes.length > 0) {
-                for (String include : includes) {
-                    this.addDangerousExtensionInclude(include);
-                }
-            }
-
+            this.dangerousExtensions.addAll(detectDangerousExtensionIncludes);
         }
-
-        String detectDangerousExtensionExcludes = detectOption.getDetectDangerousExtensionExcludes();
+        this.detectDangerousExtensionExcludes = detectOption.getDetectDangerousExtensionExcludes();
         if (detectDangerousExtensionExcludes != null) {
-            String[] excludes = StringUtils.split(detectDangerousExtensionExcludes, ",");
-            if (excludes != null && excludes.length > 0) {
-                for (String exclude : excludes) {
-                    this.addDangerousExtensionExclude(exclude);
+            this.dangerousExtensions.removeAll(detectDangerousExtensionExcludes);
 
-                }
-            }
         }
-
     }
 
 }

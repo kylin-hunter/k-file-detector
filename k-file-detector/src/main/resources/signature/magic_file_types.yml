@@ -2,213 +2,212 @@ fileTyes:
   DOC:
     extension: doc
     families:
-      - MS_OFFICE_97_DOCUMENT
-      - MS_OFFICE_OLD_DOCUMENT
+      - MS_OFFICE_97_2003
     tolerateGroup: MS_OFFICE
     risk: LOW
   PPS:
     extension: pps
     families:
-      - MS_OFFICE_97_DOCUMENT
+      - MS_OFFICE_97_2003
     tolerateGroup: MS_OFFICE
     risk: LOW
   PPT:
     extension: ppt
     families:
-      - MS_OFFICE_97_DOCUMENT
+      - MS_OFFICE_97_2003
     tolerateGroup: MS_OFFICE
     risk: LOW
   XLS:
     extension: xls
     families:
-      - MS_OFFICE_97_DOCUMENT
+      - MS_OFFICE_97_2003
     tolerateGroup: MS_OFFICE
     risk: LOW
   DOCX:
     extension: docx
     families:
-      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+      - MS_OFFICE
     tolerateGroup: MS_OFFICE
     risk: LOW
   PPSX:
     extension: ppsx
     families:
-      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+      - MS_OFFICE
     tolerateGroup: MS_OFFICE
     risk: LOW
   PPTX:
     extension: pptx
     families:
-      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+      - MS_OFFICE
     tolerateGroup: MS_OFFICE
     risk: LOW
   XLSX:
     extension: xlsx
     families:
-      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+      - MS_OFFICE
     tolerateGroup: MS_OFFICE
     risk: LOW
   BMP:
     extension: bmp
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   GIF:
     extension: gif
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   JFIF:
     extension: jfif
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   JP2:
     extension: jp2
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   JPE:
     extension: jpe
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   JPEG:
     extension: jpeg
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   JPG:
     extension: jpg
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   PNG:
     extension: png
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   TIF:
     extension: tif
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   TIFF:
     extension: tiff
     families:
-      - PIC
-    tolerateGroup: PIC
+      - PICTURE
+    tolerateGroup: PICTURE
     risk: LOW
   ASF:
     extension: asf
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   AVI:
     extension: avi
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   FLV:
     extension: flv
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   M4A:
     extension: m4a
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   M4V:
     extension: m4v
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MKV:
     extension: mkv
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MOV:
     extension: mov
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MP3:
     extension: mp3
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MP4:
     extension: mp4
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MPEG:
     extension: mpeg
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   MPG:
     extension: mpg
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   RM:
     extension: rm
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   RMVB:
     extension: rmvb
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   VOB:
     extension: vob
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   WEBM:
     extension: webm
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   WMA:
     extension: wma
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   WMV:
     extension: wmv
     families:
-      - AV
-    tolerateGroup: AV
+      - AUDIO_VIDEO
+    tolerateGroup: AUDIO_VIDEO
     risk: LOW
   COM:
     extension: com

@@ -5,10 +5,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
 import com.kylinhunter.file.detector.signature.ExtensionManager;
 import com.kylinhunter.file.detector.signature.FileTypeHelper;
-import com.kylinhunter.file.detector.signature.config.FileType;
+import com.kylinhunter.file.detector.config.FileType;
 
 class FileTypeHelperTest {
 
@@ -45,15 +46,7 @@ class FileTypeHelperTest {
         System.out.println("==> risk LOW:");
         fileTypes.forEach(System.out::println);
 
-        ExtensionManager extensionManager = FileTypeHelper.getExtensionManager();
-        Assertions.assertEquals(false, extensionManager.isDanger("xxx"));
-        Assertions.assertEquals(true, extensionManager.isDanger("exe"));
 
-        extensionManager.addDangerousExtensionInclude("xxx");
-        extensionManager.addDangerousExtensionExclude("exe");
-
-        Assertions.assertEquals(true, extensionManager.isDanger("xxx"));
-        Assertions.assertEquals(false, extensionManager.isDanger("exe"));
 
     }
 }
