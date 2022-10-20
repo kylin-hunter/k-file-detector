@@ -1,0 +1,359 @@
+fileTyes:
+  DOC:
+    extension: doc
+    families:
+      - MS_OFFICE_97_DOCUMENT
+      - MS_OFFICE_OLD_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  PPS:
+    extension: pps
+    families:
+      - MS_OFFICE_97_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  PPT:
+    extension: ppt
+    families:
+      - MS_OFFICE_97_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  XLS:
+    extension: xls
+    families:
+      - MS_OFFICE_97_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  DOCX:
+    extension: docx
+    families:
+      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  PPSX:
+    extension: ppsx
+    families:
+      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  PPTX:
+    extension: pptx
+    families:
+      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  XLSX:
+    extension: xlsx
+    families:
+      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+    tolerateGroup: MS_OFFICE
+    risk: LOW
+  BMP:
+    extension: bmp
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  GIF:
+    extension: gif
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  JFIF:
+    extension: jfif
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  JP2:
+    extension: jp2
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  JPE:
+    extension: jpe
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  JPEG:
+    extension: jpeg
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  JPG:
+    extension: jpg
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  PNG:
+    extension: png
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  TIF:
+    extension: tif
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  TIFF:
+    extension: tiff
+    families:
+      - PIC
+    tolerateGroup: PIC
+    risk: LOW
+  ASF:
+    extension: asf
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  AVI:
+    extension: avi
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  FLV:
+    extension: flv
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  M4A:
+    extension: m4a
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  M4V:
+    extension: m4v
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MKV:
+    extension: mkv
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MOV:
+    extension: mov
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MP3:
+    extension: mp3
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MP4:
+    extension: mp4
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MPEG:
+    extension: mpeg
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  MPG:
+    extension: mpg
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  RM:
+    extension: rm
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  RMVB:
+    extension: rmvb
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  VOB:
+    extension: vob
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  WEBM:
+    extension: webm
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  WMA:
+    extension: wma
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  WMV:
+    extension: wmv
+    families:
+      - AV
+    tolerateGroup: AV
+    risk: LOW
+  COM:
+    extension: com
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  DLL:
+    extension: dll
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  DRV:
+    extension: drv
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  EXE:
+    extension: exe
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  PIF:
+    extension: pif
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  QTS:
+    extension: qts
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  QTX:
+    extension: qtx
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  SYS:
+    extension: sys
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  VBX:
+    extension: vbx
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
+  DEX:
+    extension: dex
+    families:
+      - EXECUTABLE_FILE
+    tolerateGroup: null
+    risk: HIGH
+
+  JAR:
+    extension: jar
+    families:
+      - DOCUMENT
+    tolerateGroup: null
+    risk: LOW
+  PDF:
+    extension: pdf
+    families:
+      - DOCUMENT
+    tolerateGroup: null
+    risk: LOW
+  RAR:
+    extension: rar
+    families:
+      - DOCUMENT
+    tolerateGroup: null
+    risk: LOW
+  ZIP:
+    extension: zip
+    families:
+      - DOCUMENT
+    tolerateGroup: null
+    risk: LOW
+  _386:
+    extension: 386
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  ACM:
+    extension: acm
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  AX:
+    extension: ax
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+
+  CPL:
+    extension: cpl
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  FON:
+    extension: fon
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  OCX:
+    extension: ocx
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  OLB:
+    extension: olb
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  SCR:
+    extension: scr
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+  VXD:
+    extension: vxd
+    families:
+      - OTHERS
+    tolerateGroup: null
+    risk: LOW
+
+  NONE:
+    extension: none
+    families:
+      - UNKNOWN
+    tolerateGroup: null
+    risk: LOW

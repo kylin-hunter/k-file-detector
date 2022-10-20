@@ -12,6 +12,8 @@ ext {
     ]
 
     dep = [
+
+            "commons-fileupload"              : "commons-fileupload:commons-fileupload:1.4",
             "commons-io"                      : "commons-io:commons-io:2.10.0",
             'commons-lang3'                   : 'org.apache.commons:commons-lang3:3.11',
             "guava"                           : "com.google.guava:guava:31.0.1-jre",

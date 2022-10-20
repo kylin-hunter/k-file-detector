@@ -1,3 +1,3 @@
-rootProject.name = 'k-nlp'
+rootProject.name = 'k-file-detector'
 include 'k-file-detector'
 

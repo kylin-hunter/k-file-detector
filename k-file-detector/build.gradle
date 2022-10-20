@@ -1,4 +1,12 @@
 dependencies {
+    api(rootProject.dep['commons-io'])
+    api(rootProject.dep['commons-lang3'])
+    api(rootProject.dep['commons-fileupload'])
+    api(rootProject.dep['guava'])
+    implementation ('org.springframework:spring-web')
+    api ('org.yaml:snakeyaml')
+
+
 }
 
 jar.enabled = true

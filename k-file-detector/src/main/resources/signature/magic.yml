@@ -1,0 +1,402 @@
+magics:
+  - number: "0D444F43"
+    families:
+      - MS_OFFICE_OLD_DOCUMENT
+    risk: LOW
+    desc: "DeskMate Document file"
+    extensions:
+      - doc
+  - number: "DBA52D00"
+    families:
+      - MS_OFFICE_OLD_DOCUMENT
+    risk: LOW
+    desc: "Word 2.0 file"
+    extensions:
+      - doc
+  - number: "CF11E0A1B11AE100"
+    families:
+      - MS_OFFICE_OLD_DOCUMENT
+    risk: LOW
+    desc: "Perfect Office document"
+    extensions:
+      - doc
+  - number: "D0CF11E0A1B11AE1"
+    families:
+      - MS_OFFICE_97_DOCUMENT
+    risk: LOW
+    desc: "MS_OFFICE_97_DOCUMENT"
+    extensions:
+      - pps
+      - ppt
+      - doc
+      - xls
+
+  - number: "504B030414000600"
+    families:
+      - MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT
+    risk: LOW
+    desc: "MS_OFFICE_OPEN_XML_FORMAT_DOCUMENT"
+    extensions:
+      - pptx
+      - xlsx
+      - ppsx
+      - docx
+
+
+  - number: "47494638"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Graphics interchange format file"
+    extensions:
+      - gif
+  - number: "FFD8FF"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Generic JPEGimage file"
+    extensions:
+      - JPG
+      - JPEG
+      - JFIF
+      - JPE
+  - number: "424D"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Windows (or device-independent) bitmap image"
+    extensions:
+      - bmp
+  - number: "89504E470D0A1A0A"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Portable Network Graphics file"
+    extensions:
+      - PNG
+  - number: "4D4D002B"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Tagged Image File Format file"
+    extensions:
+      - TIF
+      - TIFF
+  - number: "4D4D002A"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Tagged Image File Format file"
+    extensions:
+      - TIF
+      - TIFF
+  - number: "49492A00"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Tagged Image File Format file"
+    extensions:
+      - TIF
+      - TIFF
+  - number: "492049"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "Tagged Image File Format file"
+    extensions:
+      - TIF
+      - TIFF
+  - number: "0000000C6A5020200D0A"
+    families: 
+      - PIC
+    risk: LOW
+    desc: "JPEG-2000 image file formats"
+    extensions:
+      - JP2
+
+  - number: "________667479704D344120"
+    families: 
+      - AV
+    risk: LOW
+    desc: "Apple Lossless Audio Codec file"
+    extensions:
+      - mp4
+      - M4A
+  - number: "________6674797069736F6D"
+    families: 
+      - AV
+    risk: LOW
+    desc: "ISO Base Media file (MPEG-4) v1"
+    extensions:
+      - mp4
+  - number: "52494646________415649204C495354"
+    families: 
+      - AV
+    risk: LOW
+    desc: " Resource Interchange File Format -- Windows Audio Video Interleave file"
+    extensions:
+      - avi
+  - number: "________706E6F74"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "1A45DFA3"
+    families: 
+      - AV
+    risk: LOW
+    desc: "Matroska stream file"
+    extensions:
+      - MKV
+      - WEBM
+  - number: "494433"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG-1 Audio Layer 3 (MP3) audio file"
+    extensions:
+      - MP3
+  - number: "3026B2758E66CF11A6D900AA0062CE6C"
+    families: 
+      - AV
+    risk: LOW
+    desc: "Microsoft Windows Media Audio/Video File"
+    extensions:
+      - WMV
+      - ASF
+      - WMA
+  - number: "________667479704D345620"
+    families: 
+      - AV
+    risk: LOW
+    desc: "ISO Media, MPEG v4 system, or iTunes AVC-LC file"
+    extensions:
+      - mp4
+      - FLV
+      - M4V
+  - number: "000001B_"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG video file"
+    extensions:
+      - MPEG
+      - MPG
+  - number: "________6674797071742020"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "________66726565"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "________6D6F6F76"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "________667479704D534E56"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG-4 video file"
+    extensions:
+      - mp4
+  - number: "2E524D46"
+    families: 
+      - AV
+    risk: LOW
+    desc: "RealMedia streaming media file"
+    extensions:
+      - RMVB
+      - RM
+  - number: "________667479706D703432"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG-4 video|QuickTime file"
+    extensions:
+      - mp4
+      - M4V
+  - number: "________6D646174"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "000001BA"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG video file"
+    extensions:
+      - MPEG
+      - MPG
+      - VOB
+  - number: "464C5601"
+    families: 
+      - AV
+    risk: LOW
+    desc: "Flash video file"
+    extensions:
+      - FLV
+  - number: "________77696465"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+  - number: "FFF_"
+    families: 
+      - AV
+    risk: LOW
+    desc: "MPEG video file"
+    extensions:
+      - MPEG
+      - MP3
+      - MPG
+  - number: "________736B6970"
+    families: 
+      - AV
+    risk: LOW
+    desc: "QuickTime movie file"
+    extensions:
+      - MOV
+
+
+  - number: "25504446"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "Adobe Portable Document Format"
+    extensions:
+      - PDF
+  - number: "504B0708"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "PKZIP multivolume archive file"
+    extensions:
+      - zip
+  - number: "504B0506"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "PKZIP empty archive file"
+    extensions:
+      - zip
+
+
+  - number: "504B0304"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "some archive file"
+    extensions:
+      - zip
+      - jar
+      - pptx
+      - xlsx
+      - ppsx
+      - docx
+  - number: "504B030414000100630000000000"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "ZLock Pro encrypted ZIP"
+    extensions:
+      - zip
+  - number: "526172211A0700"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "RAR (v4.x) compressed archive file"
+    extensions:
+      - RAR
+  - number: "526172211A070100"
+    families: 
+      - DOCUMENT
+    risk: LOW
+    desc: "RAR (v5) compressed archive file"
+    extensions:
+      - RAR
+
+  - number: "4D5A"
+    families: 
+      - EXECUTABLE_FILE_WINDOWS
+      - EXECUTABLE_FILE
+    risk: HIGH
+    desc: "Windows/DOS executable file and so on"
+    extensions:
+      - COM
+      - DLL
+      - DRV
+      - EXE
+      - PIF
+      - QTS
+      - QTX
+      - SYS
+      - ACM
+      - AX
+      - CPL
+      - FON
+      - OCX
+      - OLB
+      - SCR
+      - VBX
+      - VXD
+      - 386
+  - number: "6465780A"
+    families:
+      - EXECUTABLE_FILE
+    risk: HIGH
+    desc: "Dalvik executable file (Android)"
+    extensions:
+      - dex
+  - number: "7F454C46"
+    families: 
+      - EXECUTABLE_FILE
+    risk: HIGH
+    desc: "Executable and Linking Format executable file (Linux/Unix)"
+    extensions:
+      - NONE
+  - number: "CFFAEDFE"
+    families: 
+      - EXECUTABLE_FILE_APPLE
+    risk: HIGH
+    desc: "Apple OS X ABI Mach-O binary file(64-bit)"
+    extensions:
+      - NONE
+  - number: "CEFAEDFE"
+    families: 
+      - EXECUTABLE_FILE_APPLE
+    risk: HIGH
+    desc: "Apple OS X ABI Mach-O binary file (32-bit)"
+    extensions:
+      - NONE
+  - number: "FEEDFACF"
+    families: 
+      - EXECUTABLE_FILE_APPLE
+    risk: HIGH
+    desc: "Apple OS X ABI Mach-O binary file(64-bit)"
+    extensions:
+      - NONE
+  - number: "FEEDFACE"
+    families: 
+      - EXECUTABLE_FILE_APPLE
+    risk: HIGH
+    desc: "Apple OS X ABI Mach-O binary file (32-bit)"
+    extensions:
+      - NONE
