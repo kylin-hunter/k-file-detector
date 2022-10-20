@@ -2,7 +2,7 @@
 <configuration debug="false" scan="true">
     <contextName>logback</contextName>
 
-    <property name="log.path" value="./log/k-file-detector.log"/>
+    <property name="log.path" value="./logs/k-file-detector.log"/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <!--
