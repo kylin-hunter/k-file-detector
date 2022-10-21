@@ -1,16 +1,29 @@
-# k-dic
+# k-file-detector
 
 #### Description
-词典服务。
+
+a tool for detect file type
 
 #### Software Architecture
-Software architecture description
+1、detect file type by magic number  
+> reference  https://www.garykessler.net/library/file_sigs.html
+
+2、for dangrous file ,give warning message.
+
 
 #### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#####1、gradle (gradle.org)
+```java
+implementation 'com.kylinhunter.plat.file.detector:k-file-detector:1.0.1'
+```
+#####2、maven (maven.apache.org)
+```java
+        <dependency>
+          <groupId>com.kylinhunter.plat.file.detector</groupId>
+            <artifactId>k-file-detector</artifactId>
+          <version>1.0.1</version>
+        </dependency>
+```
 
 #### Instructions
 
@@ -25,12 +38,3 @@ Software architecture description
 3.  Commit your code
 4.  Create Pull Request
 
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
