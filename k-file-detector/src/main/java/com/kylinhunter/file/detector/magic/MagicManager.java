@@ -8,25 +8,32 @@ import java.util.Set;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.file.detector.constant.MagicRisk;
-import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
+import com.kylinhunter.file.detector.extension.ExtensionManager;
+
+import lombok.Getter;
 
 /**
  * @author BiJi'an
  * @description
  * @date 2022-10-21 02:38
  **/
+@Getter
 public class MagicManager {
     private final Map<String, Magic> allMagics = Maps.newHashMap();
-    private MagicConfigManager.MagicConfig magicConfig;
+    private MagicConfigLoader.MagicConfig magicConfig;
     private final Map<MagicRisk, Set<Magic>> riskMagics = new HashMap<>();
 
-    public void init(MagicConfigManager.MagicConfig magicConfig) {
-        this.magicConfig = magicConfig;
+    private final ExtensionManager extensionManager;
+
+    public MagicManager() {
+        this.extensionManager = new ExtensionManager();
+        this.magicConfig = MagicConfigLoader.load(extensionManager);
         Map<String, ExtensionMagics> allExtensionMagics = new HashMap<>();
         magicConfig.getMagics().forEach(magic -> {
             allMagics.put(magic.getNumber(), magic);
-            magic.getExtensionFiles().forEach(fileType -> {
-
+            Set<ExtensionFile> extensionFiles = magic.getExtensionFiles();
+            extensionFiles.forEach(fileType -> {
                         ExtensionMagics extensionMagicsDist = allExtensionMagics
                                 .compute(fileType.getExtension(), (extension, extensionMagics) -> {
                                     if (extensionMagics == null) {
@@ -53,7 +60,7 @@ public class MagicManager {
         allExtensionMagics.forEach((extension, extensionMagics) -> {
 
             Set<String> tolerateExtensions =
-                    ExtensionConfigManager.getExtensionManager().getFileType(extension).getTolerateExtensions();
+                    extensionManager.getFileType(extension).getTolerateExtensions();
             if (tolerateExtensions != null && tolerateExtensions.size() > 0) {
                 extensionMagics.setTolerateExtensions(tolerateExtensions);
 

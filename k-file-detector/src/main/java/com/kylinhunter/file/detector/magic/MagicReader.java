@@ -9,7 +9,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
+import com.kylinhunter.file.detector.ConfigurationManager;
+import com.kylinhunter.file.detector.exception.DetectException;
 import com.kylinhunter.file.detector.extension.ExtensionFile;
 import com.kylinhunter.file.detector.extension.ExtensionManager;
 import com.kylinhunter.file.detector.util.StringUtil;
@@ -23,7 +24,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-    private static final ExtensionManager extensionManager = ExtensionConfigManager.getExtensionManager();
+    private static final ExtensionManager extensionManager = ConfigurationManager.getExtensionManager();
+    private static final MagicManager magicManager = ConfigurationManager.getMagicManager();
 
     /**
      * @param content content
@@ -126,15 +128,18 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 10:31
      */
-    private static String read(InputStream inputStream, String fileName, long fileSize, boolean accurate)
-            throws IOException {
+    public static String read(InputStream inputStream, String fileName, long fileSize, boolean accurate) {
 
-        byte[] b = new byte[calMacgiclen(fileName, fileSize, accurate)];
-        int len = inputStream.read(b);
-        if (len > 0) {
-            return StringUtil.bytesToHexStringV2(b, 0, len);
+        try {
+            byte[] b = new byte[calMacgiclen(fileName, fileSize, accurate)];
+            int len = inputStream.read(b);
+            if (len > 0) {
+                return StringUtil.bytesToHexStringV2(b, 0, len);
+            }
+            return StringUtil.EMPTY;
+        } catch (IOException e) {
+            throw new DetectException("read error", e);
         }
-        return StringUtil.EMPTY;
     }
 
     /**
@@ -148,7 +153,6 @@ public class MagicReader {
      * @date 2022-10-22 00:36
      */
     private static int calMacgiclen(String fileName, long fileSize, boolean accurate) {
-        MagicManager magicManager = MagicConfigManager.getMagicManager();
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);

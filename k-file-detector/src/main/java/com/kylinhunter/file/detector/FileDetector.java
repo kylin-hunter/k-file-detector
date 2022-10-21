@@ -1,6 +1,7 @@
 package com.kylinhunter.file.detector;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
@@ -12,12 +13,10 @@ import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
 import com.kylinhunter.file.detector.extension.ExtensionFile;
 import com.kylinhunter.file.detector.extension.ExtensionManager;
 import com.kylinhunter.file.detector.magic.ExtensionMagics;
 import com.kylinhunter.file.detector.magic.Magic;
-import com.kylinhunter.file.detector.magic.MagicConfigManager;
 import com.kylinhunter.file.detector.magic.MagicManager;
 import com.kylinhunter.file.detector.magic.MagicReader;
 
@@ -31,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final MagicManager magicManager = MagicConfigManager.getMagicManager();
+    private static final ExtensionManager extensionManager = ConfigurationManager.getExtensionManager();
+    private static final MagicManager magicManager = ConfigurationManager.getMagicManager();
 
     /**
      * @param content  content
@@ -114,6 +114,35 @@ public class FileDetector {
     }
 
     /**
+     * @param input    input
+     * @param fileName fileName
+     * @return com.kylinhunter.file.detector.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 02:35
+     */
+    public static DetectConext detect(InputStream input, String fileName) {
+        return detect(input, fileName, -1L, DetectOption.getDefault());
+
+    }
+
+    /**
+     * @param input        input
+     * @param fileName     fileName
+     * @param detectOption detectOption
+     * @return com.kylinhunter.file.detector.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 02:39
+     */
+    public static DetectConext detect(InputStream input, String fileName, long fileSize, DetectOption detectOption) {
+        String possibleMagicNumber = MagicReader.read(input, fileName, fileSize, false);
+        return detect(possibleMagicNumber, fileName, detectOption);
+    }
+
+    /**
      * @param possibleMagicNumber possibleMagicNumber
      * @param fileName            fileName
      * @return boolean
@@ -180,8 +209,7 @@ public class FileDetector {
 
             String extension = detectConext.getExtension();
             if (!StringUtils.isEmpty(extension)) {
-                ExtensionFile explicitExtensionFile =
-                        ExtensionConfigManager.getExtensionManager().getFileType(extension);
+                ExtensionFile explicitExtensionFile = extensionManager.getFileType(extension);
                 if (explicitExtensionFile != null) { // 支持的扩展名
                     ExtensionMagics explicitExtensionMagics = explicitExtensionFile.getExtensionMagics();
                     if (explicitExtensionMagics != null) {
@@ -240,7 +268,6 @@ public class FileDetector {
     private static void detectDangerousExtension(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDetectDangerousExtension()) {
             String extension = detectConext.getExtension();
-            ExtensionManager extensionManager = ExtensionConfigManager.getExtensionManager();
             Set<String> dangerousExtensions = extensionManager.getDangerousExtensions();
             if (dangerousExtensions.contains(extension)) {
                 Set<String> detectDangerousExtensionExcludes = detectOption.getDetectDangerousExtensionExcludes();

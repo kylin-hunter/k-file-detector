@@ -27,7 +27,8 @@ public class ExtensionManager {
     private Map<ExtensionFamily, Set<ExtensionFile>> extensionFamilyFileTypes = Maps.newHashMap();
     private Set<String> dangerousExtensions = Sets.newHashSet();
 
-    public void init(ExtensionConfigManager.FileTypeConfig fileTypeConfig) {
+    public ExtensionManager() {
+        ExtensionConfigLoader.FileTypeConfig fileTypeConfig = ExtensionConfigLoader.load();
         fileTypeConfig.getFileTyes().values().forEach(this::add);
     }
 

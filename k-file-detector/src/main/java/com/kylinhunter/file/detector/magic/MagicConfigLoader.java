@@ -7,10 +7,11 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import com.kylinhunter.file.detector.extension.ExtensionManager;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.exception.DetectException;
+import com.kylinhunter.file.detector.extension.ExtensionConfigLoader;
 import com.kylinhunter.file.detector.extension.ExtensionFile;
-import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -21,14 +22,9 @@ import lombok.Data;
  * @date 2022-10-02 19:55
  **/
 @Data
-public class MagicConfigManager {
-    private static MagicManager MAGIC_MANAGER = new MagicManager();
-    private static MagicConfig MAGIC_CONFIG;
+public class MagicConfigLoader {
+    private static MagicConfig CACHED_DATA;
     private static final String MAGIC_LOCATION = "signature/magic.yml";
-
-    static {
-        init();
-    }
 
     /**
      * @return void
@@ -37,13 +33,18 @@ public class MagicConfigManager {
      * @author BiJi'an
      * @date 2022-10-22 00:19
      */
-    private static void init() {
-        MAGIC_CONFIG = load();
-        MAGIC_MANAGER.init(MAGIC_CONFIG);
-    }
-
-    public static MagicManager getMagicManager() {
-        return MAGIC_MANAGER;
+    public static MagicConfig load(ExtensionManager extensionManager) {
+        if (CACHED_DATA != null) {
+            return CACHED_DATA;
+        } else {
+            synchronized(ExtensionConfigLoader.class) {
+                if (CACHED_DATA != null) {
+                    return CACHED_DATA;
+                }
+                CACHED_DATA = load0(extensionManager);
+                return CACHED_DATA;
+            }
+        }
     }
 
     /**
@@ -53,7 +54,7 @@ public class MagicConfigManager {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static MagicConfig load() {
+    private static MagicConfig load0(ExtensionManager extensionManager) {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_LOCATION);
         Objects.requireNonNull(resource);
@@ -86,7 +87,7 @@ public class MagicConfigManager {
             }
 
             magic.getExtensions().forEach(extension -> {
-                ExtensionFile extensionFile = ExtensionConfigManager.getExtensionManager().getFileType(extension);
+                ExtensionFile extensionFile = extensionManager.getFileType(extension);
                 if (extensionFile == null) {
                     throw new DetectException("no filetype,for=>" + extension);
                 }

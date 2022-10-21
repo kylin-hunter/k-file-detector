@@ -9,8 +9,6 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.kylinhunter.file.detector.magic.MagicConfigManager;
-import com.kylinhunter.file.detector.magic.MagicManager;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -21,15 +19,9 @@ import lombok.Data;
  * @date 2022-10-02 19:55
  **/
 @Data
-public class ExtensionConfigManager {
-    private MagicManager magicManager = MagicConfigManager.getMagicManager();
-    private static FileTypeConfig FILE_TYPE_CONFIG;
+public class ExtensionConfigLoader {
+    private static FileTypeConfig CACHED_DATA;
     private static final String MAGIC_FILE_TYPES_LOCATION = "signature/magic_file_types.yml";
-    private static ExtensionManager EXTENSION_MANAGER = new ExtensionManager();
-
-    static {
-        init();
-    }
 
     /**
      * @return com.kylinhunter.file.detector.config.MagicConfig
@@ -38,17 +30,18 @@ public class ExtensionConfigManager {
      * @author BiJi'an
      * @date 2022-10-04 15:29
      */
-    private static void init() {
-        FILE_TYPE_CONFIG = load();
-        EXTENSION_MANAGER.init(FILE_TYPE_CONFIG);
-    }
-
-    public static FileTypeConfig getFileTypeConfig() {
-        return FILE_TYPE_CONFIG;
-    }
-
-    public static ExtensionManager getExtensionManager() {
-        return EXTENSION_MANAGER;
+    public static FileTypeConfig load() {
+        if (CACHED_DATA != null) {
+            return CACHED_DATA;
+        } else {
+            synchronized(ExtensionConfigLoader.class) {
+                if (CACHED_DATA != null) {
+                    return CACHED_DATA;
+                }
+                CACHED_DATA = load0();
+                return CACHED_DATA;
+            }
+        }
     }
 
     /**
@@ -58,7 +51,7 @@ public class ExtensionConfigManager {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static FileTypeConfig load() {
+    public static FileTypeConfig load0() {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_FILE_TYPES_LOCATION);
         Objects.requireNonNull(resource);

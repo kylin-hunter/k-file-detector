@@ -1,6 +1,7 @@
 package com.kylinhunter.file.detector;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,27 +13,46 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.file.detector.bean.DetectConext;
 import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.SafeStatus;
 import com.kylinhunter.file.detector.extension.ExtensionFile;
-import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionManager;
+import com.kylinhunter.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
+    private static final ExtensionManager extensionManager = ConfigurationManager.getExtensionManager();
 
     @Test
     @Order(1)
-    void checkDefault() {
+    void checkDefault() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/safe");
         System.out.println(dir.getAbsolutePath());
-        for (File file : Objects.requireNonNull(dir.listFiles())) {
+        File[] files = Objects.requireNonNull(dir.listFiles());
+        for (int i = 0; i < files.length; i++) {
+            File file = files[i];
             if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileDetector.detect(file);
+                int index = i % 4;
+                DetectConext detectConext;
+                if (index == 0) {
+                    detectConext = FileDetector.detect(file);
+
+                } else if (index == 1) {
+                    MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
+                    detectConext = FileDetector.detect(multipartFile);
+                } else if (index == 2) {
+                    byte[] bytes = FileUtils.readFileToByteArray(file);
+                    detectConext = FileDetector.detect(bytes, file.getName());
+                } else {
+                    FileInputStream inputStream = FileUtils.openInputStream(file);
+                    detectConext = FileDetector.detect(inputStream, file.getName());
+                }
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
-                if (ExtensionConfigManager.getExtensionManager().isDanger(FilenameUtils.getExtension(file.getName()))) {
+                if (extensionManager.isDanger(FilenameUtils.getExtension(file.getName()))) {
                     Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
                 } else {
                     Assertions.assertEquals(SafeStatus.SAFE, detectConext.getSafeStatus());
@@ -162,7 +182,7 @@ class FileDetectorTest {
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
 
-                for (ExtensionFile extensionFile : ExtensionConfigManager.getExtensionManager().getAllFileTypes().values()) {
+                for (ExtensionFile extensionFile : extensionManager.getAllFileTypes().values()) {
                     File fileTmp = new File(dirTmp, file.getName() + "." + extensionFile.getExtension());
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);
