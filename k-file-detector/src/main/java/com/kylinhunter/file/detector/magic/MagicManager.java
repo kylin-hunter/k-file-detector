@@ -17,7 +17,7 @@ import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
  * @date 2022-10-21 02:38
  **/
 public class MagicManager {
-    private final Map<String, ExtensionMagics> extensionMagics = new HashMap<>();
+    private final Map<String, ExtensionMagics> allExtensionMagics = new HashMap<>();
     private final Map<String, Magic> allMagics = Maps.newHashMap();
     private MagicConfigManager.MagicConfig magicConfig;
     private final Map<MagicRisk, Set<Magic>> riskMagics = new HashMap<>();
@@ -26,7 +26,7 @@ public class MagicManager {
         this.magicConfig = magicConfig;
         magicConfig.getMagics().forEach(magic -> {
             allMagics.put(magic.getNumber(), magic);
-            magic.getFileTypes().forEach(fileType -> extensionMagics
+            magic.getFileTypes().forEach(fileType -> allExtensionMagics
                     .compute(fileType.getExtension(), (extension, extensionMagics) -> {
                         if (extensionMagics == null) {
                             extensionMagics = new ExtensionMagics(extension);
@@ -45,7 +45,7 @@ public class MagicManager {
 
         });
 
-        extensionMagics.forEach((extension, extensionMagics) -> {
+        allExtensionMagics.forEach((extension, extensionMagics) -> {
 
             Set<String> tolerateExtensions =
                     FileTypeConfigManager.getExtensionManager().getFileType(extension).getTolerateExtensions();
@@ -53,7 +53,7 @@ public class MagicManager {
                 extensionMagics.setTolerateExtensions(tolerateExtensions);
 
                 for (String tolerateExtension : tolerateExtensions) {
-                    ExtensionMagics tmpExtensionMagics = this.extensionMagics.get(tolerateExtension);
+                    ExtensionMagics tmpExtensionMagics = this.allExtensionMagics.get(tolerateExtension);
                     extensionMagics.addTolerateMagics(tmpExtensionMagics.getMagics());
 
                 }
@@ -72,7 +72,7 @@ public class MagicManager {
      * @date 2022-10-02 16:21
      */
     public ExtensionMagics getExtensionMagics(String extension) {
-        return extensionMagics.get(extension);
+        return allExtensionMagics.get(extension);
 
     }
 
@@ -86,7 +86,7 @@ public class MagicManager {
      */
     public ExtensionMagics getExtensionMagics(FileType fileType) {
         if (fileType != null) {
-            return extensionMagics.get(fileType.getExtension());
+            return allExtensionMagics.get(fileType.getExtension());
         }
         return null;
     }
@@ -115,7 +115,7 @@ public class MagicManager {
      * @date 2022-10-04 15:55
      */
     public Map<String, ExtensionMagics> getAllExtensionMagics() {
-        return extensionMagics;
+        return allExtensionMagics;
     }
 
     /**

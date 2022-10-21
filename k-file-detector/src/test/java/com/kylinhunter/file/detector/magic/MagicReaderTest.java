@@ -1,17 +1,15 @@
-package com.kylinhunter.file.detector;
+package com.kylinhunter.file.detector.magic;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.file.detector.magic.MagicConfigManager;
-import com.kylinhunter.file.detector.magic.MagicManager;
-import com.kylinhunter.file.detector.magic.MagicReader;
 import com.kylinhunter.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
@@ -63,14 +61,12 @@ class MagicReaderTest {
     }
 
     @Test
-    void readAll() throws IOException {
+    void readAll() {
 
-        File dir = ResourceHelper.getFileInClassPath("files");
+        File dir = ResourceHelper.getFileInClassPath("files/safe");
         System.out.println(dir.getAbsolutePath());
-        Arrays.stream(dir.listFiles()).forEach(file -> {
-            System.out.println("file=>" + file.getName()+"\t magic_number=>"+ MagicReader.read(file, true));
-
-        });
+        Arrays.stream(Objects.requireNonNull(dir.listFiles())).filter(File::isFile).forEach(file -> System.out
+                .println("file=>" + file.getName() + "\t magic_number=>" + MagicReader.read(file, true)));
 
     }
 }

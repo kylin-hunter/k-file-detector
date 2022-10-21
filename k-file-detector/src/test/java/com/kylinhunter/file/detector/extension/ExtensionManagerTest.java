@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.config;
+package com.kylinhunter.file.detector.extension;
 
 import java.util.Set;
 
@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
-import com.kylinhunter.file.detector.extension.ExtensionManager;
-import com.kylinhunter.file.detector.extension.FileType;
-import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
 
 class ExtensionManagerTest {
     ExtensionManager extensionManager = FileTypeConfigManager.getExtensionManager();
@@ -17,8 +14,8 @@ class ExtensionManagerTest {
     @Test
     void testIsDanger() {
 
-        Assertions.assertEquals(true, extensionManager.isDanger("exe"));
-        Assertions.assertEquals(false, extensionManager.isDanger("doc"));
+        Assertions.assertTrue(extensionManager.isDanger("exe"));
+        Assertions.assertFalse(extensionManager.isDanger("doc"));
 
     }
 
@@ -30,7 +27,7 @@ class ExtensionManagerTest {
 
         fileTypes = extensionManager.getFileTypes(ExtensionRisk.HIGH);
         fileTypes.forEach(System.out::println);
-        Assertions.assertEquals(true, fileTypes.size() > 0);
+        Assertions.assertTrue(fileTypes.size() > 0);
 
         FileType fileType = extensionManager.getFileType("exe");
         System.out.println("fileType=>" + fileType);

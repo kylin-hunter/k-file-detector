@@ -2,6 +2,7 @@ package com.kylinhunter.file.detector;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.apache.commons.io.FileUtils;
@@ -14,9 +15,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import com.kylinhunter.file.detector.bean.DetectConext;
 import com.kylinhunter.file.detector.bean.DetectOption;
+import com.kylinhunter.file.detector.constant.SafeStatus;
 import com.kylinhunter.file.detector.extension.FileType;
 import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
-import com.kylinhunter.file.detector.constant.SafeStatus;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -27,7 +28,7 @@ class FileDetectorTest {
     void checkDefault() {
         File dir = ResourceHelper.getFileInClassPath("files/safe");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
@@ -81,13 +82,12 @@ class FileDetectorTest {
     void checkDisguise() {
         File dir = ResourceHelper.getFileInClassPath("files/special/disguise");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
-            if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileDetector.detect(file);
-                System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
-                Assertions.assertEquals(SafeStatus.DISGUISE, detectConext.getSafeStatus());
-            }
-        }
+        Arrays.stream(Objects.requireNonNull(dir.listFiles()))
+                .filter(file -> file.isFile() && file.getName().indexOf(".") > 0).forEach(file -> {
+            DetectConext detectConext = FileDetector.detect(file);
+            System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
+            Assertions.assertEquals(SafeStatus.DISGUISE, detectConext.getSafeStatus());
+        });
 
     }
 
@@ -96,7 +96,7 @@ class FileDetectorTest {
     void checkDisguiseWarn() {
         File dir = ResourceHelper.getFileInClassPath("files/special/disguise_warn");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
@@ -110,7 +110,7 @@ class FileDetectorTest {
     void checkDangerContent() {
         File dir = ResourceHelper.getFileInClassPath("files/special/danger_content");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
@@ -124,7 +124,7 @@ class FileDetectorTest {
     void checkUnknown() {
         File dir = ResourceHelper.getFileInClassPath("files/special/unknown");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
@@ -138,7 +138,7 @@ class FileDetectorTest {
     void checkUnrecognized() {
         File dir = ResourceHelper.getFileInClassPath("files/special/unrecognized");
         System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
@@ -154,7 +154,9 @@ class FileDetectorTest {
         System.out.println(dir.getAbsolutePath());
         File dirTmp = new File(System.getProperty("user.dir"), "tmp/files");
         if (!dirTmp.exists()) {
-            dirTmp.mkdirs();
+            if (!dirTmp.mkdirs()) {
+                throw new IOException("mkdirs error");
+            }
         }
 
         for (File file : Objects.requireNonNull(dir.listFiles())) {
