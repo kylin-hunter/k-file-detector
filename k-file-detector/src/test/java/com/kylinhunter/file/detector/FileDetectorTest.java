@@ -16,8 +16,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.kylinhunter.file.detector.bean.DetectConext;
 import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.extension.FileType;
-import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
+import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,7 +32,7 @@ class FileDetectorTest {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
-                if (FileTypeConfigManager.getExtensionManager().isDanger(FilenameUtils.getExtension(file.getName()))) {
+                if (ExtensionConfigManager.getExtensionManager().isDanger(FilenameUtils.getExtension(file.getName()))) {
                     Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
                 } else {
                     Assertions.assertEquals(SafeStatus.SAFE, detectConext.getSafeStatus());
@@ -162,8 +162,8 @@ class FileDetectorTest {
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
 
-                for (FileType fileType : FileTypeConfigManager.getExtensionManager().getAllFileTypes().values()) {
-                    File fileTmp = new File(dirTmp, file.getName() + "." + fileType.getExtension());
+                for (ExtensionFile extensionFile : ExtensionConfigManager.getExtensionManager().getAllFileTypes().values()) {
+                    File fileTmp = new File(dirTmp, file.getName() + "." + extensionFile.getExtension());
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);
                     }

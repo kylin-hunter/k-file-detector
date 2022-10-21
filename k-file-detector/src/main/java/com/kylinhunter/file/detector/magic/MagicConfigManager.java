@@ -9,8 +9,8 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.exception.DetectException;
-import com.kylinhunter.file.detector.extension.FileType;
-import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
+import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -86,11 +86,11 @@ public class MagicConfigManager {
             }
 
             magic.getExtensions().forEach(extension -> {
-                FileType fileType = FileTypeConfigManager.getExtensionManager().getFileType(extension);
-                if (fileType == null) {
+                ExtensionFile extensionFile = ExtensionConfigManager.getExtensionManager().getFileType(extension);
+                if (extensionFile == null) {
                     throw new DetectException("no filetype,for=>" + extension);
                 }
-                magic.addFileType(fileType);
+                magic.addFileType(extensionFile);
 
             });
 

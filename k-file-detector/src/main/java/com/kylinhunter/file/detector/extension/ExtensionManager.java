@@ -22,44 +22,44 @@ import lombok.Data;
  **/
 @Data
 public class ExtensionManager {
-    private Map<String, FileType> allFileTypes = Maps.newHashMap();
-    private Map<ExtensionRisk, Set<FileType>> riskFileTypes = Maps.newHashMap();
-    private Map<ExtensionFamily, Set<FileType>> extensionFamilyFileTypes = Maps.newHashMap();
+    private Map<String, ExtensionFile> allFileTypes = Maps.newHashMap();
+    private Map<ExtensionRisk, Set<ExtensionFile>> riskFileTypes = Maps.newHashMap();
+    private Map<ExtensionFamily, Set<ExtensionFile>> extensionFamilyFileTypes = Maps.newHashMap();
     private Set<String> dangerousExtensions = Sets.newHashSet();
 
-    public void init(FileTypeConfigManager.FileTypeConfig fileTypeConfig) {
+    public void init(ExtensionConfigManager.FileTypeConfig fileTypeConfig) {
         fileTypeConfig.getFileTyes().values().forEach(this::add);
     }
 
     /**
-     * @param fileType fileType
+     * @param extensionFile extensionFile
      * @return void
      * @title addDefaultData
      * @description
      * @author BiJi'an
      * @date 2022-10-20 16:12
      */
-    private void add(FileType fileType) {
-        if (fileType != null) {
+    private void add(ExtensionFile extensionFile) {
+        if (extensionFile != null) {
 
-            if (allFileTypes.get(fileType.getExtension()) != null) {
-                throw new DetectException("duplicate extension" + fileType.getExtension());
+            if (allFileTypes.get(extensionFile.getExtension()) != null) {
+                throw new DetectException("duplicate extension" + extensionFile.getExtension());
             }
 
-            allFileTypes.put(fileType.getExtension(), fileType);
+            allFileTypes.put(extensionFile.getExtension(), extensionFile);
 
-            riskFileTypes.compute(fileType.getRisk(), (risk, fileTypes) -> {
+            riskFileTypes.compute(extensionFile.getRisk(), (risk, fileTypes) -> {
                 if (fileTypes == null) {
                     fileTypes = Sets.newHashSet();
                 }
-                fileTypes.add(fileType);
+                fileTypes.add(extensionFile);
                 return fileTypes;
             });
-            if (fileType.getRisk() == ExtensionRisk.HIGH) {
-                dangerousExtensions.add(fileType.getExtension());
+            if (extensionFile.getRisk() == ExtensionRisk.HIGH) {
+                dangerousExtensions.add(extensionFile.getExtension());
             }
 
-            List<ExtensionFamily> families = fileType.getFamilies();
+            List<ExtensionFamily> families = extensionFile.getFamilies();
             if (families != null) {
                 for (ExtensionFamily extensionFamily : families) {
 
@@ -67,7 +67,7 @@ public class ExtensionManager {
                         if (v1 == null) {
                             v1 = Sets.newHashSet();
                         }
-                        v1.add(fileType);
+                        v1.add(extensionFile);
                         return v1;
                     });
                 }
@@ -96,14 +96,14 @@ public class ExtensionManager {
 
     /**
      * @param risk risk
-     * @return com.kylinhunter.file.detector.extension.FileType
+     * @return com.kylinhunter.file.detector.extension.ExtensionFile
      * @title getFileType
      * @description
      * @author BiJi'an
      * @date 2022-10-09 16:04
      */
     @SuppressWarnings("unchecked")
-    public Set<FileType> getFileTypes(ExtensionRisk risk) {
+    public Set<ExtensionFile> getFileTypes(ExtensionRisk risk) {
         if (risk != null) {
             return riskFileTypes.getOrDefault(risk, Collections.EMPTY_SET);
         }
@@ -112,26 +112,26 @@ public class ExtensionManager {
 
     /**
      * @param extensionFamily extensionFamily
-     * @return java.util.Set<config.FileType>
-     * @title getFileTypes
+     * @return java.util.Set<config.ExtensionFile>
+     * @title getExtensionFiles
      * @description
      * @author BiJi'an`
      * @date 2022-10-20 16:36
      */
     @SuppressWarnings("unchecked")
-    public Set<FileType> getFileTypes(ExtensionFamily extensionFamily) {
+    public Set<ExtensionFile> getFileTypes(ExtensionFamily extensionFamily) {
         return extensionFamilyFileTypes.getOrDefault(extensionFamily, Collections.EMPTY_SET);
     }
 
     /**
      * @param extension extension
-     * @return com.kylinhunter.file.detector.extension.FileType
+     * @return com.kylinhunter.file.detector.extension.ExtensionFile
      * @title getFileType
      * @description
      * @author BiJi'an
      * @date 2022-10-21 22:26
      */
-    public FileType getFileType(String extension) {
+    public ExtensionFile getFileType(String extension) {
         if (extension != null) {
             return allFileTypes.get(extension.toLowerCase());
         }

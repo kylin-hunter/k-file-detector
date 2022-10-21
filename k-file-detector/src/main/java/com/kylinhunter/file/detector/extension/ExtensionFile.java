@@ -6,6 +6,7 @@ import java.util.StringJoiner;
 
 import com.kylinhunter.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
+import com.kylinhunter.file.detector.magic.ExtensionMagics;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,7 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FileType {
+public class ExtensionFile {
     /* ==== from yaml  ===*/
 
     @EqualsAndHashCode.Include
@@ -28,10 +29,11 @@ public class FileType {
 
     /* ==== extended  properties===*/
     private Set<String> tolerateExtensions;
+    private ExtensionMagics extensionMagics;
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", FileType.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", ExtensionFile.class.getSimpleName() + "[", "]")
                 .add("extension='" + extension + "'")
                 .add("families=" + families)
                 .add("tolerateGroup='" + tolerateGroup + "'")

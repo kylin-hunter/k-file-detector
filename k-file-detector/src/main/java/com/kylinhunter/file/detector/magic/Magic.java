@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 import com.kylinhunter.file.detector.constant.MagicFamily;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
-import com.kylinhunter.file.detector.extension.FileType;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -37,10 +37,10 @@ public class Magic {
     private int magicLength; //  magic number's bytes size
     private MagicMatchMode matchMode;
     @Setter(AccessLevel.NONE)
-    private Set<FileType> fileTypes = new HashSet<>();
+    private Set<ExtensionFile> extensionFiles = new HashSet<>();
 
-    public void addFileType(FileType fileType) {
-        fileTypes.add(fileType);
+    public void addFileType(ExtensionFile extensionFile) {
+        extensionFiles.add(extensionFile);
     }
 
     @Override

@@ -12,9 +12,9 @@ import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
 import com.kylinhunter.file.detector.constant.SafeStatus;
+import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
 import com.kylinhunter.file.detector.extension.ExtensionManager;
-import com.kylinhunter.file.detector.extension.FileType;
-import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
 import com.kylinhunter.file.detector.magic.ExtensionMagics;
 import com.kylinhunter.file.detector.magic.Magic;
 import com.kylinhunter.file.detector.magic.MagicConfigManager;
@@ -180,9 +180,10 @@ public class FileDetector {
 
             String extension = detectConext.getExtension();
             if (!StringUtils.isEmpty(extension)) {
-                FileType explicitFileType = FileTypeConfigManager.getExtensionManager().getFileType(extension);
-                if (explicitFileType != null) { // 支持的扩展名
-                    ExtensionMagics explicitExtensionMagics = magicManager.getExtensionMagics(explicitFileType);
+                ExtensionFile explicitExtensionFile =
+                        ExtensionConfigManager.getExtensionManager().getFileType(extension);
+                if (explicitExtensionFile != null) { // 支持的扩展名
+                    ExtensionMagics explicitExtensionMagics = explicitExtensionFile.getExtensionMagics();
                     if (explicitExtensionMagics != null) {
                         detectConext.setExtensionMagics(explicitExtensionMagics);
                         detect(detectConext, explicitExtensionMagics.getMagics());
@@ -239,7 +240,7 @@ public class FileDetector {
     private static void detectDangerousExtension(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDetectDangerousExtension()) {
             String extension = detectConext.getExtension();
-            ExtensionManager extensionManager = FileTypeConfigManager.getExtensionManager();
+            ExtensionManager extensionManager = ExtensionConfigManager.getExtensionManager();
             Set<String> dangerousExtensions = extensionManager.getDangerousExtensions();
             if (dangerousExtensions.contains(extension)) {
                 Set<String> detectDangerousExtensionExcludes = detectOption.getDetectDangerousExtensionExcludes();

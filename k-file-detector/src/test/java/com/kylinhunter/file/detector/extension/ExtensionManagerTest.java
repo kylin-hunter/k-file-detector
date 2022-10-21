@@ -9,7 +9,7 @@ import com.kylinhunter.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.file.detector.constant.ExtensionRisk;
 
 class ExtensionManagerTest {
-    ExtensionManager extensionManager = FileTypeConfigManager.getExtensionManager();
+    ExtensionManager extensionManager = ExtensionConfigManager.getExtensionManager();
 
     @Test
     void testIsDanger() {
@@ -21,17 +21,17 @@ class ExtensionManagerTest {
 
     @Test
     void testGetFileTypes() {
-        Set<FileType> fileTypes = extensionManager.getFileTypes(ExtensionFamily.MS_OFFICE);
-        fileTypes.forEach(System.out::println);
-        Assertions.assertEquals(4, fileTypes.size());
+        Set<ExtensionFile> extensionFiles = extensionManager.getFileTypes(ExtensionFamily.MS_OFFICE);
+        extensionFiles.forEach(System.out::println);
+        Assertions.assertEquals(4, extensionFiles.size());
 
-        fileTypes = extensionManager.getFileTypes(ExtensionRisk.HIGH);
-        fileTypes.forEach(System.out::println);
-        Assertions.assertTrue(fileTypes.size() > 0);
+        extensionFiles = extensionManager.getFileTypes(ExtensionRisk.HIGH);
+        extensionFiles.forEach(System.out::println);
+        Assertions.assertTrue(extensionFiles.size() > 0);
 
-        FileType fileType = extensionManager.getFileType("exe");
-        System.out.println("fileType=>" + fileType);
-        Assertions.assertEquals("exe", fileType.getExtension());
+        ExtensionFile extensionFile = extensionManager.getFileType("exe");
+        System.out.println("extensionFile=>" + extensionFile);
+        Assertions.assertEquals("exe", extensionFile.getExtension());
 
     }
 

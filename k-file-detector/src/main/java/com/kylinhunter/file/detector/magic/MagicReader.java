@@ -9,6 +9,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
+import com.kylinhunter.file.detector.extension.ExtensionFile;
+import com.kylinhunter.file.detector.extension.ExtensionManager;
 import com.kylinhunter.file.detector.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
+    private static final ExtensionManager extensionManager = ExtensionConfigManager.getExtensionManager();
+
     /**
      * @param content content
      * @return java.lang.String
@@ -147,8 +152,9 @@ public class MagicReader {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
-            if (!StringUtils.isEmpty(extension)) {
-                ExtensionMagics extensionMagics = magicManager.getExtensionMagics(extension);
+            ExtensionFile fileType = extensionManager.getFileType(extension);
+            if (fileType != null) {
+                ExtensionMagics extensionMagics = fileType.getExtensionMagics();
                 if (extensionMagics != null) {
                     magicLen = extensionMagics.getMagicMaxLength();
                 }

@@ -9,6 +9,8 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.kylinhunter.file.detector.magic.MagicConfigManager;
+import com.kylinhunter.file.detector.magic.MagicManager;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -19,7 +21,8 @@ import lombok.Data;
  * @date 2022-10-02 19:55
  **/
 @Data
-public class FileTypeConfigManager {
+public class ExtensionConfigManager {
+    private MagicManager magicManager = MagicConfigManager.getMagicManager();
     private static FileTypeConfig FILE_TYPE_CONFIG;
     private static final String MAGIC_FILE_TYPES_LOCATION = "signature/magic_file_types.yml";
     private static ExtensionManager EXTENSION_MANAGER = new ExtensionManager();
@@ -76,6 +79,7 @@ public class FileTypeConfigManager {
                         });
                 fileType.setTolerateExtensions(tolerateExtensions);
             }
+
         });
 
         return fileTypeConfig;
@@ -88,7 +92,7 @@ public class FileTypeConfigManager {
      **/
     @Data
     public static class FileTypeConfig {
-        private Map<String, FileType> fileTyes; // all file types
+        private Map<String, ExtensionFile> fileTyes; // all file types
 
     }
 

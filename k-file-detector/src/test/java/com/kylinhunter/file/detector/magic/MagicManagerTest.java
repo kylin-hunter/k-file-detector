@@ -1,31 +1,18 @@
 package com.kylinhunter.file.detector.magic;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.file.detector.constant.MagicRisk;
+import com.kylinhunter.file.detector.extension.ExtensionConfigManager;
 import com.kylinhunter.file.detector.extension.ExtensionManager;
-import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
 
 class MagicManagerTest {
 
     MagicManager magicManager = MagicConfigManager.getMagicManager();
 
-    ExtensionManager extensionManager = FileTypeConfigManager.getExtensionManager();
-
-    @Test
-    void getExtensionMagics() {
-        ExtensionMagics extensionMagics1 = magicManager.getExtensionMagics(extensionManager.getFileType("docx"));
-        Assertions.assertNotNull(extensionMagics1);
-
-        ExtensionMagics extensionMagics2 = magicManager.getExtensionMagics("docx");
-        Assertions.assertNotNull(extensionMagics2);
-        Assertions.assertSame(extensionMagics1, extensionMagics2);
-
-    }
 
     @Test
     void getMagics() {
@@ -42,24 +29,10 @@ class MagicManagerTest {
 
     @Test
     void getAllExtensionMagics() {
-        Map<String, ExtensionMagics> allExtensionMagics = magicManager.getAllExtensionMagics();
-        allExtensionMagics.forEach((k, extensionMagics) -> {
+        Map<String, Magic> allExtensionMagics = magicManager.getAllMagics();
+        allExtensionMagics.forEach((k, v) -> {
             System.out.println("extension: " + k);
-
-            System.out.println(
-                    "\t magic number: " + extensionMagics.getMagics().stream().map(Magic::getNumber)
-                            .collect(Collectors.toSet()));
-
-            if (extensionMagics.getTolerateExtensions() != null) {
-
-                System.out.println(
-                        "\t tolerate disguise extension: " + extensionMagics.getTolerateExtensions());
-                System.out.println(
-                        "\t tolerate disguise magics: " + extensionMagics.getTolerateMagics().stream()
-                                .map(Magic::getNumber).collect(Collectors.toSet()));
-
-            }
-
+            System.out.println("magic: " + v);
             System.out.println();
         });
     }
@@ -78,7 +51,7 @@ class MagicManagerTest {
             v.getExtensions().forEach(e -> System.out.println("      - " + e));
 
             System.out.println("    file-types:");
-            v.getFileTypes().forEach(e -> System.out.println("      - " + e));
+            v.getExtensionFiles().forEach(e -> System.out.println("      - " + e));
         });
     }
 
