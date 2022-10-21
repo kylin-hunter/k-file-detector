@@ -1,45 +1,33 @@
 package com.kylinhunter.file.detector.util;
 
-/**
- * @author BiJi'an
- * @description
- * @date 2022-10-21 00:42
- **/
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @description:
- * @author: BiJi'an
- * @create: 2021-08-10 14:46
+ * @author BiJi'an
+ * @description
+ * @date 2022/10/22
  **/
 public class StringUtil extends StringUtils {
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
     /**
-     * @param b
+     * @param bytes bytes
      * @return java.lang.String
-     * @throws
      * @title bytesToHexStringV2
      * @description
      * @author BiJi'an
      * @date 2022-10-04 00:06
      */
-    public static String bytesToHexStringV2(byte[] b, int off, int len) {
+    public static String bytesToHexStringV2(byte[] bytes, int off, int len) {
 
-        if (b == null) {
-            throw new NullPointerException();
-        } else if ((off < 0) || (off > b.length) || (len < 0) ||
-                ((off + len) > b.length) || ((off + len) < 0)) {
-            throw new IndexOutOfBoundsException();
-        } else if (len == 0) {
+        if (check(bytes, off, len)) {
             return StringUtils.EMPTY;
         }
         char[] hexChars = new char[len * 2];
         int j;
         for (int i = 0; i < len; i++) {
             j = off + i;
-            int v = b[j] & 0xFF;
+            int v = bytes[j] & 0xFF;
             hexChars[j * 2] = HEX_ARRAY[v >>> 4];
             hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
         }
@@ -47,21 +35,15 @@ public class StringUtil extends StringUtils {
     }
 
     /**
-     * @param bytes
+     * @param bytes bytes
      * @return java.lang.String
-     * @throws
      * @title bytesToHexString
      * @description
      * @author BiJi'an
      * @date 2022-10-04 00:06
      */
     public static String bytesToHexString(byte[] bytes, int off, int len) {
-        if (bytes == null) {
-            throw new NullPointerException();
-        } else if ((off < 0) || (off > bytes.length) || (len < 0) ||
-                ((off + len) > bytes.length) || ((off + len) < 0)) {
-            throw new IndexOutOfBoundsException();
-        } else if (len == 0) {
+        if (check(bytes, off, len)) {
             return StringUtils.EMPTY;
         }
         StringBuilder builder = new StringBuilder();
@@ -78,6 +60,18 @@ public class StringUtil extends StringUtils {
         }
 
         return builder.toString();
+    }
+
+    private static boolean check(byte[] bytes, int off, int len) {
+        if (bytes == null) {
+            throw new NullPointerException();
+        } else if ((off < 0) || (off > bytes.length) || (len < 0) ||
+                ((off + len) > bytes.length) || ((off + len) < 0)) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            return len == 0;
+        }
+
     }
 
 }

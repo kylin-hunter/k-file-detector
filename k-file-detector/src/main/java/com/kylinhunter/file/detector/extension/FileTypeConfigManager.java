@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.config;
+package com.kylinhunter.file.detector.extension;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -19,9 +19,14 @@ import lombok.Data;
  * @date 2022-10-02 19:55
  **/
 @Data
-public class FileTypeConfigLoader {
-    private static FileTypeConfig CACHED_DATA;
+public class FileTypeConfigManager {
+    private static FileTypeConfig FILE_TYPE_CONFIG;
     private static final String MAGIC_FILE_TYPES_LOCATION = "signature/magic_file_types.yml";
+    private static ExtensionManager EXTENSION_MANAGER = new ExtensionManager();
+
+    static {
+        init();
+    }
 
     /**
      * @return com.kylinhunter.file.detector.config.MagicConfig
@@ -30,18 +35,17 @@ public class FileTypeConfigLoader {
      * @author BiJi'an
      * @date 2022-10-04 15:29
      */
-    public static FileTypeConfig load() {
-        if (CACHED_DATA != null) {
-            return CACHED_DATA;
-        } else {
-            synchronized(FileTypeConfigLoader.class) {
-                if (CACHED_DATA != null) {
-                    return CACHED_DATA;
-                }
-                CACHED_DATA = load0();
-                return CACHED_DATA;
-            }
-        }
+    private static void init() {
+        FILE_TYPE_CONFIG = load();
+        EXTENSION_MANAGER.init(FILE_TYPE_CONFIG);
+    }
+
+    public static FileTypeConfig getFileTypeConfig() {
+        return FILE_TYPE_CONFIG;
+    }
+
+    public static ExtensionManager getExtensionManager() {
+        return EXTENSION_MANAGER;
     }
 
     /**
@@ -51,7 +55,7 @@ public class FileTypeConfigLoader {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static FileTypeConfig load0() {
+    private static FileTypeConfig load() {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_FILE_TYPES_LOCATION);
         Objects.requireNonNull(resource);

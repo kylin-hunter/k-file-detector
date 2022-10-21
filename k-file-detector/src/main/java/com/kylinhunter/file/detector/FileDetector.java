@@ -12,13 +12,14 @@ import com.kylinhunter.file.detector.bean.DetectOption;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.config.ExtensionMagics;
-import com.kylinhunter.file.detector.config.FileType;
-import com.kylinhunter.file.detector.config.Magic;
-import com.kylinhunter.file.detector.signature.ExtensionManager;
-import com.kylinhunter.file.detector.signature.FileTypeHelper;
-import com.kylinhunter.file.detector.signature.MagicHelper;
-import com.kylinhunter.file.detector.signature.MagicReader;
+import com.kylinhunter.file.detector.extension.ExtensionManager;
+import com.kylinhunter.file.detector.extension.FileType;
+import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
+import com.kylinhunter.file.detector.magic.ExtensionMagics;
+import com.kylinhunter.file.detector.magic.Magic;
+import com.kylinhunter.file.detector.magic.MagicConfigManager;
+import com.kylinhunter.file.detector.magic.MagicManager;
+import com.kylinhunter.file.detector.magic.MagicReader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,15 +31,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
+    private static final MagicManager magicManager = MagicConfigManager.getMagicManager();
+
+    /**
+     * @param content  content
+     * @param fileName fileName
+     * @return com.kylinhunter.file.detector.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:42
+     */
     public static DetectConext detect(byte[] content, String fileName) {
         return detect(content, fileName, DetectOption.getDefault());
     }
 
     /**
-     * @param content
-     * @param fileName
+     * @param content  content
+     * @param fileName fileName
      * @return boolean
-     * @throws
      * @title safe
      * @description
      * @author BiJi'an
@@ -50,14 +61,21 @@ public class FileDetector {
 
     }
 
+    /**
+     * @param file file
+     * @return com.kylinhunter.file.detector.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:42
+     */
     public static DetectConext detect(MultipartFile file) {
         return detect(file, DetectOption.getDefault());
     }
 
     /**
-     * @param file
+     * @param file file
      * @return boolean
-     * @throws
      * @title safe
      * @description
      * @author BiJi'an
@@ -69,15 +87,22 @@ public class FileDetector {
         return detect(possibleMagicNumber, file.getOriginalFilename(), detectOption);
     }
 
+    /**
+     * @param file file
+     * @return com.kylinhunter.file.detector.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:43
+     */
     public static DetectConext detect(File file) {
         return detect(file, DetectOption.getDefault());
 
     }
 
     /**
-     * @param file
+     * @param file file
      * @return boolean
-     * @throws
      * @title safe
      * @description
      * @author BiJi'an
@@ -89,10 +114,9 @@ public class FileDetector {
     }
 
     /**
-     * @param possibleMagicNumber
-     * @param fileName
+     * @param possibleMagicNumber possibleMagicNumber
+     * @param fileName            fileName
      * @return boolean
-     * @throws
      * @title safe
      * @description
      * @author BiJi'an
@@ -110,10 +134,9 @@ public class FileDetector {
     }
 
     /**
-     * @param detectConext
-     * @param magics
+     * @param detectConext detectConext
+     * @param magics       magics
      * @return void
-     * @throws
      * @title check
      * @description
      * @author BiJi'an
@@ -144,32 +167,35 @@ public class FileDetector {
     }
 
     /**
-     * @return boolean
-     * @throws
-     * @title isValid
+     * @param detectConext detectConext
+     * @param detectOption detectOption
+     * @return void
+     * @title delectDisguiseExtension
      * @description
      * @author BiJi'an
-     * @date 2022-10-07 10:23
+     * @date 2022-10-22 00:43
      */
     private static void delectDisguiseExtension(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDetectDisguiseExtension()) {
 
             String extension = detectConext.getExtension();
             if (!StringUtils.isEmpty(extension)) {
-                FileType explicitFileType = FileTypeHelper.getFileType(extension);
+                FileType explicitFileType = FileTypeConfigManager.getExtensionManager().getFileType(extension);
                 if (explicitFileType != null) { // 支持的扩展名
-                    ExtensionMagics explicitExtensionMagics = MagicHelper.getExtensionMagics(explicitFileType);
-                    detectConext.setExtensionMagics(explicitExtensionMagics);
-                    detect(detectConext, explicitExtensionMagics.getMagics());
-                    if (detectConext.isDetected()) {
-                        detectConext.setSafeStatus(SafeStatus.SAFE);
-                    } else {
-                        detectDisguiseExtensionTolerate(detectConext, detectOption, explicitExtensionMagics);
+                    ExtensionMagics explicitExtensionMagics = magicManager.getExtensionMagics(explicitFileType);
+                    if (explicitExtensionMagics != null) {
+                        detectConext.setExtensionMagics(explicitExtensionMagics);
+                        detect(detectConext, explicitExtensionMagics.getMagics());
+                        if (detectConext.isDetected()) {
+                            detectConext.setSafeStatus(SafeStatus.SAFE);
+                        } else {
+                            detectDisguiseExtensionTolerate(detectConext, detectOption, explicitExtensionMagics);
 
-                        if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN) {
-                            detectConext.setSafeStatus(SafeStatus.DISGUISE);
+                            if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN) {
+                                detectConext.setSafeStatus(SafeStatus.DISGUISE);
+                            }
+
                         }
-
                     }
 
                 }
@@ -179,6 +205,16 @@ public class FileDetector {
 
     }
 
+    /**
+     * @param detectConext    detectConext
+     * @param detectOption    detectOption
+     * @param extensionMagics extensionMagics
+     * @return void
+     * @title detectDisguiseExtensionTolerate
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:43
+     */
     private static void detectDisguiseExtensionTolerate(DetectConext detectConext, DetectOption detectOption,
                                                         ExtensionMagics extensionMagics) {
 
@@ -191,22 +227,42 @@ public class FileDetector {
 
     }
 
+    /**
+     * @param detectConext detectConext
+     * @param detectOption detectOption
+     * @return void
+     * @title detectDangerousExtension
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:43
+     */
     private static void detectDangerousExtension(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDetectDangerousExtension()) {
             String extension = detectConext.getExtension();
-            ExtensionManager extensionManager = FileTypeHelper.getExtensionManager();
+            ExtensionManager extensionManager = FileTypeConfigManager.getExtensionManager();
             Set<String> dangerousExtensions = extensionManager.getDangerousExtensions();
             if (dangerousExtensions.contains(extension)) {
-                detectConext.setSafeStatus(SafeStatus.DANGEROUS_EXTENSION);
-                detectConext.setDangerousExtensions(dangerousExtensions);
+                Set<String> detectDangerousExtensionExcludes = detectOption.getDetectDangerousExtensionExcludes();
+                if (detectDangerousExtensionExcludes == null || !detectDangerousExtensionExcludes.contains(extension)) {
+                    detectConext.setSafeStatus(SafeStatus.DANGEROUS_EXTENSION);
+                    detectConext.setDangerousExtensions(dangerousExtensions);
+
+                }
+            } else {
+                Set<String> detectDangerousExtensionIncludes = detectOption.getDetectDangerousExtensionIncludes();
+                if (detectDangerousExtensionIncludes != null && detectDangerousExtensionIncludes.contains(extension)) {
+                    detectConext.setSafeStatus(SafeStatus.DANGEROUS_EXTENSION);
+                    detectConext.setDangerousExtensions(detectDangerousExtensionIncludes);
+
+                }
+
             }
         }
     }
 
     /**
-     * @param detectConext
+     * @param detectConext detectConext
      * @return void
-     * @throws
      * @title checkDanger
      * @description
      * @author BiJi'an
@@ -214,7 +270,7 @@ public class FileDetector {
      */
     private static void detectDangerConent(DetectConext detectConext, DetectOption detectOption) {
         if (detectConext.getSafeStatus() == SafeStatus.UNKNOWN && detectOption.isDeletecDangerousContent()) {
-            Set<Magic> magics = MagicHelper.getMagics(MagicRisk.HIGH);
+            Set<Magic> magics = magicManager.getMagics(MagicRisk.HIGH);
             detect(detectConext, magics);
             if (detectConext.isDetected()) {
                 detectConext.setSafeStatus(SafeStatus.DANGEROUS_CONTENT);

@@ -5,8 +5,8 @@ import java.util.StringJoiner;
 
 import com.google.common.collect.Sets;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.config.ExtensionMagics;
-import com.kylinhunter.file.detector.config.Magic;
+import com.kylinhunter.file.detector.magic.ExtensionMagics;
+import com.kylinhunter.file.detector.magic.Magic;
 
 import lombok.Data;
 

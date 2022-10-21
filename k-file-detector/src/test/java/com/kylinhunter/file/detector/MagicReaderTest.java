@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.file.detector.signature.MagicHelper;
-import com.kylinhunter.file.detector.signature.MagicReader;
+import com.kylinhunter.file.detector.magic.MagicConfigManager;
+import com.kylinhunter.file.detector.magic.MagicManager;
+import com.kylinhunter.file.detector.magic.MagicReader;
 import com.kylinhunter.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
@@ -18,12 +19,14 @@ class MagicReaderTest {
 
     @Test
     void read() throws IOException {
+        MagicManager magicManager = MagicConfigManager.getMagicManager();
+
         File file = ResourceHelper.getFileInClassPath("files/safe/doc.doc");
 
         String read1 = MagicReader.read(file);
 
         System.out.println(read1);
-        Assertions.assertEquals(MagicHelper.getMagicMaxLength() * 2, read1.length());
+        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read1.length());
         Assertions.assertEquals("D0CF11E0A1B11AE1", read1.substring(0, 16));
 
         read1 = MagicReader.read(file, true);
@@ -34,7 +37,7 @@ class MagicReaderTest {
 
         String read2 = MagicReader.read(multipartFile);
         System.out.println(read2);
-        Assertions.assertEquals(MagicHelper.getMagicMaxLength() * 2, read2.length());
+        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read2.length());
         Assertions.assertEquals("D0CF11E0A1B11AE1", read2.substring(0, 16));
 
         read2 = MagicReader.read(multipartFile, true);
@@ -46,7 +49,7 @@ class MagicReaderTest {
         String read3 = MagicReader.read(bytes);
         System.out.println(read3);
         Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(MagicHelper.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
 
         read3 = MagicReader.read(bytes, "1.doc", true);
         System.out.println(read3);
@@ -55,7 +58,7 @@ class MagicReaderTest {
         read3 = MagicReader.read(bytes, "1.doc", false);
         System.out.println(read3);
         Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(MagicHelper.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
 
     }
 

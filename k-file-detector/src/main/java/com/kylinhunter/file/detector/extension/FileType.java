@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.config;
+package com.kylinhunter.file.detector.extension;
 
 import java.util.List;
 import java.util.Set;

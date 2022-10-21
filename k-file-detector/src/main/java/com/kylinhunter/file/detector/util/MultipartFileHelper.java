@@ -24,12 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MultipartFileHelper {
 
-    private static FileItemFactory fileItemFactory = new DiskFileItemFactory(1024, null);
+    private static final FileItemFactory FILE_ITEM_FACTORY = new DiskFileItemFactory(5120, null);
 
     /**
-     * @param file
+     * @param file file
      * @return org.springframework.web.multipart.MultipartFile
-     * @throws
      * @title getMultipartFile
      * @description
      * @author BiJi'an
@@ -41,9 +40,8 @@ public class MultipartFileHelper {
     }
 
     /**
-     * @param file
+     * @param file file
      * @return org.apache.commons.fileupload.FileItem
-     * @throws
      * @title createFileItem
      * @description
      * @author BiJi'an
@@ -51,7 +49,7 @@ public class MultipartFileHelper {
      */
     private static FileItem createFileItem(File file) throws IOException {
 
-        FileItem item = fileItemFactory.createItem("file", MediaType.MULTIPART_FORM_DATA_VALUE, true, file.getName());
+        FileItem item = FILE_ITEM_FACTORY.createItem("file", MediaType.MULTIPART_FORM_DATA_VALUE, true, file.getName());
         try (InputStream in = new FileInputStream(file); OutputStream out = item.getOutputStream()) {
             IOUtils.copy(in, out);
         } catch (Exception e) {

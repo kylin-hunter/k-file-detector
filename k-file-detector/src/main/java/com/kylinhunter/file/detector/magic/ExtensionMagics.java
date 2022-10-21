@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.config;
+package com.kylinhunter.file.detector.magic;
 
 import java.util.HashSet;
 import java.util.Set;

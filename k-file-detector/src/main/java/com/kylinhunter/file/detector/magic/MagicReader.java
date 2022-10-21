@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.signature;
+package com.kylinhunter.file.detector.magic;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.file.detector.config.ExtensionMagics;
 import com.kylinhunter.file.detector.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,15 +20,21 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-
+    /**
+     * @param content content
+     * @return java.lang.String
+     * @title read
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:38
+     */
     public static String read(byte[] content) {
         return read(content, null, false);
     }
 
     /**
-     * @param content
+     * @param content content
      * @return java.lang.String
-     * @throws
      * @title read
      * @description
      * @author BiJi'an
@@ -45,9 +50,8 @@ public class MagicReader {
     }
 
     /**
-     * @param file
+     * @param file file
      * @return java.lang.String
-     * @throws
      * @title read magic
      * @description
      * @author BiJi'an
@@ -60,10 +64,9 @@ public class MagicReader {
     }
 
     /**
-     * @param file
-     * @param accurate
+     * @param file     file
+     * @param accurate accurate
      * @return java.lang.String
-     * @throws
      * @title read
      * @description
      * @author BiJi'an
@@ -80,9 +83,8 @@ public class MagicReader {
     }
 
     /**
-     * @param file
+     * @param file file
      * @return java.lang.String
-     * @throws
      * @title read
      * @description
      * @author BiJi'an
@@ -93,10 +95,9 @@ public class MagicReader {
     }
 
     /**
-     * @param file
-     * @param accurate
+     * @param file     file
+     * @param accurate accurate
      * @return java.lang.String
-     * @throws
      * @title read
      * @description
      * @author BiJi'an
@@ -112,10 +113,9 @@ public class MagicReader {
     }
 
     /**
-     * @param inputStream
-     * @param fileSize
+     * @param inputStream inputStream
+     * @param fileSize    fileSize
      * @return java.lang.String
-     * @throws
      * @title read
      * @description
      * @author BiJi'an
@@ -132,12 +132,23 @@ public class MagicReader {
         return StringUtil.EMPTY;
     }
 
+    /**
+     * @param fileName fileName
+     * @param fileSize fileSize
+     * @param accurate accurate
+     * @return int
+     * @title calMacgiclen
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:36
+     */
     private static int calMacgiclen(String fileName, long fileSize, boolean accurate) {
+        MagicManager magicManager = MagicConfigManager.getMagicManager();
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
             if (!StringUtils.isEmpty(extension)) {
-                ExtensionMagics extensionMagics = MagicHelper.getExtensionMagics(extension);
+                ExtensionMagics extensionMagics = magicManager.getExtensionMagics(extension);
                 if (extensionMagics != null) {
                     magicLen = extensionMagics.getMagicMaxLength();
                 }
@@ -145,7 +156,7 @@ public class MagicReader {
 
         }
         if (magicLen <= 0) {
-            magicLen = MagicHelper.getMagicMaxLength();
+            magicLen = magicManager.getMagicMaxLength();
         }
 
         if (fileSize > 0 && magicLen > fileSize) {

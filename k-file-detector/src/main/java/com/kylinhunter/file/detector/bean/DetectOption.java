@@ -23,9 +23,9 @@ public class DetectOption {
     private boolean detectDangerousExtension = true;  /* detect Dangerous Extension */
 
     /* Add danger extension such as exe,vbx  */
-    private Set<String> detectDangerousExtensionIncludes = Sets.newHashSet();
+    private Set<String> detectDangerousExtensionIncludes;
     /* remove danger extension such as exe,vbx */
-    private Set<String> detectDangerousExtensionExcludes = Sets.newHashSet();
+    private Set<String> detectDangerousExtensionExcludes;
 
     private boolean detectDisguiseExtension = true;  /* detect disguise extension  */
     private boolean detectDisguiseExtensionTolerate = true;  /* detect  disguise tolerate extension   */
@@ -38,6 +38,11 @@ public class DetectOption {
         return DEFAULT_CHECK_OPTION;
     }
 
+    public static DetectOption custom() {
+        DetectOption detectOption = new DetectOption();
+        return detectOption;
+    }
+
     /**
      * @param extension extension
      * @return void
@@ -46,10 +51,14 @@ public class DetectOption {
      * @author BiJi'an
      * @date 2022-10-20 16:12
      */
-    public void addDangerousExtensionIncludes(String extension) {
+    public DetectOption addDangerousExtensionIncludes(String extension) {
         if (!StringUtils.isEmpty(extension)) {
+            if (detectDangerousExtensionIncludes == null) {
+                detectDangerousExtensionIncludes = Sets.newHashSet();
+            }
             detectDangerousExtensionIncludes.add(extension);
         }
+        return this;
 
     }
 
@@ -62,10 +71,14 @@ public class DetectOption {
      * @date 2022-10-20 16:12
      */
 
-    public void addDangerousExtensionExcludes(String extension) {
+    public DetectOption addDangerousExtensionExcludes(String extension) {
         if (!StringUtils.isEmpty(extension)) {
+            if (detectDangerousExtensionExcludes == null) {
+                detectDangerousExtensionExcludes = Sets.newHashSet();
+            }
             detectDangerousExtensionExcludes.add(extension);
         }
+        return this;
     }
 
 }

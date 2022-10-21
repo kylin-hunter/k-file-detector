@@ -263,8 +263,20 @@ fileTyes:
       - EXECUTABLE_FILE_WINDOWS
     tolerateGroup: null
     risk: HIGH
+  BAT:
+    extension: bat
+    families:
+      - EXECUTABLE_FILE_WINDOWS
+    tolerateGroup: null
+    risk: HIGH
   DEX:
     extension: dex
+    families:
+      - EXECUTABLE_FILE
+    tolerateGroup: null
+    risk: HIGH
+  SH:
+    extension: sh
     families:
       - EXECUTABLE_FILE
     tolerateGroup: null

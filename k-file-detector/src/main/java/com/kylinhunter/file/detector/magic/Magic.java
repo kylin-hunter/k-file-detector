@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector.config;
+package com.kylinhunter.file.detector.magic;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.StringJoiner;
 import com.kylinhunter.file.detector.constant.MagicFamily;
 import com.kylinhunter.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.file.detector.constant.MagicRisk;
+import com.kylinhunter.file.detector.extension.FileType;
 
 import lombok.AccessLevel;
 import lombok.Data;

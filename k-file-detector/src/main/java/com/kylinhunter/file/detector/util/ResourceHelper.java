@@ -14,6 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ResourceHelper {
 
+    /**
+     * @param path path
+     * @return java.io.InputStream
+     * @title getInputStreamInClassPath
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 00:39
+     */
     public static InputStream getInputStreamInClassPath(String path) {
         InputStream inputStream = ResourceHelper.class.getClassLoader().getResourceAsStream(path);
         if (inputStream == null) {

@@ -1,4 +1,4 @@
-package com.kylinhunter.file.detector;
+package com.kylinhunter.file.detector.config;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -6,18 +6,20 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.kylinhunter.file.detector.magic.MagicConfigManager;
+import com.kylinhunter.file.detector.magic.MagicManager;
 import com.kylinhunter.file.detector.constant.MagicRisk;
-import com.kylinhunter.file.detector.signature.MagicHelper;
-import com.kylinhunter.file.detector.config.ExtensionMagics;
-import com.kylinhunter.file.detector.config.Magic;
+import com.kylinhunter.file.detector.magic.ExtensionMagics;
+import com.kylinhunter.file.detector.magic.Magic;
 
-class MagicHelperTest {
+class MagicManagerTest {
 
     @Test
     void test() {
+        MagicManager magicManager = MagicConfigManager.getMagicManager();
 
         System.out.println("============getAllExplicitExtensionMagics");
-        Map<String, ExtensionMagics> allExtensionMagics = MagicHelper.getAllExtensionMagics();
+        Map<String, ExtensionMagics> allExtensionMagics = magicManager.getAllExtensionMagics();
         allExtensionMagics.forEach((k, extensionMagics) -> {
             System.out.println("extension: " + k);
 
@@ -39,21 +41,21 @@ class MagicHelperTest {
         });
 
         System.out.println("============getExtensionMagics");
-        MagicHelper.getMagics(MagicRisk.HIGH).forEach(e -> {
+        magicManager.getMagics(MagicRisk.HIGH).forEach(e -> {
             System.out.println("HIGH==>" + e.getNumber() + ":" + e.getFamilies());
         });
 
-        MagicHelper.getMagics(MagicRisk.MIDDLE).forEach(e -> {
+        magicManager.getMagics(MagicRisk.MIDDLE).forEach(e -> {
             System.out.println("MIDDLE==>" + e.getNumber() + ":" + e.getFamilies());
         });
 
-        MagicHelper.getMagics(MagicRisk.LOW).forEach(e -> {
+        magicManager.getMagics(MagicRisk.LOW).forEach(e -> {
             System.out.println("LOW==>" + e.getNumber() + ":" + e.getFamilies());
         });
 
         System.out.println("============getMagics");
         System.out.println("magicHelper: ");
-        Map<String, Magic> allMagics = MagicHelper.getAllMagics();
+        Map<String, Magic> allMagics = magicManager.getAllMagics();
         allMagics.forEach((k, v) -> {
             System.out.println("  - number: \"" + v.getNumber() + "\"");
             System.out.println("    desc: \"" + v.getDesc() + "\"");
@@ -73,7 +75,7 @@ class MagicHelperTest {
 
         System.out.println("============getMagicMaxLength");
 
-        System.out.println(MagicHelper.getMagicMaxLength());
+        System.out.println(magicManager.getMagicMaxLength());
 
         Assertions.assertEquals(
                 allExtensionMagics.values().stream().flatMap(e -> e.getMagics().stream())

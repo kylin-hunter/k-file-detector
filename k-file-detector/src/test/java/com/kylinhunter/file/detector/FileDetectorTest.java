@@ -13,9 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.kylinhunter.file.detector.bean.DetectConext;
+import com.kylinhunter.file.detector.bean.DetectOption;
+import com.kylinhunter.file.detector.extension.FileType;
+import com.kylinhunter.file.detector.extension.FileTypeConfigManager;
 import com.kylinhunter.file.detector.constant.SafeStatus;
-import com.kylinhunter.file.detector.signature.FileTypeHelper;
-import com.kylinhunter.file.detector.config.FileType;
 import com.kylinhunter.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -30,7 +31,7 @@ class FileDetectorTest {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
-                if (FileTypeHelper.isDanger(FilenameUtils.getExtension(file.getName()))) {
+                if (FileTypeConfigManager.getExtensionManager().isDanger(FilenameUtils.getExtension(file.getName()))) {
                     Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
                 } else {
                     Assertions.assertEquals(SafeStatus.SAFE, detectConext.getSafeStatus());
@@ -42,6 +43,41 @@ class FileDetectorTest {
 
     @Test
     @Order(2)
+    void checkDangerExtension() {
+        File dir = ResourceHelper.getFileInClassPath("files/special/danger_extension");
+        DetectOption detectOption = DetectOption.custom()
+                .addDangerousExtensionIncludes("doc")
+                .addDangerousExtensionExcludes("sh");
+        System.out.println(dir.getAbsolutePath());
+
+        File file1 = new File(dir, "exe.exe");
+        DetectConext detectConext = FileDetector.detect(file1);
+        System.out.println(file1.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
+
+        detectConext = FileDetector.detect(file1, detectOption);
+        System.out.println(file1.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
+
+        File file2 = new File(dir, "sh.sh");
+        detectConext = FileDetector.detect(file2);
+        System.out.println(file2.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
+        detectConext = FileDetector.detect(file2, detectOption);
+        System.out.println(file2.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.UNKNOWN, detectConext.getSafeStatus());
+
+        File file3 = new File(dir, "doc.doc");
+        detectConext = FileDetector.detect(file3);
+        System.out.println(file3.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.SAFE, detectConext.getSafeStatus());
+        detectConext = FileDetector.detect(file3, detectOption);
+        System.out.println(file3.getName() + "=>" + detectConext.getSafeStatus());
+        Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
+    }
+
+    @Test
+    @Order(3)
     void checkDisguise() {
         File dir = ResourceHelper.getFileInClassPath("files/special/disguise");
         System.out.println(dir.getAbsolutePath());
@@ -56,7 +92,7 @@ class FileDetectorTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     void checkDisguiseWarn() {
         File dir = ResourceHelper.getFileInClassPath("files/special/disguise_warn");
         System.out.println(dir.getAbsolutePath());
@@ -65,20 +101,6 @@ class FileDetectorTest {
                 DetectConext detectConext = FileDetector.detect(file);
                 System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
                 Assertions.assertEquals(SafeStatus.DISGUISE_WARN, detectConext.getSafeStatus());
-            }
-        }
-    }
-
-    @Test
-    @Order(4)
-    void checkDangerExtension() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/danger_extension");
-        System.out.println(dir.getAbsolutePath());
-        for (File file : dir.listFiles()) {
-            if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectConext detectConext = FileDetector.detect(file);
-                System.out.println(file.getName() + "=>" + detectConext.getSafeStatus());
-                Assertions.assertEquals(SafeStatus.DANGEROUS_EXTENSION, detectConext.getSafeStatus());
             }
         }
     }
@@ -138,7 +160,7 @@ class FileDetectorTest {
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
 
-                for (FileType fileType : FileTypeHelper.getAllFileTypes().values()) {
+                for (FileType fileType : FileTypeConfigManager.getExtensionManager().getAllFileTypes().values()) {
                     File fileTmp = new File(dirTmp, file.getName() + "." + fileType.getExtension());
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);
