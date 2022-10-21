@@ -26,6 +26,7 @@ implementation 'com.kylinhunter.plat.file.detector:k-file-detector:1.0.1'
         </dependency>
 ```
 
+
 #### 使用说明
 
 1. xxxx
