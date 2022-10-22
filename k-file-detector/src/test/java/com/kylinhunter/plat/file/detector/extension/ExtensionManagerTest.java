@@ -5,12 +5,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.ConfigurationManager;
+import com.kylinhunter.plat.file.detector.CommonManager;
 import com.kylinhunter.plat.file.detector.constant.ExtensionFamily;
 import com.kylinhunter.plat.file.detector.constant.ExtensionRisk;
 
 class ExtensionManagerTest {
-    ExtensionManager extensionManager = ConfigurationManager.getExtensionManager();
+    ExtensionManager extensionManager = CommonManager.getExtensionManager();
 
     @Test
     void testIsDanger() {

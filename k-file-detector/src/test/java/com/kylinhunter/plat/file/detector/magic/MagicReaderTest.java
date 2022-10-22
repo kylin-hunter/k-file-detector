@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.ConfigurationManager;
+import com.kylinhunter.plat.file.detector.CommonManager;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
@@ -18,7 +18,7 @@ class MagicReaderTest {
 
     @Test
     void read() throws IOException {
-        MagicManager magicManager = ConfigurationManager.getMagicManager();
+        MagicManager magicManager = CommonManager.getMagicManager();
 
         File file = ResourceHelper.getFileInClassPath("files/safe/doc.doc");
 

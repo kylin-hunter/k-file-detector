@@ -1,9 +1,9 @@
 package com.kylinhunter.plat.file.detector.bean;
 
 import java.util.Set;
-import java.util.StringJoiner;
 
-import com.kylinhunter.plat.file.detector.constant.SafeStatus;
+import com.kylinhunter.plat.file.detector.constant.SecurityStatus;
+import com.kylinhunter.plat.file.detector.magic.Magic;
 
 import lombok.Data;
 
@@ -15,21 +15,15 @@ import lombok.Data;
 @Data
 public class DetectResult {
 
-    private SafeStatus safeStatus = SafeStatus.UNKNOWN;
-    private final String possibleMagicNumber;
-    private final String extension;
-    private final Set<String> tolerateExtensions;
-    private final Set<String> extensionMagics;
-    private final Set<String> potential;
+    private final String fileName;
+    private Set<Magic> detectedMagics;
+    private FileSecurity fileSecurity;
 
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", DetectResult.class.getSimpleName() + "[", "]")
-                .add("safeStatus=" + safeStatus)
-                .add("possibleMagicNumber='" + possibleMagicNumber + "'")
-                .add("extension='" + extension + "'")
-                .add("tolerateExtensions='" + tolerateExtensions + "'")
-                .toString();
+    public SecurityStatus getSafeStatus() {
+        if (fileSecurity != null) {
+            return fileSecurity.getSecurityStatus();
+        }
+        return SecurityStatus.UNKNOWN;
     }
 
 }

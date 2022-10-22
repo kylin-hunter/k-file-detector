@@ -1,17 +1,18 @@
 package com.kylinhunter.plat.file.detector.magic;
 
 import java.io.InputStream;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
 import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.extension.ExtensionConfigLoader;
 import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
+import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -62,7 +63,8 @@ public class MagicConfigLoader {
         Objects.requireNonNull(magicConfig);
 
         magicConfig.getMagics().forEach(magic -> {
-
+            Set<String> extensions = magic.getExtensions();
+            magic.setExtensions(extensions.stream().map(e -> e.toLowerCase()).collect(Collectors.toSet()));
             Objects.requireNonNull(magic.getFamilies(), "magic.getFamilies is null");
             Objects.requireNonNull(magic.getRisk(), "magic.getRisk is null");
             String number = magic.getNumber();
@@ -86,7 +88,7 @@ public class MagicConfigLoader {
 
             }
 
-            magic.getExtensions().forEach(extension -> {
+            extensions.forEach(extension -> {
                 ExtensionFile extensionFile = extensionManager.getFileType(extension);
                 if (extensionFile == null) {
                     throw new DetectException("no filetype,for=>" + extension);
@@ -109,7 +111,7 @@ public class MagicConfigLoader {
      **/
     @Data
     public static class MagicConfig {
-        private List<Magic> magics;
+        private Set<Magic> magics;
         private int magicMaxLength = 1;
 
     }

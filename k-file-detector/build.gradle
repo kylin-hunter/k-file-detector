@@ -3,6 +3,7 @@ dependencies {
     api(rootProject.dep['commons-lang3'])
     api(rootProject.dep['commons-fileupload'])
     api(rootProject.dep['guava'])
+    api(rootProject.dep['commons-collections4'])
     implementation ('org.springframework:spring-web')
     api ('org.yaml:snakeyaml')
 

@@ -9,7 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.ConfigurationManager;
+import com.kylinhunter.plat.file.detector.CommonManager;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
 import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
@@ -24,8 +24,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-    private static final ExtensionManager extensionManager = ConfigurationManager.getExtensionManager();
-    private static final MagicManager magicManager = ConfigurationManager.getMagicManager();
+    private static final ExtensionManager extensionManager = CommonManager.getExtensionManager();
+    private static final MagicManager magicManager = CommonManager.getMagicManager();
 
     /**
      * @param content content

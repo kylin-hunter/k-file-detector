@@ -3,8 +3,9 @@ package com.kylinhunter.plat.file.detector.bean;
 import java.util.Set;
 import java.util.StringJoiner;
 
-import com.google.common.collect.Sets;
-import com.kylinhunter.plat.file.detector.constant.SafeStatus;
+import org.apache.commons.collections4.CollectionUtils;
+
+import com.kylinhunter.plat.file.detector.constant.SecurityStatus;
 import com.kylinhunter.plat.file.detector.magic.ExtensionMagics;
 import com.kylinhunter.plat.file.detector.magic.Magic;
 
@@ -18,7 +19,7 @@ import lombok.Data;
 @Data
 public class DetectConext {
 
-    private SafeStatus safeStatus = SafeStatus.UNKNOWN;
+    private SecurityStatus securityStatus = SecurityStatus.UNKNOWN;
     private final String possibleMagicNumber; // potential magic numbers
     private final String extension; // explicit extension
     private Set<Magic> detectedMagics; // the detected magic messages
@@ -26,19 +27,12 @@ public class DetectConext {
     private Set<String> dangerousExtensions;
     private ExtensionMagics extensionMagics;
 
-    public void addDetectedMagic(Magic magic) {
-        if (detectedMagics == null) {
-            detectedMagics = Sets.newHashSet();
-        }
-        detectedMagics.add(magic);
-    }
-
-    public void setSafeStatus(SafeStatus safeStatus) {
-        this.safeStatus = safeStatus;
+    public void setSecurityStatus(SecurityStatus securityStatus) {
+        this.securityStatus = securityStatus;
     }
 
     public boolean isDetected() {
-        return safeStatus != SafeStatus.UNKNOWN || detectedMagics != null && detectedMagics.size() > 0;
+        return CollectionUtils.isEmpty(detectedMagics);
     }
 
     private String msg;
@@ -46,10 +40,10 @@ public class DetectConext {
     @Override
     public String toString() {
         return new StringJoiner(", ", DetectConext.class.getSimpleName() + "[", "]")
-                .add("safeStatus=" + safeStatus)
+                .add("securityStatus=" + securityStatus)
                 .add("possibleMagicNumber='" + possibleMagicNumber + "'")
                 .add("extension='" + extension + "'")
-                .add("detectedMagics=" + detectedMagics)
+                .add("magics=" + detectedMagics)
                 .toString();
     }
 

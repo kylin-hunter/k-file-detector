@@ -8,7 +8,7 @@ import com.kylinhunter.plat.file.detector.magic.MagicManager;
  * @description
  * @date 2022-10-22 01:48
  **/
-public class ConfigurationManager {
+public class CommonManager {
     private static final MagicManager MAGIC_MANAGER = new MagicManager();
     private static final ExtensionManager EXTENSION_MANAGER = MAGIC_MANAGER.getExtensionManager();
 

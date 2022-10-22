@@ -10,7 +10,7 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public enum SafeStatus {
+public enum SecurityStatus {
     UNKNOWN(1, "unknown"),
     SAFE(2, "safe"),
     DANGEROUS_EXTENSION(3, "dangerous extension"),

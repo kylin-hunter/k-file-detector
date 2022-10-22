@@ -5,12 +5,12 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.ConfigurationManager;
+import com.kylinhunter.plat.file.detector.CommonManager;
 import com.kylinhunter.plat.file.detector.constant.MagicRisk;
 
 class MagicManagerTest {
 
-    MagicManager magicManager = ConfigurationManager.getMagicManager();
+    MagicManager magicManager = CommonManager.getMagicManager();
 
     @Test
     void getMagics() {
