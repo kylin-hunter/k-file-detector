@@ -1,6 +1,5 @@
 package com.kylinhunter.plat.file.detector.type;
 
-import java.util.Set;
 import java.util.StringJoiner;
 
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
@@ -27,15 +26,15 @@ public class FileType {
 
     /* ==== extended  properties===*/
     private FileFamily family;
-    private Set<FileType> tolerateFileTypes;
-    private ExtensionMagics extensionMagics;
-    private TolerateMagics tolerateMagics;
+    private ExtensionMagics extensionMagics = new ExtensionMagics();
+    private TolerateMagics tolerateMagics = new TolerateMagics();
 
     @Override
     public String toString() {
         return new StringJoiner(", ", FileType.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
+                .add("id='" + id + "'")
                 .add("extension='" + extension + "'")
+                .add("desc='" + desc + "'")
                 .toString();
     }
 }

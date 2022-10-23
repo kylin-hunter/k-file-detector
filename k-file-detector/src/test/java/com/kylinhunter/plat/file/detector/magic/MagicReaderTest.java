@@ -20,7 +20,7 @@ class MagicReaderTest {
     void read() throws IOException {
         MagicManager magicManager = CommonManager.getMagicManager();
 
-        File file = ResourceHelper.getFileInClassPath("files/safe/doc.doc");
+        File file = ResourceHelper.getFileInClassPath("files/basic/doc.doc");
 
         String read1 = MagicReader.read(file);
 
@@ -64,7 +64,7 @@ class MagicReaderTest {
     @Test
     void readAll() {
 
-        File dir = ResourceHelper.getFileInClassPath("files/safe");
+        File dir = ResourceHelper.getFileInClassPath("files/basic");
         System.out.println(dir.getAbsolutePath());
         Arrays.stream(Objects.requireNonNull(dir.listFiles())).filter(File::isFile).forEach(file -> System.out
                 .println("file=>" + file.getName() + "\t magic_number=>" + MagicReader.read(file, true)));

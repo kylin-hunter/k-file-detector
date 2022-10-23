@@ -1,13 +1,11 @@
 package com.kylinhunter.plat.file.detector.magic;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.kylinhunter.plat.file.detector.type.FileType;
+import com.google.common.collect.Sets;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 /**
@@ -16,17 +14,10 @@ import lombok.Setter;
  * @date 2022-10-02 19:55
  **/
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ExtensionMagics {
-    @EqualsAndHashCode.Include
-    private String extension;
     @Setter(AccessLevel.NONE)
-    private Set<Magic> magics = new HashSet<>();
+    private Set<Magic> magics;
     private int magicMaxLength = 1;
-
-    public ExtensionMagics(FileType fileType) {
-        this.extension = fileType.getExtension();
-    }
 
     /**
      * @param magic magic
@@ -37,6 +28,9 @@ public class ExtensionMagics {
      * @date 2022-10-21 02:07
      */
     public void addMagic(Magic magic) {
+        if (magics == null) {
+            magics = Sets.newHashSet();
+        }
         magics.add(magic);
         if (magic.getMagicLength() > magicMaxLength) {
             magicMaxLength = magic.getMagicLength();

@@ -157,7 +157,7 @@ public class MagicReader {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
-            Set<FileType> fileTypes = fileTypeManager.getFileTypes(extension);
+            Set<FileType> fileTypes = fileTypeManager.getFileTypesByExtension(extension);
 
             for (FileType fileType : fileTypes) {
                 ExtensionMagics extensionMagics = fileType.getExtensionMagics();

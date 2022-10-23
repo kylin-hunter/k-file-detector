@@ -62,54 +62,10 @@ public class MagicConfigLoader {
         Objects.requireNonNull(resource);
         MagicConfig magicConfig = new Yaml().loadAs(resource, MagicConfig.class);
         Objects.requireNonNull(magicConfig);
-
-        magicConfig.getMagics().forEach(magic -> {
-            Set<String> fileTypeIds = magic.getFileTypeIds();
-            if (fileTypeIds != null) {
-                Set<String> extensions = Sets.newHashSet();
-                Set<FileType> fileTypes = Sets.newHashSet();
-
-                fileTypeIds.forEach(id -> {
-                    FileType fileType = fileTypeManager.getFileTypeById(id);
-                    if (fileType == null) {
-                        throw new DetectException("no file type :" + id);
-                    }
-                    extensions.add(fileType.getExtension());
-                    fileTypes.add(fileType);
-
-                });
-                magic.setExtensions(extensions);
-                magic.setFileTypes(fileTypes);
-            }
-
-            String number = magic.getNumber();
-            if (StringUtils.isEmpty(number)) {
-                throw new DetectException("number can't be empty");
-
-            }
-
-            // dynamic calculate other attributes
-
-            int numberLen = number.length();
-            if (numberLen % 2 != 0) {
-                throw new DetectException("magic number must be even");
-            }
-
-            int magicLength = numberLen / 2;
-            magic.setMagicLength(magicLength);
-            if (number.contains("_")) {
-                magic.setMatchMode(MagicMatchMode.PREFIX_FUZZY);
-            } else {
-                magic.setMatchMode(MagicMatchMode.PREFIX);
-
-            }
-
-            if (magicLength > magicConfig.getMagicMaxLength()) {
-                magicConfig.setMagicMaxLength(magicLength);
-            }
-        });
         return magicConfig;
     }
+
+
 
     /**
      * @author BiJi'an

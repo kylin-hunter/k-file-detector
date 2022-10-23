@@ -57,7 +57,6 @@ public class FileTypeConfigLoader {
         Yaml yaml = new Yaml();
         FileTypeConfig fileTypeConfig = yaml.loadAs(resource, FileTypeConfig.class); // load config from yaml
         Objects.requireNonNull(fileTypeConfig);
-
         return fileTypeConfig;
     }
 
@@ -74,7 +73,7 @@ public class FileTypeConfigLoader {
     @Data
     public static class FileFamilyData {
         private String tolerateTag;
-        List<FileType> list;
+        private List<FileType> list;
     }
 
 }

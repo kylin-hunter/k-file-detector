@@ -7,11 +7,9 @@ import java.util.StringJoiner;
 import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.plat.file.detector.type.FileType;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author BiJi'an
@@ -29,16 +27,17 @@ public class Magic {
     private Set<String> fileTypeIds;
 
     /* ==== extended  properties===*/
-    private Set<String> extensions;
     private int magicLength; //  magic number's bytes size
     private MagicMatchMode matchMode;
     private Set<FileType> fileTypes = new HashSet<>();
+    private Set<String> extensions;
 
     @Override
     public String toString() {
         return new StringJoiner(", ", Magic.class.getSimpleName() + "[", "]")
                 .add("number='" + number + "'")
                 .add("desc='" + desc + "'")
+                .add("fileTypeIds=" + fileTypeIds)
                 .add("extensions=" + extensions)
                 .toString();
     }

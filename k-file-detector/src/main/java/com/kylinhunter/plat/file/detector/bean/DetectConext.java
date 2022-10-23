@@ -1,12 +1,10 @@
 package com.kylinhunter.plat.file.detector.bean;
 
 import java.util.Set;
-import java.util.StringJoiner;
 
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FilenameUtils;
 
-import com.kylinhunter.plat.file.detector.constant.SecurityStatus;
-import com.kylinhunter.plat.file.detector.magic.ExtensionMagics;
+import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.magic.Magic;
 
 import lombok.Data;
@@ -18,33 +16,26 @@ import lombok.Data;
  **/
 @Data
 public class DetectConext {
-
-    private SecurityStatus securityStatus = SecurityStatus.UNKNOWN;
-    private final String possibleMagicNumber; // potential magic numbers
-    private final String extension; // explicit extension
+    private String possibleMagicNumber; // potential magic numbers
+    private String fileName; // explicit extension
+    private String extension; // explicit extension
     private Set<Magic> detectedMagics; // the detected magic messages
 
-    private Set<String> dangerousExtensions;
-    private ExtensionMagics extensionMagics;
-
-    public void setSecurityStatus(SecurityStatus securityStatus) {
-        this.securityStatus = securityStatus;
+    public DetectConext(String possibleMagicNumber, String fileName) {
+        this.possibleMagicNumber = possibleMagicNumber;
+        this.fileName = fileName;
+        this.extension = FilenameUtils.getExtension(fileName);
     }
 
-    public boolean isDetected() {
-        return CollectionUtils.isEmpty(detectedMagics);
+    /**
+     * @return java.util.Set<com.kylinhunter.plat.file.detector.magic.Magic>
+     * @title createDetectedMagics
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-24 02:43
+     */
+    public Set<Magic> resetDetectedMagics() {
+        this.detectedMagics = Sets.newHashSet();
+        return detectedMagics;
     }
-
-    private String msg;
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", DetectConext.class.getSimpleName() + "[", "]")
-                .add("securityStatus=" + securityStatus)
-                .add("possibleMagicNumber='" + possibleMagicNumber + "'")
-                .add("extension='" + extension + "'")
-                .add("magics=" + detectedMagics)
-                .toString();
-    }
-
 }

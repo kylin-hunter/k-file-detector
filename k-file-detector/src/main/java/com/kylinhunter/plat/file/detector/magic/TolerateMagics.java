@@ -7,7 +7,6 @@ import com.kylinhunter.plat.file.detector.type.FileType;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 /**
@@ -16,19 +15,14 @@ import lombok.Setter;
  * @date 2022-10-02 19:55
  **/
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TolerateMagics {
-    @EqualsAndHashCode.Include
-    private String extension;
+
+    private Set<FileType> fileTypes;
     @Setter(AccessLevel.NONE)
     private Set<String> extensions;
+
     @Setter(AccessLevel.NONE)
     private Set<Magic> magics;
-    private int magicMaxLength = 1;
-
-    public TolerateMagics(FileType fileType) {
-        this.extension = fileType.getExtension();
-    }
 
     /**
      * @param magics explictMagic
@@ -39,6 +33,7 @@ public class TolerateMagics {
      * @date 2022-10-21 02:07
      */
     public void addMagic(Set<Magic> magics) {
+
         if (this.magics == null) {
             this.magics = Sets.newHashSet();
         }
@@ -47,6 +42,14 @@ public class TolerateMagics {
         }
     }
 
+    /**
+     * @param extension extension
+     * @return void
+     * @title addExtension
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-24 01:28
+     */
     public void addExtension(String extension) {
         if (extensions == null) {
             extensions = Sets.newHashSet();

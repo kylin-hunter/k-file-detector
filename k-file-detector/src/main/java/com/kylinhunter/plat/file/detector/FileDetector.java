@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.Set;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectOption;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.bean.FileSecurity;
-import com.kylinhunter.plat.file.detector.constant.SecurityStatus;
 import com.kylinhunter.plat.file.detector.magic.Magic;
 import com.kylinhunter.plat.file.detector.magic.MagicManager;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
@@ -151,8 +149,8 @@ public class FileDetector {
 
     private static DetectResult detect(String possibleMagicNumber, String fileName, DetectOption detectOption) {
         DetectResult detectResult = new DetectResult(fileName);
-
-        Set<Magic> detectedMagics = magicManager.detect(possibleMagicNumber);
+        DetectConext detectConext = new DetectConext(possibleMagicNumber, fileName);
+        Set<Magic> detectedMagics = magicManager.detect(detectConext);
         detectResult.setDetectedMagics(detectedMagics);
 
         FileSecurity fileSecurity = detectFileSecurity(fileName, detectedMagics, detectOption);
@@ -172,24 +170,11 @@ public class FileDetector {
      */
 
     private static FileSecurity detectFileSecurity(String fileName, Set<Magic> detectedMagics,
+
                                                    DetectOption detectOption) {
 
-        FileSecurity fileSecurity = new FileSecurity(detectedMagics);
-        String extension = FilenameUtils.getExtension(fileName);
-
-        if (!fileSecurity.isDetected()) {
-            if (CollectionUtils.isNotEmpty(detectedMagics)) {
-//                fileTypeManager.detectExtensionSafe(fileSecurity, extension, detectedMagics);
-//                if (!fileSecurity.isDetected()) {
-//                    fileTypeManager.detectExtensionDisguise(fileSecurity, extension, detectedMagics);
-//                    if (!fileSecurity.isDetected()) {
-//                        fileSecurity.setSecurityStatus(SecurityStatus.DISGUISE);
-//                    }
-//                }
-            }
-
-        }
-        return fileSecurity;
+        FileSecurityDetector.checkExtensionConsistent(fileName, detectedMagics, detectOption);
+        return null;
     }
 
 }
