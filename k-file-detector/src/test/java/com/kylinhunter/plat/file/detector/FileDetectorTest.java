@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -26,16 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectOption;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.bean.FileSecurity;
-import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
 import com.kylinhunter.plat.file.detector.magic.Magic;
+import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
-    private static final ExtensionManager extensionManager = CommonManager.getExtensionManager();
+    private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
 
     private void printDetectResult(DetectResult detectResult) {
         Set<Magic> detectedMagics = detectResult.getDetectedMagics();
@@ -58,9 +55,9 @@ class FileDetectorTest {
         }
         System.out.println("##########file  security######################");
 
-        FileSecurity fileSecurity = detectResult.getFileSecurity();
-        System.out.println("\t securityStatus=>" + fileSecurity.getSecurityStatus());
-        System.out.println("\t securityDesc=>" + fileSecurity.getDesc());
+//        FileSecurity fileSecurity = detectResult.getFileSecurity();
+//        System.out.println("\t securityStatus=>" + fileSecurity.getSecurityStatus());
+//        System.out.println("\t securityDesc=>" + fileSecurity.getDesc());
         System.out.println("===============================================");
         System.out.println();
 
@@ -90,11 +87,8 @@ class FileDetectorTest {
                     detectResult = FileDetector.detect(inputStream, file.getName());
                 }
                 printDetectResult(detectResult);
-                if (extensionManager.isDanger(FilenameUtils.getExtension(file.getName()))) {
-                    Assertions.assertEquals(DANGEROUS_EXTENSION, detectResult.getSafeStatus());
-                } else {
-                    Assertions.assertEquals(SAFE, detectResult.getSafeStatus());
-                }
+
+                Assertions.assertEquals(SAFE, detectResult.getSafeStatus());
 
             }
         }
@@ -218,16 +212,15 @@ class FileDetectorTest {
 
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
-
-                for (ExtensionFile extensionFile : extensionManager.getAllFileTypes().values()) {
-                    File fileTmp = new File(dirTmp, file.getName() + "." + extensionFile.getExtension());
+                for (String extension : fileTypeManager.getExtensionToFileTypes().keySet()) {
+                    File fileTmp = new File(dirTmp, file.getName() + "." + extension);
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);
                     }
-
                     DetectResult detectResult = FileDetector.detect(fileTmp);
                     System.out.println(fileTmp.getName() + "=>" + detectResult.getSafeStatus());
                 }
+
             }
 
         }

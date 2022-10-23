@@ -1,14 +1,11 @@
 package com.kylinhunter.plat.file.detector.magic;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
-import com.kylinhunter.plat.file.detector.constant.MagicFamily;
 import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
-import com.kylinhunter.plat.file.detector.constant.MagicRisk;
-import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
+import com.kylinhunter.plat.file.detector.type.FileType;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -29,19 +26,13 @@ public class Magic {
     @EqualsAndHashCode.Include
     private String number;
     private String desc;
-    private Set<String> extensions;
-    private List<MagicFamily> families;
-    private MagicRisk risk;
+    private Set<String> fileTypeIds;
 
     /* ==== extended  properties===*/
+    private Set<String> extensions;
     private int magicLength; //  magic number's bytes size
     private MagicMatchMode matchMode;
-    @Setter(AccessLevel.NONE)
-    private Set<ExtensionFile> extensionFiles = new HashSet<>();
-
-    public void addFileType(ExtensionFile extensionFile) {
-        extensionFiles.add(extensionFile);
-    }
+    private Set<FileType> fileTypes = new HashSet<>();
 
     @Override
     public String toString() {
@@ -49,8 +40,6 @@ public class Magic {
                 .add("number='" + number + "'")
                 .add("desc='" + desc + "'")
                 .add("extensions=" + extensions)
-                .add("families=" + families)
-                .add("risk=" + risk)
                 .toString();
     }
 }

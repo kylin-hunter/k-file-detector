@@ -1,6 +1,6 @@
 package com.kylinhunter.plat.file.detector;
 
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
+import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.magic.MagicManager;
 
 /**
@@ -10,13 +10,13 @@ import com.kylinhunter.plat.file.detector.magic.MagicManager;
  **/
 public class CommonManager {
     private static final MagicManager MAGIC_MANAGER = new MagicManager();
-    private static final ExtensionManager EXTENSION_MANAGER = MAGIC_MANAGER.getExtensionManager();
+    private static final FileTypeManager EXTENSION_MANAGER = MAGIC_MANAGER.getFileTypeManager();
 
     public static MagicManager getMagicManager() {
         return MAGIC_MANAGER;
     }
 
-    public static ExtensionManager getExtensionManager() {
+    public static FileTypeManager getFileTypeManager() {
         return EXTENSION_MANAGER;
     }
 }

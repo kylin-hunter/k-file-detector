@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.CommonManager;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
+import com.kylinhunter.plat.file.detector.type.FileType;
+import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-    private static final ExtensionManager extensionManager = CommonManager.getExtensionManager();
+    private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
     private static final MagicManager magicManager = CommonManager.getMagicManager();
 
     /**
@@ -156,11 +157,14 @@ public class MagicReader {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
-            ExtensionFile fileType = extensionManager.getFileType(extension);
-            if (fileType != null) {
+            Set<FileType> fileTypes = fileTypeManager.getFileTypes(extension);
+
+            for (FileType fileType : fileTypes) {
                 ExtensionMagics extensionMagics = fileType.getExtensionMagics();
                 if (extensionMagics != null) {
-                    magicLen = extensionMagics.getMagicMaxLength();
+                    if (extensionMagics.getMagicMaxLength() > magicLen) {
+                        magicLen = extensionMagics.getMagicMaxLength();
+                    }
                 }
             }
 

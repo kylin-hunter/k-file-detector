@@ -1,14 +1,13 @@
-package com.kylinhunter.plat.file.detector.extension;
+package com.kylinhunter.plat.file.detector.type;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.yaml.snakeyaml.Yaml;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.kylinhunter.plat.file.detector.constant.FileFamily;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -19,9 +18,9 @@ import lombok.Data;
  * @date 2022-10-02 19:55
  **/
 @Data
-public class ExtensionConfigLoader {
+public class FileTypeConfigLoader {
     private static FileTypeConfig CACHED_DATA;
-    private static final String MAGIC_FILE_TYPES_LOCATION = "signature/magic_file_types.yml";
+    private static final String MAGIC_FILE_TYPES_LOCATION = "signature/file_types.yml";
 
     /**
      * @return com.kylinhunter.file.detector.config.MagicConfig
@@ -34,7 +33,7 @@ public class ExtensionConfigLoader {
         if (CACHED_DATA != null) {
             return CACHED_DATA;
         } else {
-            synchronized(ExtensionConfigLoader.class) {
+            synchronized(FileTypeConfigLoader.class) {
                 if (CACHED_DATA != null) {
                     return CACHED_DATA;
                 }
@@ -55,25 +54,9 @@ public class ExtensionConfigLoader {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_FILE_TYPES_LOCATION);
         Objects.requireNonNull(resource);
-        FileTypeConfig fileTypeConfig = new Yaml().loadAs(resource, FileTypeConfig.class); // load config from yaml
+        Yaml yaml = new Yaml();
+        FileTypeConfig fileTypeConfig = yaml.loadAs(resource, FileTypeConfig.class); // load config from yaml
         Objects.requireNonNull(fileTypeConfig);
-        Map<String, Set<String>> tolerateDisguiseGroupDatas = Maps.newHashMap();
-
-        fileTypeConfig.fileTyes.values().forEach(fileType -> {
-            String tolerateDisguiseGroup = fileType.getTolerateGroup();
-            if (tolerateDisguiseGroup != null) {
-                Set<String> tolerateExtensions = tolerateDisguiseGroupDatas.compute(tolerateDisguiseGroup,
-                        (k, v) -> {
-                            if (v == null) {
-                                v = Sets.newHashSet();
-                            }
-                            v.add(fileType.getExtension());
-                            return v;
-                        });
-                fileType.setTolerateExtensions(tolerateExtensions);
-            }
-
-        });
 
         return fileTypeConfig;
     }
@@ -85,8 +68,13 @@ public class ExtensionConfigLoader {
      **/
     @Data
     public static class FileTypeConfig {
-        private Map<String, ExtensionFile> fileTyes; // all file types
+        private Map<FileFamily, FileFamilyData> config; // all file types
+    }
 
+    @Data
+    public static class FileFamilyData {
+        private String tolerateTag;
+        List<FileType> list;
     }
 
 }

@@ -17,12 +17,10 @@ public class DetectResult {
 
     private final String fileName;
     private Set<Magic> detectedMagics;
-    private FileSecurity fileSecurity;
+    private Set<String> explicitFileType;
+
 
     public SecurityStatus getSafeStatus() {
-        if (fileSecurity != null) {
-            return fileSecurity.getSecurityStatus();
-        }
         return SecurityStatus.UNKNOWN;
     }
 

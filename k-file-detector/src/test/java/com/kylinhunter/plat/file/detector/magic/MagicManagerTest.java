@@ -6,62 +6,43 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.plat.file.detector.CommonManager;
-import com.kylinhunter.plat.file.detector.constant.MagicRisk;
 
 class MagicManagerTest {
 
     MagicManager magicManager = CommonManager.getMagicManager();
 
     @Test
-    void getMagics() {
-        System.out.println("============getExtensionMagics");
-        magicManager.getMagics(MagicRisk.HIGH)
-                .forEach(e -> System.out.println("HIGH==>" + e.getNumber() + ":" + e.getFamilies()));
-
-        magicManager.getMagics(MagicRisk.MIDDLE)
-                .forEach(e -> System.out.println("MIDDLE==>" + e.getNumber() + ":" + e.getFamilies()));
-
-        magicManager.getMagics(MagicRisk.LOW)
-                .forEach(e -> System.out.println("LOW==>" + e.getNumber() + ":" + e.getFamilies()));
-    }
-
-    @Test
-    void getAllExtensionMagics() {
-        Map<String, Magic> allExtensionMagics = magicManager.getAllMagics();
-        allExtensionMagics.forEach((k, v) -> {
-            System.out.println("extension: " + k);
-            System.out.println("magic: " + v);
-            System.out.println();
-        });
-    }
-
-    @Test
     void getAllMagics() {
+        Assertions.assertTrue(magicManager.getAllMagics().size() > 0);
 
-        System.out.println("============getMagics");
+    }
+
+    @Test
+    void getNumberMagics() {
+
+        System.out.println("============getNumberMagics");
         System.out.println("magicHelper: ");
-        Map<String, Magic> allMagics = magicManager.getAllMagics();
-        allMagics.forEach((k, v) -> {
-            System.out.println("  - number: \"" + v.getNumber() + "\"");
-            System.out.println("    desc: \"" + v.getDesc() + "\"");
+        Map<String, Magic> allMagics = magicManager.getNumberMagics();
+        allMagics.forEach((number, magic) -> {
+            System.out.println("  - number: \"" + magic.getNumber() + "\"");
+            System.out.println("    desc: \"" + magic.getDesc() + "\"");
             System.out.println("    extensions:");
-
-            v.getExtensions().forEach(e -> System.out.println("      - " + e));
-
-            System.out.println("    file-types:");
-            v.getExtensionFiles().forEach(e -> System.out.println("      - " + e));
+            magic.getExtensions().forEach(e -> System.out.println("      - " + e));
         });
     }
 
     @Test
     void getMagic() {
         Magic magic = magicManager.getMagic("0D444F43");
+        System.out.println("0D444F43:" + magic);
         Assertions.assertNotNull(magic);
     }
 
     @Test
     void getMagicMaxLength() {
-        Assertions.assertTrue(magicManager.getMagicMaxLength() > 0);
+        int magicMaxLength = magicManager.getMagicMaxLength();
+        System.out.println("magicMaxLength:" + magicMaxLength);
+        Assertions.assertTrue(magicMaxLength > 0);
 
     }
 }

@@ -1,18 +1,19 @@
 package com.kylinhunter.plat.file.detector.magic;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.extension.ExtensionConfigLoader;
-import com.kylinhunter.plat.file.detector.extension.ExtensionFile;
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
+import com.kylinhunter.plat.file.detector.type.FileType;
+import com.kylinhunter.plat.file.detector.type.FileTypeConfigLoader;
+import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 import lombok.Data;
@@ -34,15 +35,15 @@ public class MagicConfigLoader {
      * @author BiJi'an
      * @date 2022-10-22 00:19
      */
-    public static MagicConfig load(ExtensionManager extensionManager) {
+    public static MagicConfig load(FileTypeManager fileTypeManager) {
         if (CACHED_DATA != null) {
             return CACHED_DATA;
         } else {
-            synchronized(ExtensionConfigLoader.class) {
+            synchronized(FileTypeConfigLoader.class) {
                 if (CACHED_DATA != null) {
                     return CACHED_DATA;
                 }
-                CACHED_DATA = load0(extensionManager);
+                CACHED_DATA = load0(fileTypeManager);
                 return CACHED_DATA;
             }
         }
@@ -55,7 +56,7 @@ public class MagicConfigLoader {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static MagicConfig load0(ExtensionManager extensionManager) {
+    private static MagicConfig load0(FileTypeManager fileTypeManager) {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_LOCATION);
         Objects.requireNonNull(resource);
@@ -63,13 +64,28 @@ public class MagicConfigLoader {
         Objects.requireNonNull(magicConfig);
 
         magicConfig.getMagics().forEach(magic -> {
-            Set<String> extensions = magic.getExtensions();
-            magic.setExtensions(extensions.stream().map(e -> e.toLowerCase()).collect(Collectors.toSet()));
-            Objects.requireNonNull(magic.getFamilies(), "magic.getFamilies is null");
-            Objects.requireNonNull(magic.getRisk(), "magic.getRisk is null");
+            Set<String> fileTypeIds = magic.getFileTypeIds();
+            if (fileTypeIds != null) {
+                Set<String> extensions = Sets.newHashSet();
+                Set<FileType> fileTypes = Sets.newHashSet();
+
+                fileTypeIds.forEach(id -> {
+                    FileType fileType = fileTypeManager.getFileTypeById(id);
+                    if (fileType == null) {
+                        throw new DetectException("no file type :" + id);
+                    }
+                    extensions.add(fileType.getExtension());
+                    fileTypes.add(fileType);
+
+                });
+                magic.setExtensions(extensions);
+                magic.setFileTypes(fileTypes);
+            }
+
             String number = magic.getNumber();
             if (StringUtils.isEmpty(number)) {
-                return;
+                throw new DetectException("number can't be empty");
+
             }
 
             // dynamic calculate other attributes
@@ -88,15 +104,6 @@ public class MagicConfigLoader {
 
             }
 
-            extensions.forEach(extension -> {
-                ExtensionFile extensionFile = extensionManager.getFileType(extension);
-                if (extensionFile == null) {
-                    throw new DetectException("no filetype,for=>" + extension);
-                }
-                magic.addFileType(extensionFile);
-
-            });
-
             if (magicLength > magicConfig.getMagicMaxLength()) {
                 magicConfig.setMagicMaxLength(magicLength);
             }
@@ -111,7 +118,7 @@ public class MagicConfigLoader {
      **/
     @Data
     public static class MagicConfig {
-        private Set<Magic> magics;
+        private List<Magic> magics;
         private int magicMaxLength = 1;
 
     }

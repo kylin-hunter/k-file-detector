@@ -1,8 +1,8 @@
 package com.kylinhunter.plat.file.detector.magic;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.type.FileType;
 
 import lombok.AccessLevel;
@@ -17,30 +17,42 @@ import lombok.Setter;
  **/
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ExtensionMagics {
+public class TolerateMagics {
     @EqualsAndHashCode.Include
     private String extension;
     @Setter(AccessLevel.NONE)
-    private Set<Magic> magics = new HashSet<>();
+    private Set<String> extensions;
+    @Setter(AccessLevel.NONE)
+    private Set<Magic> magics;
     private int magicMaxLength = 1;
 
-    public ExtensionMagics(FileType fileType) {
+    public TolerateMagics(FileType fileType) {
         this.extension = fileType.getExtension();
     }
 
     /**
-     * @param magic magic
+     * @param magics explictMagic
      * @return void
-     * @title addExplicitMagic
+     * @title addTolerateMagics
      * @description
      * @author BiJi'an
      * @date 2022-10-21 02:07
      */
-    public void addMagic(Magic magic) {
-        magics.add(magic);
-        if (magic.getMagicLength() > magicMaxLength) {
-            magicMaxLength = magic.getMagicLength();
+    public void addMagic(Set<Magic> magics) {
+        if (this.magics == null) {
+            this.magics = Sets.newHashSet();
         }
+        if (magics != null) {
+            this.magics.addAll(magics);
+        }
+    }
+
+    public void addExtension(String extension) {
+        if (extensions == null) {
+            extensions = Sets.newHashSet();
+        }
+        extensions.add(extension);
+
     }
 
 }

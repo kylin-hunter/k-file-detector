@@ -1,0 +1,174 @@
+config:
+  MS_OFFICE_BEFORE_97:
+    tolerateTag: MS_OFFICE
+    list:
+      - id: 10001
+        extension: doc
+        desc: "DeskMate Document file"
+      - id: 10002
+        extension: doc
+        desc: "Word 2.0 file"
+  MS_OFFICE_97_2003:
+    tolerateTag: MS_OFFICE
+    list:
+      - id: 20001
+        extension: doc
+      - id: 20002
+        extension: pps
+      - id: 20003
+        extension: ppt
+      - id: 20004
+        extension: xls
+  MS_OFFICE:
+    tolerateTag: MS_OFFICE
+    list:
+      - id: 30001
+        extension: docx
+      - id: 30002
+        extension: pptx
+      - id: 30003
+        extension: xlsx
+
+  PICTURE:
+    tolerateTag: PICTURE
+    list:
+      - id: 40001
+        extension: bmp
+      - id: 40002
+        extension: gif
+      - id: 40003
+        extension: gif
+      - id: 40004
+        extension: jfif
+      - id: 40005
+        extension: jpg
+      - id: 40006
+        extension: jpe
+      - id: 40007
+        extension: jpeg
+      - id: 40008
+        extension: jp2
+      - id: 40009
+        extension: png
+      - id: 40010
+        extension: tif
+      - id: 40011
+        extension: tiff
+
+  AUDIO_VIDEO:
+    tolerateTag: AUDIO_VIDEO
+    list:
+      - id: 50001
+        extension: asf
+      - id: 50002
+        extension: avi
+      - id: 50003
+        extension: flv
+      - id: 50004
+        extension: m4a
+      - id: 50005
+        extension: m4v
+      - id: 50006
+        extension: mkv
+      - id: 50007
+        extension: mov
+      - id: 50008
+        extension: mp4
+      - id: 50009
+        extension: mpeg
+      - id: 50010
+        extension: mpg
+      - id: 50011
+        extension: rm
+      - id: 50012
+        extension: rmvb
+      - id: 50013
+        extension: vob
+      - id: 50014
+        extension: webm
+      - id: 50015
+        extension: wma
+      - id: 50016
+        extension: wmv
+      - id: 50017
+        extension: mp3
+
+  EXECUTABLE_FILE_WINDOWS:
+    list:
+      - id: 60001
+        extension: com
+      - id: 60002
+        extension: dll
+      - id: 60003
+        extension: drv
+      - id: 60004
+        extension: exe
+      - id: 60005
+        extension: pif
+      - id: 60006
+        extension: qts
+      - id: 60007
+        extension: qtx
+      - id: 60008
+        extension: sys
+      - id: 60009
+        extension: vbx
+      - id: 60010
+        extension: bat
+
+
+
+  EXECUTABLE_FILE_MAC:
+    list:
+      - id: 70001
+        extension: NONE
+      - id: 70002
+        extension: NONE
+      - id: 70003
+        extension: NONE
+      - id: 70004
+        extension: NONE
+
+  EXECUTABLE_FILE:
+    list:
+      - id: 80001
+        extension: NONE
+      - id: 80002
+        extension: dex
+      - id: 80003
+        extension: sh
+
+  DOCUMENT:
+    list:
+      - id: 90001
+        extension: jar
+      - id: 90002
+        extension: pdf
+      - id: 90003
+        extension: rar
+      - id: 90004
+        extension: zip
+      - id: 90005
+        extension: 386
+      - id: 90006
+        extension: acm
+      - id: 90007
+        extension: ax
+      - id: 90008
+        extension: cpl
+      - id: 90009
+        extension: fon
+      - id: 90010
+        extension: ocx
+      - id: 90011
+        extension: olb
+      - id: 90012
+        extension: scr
+      - id: 90013
+        extension: vxd
+  OTHERS:
+    list:
+      - id: 100001
+        extension: doc
+        desc: "Perfect Office document"
+

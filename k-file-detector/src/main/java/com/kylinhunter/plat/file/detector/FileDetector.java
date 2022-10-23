@@ -12,10 +12,10 @@ import com.kylinhunter.plat.file.detector.bean.DetectOption;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.bean.FileSecurity;
 import com.kylinhunter.plat.file.detector.constant.SecurityStatus;
-import com.kylinhunter.plat.file.detector.extension.ExtensionManager;
 import com.kylinhunter.plat.file.detector.magic.Magic;
 import com.kylinhunter.plat.file.detector.magic.MagicManager;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
+import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final ExtensionManager extensionManager = CommonManager.getExtensionManager();
+    private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
     private static final MagicManager magicManager = CommonManager.getMagicManager();
 
     /**
@@ -156,7 +156,6 @@ public class FileDetector {
         detectResult.setDetectedMagics(detectedMagics);
 
         FileSecurity fileSecurity = detectFileSecurity(fileName, detectedMagics, detectOption);
-        detectResult.setFileSecurity(fileSecurity);
         return detectResult;
 
     }
@@ -178,20 +177,17 @@ public class FileDetector {
         FileSecurity fileSecurity = new FileSecurity(detectedMagics);
         String extension = FilenameUtils.getExtension(fileName);
 
-        extensionManager.detectDangerourExtension(fileSecurity, extension, detectOption);
         if (!fileSecurity.isDetected()) {
             if (CollectionUtils.isNotEmpty(detectedMagics)) {
-                extensionManager.detectExtensionSafe(fileSecurity, extension, detectedMagics);
-                if (!fileSecurity.isDetected()) {
-                    extensionManager.detectExtensionDisguise(fileSecurity, extension, detectedMagics);
-                    if (!fileSecurity.isDetected()) {
-                        fileSecurity.setSecurityStatus(SecurityStatus.DISGUISE);
-                    }
-                }
+//                fileTypeManager.detectExtensionSafe(fileSecurity, extension, detectedMagics);
+//                if (!fileSecurity.isDetected()) {
+//                    fileTypeManager.detectExtensionDisguise(fileSecurity, extension, detectedMagics);
+//                    if (!fileSecurity.isDetected()) {
+//                        fileSecurity.setSecurityStatus(SecurityStatus.DISGUISE);
+//                    }
+//                }
             }
-            if (detectOption.isDeletecDangerousContent()) {
-                magicManager.deletecDangerousContent(fileSecurity, detectedMagics);
-            }
+
         }
         return fileSecurity;
     }
