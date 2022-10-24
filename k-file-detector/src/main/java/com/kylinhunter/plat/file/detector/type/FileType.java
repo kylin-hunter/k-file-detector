@@ -1,10 +1,8 @@
 package com.kylinhunter.plat.file.detector.type;
 
-import java.util.StringJoiner;
+import java.util.Set;
 
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
-import com.kylinhunter.plat.file.detector.magic.ExtensionMagics;
-import com.kylinhunter.plat.file.detector.magic.TolerateMagics;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,15 +24,21 @@ public class FileType {
 
     /* ==== extended  properties===*/
     private FileFamily family;
-    private ExtensionMagics extensionMagics = new ExtensionMagics();
-    private TolerateMagics tolerateMagics = new TolerateMagics();
+    private Set<FileType> tolerateFileTypes;
+    private int magicMaxLength;
+
+    public void reCalMaxMagicLen(int magicLen) {
+        if (magicLen > this.magicMaxLength) {
+            this.magicMaxLength = magicLen;
+        }
+    }
+
+    public boolean extensionEquals(String extension) {
+        return extension.equals(extension);
+    }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", FileType.class.getSimpleName() + "[", "]")
-                .add("id='" + id + "'")
-                .add("extension='" + extension + "'")
-                .add("desc='" + desc + "'")
-                .toString();
+        return id + "/" + extension;
     }
 }

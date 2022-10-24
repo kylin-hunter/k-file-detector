@@ -1,6 +1,5 @@
 package com.kylinhunter.plat.file.detector.magic;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.StringJoiner;
 
@@ -29,7 +28,7 @@ public class Magic {
     /* ==== extended  properties===*/
     private int magicLength; //  magic number's bytes size
     private MagicMatchMode matchMode;
-    private Set<FileType> fileTypes = new HashSet<>();
+    private Set<FileType> fileTypes;
     private Set<String> extensions;
 
     @Override

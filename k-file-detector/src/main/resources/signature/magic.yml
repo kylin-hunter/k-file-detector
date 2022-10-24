@@ -24,6 +24,7 @@ magics:
       - 30001
       - 30002
       - 30003
+      - 30004
   - number: "474946383761"
     desc: "Graphics interchange format file(GIF87a)"
     fileTypeIds:
@@ -196,6 +197,7 @@ magics:
       - 30001
       - 30002
       - 30003
+      - 30004
   - number: "504B030414000100630000000000"
     desc: "ZLock Pro encrypted ZIP"
     fileTypeIds:

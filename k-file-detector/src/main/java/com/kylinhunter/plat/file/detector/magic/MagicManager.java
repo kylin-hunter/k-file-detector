@@ -1,11 +1,12 @@
 package com.kylinhunter.plat.file.detector.magic;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
@@ -25,7 +26,6 @@ import lombok.Getter;
 public class MagicManager {
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap();
-    private final Map<String, Set<Magic>> fileTypeIdToMagics = Maps.newHashMap();
     @Getter
     private final Set<Magic> allMagics = Sets.newHashSet();
     private final MagicConfigLoader.MagicConfig magicConfig;
@@ -40,35 +40,9 @@ public class MagicManager {
             check(magic);
             processExProperties(magic);
             processBasic(magic);
-            processExtensionMagics(magic);
 
         });
 
-        processTolerateMagics();
-
-    }
-
-    /**
-     * @return void
-     * @title processTolerateMagics
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 02:21
-     */
-    private void processTolerateMagics() {
-        fileTypeManager.getAllFileTypes().forEach(fileType -> {
-            TolerateMagics tolerateMagics = fileType.getTolerateMagics();
-            Set<FileType> tolerateFileTypes = tolerateMagics.getFileTypes();
-            if (!CollectionUtils.isEmpty(tolerateFileTypes)) {
-                tolerateFileTypes.forEach(ft -> {
-                    Set<Magic> magics = fileTypeIdToMagics.get(ft.getId());
-                    tolerateMagics.addMagic(magics);
-                    tolerateMagics.addExtension(ft.getExtension());
-                });
-
-            }
-
-        });
     }
 
     /**
@@ -82,31 +56,6 @@ public class MagicManager {
     private void processBasic(Magic magic) {
         allMagics.add(magic);
         numberMagics.put(magic.getNumber(), magic);
-    }
-
-    /**
-     * @param magic magic
-     * @return void
-     * @title processExtensionMagics
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 02:20
-     */
-    private void processExtensionMagics(Magic magic) {
-        Set<FileType> fileTypes = magic.getFileTypes();
-        fileTypes.forEach(fileType -> {
-                    fileTypeIdToMagics.compute(fileType.getId(), (k, v) -> {
-                        if (v == null) {
-                            v = Sets.newHashSet();
-                        }
-                        v.add(magic);
-                        return v;
-                    });
-                    ExtensionMagics extensionMagics = fileType.getExtensionMagics();
-                    extensionMagics.addMagic(magic);
-                }
-
-        );
     }
 
     /**
@@ -138,6 +87,15 @@ public class MagicManager {
      */
     private void processExProperties(Magic magic) {
         String number = magic.getNumber();
+
+        int numberLen = number.length();
+        if (numberLen % 2 != 0) {
+            throw new DetectException("magic number must be even");
+        }
+
+        int magicLength = numberLen / 2;
+        magic.setMagicLength(magicLength);
+
         Set<String> fileTypeIds = magic.getFileTypeIds();
         if (fileTypeIds != null) {
             Set<String> extensions = Sets.newHashSet();
@@ -148,6 +106,7 @@ public class MagicManager {
                 if (fileType == null) {
                     throw new DetectException("no file type :" + id);
                 }
+                fileType.reCalMaxMagicLen(magic.getMagicLength());
                 extensions.add(fileType.getExtension());
                 fileTypes.add(fileType);
 
@@ -156,15 +115,6 @@ public class MagicManager {
             magic.setFileTypes(fileTypes);
         }
 
-        // dynamic calculate other attributes
-
-        int numberLen = number.length();
-        if (numberLen % 2 != 0) {
-            throw new DetectException("magic number must be even");
-        }
-
-        int magicLength = numberLen / 2;
-        magic.setMagicLength(magicLength);
         if (number.contains("_")) {
             magic.setMatchMode(MagicMatchMode.PREFIX_FUZZY);
         } else {
@@ -209,9 +159,10 @@ public class MagicManager {
      * @date 2022-10-22 21:18
      */
 
-    public Set<Magic> detect(DetectConext detectConext) {
+    public void detect(DetectConext detectConext) {
         String possibleMagicNumber = detectConext.getPossibleMagicNumber();
-        Set<Magic> detectedMagics = detectConext.resetDetectedMagics();
+        List<Magic> detectedMagics = Lists.newArrayList();
+        detectConext.setDetectedMagics(detectedMagics);
         if (!StringUtils.isEmpty(possibleMagicNumber)) {
             for (Magic magic : allMagics) {
                 String number = magic.getNumber();
@@ -233,7 +184,6 @@ public class MagicManager {
             }
 
         }
-        return detectedMagics;
     }
 
 }

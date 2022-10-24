@@ -11,7 +11,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.magic.TolerateMagics;
 
 import lombok.Getter;
 
@@ -25,12 +24,15 @@ public class FileTypeManager {
     @Getter
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();
     @Getter
+    private final Set<FileType> noExtensionFileTypes = Sets.newHashSet();
+    @Getter
     private final Map<String, FileType> idToFileTyes = Maps.newHashMap();
     @Getter
     private final Set<FileType> allFileTypes = Sets.newHashSet();
+
     @Getter
     private final Map<FileFamily, Set<FileType>> fileFamilyDatas = Maps.newHashMap();
-    private final Map<String, Set<FileType>> allTolerateDatas = Maps.newHashMap();
+    private final Map<String, Set<FileType>> allTolerateFileTypes = Maps.newHashMap();
 
     public FileTypeManager() {
         init(FileTypeConfigLoader.load());
@@ -97,8 +99,10 @@ public class FileTypeManager {
      */
     private void check(FileFamily fileFamily, FileTypeConfigLoader.FileFamilyData fileFamilyData, FileType fileType) {
         String extension = fileType.getExtension();
-        if (StringUtils.isEmpty(extension)) {
-            throw new DetectException(" extension can't be empty");
+        if (!StringUtils.isEmpty(extension)) {
+            fileType.setExtension(extension.toLowerCase());
+        } else {
+            fileType.setExtension(StringUtils.EMPTY);
         }
 
         if (StringUtils.isEmpty(fileType.getId())) {
@@ -143,13 +147,20 @@ public class FileTypeManager {
      */
 
     private void proccessExtensionToFile(FileType fileType) {
-        extensionToFileTypes.compute(fileType.getExtension(), (k, v) -> {
-            if (v == null) {
-                v = Sets.newHashSet();
-            }
-            v.add(fileType);
-            return v;
-        });
+
+        String extension = fileType.getExtension();
+        if (!StringUtils.isEmpty(extension)) {
+            extensionToFileTypes.compute(extension, (k, v) -> {
+                if (v == null) {
+                    v = Sets.newHashSet();
+                }
+                v.add(fileType);
+                return v;
+            });
+        } else {
+            noExtensionFileTypes.add(fileType);
+        }
+
     }
 
     /**
@@ -164,7 +175,7 @@ public class FileTypeManager {
         String tolerateTag = fileType.getTolerateTag();
 
         if (tolerateTag != null) {
-            Set<FileType> fileTypes = allTolerateDatas.compute(tolerateTag,
+            Set<FileType> tolerateFileTypes = allTolerateFileTypes.compute(tolerateTag,
                     (k, v) -> {
                         if (v == null) {
                             v = Sets.newHashSet();
@@ -172,8 +183,7 @@ public class FileTypeManager {
                         v.add(fileType);
                         return v;
                     });
-            TolerateMagics tolerateMagics = fileType.getTolerateMagics();
-            tolerateMagics.setFileTypes(fileTypes);
+            fileType.setTolerateFileTypes(tolerateFileTypes);
         }
 
     }

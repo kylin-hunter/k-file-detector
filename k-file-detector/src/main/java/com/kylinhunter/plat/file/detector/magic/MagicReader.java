@@ -160,15 +160,12 @@ public class MagicReader {
             Set<FileType> fileTypes = fileTypeManager.getFileTypesByExtension(extension);
 
             for (FileType fileType : fileTypes) {
-                ExtensionMagics extensionMagics = fileType.getExtensionMagics();
-                if (extensionMagics != null) {
-                    if (extensionMagics.getMagicMaxLength() > magicLen) {
-                        magicLen = extensionMagics.getMagicMaxLength();
-                    }
+                if (fileType.getMagicMaxLength() > magicLen) {
+                    magicLen = fileType.getMagicMaxLength();
                 }
             }
-
         }
+
         if (magicLen <= 0) {
             magicLen = magicManager.getMagicMaxLength();
         }

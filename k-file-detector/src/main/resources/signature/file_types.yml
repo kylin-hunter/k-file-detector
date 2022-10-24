@@ -28,6 +28,9 @@ config:
         extension: pptx
       - id: 30003
         extension: xlsx
+      - id: 30004
+        extension: ppsx
+
 
   PICTURE:
     tolerateTag: PICTURE
@@ -121,18 +124,18 @@ config:
   EXECUTABLE_FILE_MAC:
     list:
       - id: 70001
-        extension: NONE
+        extension:
       - id: 70002
-        extension: NONE
+        extension:
       - id: 70003
-        extension: NONE
+        extension:
       - id: 70004
-        extension: NONE
+        extension:
 
   EXECUTABLE_FILE:
     list:
       - id: 80001
-        extension: NONE
+        extension:
       - id: 80002
         extension: dex
       - id: 80003

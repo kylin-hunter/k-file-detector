@@ -1,6 +1,7 @@
 package com.kylinhunter.plat.file.detector.magic;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,10 +25,19 @@ class MagicManagerTest {
         System.out.println("magicHelper: ");
         Map<String, Magic> allMagics = magicManager.getNumberMagics();
         allMagics.forEach((number, magic) -> {
-            System.out.println("  - number: \"" + magic.getNumber() + "\"");
-            System.out.println("    desc: \"" + magic.getDesc() + "\"");
-            System.out.println("    extensions:");
-            magic.getExtensions().forEach(e -> System.out.println("      - " + e));
+            System.out.println("    1、number: \"" + magic.getNumber() + "\"");
+            System.out.println("    2、desc: \"" + magic.getDesc() + "\"");
+            System.out.println("    3、fileTypeIds: \"" + magic.getFileTypeIds() + "\"");
+
+            System.out.println("    4、ex--magicLength:" + magic.getMagicLength());
+            System.out.println("    5、ex--matchMode:" + magic.getMatchMode());
+
+            System.out.println("    6、ex--fileTypes: " + magic.getFileTypes().stream()
+                    .map(e -> e.getId() + "/" + e.getExtension()).collect(Collectors.toSet()));
+
+            System.out.println("    7、ex--extensions:" + magic.getExtensions());
+            System.out.println("======================================");
+
         });
     }
 

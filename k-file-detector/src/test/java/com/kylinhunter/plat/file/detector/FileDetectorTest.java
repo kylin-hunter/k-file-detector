@@ -1,18 +1,13 @@
 package com.kylinhunter.plat.file.detector;
 
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.DANGEROUS_CONTENT;
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.DANGEROUS_EXTENSION;
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.DISGUISE;
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.DISGUISE_WARN;
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.SAFE;
-import static com.kylinhunter.plat.file.detector.constant.SecurityStatus.UNKNOWN;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
@@ -23,9 +18,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.bean.DetectOption;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.magic.Magic;
+import com.kylinhunter.plat.file.detector.type.FileType;
 import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
@@ -35,29 +30,21 @@ class FileDetectorTest {
     private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
 
     private void printDetectResult(DetectResult detectResult) {
-        Set<Magic> detectedMagics = detectResult.getDetectedMagics();
+        List<Magic> detectedMagics = detectResult.getDetectedMagics();
         System.out.println("===============================================");
-        System.out.println("fileName=>" + detectResult.getFileName());
-        System.out.println("************detected magics********************");
+        System.out.println("\t 1、fileName=>" + detectResult.getFileName());
 
+        System.out.print("\t 2、detectedMagics=>");
         if (CollectionUtils.isNotEmpty(detectedMagics)) {
-            int index = 0;
-            for (Magic magic : detectedMagics) {
-                index++;
-                System.out.println("\t magic[" + index + "] 's number=>" + magic.getNumber());
-                System.out.println("\t magic[" + index + "] 's extensions=>" + magic.getExtensions());
-
-            }
-
-        } else {
-            System.out.println("\t can't detete magic numbers");
-
+            Set<String> numbers = detectedMagics.stream().map(e -> e.getNumber()).collect(Collectors.toSet());
+            System.out.print(numbers);
         }
-        System.out.println("##########file  security######################");
+        System.out.println();
+        FileType bestFileType = detectResult.getBestFileType();
+        System.out.println("\t 3、bestFileType=>" + bestFileType);
+        Set<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
+        System.out.println("\t 4、allPossibleFileTypes=>" + allPossibleFileTypes);
 
-//        FileSecurity fileSecurity = detectResult.getFileSecurity();
-//        System.out.println("\t securityStatus=>" + fileSecurity.getSecurityStatus());
-//        System.out.println("\t securityDesc=>" + fileSecurity.getDesc());
         System.out.println("===============================================");
         System.out.println();
 
@@ -65,7 +52,7 @@ class FileDetectorTest {
 
     @Test
     @Order(1)
-    void checkDefault() throws IOException {
+    void detectAll() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/basic");
         File[] files = Objects.requireNonNull(dir.listFiles());
         for (int i = 0; i < files.length; i++) {
@@ -75,7 +62,6 @@ class FileDetectorTest {
                 DetectResult detectResult;
                 if (index == 0) {
                     detectResult = FileDetector.detect(file);
-
                 } else if (index == 1) {
                     MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
                     detectResult = FileDetector.detect(multipartFile);
@@ -88,7 +74,8 @@ class FileDetectorTest {
                 }
                 printDetectResult(detectResult);
 
-                Assertions.assertEquals(SAFE, detectResult.getSafeStatus());
+                Assertions.assertNotNull(detectResult.getBestFileType());
+                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
 
             }
         }
@@ -96,40 +83,6 @@ class FileDetectorTest {
 
     @Test
     @Order(2)
-    void checkDangerExtension() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/danger_extension");
-        DetectOption detectOption = DetectOption.custom()
-                .addDangerousExtensionIncludes("doc")
-                .addDangerousExtensionExcludes("sh");
-
-        File file1 = new File(dir, "exe.exe");
-        DetectResult detectResult = FileDetector.detect(file1);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(DANGEROUS_EXTENSION, detectResult.getSafeStatus());
-
-        detectResult = FileDetector.detect(file1, detectOption);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(DANGEROUS_EXTENSION, detectResult.getSafeStatus());
-
-        File file2 = new File(dir, "sh.sh");
-        detectResult = FileDetector.detect(file2);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(DANGEROUS_EXTENSION, detectResult.getSafeStatus());
-        detectResult = FileDetector.detect(file2, detectOption);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(UNKNOWN, detectResult.getSafeStatus());
-
-        File file3 = new File(dir, "doc.doc");
-        detectResult = FileDetector.detect(file3);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(SAFE, detectResult.getSafeStatus());
-        detectResult = FileDetector.detect(file3, detectOption);
-        printDetectResult(detectResult);
-        Assertions.assertEquals(DANGEROUS_EXTENSION, detectResult.getSafeStatus());
-    }
-
-    @Test
-    @Order(3)
     void checkDisguise() {
         File dir = ResourceHelper.getFileInClassPath("files/special/disguise");
         System.out.println(dir.getAbsolutePath());
@@ -137,7 +90,9 @@ class FileDetectorTest {
                 .filter(file -> file.isFile() && file.getName().indexOf(".") > 0).forEach(file -> {
             DetectResult detectResult = FileDetector.detect(file);
             printDetectResult(detectResult);
-            Assertions.assertEquals(DISGUISE, detectResult.getSafeStatus());
+            Assertions.assertNotNull(detectResult.getBestFileType());
+            Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+
         });
 
     }
@@ -151,7 +106,8 @@ class FileDetectorTest {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectResult detectResult = FileDetector.detect(file);
                 printDetectResult(detectResult);
-                Assertions.assertEquals(DISGUISE_WARN, detectResult.getSafeStatus());
+                Assertions.assertNotNull(detectResult.getBestFileType());
+                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
             }
         }
     }
@@ -165,7 +121,8 @@ class FileDetectorTest {
             if (file.isFile()) {
                 DetectResult detectResult = FileDetector.detect(file);
                 printDetectResult(detectResult);
-                Assertions.assertEquals(DANGEROUS_CONTENT, detectResult.getSafeStatus());
+                Assertions.assertNotNull(detectResult.getBestFileType());
+                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
             }
         }
     }
@@ -179,7 +136,8 @@ class FileDetectorTest {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectResult detectResult = FileDetector.detect(file);
                 printDetectResult(detectResult);
-                Assertions.assertEquals(UNKNOWN, detectResult.getSafeStatus());
+                Assertions.assertNull(detectResult.getBestFileType());
+                Assertions.assertNull(detectResult.getAllPossibleFileTypes());
             }
         }
     }
@@ -193,7 +151,8 @@ class FileDetectorTest {
             if (file.isFile() && file.getName().indexOf(".") > 0) {
                 DetectResult detectResult = FileDetector.detect(file);
                 printDetectResult(detectResult);
-                Assertions.assertEquals(SAFE, detectResult.getSafeStatus());
+                Assertions.assertNotNull(detectResult.getBestFileType());
+                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
             }
         }
     }
@@ -218,7 +177,8 @@ class FileDetectorTest {
                         FileUtils.copyFile(file, fileTmp);
                     }
                     DetectResult detectResult = FileDetector.detect(fileTmp);
-                    System.out.println(fileTmp.getName() + "=>" + detectResult.getSafeStatus());
+                    Assertions.assertNotNull(detectResult.getBestFileType());
+                    Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
                 }
 
             }
