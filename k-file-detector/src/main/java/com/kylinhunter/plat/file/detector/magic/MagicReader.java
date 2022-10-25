@@ -10,11 +10,11 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.manager.MType;
-import com.kylinhunter.plat.file.detector.manager.Managers;
+import com.kylinhunter.plat.file.detector.manager.Service;
+import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.type.FileType;
-import com.kylinhunter.plat.file.detector.type.FileTypeManager;
+import com.kylinhunter.plat.file.detector.type.FileTypeConfigService;
 import com.kylinhunter.plat.file.detector.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-    private static final FileTypeManager fileTypeManager = Managers.get(MType.FILE_TYPE);
-    private static final MagicManager magicManager = Managers.get(MType.MAGIC);
+    private static final FileTypeConfigService FILE_TYPE_CONFIG_SERVICE = ServiceFactory.get(Service.FILE_TYPE);
+    private static final MagicConfigService MAGIC_SERVICE = ServiceFactory.get(Service.MAGIC);
 
     /**
      * @param content content
@@ -158,7 +158,7 @@ public class MagicReader {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
-            Set<FileType> fileTypes = fileTypeManager.getFileTypesByExtension(extension);
+            Set<FileType> fileTypes = FILE_TYPE_CONFIG_SERVICE.getFileTypesByExtension(extension);
 
             for (FileType fileType : fileTypes) {
                 if (fileType.getMagicMaxLength() > magicLen) {
@@ -168,7 +168,7 @@ public class MagicReader {
         }
 
         if (magicLen <= 0) {
-            magicLen = magicManager.getMagicMaxLength();
+            magicLen = MAGIC_SERVICE.getMagicMaxLength();
         }
 
         if (fileSize > 0 && magicLen > fileSize) {

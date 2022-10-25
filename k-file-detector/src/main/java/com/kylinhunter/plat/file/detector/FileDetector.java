@@ -7,10 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.magic.MagicManager;
+import com.kylinhunter.plat.file.detector.magic.MagicDetectService;
+import com.kylinhunter.plat.file.detector.magic.MagicConfigService;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
-import com.kylinhunter.plat.file.detector.manager.MType;
-import com.kylinhunter.plat.file.detector.manager.Managers;
+import com.kylinhunter.plat.file.detector.manager.Service;
+import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final MagicManager magicManager = Managers.get(MType.MAGIC);
+    private static final MagicConfigService MAGIC_SERVICE = ServiceFactory.get(Service.MAGIC);
 
     /**
      * @param content  content
@@ -106,8 +107,7 @@ public class FileDetector {
 
     private static DetectResult detect(String possibleMagicNumber, String fileName) {
         DetectConext detectConext = new DetectConext(possibleMagicNumber, fileName);
-        magicManager.detect(detectConext);
-        return FileTypeSelector.selectBest(detectConext);
+        return MagicDetectService.selectBest(MAGIC_SERVICE.detect(detectConext));
 
     }
 

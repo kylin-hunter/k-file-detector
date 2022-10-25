@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.manager.MType;
-import com.kylinhunter.plat.file.detector.manager.Managers;
+import com.kylinhunter.plat.file.detector.manager.Service;
+import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
@@ -19,14 +19,14 @@ class MagicReaderTest {
 
     @Test
     void read() throws IOException {
-        MagicManager magicManager = Managers.get(MType.MAGIC);
+        MagicConfigService magicConfigService = ServiceFactory.get(Service.MAGIC);
 
         File file = ResourceHelper.getFileInClassPath("files/basic/doc.doc");
 
         String read1 = MagicReader.read(file);
 
         System.out.println(read1);
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read1.length());
+        Assertions.assertEquals(magicConfigService.getMagicMaxLength() * 2, read1.length());
         Assertions.assertEquals("D0CF11E0A1B11AE1", read1.substring(0, 16));
 
         read1 = MagicReader.read(file, true);
@@ -37,7 +37,7 @@ class MagicReaderTest {
 
         String read2 = MagicReader.read(multipartFile);
         System.out.println(read2);
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read2.length());
+        Assertions.assertEquals(magicConfigService.getMagicMaxLength() * 2, read2.length());
         Assertions.assertEquals("D0CF11E0A1B11AE1", read2.substring(0, 16));
 
         read2 = MagicReader.read(multipartFile, true);
@@ -49,7 +49,7 @@ class MagicReaderTest {
         String read3 = MagicReader.read(bytes);
         System.out.println(read3);
         Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals(magicConfigService.getMagicMaxLength() * 2, read3.length());
 
         read3 = MagicReader.read(bytes, "1.doc", true);
         System.out.println(read3);
@@ -58,7 +58,7 @@ class MagicReaderTest {
         read3 = MagicReader.read(bytes, "1.doc", false);
         System.out.println(read3);
         Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals(magicConfigService.getMagicMaxLength() * 2, read3.length());
 
     }
 

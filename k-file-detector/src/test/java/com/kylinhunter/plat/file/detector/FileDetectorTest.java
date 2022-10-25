@@ -20,16 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.magic.Magic;
-import com.kylinhunter.plat.file.detector.manager.MType;
-import com.kylinhunter.plat.file.detector.manager.Managers;
+import com.kylinhunter.plat.file.detector.manager.Service;
+import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
 import com.kylinhunter.plat.file.detector.type.FileType;
-import com.kylinhunter.plat.file.detector.type.FileTypeManager;
+import com.kylinhunter.plat.file.detector.type.FileTypeConfigService;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
-    private static final FileTypeManager fileTypeManager = Managers.get(MType.FILE_TYPE);
+    private static final FileTypeConfigService FILE_TYPE_CONFIG_SERVICE = ServiceFactory.get(Service.FILE_TYPE);
 
     private void printDetectResult(DetectResult detectResult) {
         List<Magic> detectedMagics = detectResult.getDetectedMagics();
@@ -44,7 +44,7 @@ class FileDetectorTest {
         System.out.println();
         FileType bestFileType = detectResult.getBestFileType();
         System.out.println("\t 3、bestFileType=>" + bestFileType);
-        Set<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
+        List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
         System.out.println("\t 4、allPossibleFileTypes=>" + allPossibleFileTypes);
 
         System.out.println("===============================================");
@@ -54,7 +54,7 @@ class FileDetectorTest {
 
     @Test
     @Order(1)
-    void detectAll() throws IOException {
+    void detectBasic() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/basic");
         File[] files = Objects.requireNonNull(dir.listFiles());
         for (int i = 0; i < files.length; i++) {
@@ -85,8 +85,8 @@ class FileDetectorTest {
 
     @Test
     @Order(2)
-    void checkDisguise() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/disguise");
+    void detectSpecialExtension() {
+        File dir = ResourceHelper.getFileInClassPath("files/special/extension");
         System.out.println(dir.getAbsolutePath());
         Arrays.stream(Objects.requireNonNull(dir.listFiles()))
                 .filter(file -> file.isFile() && file.getName().indexOf(".") > 0).forEach(file -> {
@@ -100,38 +100,62 @@ class FileDetectorTest {
     }
 
     @Test
-    @Order(4)
-    void checkDisguiseWarn() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/disguise_warn");
-        System.out.println(dir.getAbsolutePath());
-        for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectResult detectResult = FileDetector.detect(file);
-                printDetectResult(detectResult);
-                Assertions.assertNotNull(detectResult.getBestFileType());
-                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
-            }
-        }
-    }
-
-    @Test
-    @Order(5)
-    void checkDangerContent() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/danger_content");
+    @Order(3)
+    void detectSpecialNoExtension() {
+        File dir = ResourceHelper.getFileInClassPath("files/special/no_extension");
         System.out.println(dir.getAbsolutePath());
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
                 DetectResult detectResult = FileDetector.detect(file);
                 printDetectResult(detectResult);
-                Assertions.assertNotNull(detectResult.getBestFileType());
+                FileType bestFileType = detectResult.getBestFileType();
+
+                Assertions.assertNotNull(bestFileType);
                 Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+
+                String fileName = detectResult.getFileName();
+
+                switch (fileName) {
+                    case "remove_extension_doc":
+                        Assertions.assertTrue(bestFileType.extensionEquals("doc"));
+
+                        break;
+                    case "remove_extension_docx":
+                        Assertions.assertTrue(bestFileType.extensionEquals("docx"));
+
+                        break;
+                    case "remove_extension_ppt":
+//                        Assertions.assertTrue(bestFileType.extensionEquals("ppt"));
+
+                        break;
+                    case "remove_extension_pptx":
+//                        Assertions.assertTrue(bestFileType.extensionEquals("pptx"));
+
+                        break;
+                    case "remove_extension_exe":
+//                        Assertions.assertTrue(bestFileType.extensionEquals("exe"));
+
+                        break;
+                    case "linux_execute_file":
+                        Assertions.assertEquals("80001", bestFileType.getId());
+
+                        break;
+                    case "mac_execute_file":
+                        Assertions.assertEquals("70001", bestFileType.getId());
+
+                        break;
+                    default:
+                        throw new RuntimeException("unkown file name => " + fileName);
+                }
+
             }
         }
+
     }
 
     @Test
-    @Order(6)
-    void checkUnknown() {
+    @Order(4)
+    void detectUnknown() {
         File dir = ResourceHelper.getFileInClassPath("files/special/unknown");
         System.out.println(dir.getAbsolutePath());
         for (File file : Objects.requireNonNull(dir.listFiles())) {
@@ -145,23 +169,8 @@ class FileDetectorTest {
     }
 
     @Test
-    @Order(7)
-    void checkUnrecognized() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/unrecognized");
-        System.out.println(dir.getAbsolutePath());
-        for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if (file.isFile() && file.getName().indexOf(".") > 0) {
-                DetectResult detectResult = FileDetector.detect(file);
-                printDetectResult(detectResult);
-                Assertions.assertNotNull(detectResult.getBestFileType());
-                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
-            }
-        }
-    }
-
-    @Test
-    @Order(8)
-    void checkAll() throws IOException {
+    @Order(5)
+    void detectAllPossible() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/basic");
         System.out.println(dir.getAbsolutePath());
         File dirTmp = new File(System.getProperty("user.dir"), "tmp/files");
@@ -173,12 +182,13 @@ class FileDetectorTest {
 
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
-                for (String extension : fileTypeManager.getExtensionToFileTypes().keySet()) {
+                for (String extension : FILE_TYPE_CONFIG_SERVICE.getExtensionToFileTypes().keySet()) {
                     File fileTmp = new File(dirTmp, file.getName() + "." + extension);
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);
                     }
                     DetectResult detectResult = FileDetector.detect(fileTmp);
+                    printDetectResult(detectResult);
                     Assertions.assertNotNull(detectResult.getBestFileType());
                     Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
                 }
