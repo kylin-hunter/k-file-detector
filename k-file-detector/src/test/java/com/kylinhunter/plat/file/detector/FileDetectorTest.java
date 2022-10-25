@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.magic.Magic;
+import com.kylinhunter.plat.file.detector.manager.MType;
+import com.kylinhunter.plat.file.detector.manager.Managers;
 import com.kylinhunter.plat.file.detector.type.FileType;
 import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
@@ -27,7 +29,7 @@ import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
-    private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
+    private static final FileTypeManager fileTypeManager = Managers.get(MType.FILE_TYPE);
 
     private void printDetectResult(DetectResult detectResult) {
         List<Magic> detectedMagics = detectResult.getDetectedMagics();
@@ -36,7 +38,7 @@ class FileDetectorTest {
 
         System.out.print("\t 2、detectedMagics=>");
         if (CollectionUtils.isNotEmpty(detectedMagics)) {
-            Set<String> numbers = detectedMagics.stream().map(e -> e.getNumber()).collect(Collectors.toSet());
+            Set<String> numbers = detectedMagics.stream().map(Magic::getNumber).collect(Collectors.toSet());
             System.out.print(numbers);
         }
         System.out.println();

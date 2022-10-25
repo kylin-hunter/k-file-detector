@@ -10,14 +10,9 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public enum SecurityStatus {
-    UNKNOWN(1, "unknown"),
-    SAFE(2, "safe"),
-    DANGEROUS_EXTENSION(3, "dangerous extension"),
-    DISGUISE_WARN(4, "disguise extension warn"),
-    DISGUISE(5, "disguise extension "),
-    DANGEROUS_CONTENT(6, "dangerous content");
-
+public enum MagicMode {
+    PREFIX(1, "prefix magic number"),
+    PREFIX_FUZZY(2, "fuzzy prefix  magic number");
     private final int code;
     private final String name;
 

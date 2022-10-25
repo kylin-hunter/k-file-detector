@@ -10,7 +10,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.CommonManager;
+import com.kylinhunter.plat.file.detector.manager.MType;
+import com.kylinhunter.plat.file.detector.manager.Managers;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.type.FileType;
 import com.kylinhunter.plat.file.detector.type.FileTypeManager;
@@ -25,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class MagicReader {
-    private static final FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
-    private static final MagicManager magicManager = CommonManager.getMagicManager();
+    private static final FileTypeManager fileTypeManager = Managers.get(MType.FILE_TYPE);
+    private static final MagicManager magicManager = Managers.get(MType.MAGIC);
 
     /**
      * @param content content

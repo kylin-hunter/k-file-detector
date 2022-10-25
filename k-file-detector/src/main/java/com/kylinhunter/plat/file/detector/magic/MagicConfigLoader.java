@@ -3,24 +3,17 @@ package com.kylinhunter.plat.file.detector.magic;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import com.google.common.collect.Sets;
-import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.type.FileType;
 import com.kylinhunter.plat.file.detector.type.FileTypeConfigLoader;
-import com.kylinhunter.plat.file.detector.type.FileTypeManager;
 import com.kylinhunter.plat.file.detector.util.ResourceHelper;
 
 import lombok.Data;
 
 /**
  * @author BiJi'an
- * @description
+ * @description a tool for load magic.yaml
  * @date 2022-10-02 19:55
  **/
 @Data
@@ -35,7 +28,7 @@ public class MagicConfigLoader {
      * @author BiJi'an
      * @date 2022-10-22 00:19
      */
-    public static MagicConfig load(FileTypeManager fileTypeManager) {
+    public static MagicConfig load() {
         if (CACHED_DATA != null) {
             return CACHED_DATA;
         } else {
@@ -43,7 +36,7 @@ public class MagicConfigLoader {
                 if (CACHED_DATA != null) {
                     return CACHED_DATA;
                 }
-                CACHED_DATA = load0(fileTypeManager);
+                CACHED_DATA = load0();
                 return CACHED_DATA;
             }
         }
@@ -56,7 +49,7 @@ public class MagicConfigLoader {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static MagicConfig load0(FileTypeManager fileTypeManager) {
+    private static MagicConfig load0() {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_LOCATION);
         Objects.requireNonNull(resource);
@@ -64,8 +57,6 @@ public class MagicConfigLoader {
         Objects.requireNonNull(magicConfig);
         return magicConfig;
     }
-
-
 
     /**
      * @author BiJi'an
@@ -75,7 +66,5 @@ public class MagicConfigLoader {
     @Data
     public static class MagicConfig {
         private List<Magic> magics;
-        private int magicMaxLength = 1;
-
     }
 }

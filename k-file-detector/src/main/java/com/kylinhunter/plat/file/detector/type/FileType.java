@@ -33,10 +33,6 @@ public class FileType {
         }
     }
 
-    public boolean extensionEquals(String extension) {
-        return extension.equals(extension);
-    }
-
     @Override
     public String toString() {
         return id + "/" + extension;

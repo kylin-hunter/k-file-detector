@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.CommonManager;
+import com.kylinhunter.plat.file.detector.manager.MType;
+import com.kylinhunter.plat.file.detector.manager.Managers;
 
 class MagicManagerTest {
 
-    MagicManager magicManager = CommonManager.getMagicManager();
+    MagicManager magicManager = Managers.get(MType.MAGIC);
 
     @Test
     void getAllMagics() {
@@ -30,7 +31,7 @@ class MagicManagerTest {
             System.out.println("    3、fileTypeIds: \"" + magic.getFileTypeIds() + "\"");
 
             System.out.println("    4、ex--magicLength:" + magic.getMagicLength());
-            System.out.println("    5、ex--matchMode:" + magic.getMatchMode());
+            System.out.println("    5、ex--mode:" + magic.getMode());
 
             System.out.println("    6、ex--fileTypes: " + magic.getFileTypes().stream()
                     .map(e -> e.getId() + "/" + e.getExtension()).collect(Collectors.toSet()));

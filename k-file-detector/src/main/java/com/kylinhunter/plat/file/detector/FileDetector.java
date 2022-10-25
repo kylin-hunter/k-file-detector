@@ -9,6 +9,8 @@ import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.magic.MagicManager;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
+import com.kylinhunter.plat.file.detector.manager.MType;
+import com.kylinhunter.plat.file.detector.manager.Managers;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final MagicManager magicManager = CommonManager.getMagicManager();
+    private static final MagicManager magicManager = Managers.get(MType.MAGIC);
 
     /**
      * @param content  content

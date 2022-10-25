@@ -10,7 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
-import com.kylinhunter.plat.file.detector.constant.MagicMatchMode;
+import com.kylinhunter.plat.file.detector.constant.MagicMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.type.FileType;
 import com.kylinhunter.plat.file.detector.type.FileTypeManager;
@@ -25,17 +25,17 @@ import lombok.Getter;
 
 public class MagicManager {
     @Getter
-    private final Map<String, Magic> numberMagics = Maps.newHashMap();
+    private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
     @Getter
-    private final Set<Magic> allMagics = Sets.newHashSet();
-    private final MagicConfigLoader.MagicConfig magicConfig;
-    @Getter
+    private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
+
     private final FileTypeManager fileTypeManager;
+    @Getter
+    private int magicMaxLength = 1;
 
-    public MagicManager() {
-        this.fileTypeManager = new FileTypeManager();
-        this.magicConfig = MagicConfigLoader.load(fileTypeManager);
-
+    public MagicManager(FileTypeManager fileTypeManager) {
+        this.fileTypeManager = fileTypeManager;
+        MagicConfigLoader.MagicConfig magicConfig = MagicConfigLoader.load();
         magicConfig.getMagics().forEach(magic -> {
             check(magic);
             processExProperties(magic);
@@ -116,14 +116,14 @@ public class MagicManager {
         }
 
         if (number.contains("_")) {
-            magic.setMatchMode(MagicMatchMode.PREFIX_FUZZY);
+            magic.setMode(MagicMode.PREFIX_FUZZY);
         } else {
-            magic.setMatchMode(MagicMatchMode.PREFIX);
+            magic.setMode(MagicMode.PREFIX);
 
         }
 
-        if (magicLength > magicConfig.getMagicMaxLength()) {
-            magicConfig.setMagicMaxLength(magicLength);
+        if (magicLength > this.magicMaxLength) {
+            this.magicMaxLength = magicLength;
         }
     }
 
@@ -137,17 +137,6 @@ public class MagicManager {
      */
     public Magic getMagic(String number) {
         return numberMagics.get(number);
-    }
-
-    /**
-     * @return int
-     * @title getMagicMaxLength
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-22 00:34
-     */
-    public int getMagicMaxLength() {
-        return magicConfig.getMagicMaxLength();
     }
 
     /**
@@ -166,7 +155,7 @@ public class MagicManager {
         if (!StringUtils.isEmpty(possibleMagicNumber)) {
             for (Magic magic : allMagics) {
                 String number = magic.getNumber();
-                if (magic.getMatchMode() == MagicMatchMode.PREFIX) {
+                if (magic.getMode() == MagicMode.PREFIX) {
                     if (possibleMagicNumber.startsWith(number)) {
                         detectedMagics.add(magic);
                     }

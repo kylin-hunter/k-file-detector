@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.CommonManager;
+import com.kylinhunter.plat.file.detector.manager.MType;
+import com.kylinhunter.plat.file.detector.manager.Managers;
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
 
 class FileTypeManagerTest {
-    FileTypeManager fileTypeManager = CommonManager.getFileTypeManager();
+    FileTypeManager fileTypeManager = Managers.get(MType.FILE_TYPE);
 
     @Test
     void getFileFamilyDatas() {

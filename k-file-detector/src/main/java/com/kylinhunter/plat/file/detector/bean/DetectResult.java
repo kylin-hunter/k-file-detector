@@ -12,24 +12,28 @@ import lombok.Setter;
 
 /**
  * @author BiJi'an
- * @description
+ * @description the result for detect
  * @date 2022-10-01 22:37
  **/
 public class DetectResult {
 
     @Getter
     private final String fileName;
+
     @Getter
-    private final List<Magic> detectedMagics; // the detected magic messages
-    @Getter
-    private FileType bestFileType;
+    private FileType bestFileType; // the best  of all detected file type
     @Getter
     @Setter
-    private Set<FileType> allBestFileTypes;
+    private Set<FileType> allBestFileTypes; // all detected file type
+
     @Getter
-    private Magic bestMagic;
+    private Set<FileType> allPossibleFileTypes;  // all possible file type
+
     @Getter
-    private Set<FileType> allPossibleFileTypes;
+    private Magic bestMagic; // the best of all detedted magics
+
+    @Getter
+    private final List<Magic> detectedMagics; // the detected magic numbers
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();

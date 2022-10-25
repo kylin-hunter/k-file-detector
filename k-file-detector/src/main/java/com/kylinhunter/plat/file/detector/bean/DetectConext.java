@@ -10,7 +10,7 @@ import lombok.Data;
 
 /**
  * @author BiJi'an
- * @description
+ * @description a context for detect action
  * @date 2022-10-01 22:37
  **/
 @Data
