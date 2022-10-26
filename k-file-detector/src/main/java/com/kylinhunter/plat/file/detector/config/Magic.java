@@ -31,6 +31,10 @@ public class Magic implements Comparable<Magic> {
     private List<FileType> fileTypes; // the file type  can be detected  ,reference  the field=> fileTypeIds
     private List<String> extensions; // the extension can be detected
 
+    public Magic(String number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Magic.class.getSimpleName() + "[", "]")

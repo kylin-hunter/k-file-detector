@@ -18,7 +18,7 @@ import lombok.Data;
 @Data
 public class MagicConfigLoader {
     private static MagicConfig CACHED_DATA;
-    private static final String MAGIC_LOCATION = "signature/magic.yml";
+    private static final String MAGIC_LOCATION = "signature/magic2.yml";
 
     /**
      * @return void

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
-import com.kylinhunter.plat.file.detector.component.MagicManager;
 import com.kylinhunter.plat.file.detector.config.Magic;
 
 class MagicManagerTest {
