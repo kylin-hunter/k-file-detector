@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.type;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.config.FileType;
+import com.kylinhunter.plat.file.detector.config.FileTypeConfigLoader;
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
@@ -20,7 +23,8 @@ import lombok.Getter;
  * @date 2022-10-20 15:51
  **/
 
-public class FileTypeConfigService {
+@Component
+public class FileTypeManager {
     @Getter
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();
     @Getter
@@ -29,12 +33,11 @@ public class FileTypeConfigService {
     private final Map<String, FileType> idToFileTyes = Maps.newHashMap();
     @Getter
     private final Set<FileType> allFileTypes = Sets.newHashSet();
-
     @Getter
     private final Map<FileFamily, Set<FileType>> fileFamilyDatas = Maps.newHashMap();
     private final Map<String, Set<FileType>> allTolerateFileTypes = Maps.newHashMap();
 
-    public FileTypeConfigService() {
+    public FileTypeManager() {
         init(FileTypeConfigLoader.load());
     }
 
@@ -203,7 +206,7 @@ public class FileTypeConfigService {
 
     /**
      * @param extension extension
-     * @return java.util.Set<com.kylinhunter.plat.file.detector.type.FileType>
+     * @return java.util.Set<com.kylinhunter.plat.file.detector.config.FileType>
      * @title getFileTypes
      * @description
      * @author BiJi'an
@@ -219,7 +222,7 @@ public class FileTypeConfigService {
 
     /**
      * @param id id
-     * @return com.kylinhunter.plat.file.detector.type.FileType
+     * @return com.kylinhunter.plat.file.detector.config.FileType
      * @title getFileType
      * @description
      * @author BiJi'an

@@ -19,17 +19,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.magic.Magic;
-import com.kylinhunter.plat.file.detector.manager.Service;
-import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
-import com.kylinhunter.plat.file.detector.type.FileType;
-import com.kylinhunter.plat.file.detector.type.FileTypeConfigService;
-import com.kylinhunter.plat.file.detector.util.MultipartFileHelper;
-import com.kylinhunter.plat.file.detector.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.component.FileTypeManager;
+import com.kylinhunter.plat.file.detector.config.FileType;
+import com.kylinhunter.plat.file.detector.config.Magic;
+import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
-    private static final FileTypeConfigService FILE_TYPE_CONFIG_SERVICE = ServiceFactory.get(Service.FILE_TYPE);
+    private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
 
     private void printDetectResult(DetectResult detectResult) {
         List<Magic> detectedMagics = detectResult.getDetectedMagics();
@@ -125,15 +124,15 @@ class FileDetectorTest {
 
                         break;
                     case "remove_extension_ppt":
-//                        Assertions.assertTrue(bestFileType.extensionEquals("ppt"));
+                        //                        Assertions.assertTrue(bestFileType.extensionEquals("ppt"));
 
                         break;
                     case "remove_extension_pptx":
-//                        Assertions.assertTrue(bestFileType.extensionEquals("pptx"));
+                        //                        Assertions.assertTrue(bestFileType.extensionEquals("pptx"));
 
                         break;
                     case "remove_extension_exe":
-//                        Assertions.assertTrue(bestFileType.extensionEquals("exe"));
+                        //                        Assertions.assertTrue(bestFileType.extensionEquals("exe"));
 
                         break;
                     case "linux_execute_file":
@@ -182,7 +181,7 @@ class FileDetectorTest {
 
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
-                for (String extension : FILE_TYPE_CONFIG_SERVICE.getExtensionToFileTypes().keySet()) {
+                for (String extension : fileTypeManager.getExtensionToFileTypes().keySet()) {
                     File fileTmp = new File(dirTmp, file.getName() + "." + extension);
                     if (!fileTmp.exists()) {
                         FileUtils.copyFile(file, fileTmp);

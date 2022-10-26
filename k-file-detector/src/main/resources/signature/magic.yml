@@ -1,4 +1,20 @@
 magics:
+  - number: "########000000006231050009000000002000000009000000000000"
+    desc: "High Efficiency Image Container "
+    fileTypeIds:
+      - 100003
+  - number: "########000000006231050009000000002000000009000000000000"
+    desc: "Bitcoin Core wallet.dat file"
+    fileTypeIds:
+      - 100004
+  - number: "000000206674797068656963"
+    desc: "High Efficiency Image Container "
+    fileTypeIds:
+      - 100003
+  - number: "0000000014000000"
+    desc: "Windows Disk Image file"
+    fileTypeIds:
+      - 100002
   - number: "0D444F43"
     desc: "DeskMate Document file"
     fileTypeIds:
@@ -33,18 +49,18 @@ magics:
     desc: "Graphics interchange format file(GIF89a)"
     fileTypeIds:
       - 40003
-  - number: "FFD8FFE0____4A46494600"
+  - number: "FFD8FFE0####4A46494600"
     desc: "JPEG/JFIF graphics file"
     fileTypeIds:
       - 40004
       - 40005
       - 40006
       - 40007
-  - number: "FFD8FFE1____4578696600"
+  - number: "FFD8FFE1####4578696600"
     desc: "JPG"
     fileTypeIds:
       - 40005
-  - number: "FFD8FFE8____535049464600"
+  - number: "FFD8FFE8####535049464600"
     desc: "JPG"
     fileTypeIds:
       - 40005
@@ -80,20 +96,20 @@ magics:
     desc: "JPEG-2000 image file formats"
     fileTypeIds:
       - 40008
-  - number: "________667479704D344120"
+  - number: "########667479704D344120"
     desc: "Apple Lossless Audio Codec file"
     fileTypeIds:
       - 50004
       - 50008
-  - number: "________6674797069736F6D"
+  - number: "########6674797069736F6D"
     desc: "ISO Base Media file (MPEG-4) v1"
     fileTypeIds:
       - 50008
-  - number: "52494646________415649204C495354"
+  - number: "52494646########415649204C495354"
     desc: " Resource Interchange File Format -- Windows Audio Video Interleave file"
     fileTypeIds:
       - 50002
-  - number: "________706E6F74"
+  - number: "########706E6F74"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
@@ -112,7 +128,7 @@ magics:
       - 50016
       - 50001
       - 50015
-  - number: "________667479704D345620"
+  - number: "########667479704D345620"
     desc: "ISO Media, MPEG v4 system, or iTunes AVC-LC file"
     fileTypeIds:
       - 50008
@@ -123,19 +139,19 @@ magics:
     fileTypeIds:
       - 50009
       - 50010
-  - number: "________6674797071742020"
+  - number: "########6674797071742020"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
-  - number: "________66726565"
+  - number: "########66726565"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
-  - number: "________6D6F6F76"
+  - number: "########6D6F6F76"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
-  - number: "________667479704D534E56"
+  - number: "########667479704D534E56"
     desc: "MPEG-4 video file"
     fileTypeIds:
       - 50008
@@ -144,12 +160,12 @@ magics:
     fileTypeIds:
       - 50012
       - 50013
-  - number: "________667479706D703432"
+  - number: "########667479706D703432"
     desc: "MPEG-4 video|QuickTime file"
     fileTypeIds:
       - 50008
       - 50005
-  - number: "________6D646174"
+  - number: "########6D646174"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
@@ -163,7 +179,7 @@ magics:
     desc: "Flash video file"
     fileTypeIds:
       - 50003
-  - number: "________77696465"
+  - number: "########77696465"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007
@@ -173,7 +189,7 @@ magics:
       - 50009
       - 50017
       - 50010
-  - number: "________736B6970"
+  - number: "########736B6970"
     desc: "QuickTime movie file"
     fileTypeIds:
       - 50007

@@ -1,10 +1,9 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.config;
 
 import java.util.List;
 import java.util.StringJoiner;
 
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
-import com.kylinhunter.plat.file.detector.type.FileType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

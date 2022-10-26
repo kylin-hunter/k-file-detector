@@ -51,12 +51,16 @@ config:
         extension: jpeg
       - id: 40008
         extension: jp2
+        desc: "Various JPEG-2000 image file formats"
       - id: 40009
         extension: png
       - id: 40010
         extension: tif
       - id: 40011
         extension: tiff
+      - id: 40012
+        extension: ico
+        desc: "Windows icon file"
 
   AUDIO_VIDEO:
     tolerateTag: AUDIO_VIDEO
@@ -174,4 +178,21 @@ config:
       - id: 100001
         extension: doc
         desc: "Perfect Office document"
+      - id: 100002
+        extension: tbi
+        desc: "Windows Disk Image file"
+      - id: 100003
+        extension: heic
+        desc: "High Efficiency Image Container (HEIC), holding one or more High Efficiency Image File (HEIF)
+               — aka H.265 — images, created using the High Efficiency Video Coding (HEVC) algorithm.
+               Developed by the Moving Pictures Experts Group (MPEG) and adopted by Apple as the standard image
+               file format in 2017."
+      - id: 100004
+        extension: dat
+        desc: "Bitcoin Core wallet.dat file"
+
+      - id: 100005
+        extension: spl
+        desc: "Windows NT/2000/XP printer spool file"
+
 

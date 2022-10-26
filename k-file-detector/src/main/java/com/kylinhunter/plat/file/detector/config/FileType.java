@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.type;
+package com.kylinhunter.plat.file.detector.config;
 
 import java.util.Set;
 

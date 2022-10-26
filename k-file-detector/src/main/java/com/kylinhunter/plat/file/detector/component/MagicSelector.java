@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,27 +7,30 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.type.FileType;
+import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.config.FileType;
+import com.kylinhunter.plat.file.detector.config.Magic;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author BiJi'an
- * @description 文件magic code检查
+ * @description
  * @date 2022-10-02 14:08
  **/
 @Slf4j
-public class MagicDetectService {
+@Component
+public class MagicSelector {
 
     /**
      * @param detectConext detectConext
-     * @return com.kylinhunter.plat.file.detector.magic.Magic
+     * @return com.kylinhunter.plat.file.detector.config.Magic
      * @title checkExtensionConsistent
      * @description
      * @author BiJi'an
      * @date 2022-10-24 02:35
      */
-    public static DetectResult selectBest(DetectConext detectConext) {
+    public DetectResult selectBest(DetectConext detectConext) {
 
         DetectResult detectResult = new DetectResult(detectConext);
         List<Magic> detectedMagics = detectConext.getDetectedMagics();

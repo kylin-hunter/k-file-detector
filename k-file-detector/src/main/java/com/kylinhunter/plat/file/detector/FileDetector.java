@@ -7,11 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.magic.MagicDetectService;
-import com.kylinhunter.plat.file.detector.magic.MagicConfigService;
-import com.kylinhunter.plat.file.detector.magic.MagicReader;
-import com.kylinhunter.plat.file.detector.manager.Service;
-import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
+import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.component.MagicManager;
+import com.kylinhunter.plat.file.detector.component.MagicReader;
+import com.kylinhunter.plat.file.detector.component.MagicSelector;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final MagicConfigService MAGIC_SERVICE = ServiceFactory.get(Service.MAGIC);
+    private static MagicManager magicManager = ComponentFactory.get(MagicManager.class);
+    private static MagicReader magicReader = ComponentFactory.get(MagicReader.class);
+    private static MagicSelector magicSelector = ComponentFactory.get(MagicSelector.class);
 
     /**
      * @param content  content
@@ -35,7 +36,7 @@ public class FileDetector {
      * @date 2022-10-07 10:23
      */
     public static DetectResult detect(byte[] content, String fileName) {
-        String possibleMagicNumber = MagicReader.read(content, fileName, false);
+        String possibleMagicNumber = magicReader.read(content, fileName, false);
         return detect(possibleMagicNumber, fileName);
 
     }
@@ -50,7 +51,7 @@ public class FileDetector {
      */
 
     public static DetectResult detect(MultipartFile file) {
-        String possibleMagicNumber = MagicReader.read(file, false);
+        String possibleMagicNumber = magicReader.read(file, false);
         return detect(possibleMagicNumber, file.getOriginalFilename());
     }
 
@@ -63,7 +64,7 @@ public class FileDetector {
      * @date 2022-10-07 10:23
      */
     public static DetectResult detect(File file) {
-        String possibleMagicNumber = MagicReader.read(file, false);
+        String possibleMagicNumber = magicReader.read(file, false);
         return detect(possibleMagicNumber, file.getName());
     }
 
@@ -91,7 +92,7 @@ public class FileDetector {
      * @date 2022-10-22 02:39
      */
     public static DetectResult detect(InputStream input, String fileName, long fileSize) {
-        String possibleMagicNumber = MagicReader.read(input, fileName, fileSize, false);
+        String possibleMagicNumber = magicReader.read(input, fileName, fileSize, false);
         return detect(possibleMagicNumber, fileName);
     }
 
@@ -107,7 +108,7 @@ public class FileDetector {
 
     private static DetectResult detect(String possibleMagicNumber, String fileName) {
         DetectConext detectConext = new DetectConext(possibleMagicNumber, fileName);
-        return MagicDetectService.selectBest(MAGIC_SERVICE.detect(detectConext));
+        return magicSelector.selectBest(magicManager.detect(detectConext));
 
     }
 

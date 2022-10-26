@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.type;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.util.Map;
 import java.util.Set;
@@ -7,16 +7,16 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.manager.Service;
-import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
+import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.config.FileType;
 import com.kylinhunter.plat.file.detector.constant.FileFamily;
 
-class FileTypeConfigServiceTest {
-    FileTypeConfigService fileTypeConfigService = ServiceFactory.get(Service.FILE_TYPE);
+class FileTypeManagerTest {
+    private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
 
     @Test
     void getFileFamilyDatas() {
-        Map<FileFamily, Set<FileType>> fileFamilyDatas = fileTypeConfigService.getFileFamilyDatas();
+        Map<FileFamily, Set<FileType>> fileFamilyDatas = fileTypeManager.getFileFamilyDatas();
 
         fileFamilyDatas.forEach((fileFamily, familyFileType) -> {
             System.out.println(fileFamily);
@@ -46,7 +46,7 @@ class FileTypeConfigServiceTest {
 
     @Test
     void getExtensionDatas() {
-        Map<String, Set<FileType>> extensionDatas = fileTypeConfigService.getExtensionToFileTypes();
+        Map<String, Set<FileType>> extensionDatas = fileTypeManager.getExtensionToFileTypes();
 
         extensionDatas.forEach((fileFamily, fileTypes) -> {
             System.out.println(fileFamily);
@@ -63,7 +63,7 @@ class FileTypeConfigServiceTest {
 
     @Test
     void getFileTypesByExtension() {
-        Set<FileType> fileTypes = fileTypeConfigService.getFileTypesByExtension(FileFamily.MS_OFFICE_97_2003);
+        Set<FileType> fileTypes = fileTypeManager.getFileTypesByExtension(FileFamily.MS_OFFICE_97_2003);
         fileTypes.forEach(System.out::println);
         Assertions.assertTrue(fileTypes.size() > 1);
 
@@ -72,7 +72,12 @@ class FileTypeConfigServiceTest {
     @Test
     void getFileTypes() {
 
-        Set<FileType> fileTypes = fileTypeConfigService.getFileTypesByExtension("exe");
+        Set<FileType> fileTypes = fileTypeManager.getFileTypesByExtension("exe");
+        fileTypes.forEach(System.out::println);
+        Assertions.assertEquals(1, fileTypes.size());
+
+
+        fileTypes = fileTypeManager.getFileTypesByExtension("heic");
         fileTypes.forEach(System.out::println);
         Assertions.assertEquals(1, fileTypes.size());
 

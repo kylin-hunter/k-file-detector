@@ -3,8 +3,8 @@ package com.kylinhunter.plat.file.detector.bean;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.kylinhunter.plat.file.detector.magic.Magic;
-import com.kylinhunter.plat.file.detector.type.FileType;
+import com.kylinhunter.plat.file.detector.config.Magic;
+import com.kylinhunter.plat.file.detector.config.FileType;
 
 import lombok.Getter;
 import lombok.Setter;

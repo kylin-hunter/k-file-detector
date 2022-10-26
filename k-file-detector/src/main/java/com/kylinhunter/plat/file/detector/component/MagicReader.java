@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,13 +10,12 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.manager.Service;
-import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
+import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.config.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.type.FileType;
-import com.kylinhunter.plat.file.detector.type.FileTypeConfigService;
-import com.kylinhunter.plat.file.detector.util.StringUtil;
+import com.kylinhunter.plat.file.detector.common.util.StringUtil;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,9 +24,11 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022-10-02 16:45
  **/
 @Slf4j
+@RequiredArgsConstructor
+@Component
 public class MagicReader {
-    private static final FileTypeConfigService FILE_TYPE_CONFIG_SERVICE = ServiceFactory.get(Service.FILE_TYPE);
-    private static final MagicConfigService MAGIC_SERVICE = ServiceFactory.get(Service.MAGIC);
+    private final FileTypeManager fileTypeManager;
+    private final MagicManager magicManager;
 
     /**
      * @param content content
@@ -37,7 +38,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-22 00:38
      */
-    public static String read(byte[] content) {
+    public String read(byte[] content) {
         return read(content, null, false);
     }
 
@@ -49,7 +50,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:09
      */
-    public static String read(byte[] content, String fileName, boolean accurate) {
+    public String read(byte[] content, String fileName, boolean accurate) {
         if (content != null && content.length > 0) {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
@@ -67,7 +68,7 @@ public class MagicReader {
      * @date 2022-10-02 16:47
      */
 
-    public static String read(MultipartFile file) {
+    public String read(MultipartFile file) {
         return read(file, false);
 
     }
@@ -81,7 +82,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:09
      */
-    public static String read(MultipartFile file, boolean accurate) {
+    public String read(MultipartFile file, boolean accurate) {
 
         try (InputStream is = file.getInputStream()) {
             return read(is, file.getOriginalFilename(), file.getSize(), accurate);
@@ -99,7 +100,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 10:31
      */
-    public static String read(File file) {
+    public String read(File file) {
         return read(file, false);
     }
 
@@ -112,7 +113,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:10
      */
-    public static String read(File file, boolean accurate) {
+    public String read(File file, boolean accurate) {
         try (InputStream is = new FileInputStream(file)) {
             return read(is, file.getName(), file.length(), accurate);
         } catch (Exception e) {
@@ -130,7 +131,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 10:31
      */
-    public static String read(InputStream inputStream, String fileName, long fileSize, boolean accurate) {
+    public String read(InputStream inputStream, String fileName, long fileSize, boolean accurate) {
 
         try {
             byte[] b = new byte[calMacgiclen(fileName, fileSize, accurate)];
@@ -154,11 +155,11 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-22 00:36
      */
-    private static int calMacgiclen(String fileName, long fileSize, boolean accurate) {
+    private int calMacgiclen(String fileName, long fileSize, boolean accurate) {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
-            Set<FileType> fileTypes = FILE_TYPE_CONFIG_SERVICE.getFileTypesByExtension(extension);
+            Set<FileType> fileTypes = this.fileTypeManager.getFileTypesByExtension(extension);
 
             for (FileType fileType : fileTypes) {
                 if (fileType.getMagicMaxLength() > magicLen) {
@@ -168,7 +169,7 @@ public class MagicReader {
         }
 
         if (magicLen <= 0) {
-            magicLen = MAGIC_SERVICE.getMagicMaxLength();
+            magicLen = this.magicManager.getMagicMaxLength();
         }
 
         if (fileSize > 0 && magicLen > fileSize) {

@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.util;
+package com.kylinhunter.plat.file.detector.common.util;
 
 import java.io.File;
 import java.io.FileInputStream;

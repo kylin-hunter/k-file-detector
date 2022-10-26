@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.util;
+package com.kylinhunter.plat.file.detector.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.util.List;
 import java.util.Map;
@@ -10,10 +10,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.config.FileType;
+import com.kylinhunter.plat.file.detector.config.Magic;
+import com.kylinhunter.plat.file.detector.config.MagicConfigLoader;
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.type.FileType;
-import com.kylinhunter.plat.file.detector.type.FileTypeConfigService;
 
 import lombok.Getter;
 
@@ -22,19 +24,20 @@ import lombok.Getter;
  * @description
  * @date 2022-10-21 02:38
  **/
-
-public class MagicConfigService {
+@Component
+public class MagicManager {
+    private final char HEX_PLACE_HOLDER = '#';
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
     @Getter
     private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
+    private final FileTypeManager fileTypeManager;
 
-    private final FileTypeConfigService fileTypeConfigService;
     @Getter
     private int magicMaxLength = 1;
 
-    public MagicConfigService(FileTypeConfigService fileTypeConfigService) {
-        this.fileTypeConfigService = fileTypeConfigService;
+    public MagicManager(FileTypeManager fileTypeManager) {
+        this.fileTypeManager = fileTypeManager;
         MagicConfigLoader.MagicConfig magicConfig = MagicConfigLoader.load();
         magicConfig.getMagics().forEach(magic -> {
             check(magic);
@@ -103,7 +106,7 @@ public class MagicConfigService {
 
             FileType firstFileType = null;
             for (String id : fileTypeIds) {
-                FileType fileType = fileTypeConfigService.getFileTypeById(id);
+                FileType fileType = fileTypeManager.getFileTypeById(id);
                 if (fileType == null) {
                     throw new DetectException("no file type :" + id);
                 }
@@ -120,7 +123,7 @@ public class MagicConfigService {
             magic.setFileTypes(fileTypes);
         }
 
-        if (number.contains("_")) {
+        if (number.indexOf(HEX_PLACE_HOLDER) >= 0) {
             magic.setMode(MagicMode.PREFIX_FUZZY);
         } else {
             magic.setMode(MagicMode.PREFIX);
@@ -166,7 +169,7 @@ public class MagicConfigService {
                 } else {
                     int i;
                     for (i = 0; i < number.length(); i++) {
-                        if (number.charAt(i) != '_' && number.charAt(i) != possibleMagicNumber.charAt(i)) {
+                        if (number.charAt(i) != HEX_PLACE_HOLDER && number.charAt(i) != possibleMagicNumber.charAt(i)) {
                             break;
                         }
                     }

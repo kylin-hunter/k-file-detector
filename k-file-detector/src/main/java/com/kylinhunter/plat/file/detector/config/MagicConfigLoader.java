@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.config;
 
 import java.io.InputStream;
 import java.util.List;
@@ -6,8 +6,7 @@ import java.util.Objects;
 
 import org.yaml.snakeyaml.Yaml;
 
-import com.kylinhunter.plat.file.detector.type.FileTypeConfigLoader;
-import com.kylinhunter.plat.file.detector.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 
 import lombok.Data;
 

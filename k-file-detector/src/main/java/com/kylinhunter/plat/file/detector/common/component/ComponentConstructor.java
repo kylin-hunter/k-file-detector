@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.manager;
+package com.kylinhunter.plat.file.detector.common.component;
 
 import java.lang.reflect.Constructor;
 
@@ -10,19 +10,19 @@ import lombok.Data;
  * @date 2022-10-25 23:17
  **/
 @Data
-public class ServiceConstructor implements Comparable<ServiceConstructor> {
-    private Service service;
+public class ComponentConstructor implements Comparable<ComponentConstructor> {
+    private Class<?> clazz;
     private int parameterCount;
     private Constructor<?> constructor;
 
-    public ServiceConstructor(Service service, Constructor<?> constructor) {
-        this.service = service;
+    public ComponentConstructor(Class<?> clazz, Constructor<?> constructor) {
+        this.clazz = clazz;
         this.constructor = constructor;
         this.parameterCount = constructor.getParameterCount();
     }
 
     @Override
-    public int compareTo(ServiceConstructor o) {
+    public int compareTo(ComponentConstructor o) {
         return this.parameterCount - o.parameterCount;
     }
 }

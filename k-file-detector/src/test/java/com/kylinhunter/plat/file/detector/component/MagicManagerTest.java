@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.magic;
+package com.kylinhunter.plat.file.detector.component;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -6,16 +6,17 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.manager.Service;
-import com.kylinhunter.plat.file.detector.manager.ServiceFactory;
+import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.component.MagicManager;
+import com.kylinhunter.plat.file.detector.config.Magic;
 
-class MagicConfigServiceTest {
+class MagicManagerTest {
 
-    MagicConfigService magicConfigService = ServiceFactory.get(Service.MAGIC);
+    private final MagicManager magicManager = ComponentFactory.get(MagicManager.class);
 
     @Test
     void getAllMagics() {
-        Assertions.assertTrue(magicConfigService.getAllMagics().size() > 0);
+        Assertions.assertTrue(magicManager.getAllMagics().size() > 0);
 
     }
 
@@ -24,7 +25,7 @@ class MagicConfigServiceTest {
 
         System.out.println("============getNumberMagics");
         System.out.println("magicHelper: ");
-        Map<String, Magic> allMagics = magicConfigService.getNumberMagics();
+        Map<String, Magic> allMagics = magicManager.getNumberMagics();
         allMagics.forEach((number, magic) -> {
             System.out.println("    1、number: \"" + magic.getNumber() + "\"");
             System.out.println("    2、desc: \"" + magic.getDesc() + "\"");
@@ -44,14 +45,14 @@ class MagicConfigServiceTest {
 
     @Test
     void getMagic() {
-        Magic magic = magicConfigService.getMagic("0D444F43");
+        Magic magic = magicManager.getMagic("0D444F43");
         System.out.println("0D444F43:" + magic);
         Assertions.assertNotNull(magic);
     }
 
     @Test
     void getMagicMaxLength() {
-        int magicMaxLength = magicConfigService.getMagicMaxLength();
+        int magicMaxLength = magicManager.getMagicMaxLength();
         System.out.println("magicMaxLength:" + magicMaxLength);
         Assertions.assertTrue(magicMaxLength > 0);
 

@@ -1,7 +1,9 @@
-package com.kylinhunter.plat.file.detector.util;
+package com.kylinhunter.plat.file.detector.common.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.kylinhunter.plat.file.detector.common.util.StringUtil;
 
 class StringUtilTest {
     @Test

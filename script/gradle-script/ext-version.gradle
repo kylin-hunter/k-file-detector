@@ -12,6 +12,7 @@ ext {
     ]
 
     dep = [
+
             "commons-collections4"            : "org.apache.commons:commons-collections4:4.4",
             "commons-fileupload"              : "commons-fileupload:commons-fileupload:1.4",
             "commons-io"                      : "commons-io:commons-io:2.10.0",
@@ -46,7 +47,7 @@ ext {
             'poi-ooxml'                       : 'org.apache.poi:poi-ooxml:4.1.2',
             'poi-scratchpad'                  : 'org.apache.poi:poi-scratchpad:4.1.2',
             'fr-xwpf'                         : 'fr.opensagres.xdocreport:fr.opensagres.poi.xwpf.converter.xhtml:2.0.2',
-            'reflections'                     : 'org.reflections:reflections:0.9.11',
+            'reflections'                     : 'org.reflections:reflections:0.10.2',
             'docx4j-ImportXHTML'              : 'org.docx4j:docx4j-ImportXHTML:8.3.2',
             'easyexcel'                       : 'com.alibaba:easyexcel:3.0.5',
             'jodconverter-local'              : 'org.jodconverter:jodconverter-local:4.4.2',
