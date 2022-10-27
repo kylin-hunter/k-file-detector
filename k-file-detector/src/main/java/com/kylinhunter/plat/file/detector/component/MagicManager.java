@@ -11,7 +11,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.config.FileType;
 import com.kylinhunter.plat.file.detector.config.Magic;
 import com.kylinhunter.plat.file.detector.config.MagicConfigLoader;
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
@@ -26,7 +25,7 @@ import lombok.Getter;
  **/
 @Component
 public class MagicManager {
-    private final char HEX_PLACE_HOLDER = '#';
+    private final char HEX_PLACE_HOLDER = 'x';
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
     @Getter
@@ -99,29 +98,29 @@ public class MagicManager {
         int magicLength = numberLen / 2;
         magic.setMagicLength(magicLength);
 
-        List<String> fileTypeIds = magic.getFileTypeIds();
-        if (fileTypeIds != null) {
-            List<String> extensions = Lists.newArrayList();
-            List<FileType> fileTypes = Lists.newArrayList();
-
-            FileType firstFileType = null;
-            for (String id : fileTypeIds) {
-                FileType fileType = fileTypeManager.getFileTypeById(id);
-                if (fileType == null) {
-                    throw new DetectException("no file type :" + id);
-                }
-                if (firstFileType == null) {
-                    firstFileType = fileType;
-                }
-                fileType.reCalMaxMagicLen(magic.getMagicLength());
-                extensions.add(fileType.getExtension());
-                fileTypes.add(fileType);
-            }
-
-            magic.setExtensions(extensions);
-            magic.setFileType(firstFileType);
-            magic.setFileTypes(fileTypes);
-        }
+        //        List<String> fileTypeIds = magic.getFileTypeIds();
+        //        if (fileTypeIds != null) {
+        //            List<String> extensions = Lists.newArrayList();
+        //            List<FileType> fileTypes = Lists.newArrayList();
+        //
+        //            FileType firstFileType = null;
+        //            for (String id : fileTypeIds) {
+        //                FileType fileType = fileTypeManager.getFileTypeById(id);
+        //                if (fileType == null) {
+        //                    throw new DetectException("no file type :" + id);
+        //                }
+        //                if (firstFileType == null) {
+        //                    firstFileType = fileType;
+        //                }
+        //                fileType.reCalMaxMagicLen(magic.getMagicLength());
+        //                extensions.add(fileType.getExtension());
+        //                fileTypes.add(fileType);
+        //            }
+        //
+        //            magic.setExtensions(extensions);
+        //            magic.setFileType(firstFileType);
+        //            magic.setFileTypes(fileTypes);
+        //        }
 
         if (number.indexOf(HEX_PLACE_HOLDER) >= 0) {
             magic.setMode(MagicMode.PREFIX_FUZZY);

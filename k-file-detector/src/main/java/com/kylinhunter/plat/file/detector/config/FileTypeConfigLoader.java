@@ -55,6 +55,7 @@ public class FileTypeConfigLoader {
         InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_FILE_TYPES_LOCATION);
         Objects.requireNonNull(resource);
         Yaml yaml = new Yaml();
+
         FileTypeConfig fileTypeConfig = yaml.loadAs(resource, FileTypeConfig.class); // load config from yaml
         Objects.requireNonNull(fileTypeConfig);
         return fileTypeConfig;

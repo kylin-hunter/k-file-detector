@@ -1,5 +1,7 @@
 package com.kylinhunter.plat.file.detector.common.util;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -9,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  **/
 public class StringUtil extends StringUtils {
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+    private static final Pattern PATTERN_HEX = Pattern.compile("^[A-Fa-f0-9]+$");
 
     /**
      * @param bytes bytes
@@ -62,6 +65,16 @@ public class StringUtil extends StringUtils {
         return builder.toString();
     }
 
+    /**
+     * @param bytes bytes
+     * @param off   off
+     * @param len   len
+     * @return boolean
+     * @title check
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-27 16:33
+     */
     private static boolean check(byte[] bytes, int off, int len) {
         if (bytes == null) {
             throw new NullPointerException();
@@ -72,6 +85,18 @@ public class StringUtil extends StringUtils {
             return len == 0;
         }
 
+    }
+
+    /**
+     * @param str str
+     * @return boolean
+     * @title isHexStr
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-27 16:33
+     */
+    public static boolean isHexStr(String str) {
+        return PATTERN_HEX.matcher(str).matches();
     }
 
 }

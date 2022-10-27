@@ -31,7 +31,7 @@ public class DetectResult {
     private Magic bestMagic; // the best of all detedted magics
 
     @Getter
-    private final List<Magic> detectedMagics; // the detected magic numbers
+    private final List<Magic> detectedMagics; // the detected magic number
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();

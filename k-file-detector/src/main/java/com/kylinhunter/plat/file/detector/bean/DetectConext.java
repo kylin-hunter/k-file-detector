@@ -15,7 +15,7 @@ import lombok.Data;
  **/
 @Data
 public class DetectConext {
-    private String possibleMagicNumber; // potential magic numbers
+    private String possibleMagicNumber; // potential magic number
     private String fileName; // file name
     private String extension; // explicit extension
     private List<Magic> detectedMagics; // the detected magic messages
