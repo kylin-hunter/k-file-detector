@@ -196,4 +196,26 @@ class FileDetectorTest {
 
         }
     }
+
+    @Test
+    @Order(99)
+    void test() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/test");
+        File[] files = Objects.requireNonNull(dir.listFiles());
+        for (int i = 0; i < files.length; i++) {
+            File file = files[i];
+            if (file.isFile() && file.getName().indexOf(".") > 0) {
+                int index = i % 4;
+                DetectResult detectResult = FileDetector.detect(file);
+
+                printDetectResult(detectResult);
+
+                Assertions.assertNotNull(detectResult.getBestFileType());
+                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+
+            }
+        }
+    }
+
+
 }

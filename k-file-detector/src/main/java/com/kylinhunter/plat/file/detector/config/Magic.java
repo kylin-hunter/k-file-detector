@@ -21,6 +21,8 @@ public class Magic implements Comparable<Magic> {
     /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
     private String number;  // the magic number;
+    private int id;
+    private int offset;
     private String desc; // the description for the magic number
     private List<String> fileTypeIds;  // the file type id can be detected
 
@@ -33,6 +35,13 @@ public class Magic implements Comparable<Magic> {
 
     public Magic(String number) {
         this.number = number;
+    }
+
+    public FileType getFileType() {
+        if (fileTypes != null && fileTypes.size() > 0) {
+            return fileTypes.get(0);
+        }
+        return null;
     }
 
     @Override

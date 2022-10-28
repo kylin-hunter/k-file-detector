@@ -25,7 +25,6 @@ import lombok.Getter;
  **/
 @Component
 public class MagicManager {
-    private final char HEX_PLACE_HOLDER = 'x';
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
     @Getter
@@ -96,7 +95,7 @@ public class MagicManager {
         }
 
         int magicLength = numberLen / 2;
-        magic.setMagicLength(magicLength);
+        magic.setMagicLength(magicLength + magic.getOffset());
 
         //        List<String> fileTypeIds = magic.getFileTypeIds();
         //        if (fileTypeIds != null) {
@@ -122,11 +121,10 @@ public class MagicManager {
         //            magic.setFileTypes(fileTypes);
         //        }
 
-        if (number.indexOf(HEX_PLACE_HOLDER) >= 0) {
+        if (magic.getOffset() > 0) {
             magic.setMode(MagicMode.PREFIX_FUZZY);
         } else {
             magic.setMode(MagicMode.PREFIX);
-
         }
 
         if (magicLength > this.magicMaxLength) {
@@ -167,10 +165,17 @@ public class MagicManager {
                     }
                 } else {
                     int i;
+                    int offset = magic.getOffset() * 2;
+
                     for (i = 0; i < number.length(); i++) {
-                        if (number.charAt(i) != HEX_PLACE_HOLDER && number.charAt(i) != possibleMagicNumber.charAt(i)) {
+                        if (offset < possibleMagicNumber.length()) {
+                            if (number.charAt(i) != possibleMagicNumber.charAt(offset++)) {
+                                break;
+                            }
+                        } else {
                             break;
                         }
+
                     }
                     if (i == number.length()) {
                         detectedMagics.add(magic);
