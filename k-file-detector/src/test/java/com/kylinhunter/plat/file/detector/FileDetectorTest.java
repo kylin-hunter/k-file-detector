@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -74,9 +76,20 @@ class FileDetectorTest {
                     detectResult = FileDetector.detect(inputStream, file.getName());
                 }
                 printDetectResult(detectResult);
+                String extension = FilenameUtils.getExtension(file.getName());
 
-                Assertions.assertNotNull(detectResult.getBestFileType());
+                FileType bestFileType = detectResult.getBestFileType();
+                Assertions.assertNotNull(bestFileType);
                 Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+                if (!StringUtils.isEmpty(extension)) {
+                    if (!extension.equals("mp4") && !extension.equals("ppsx")) {
+                        Assertions.assertEquals(extension, bestFileType.getExtension());
+
+                    }
+                } else {
+
+
+                }
 
             }
         }
