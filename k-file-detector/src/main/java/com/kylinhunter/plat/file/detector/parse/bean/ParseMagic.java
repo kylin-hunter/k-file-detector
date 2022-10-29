@@ -1,9 +1,9 @@
-package com.kylinhunter.plat.file.detector.parse;
+package com.kylinhunter.plat.file.detector.parse.bean;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.kylinhunter.plat.file.detector.config.FileType;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
 import lombok.Data;
@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ParseMagic implements Comparable<ParseMagic>, Cloneable {
+
     @EqualsAndHashCode.Include
+    private String number;
+    private int offset;
+    private String desc;
     private final String td0Text;
     private boolean valid = false;
-    private int id;
-    private int offset;
-    private String number;
-    private String desc;
     private List<FileType> fileTypes = Lists.newArrayList();
 
     @Override

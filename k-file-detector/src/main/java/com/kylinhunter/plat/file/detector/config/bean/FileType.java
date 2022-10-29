@@ -1,8 +1,4 @@
-package com.kylinhunter.plat.file.detector.config;
-
-import java.util.Set;
-
-import com.kylinhunter.plat.file.detector.constant.FileFamily;
+package com.kylinhunter.plat.file.detector.config.bean;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,17 +10,12 @@ import lombok.EqualsAndHashCode;
  **/
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FileType {
+public class FileType implements Comparable<FileType> {
     /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
-    String id;
+    int id;
     private String extension;
     private String desc;
-    private String tolerateTag;
-
-    /* ==== extended  properties===*/
-    private FileFamily family;
-    private Set<FileType> tolerateFileTypes;
     private int magicMaxLength;
 
     public void reCalMaxMagicLen(int magicLen) {
@@ -39,6 +30,11 @@ public class FileType {
 
     @Override
     public String toString() {
-        return id + "/" + extension + "/" + desc;
+        return id + "/" + extension;
+    }
+
+    @Override
+    public int compareTo(FileType o) {
+        return id - o.id;
     }
 }

@@ -95,7 +95,7 @@ public class StringUtil extends StringUtils {
      * @author BiJi'an
      * @date 2022-10-27 16:33
      */
-    public static boolean isHexStr(String str) {
+    public static boolean isHex(String str) {
         return PATTERN_HEX.matcher(str).matches();
     }
 

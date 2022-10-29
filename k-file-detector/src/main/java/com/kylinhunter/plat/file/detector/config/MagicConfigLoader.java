@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.Data;
 
@@ -18,7 +19,7 @@ import lombok.Data;
 @Data
 public class MagicConfigLoader {
     private static MagicConfig CACHED_DATA;
-    private static final String MAGIC_LOCATION = "signature/magic2.yml";
+    private static final String MAGIC_LOCATION = "signature/magic.yml";
 
     /**
      * @return void

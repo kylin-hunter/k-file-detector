@@ -13,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
-import com.kylinhunter.plat.file.detector.component.MagicManager;
-import com.kylinhunter.plat.file.detector.component.MagicReader;
 
 class MagicReaderTest {
     private final MagicManager magicManager = ComponentFactory.get(MagicManager.class);

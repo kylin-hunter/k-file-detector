@@ -8,8 +8,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.config.FileType;
-import com.kylinhunter.plat.file.detector.config.Magic;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
+import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ public class MagicSelector {
 
     /**
      * @param detectConext detectConext
-     * @return com.kylinhunter.plat.file.detector.config.Magic
+     * @return com.kylinhunter.plat.file.detector.config.bean.Magic
      * @title checkExtensionConsistent
      * @description
      * @author BiJi'an

@@ -3,16 +3,18 @@ package com.kylinhunter.plat.file.detector.component;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.config.Magic;
 import com.kylinhunter.plat.file.detector.config.MagicConfigLoader;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
+import com.kylinhunter.plat.file.detector.config.bean.Magic;
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
@@ -27,6 +29,7 @@ import lombok.Getter;
 public class MagicManager {
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
+
     @Getter
     private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
     private final FileTypeManager fileTypeManager;
@@ -39,24 +42,8 @@ public class MagicManager {
         MagicConfigLoader.MagicConfig magicConfig = MagicConfigLoader.load();
         magicConfig.getMagics().forEach(magic -> {
             check(magic);
-            processExProperties(magic);
-            processBasic(magic);
-
+            process(magic);
         });
-
-    }
-
-    /**
-     * @param magic magic
-     * @return void
-     * @title processBasic
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 02:19
-     */
-    private void processBasic(Magic magic) {
-        allMagics.add(magic);
-        numberMagics.put(magic.getNumber(), magic);
     }
 
     /**
@@ -76,6 +63,14 @@ public class MagicManager {
         if (allMagics.contains(magic)) {
             throw new DetectException("duplicated magic number:" + number);
         }
+        if (CollectionUtils.isEmpty(magic.getFileTypes())) {
+            throw new DetectException("file types can't be empty");
+
+        }
+        int numberLen = number.length();
+        if (numberLen % 2 != 0) {
+            throw new DetectException("magic number must be even");
+        }
     }
 
     /**
@@ -86,40 +81,11 @@ public class MagicManager {
      * @author BiJi'an
      * @date 2022-10-24 02:13
      */
-    private void processExProperties(Magic magic) {
-        String number = magic.getNumber();
+    private void process(Magic magic) {
+        allMagics.add(magic);
+        numberMagics.put(magic.getNumber(), magic);
 
-        int numberLen = number.length();
-        if (numberLen % 2 != 0) {
-            throw new DetectException("magic number must be even");
-        }
-
-        int magicLength = numberLen / 2;
-        magic.setMagicLength(magicLength + magic.getOffset());
-
-        //        List<String> fileTypeIds = magic.getFileTypeIds();
-        //        if (fileTypeIds != null) {
-        //            List<String> extensions = Lists.newArrayList();
-        //            List<FileType> fileTypes = Lists.newArrayList();
-        //
-        //            FileType firstFileType = null;
-        //            for (String id : fileTypeIds) {
-        //                FileType fileType = fileTypeManager.getFileTypeById(id);
-        //                if (fileType == null) {
-        //                    throw new DetectException("no file type :" + id);
-        //                }
-        //                if (firstFileType == null) {
-        //                    firstFileType = fileType;
-        //                }
-        //                fileType.reCalMaxMagicLen(magic.getMagicLength());
-        //                extensions.add(fileType.getExtension());
-        //                fileTypes.add(fileType);
-        //            }
-        //
-        //            magic.setExtensions(extensions);
-        //            magic.setFileType(firstFileType);
-        //            magic.setFileTypes(fileTypes);
-        //        }
+        magic.setLength(magic.getNumber().length() / 2);
 
         if (magic.getOffset() > 0) {
             magic.setMode(MagicMode.PREFIX_FUZZY);
@@ -127,8 +93,29 @@ public class MagicManager {
             magic.setMode(MagicMode.PREFIX);
         }
 
-        if (magicLength > this.magicMaxLength) {
-            this.magicMaxLength = magicLength;
+        List<FileType> fileTypes = magic.getFileTypes();
+        fileTypes = fileTypes.stream().
+                map(oldFileType -> {
+
+                    FileType newFileType = fileTypeManager.getFileTypeById(oldFileType.getId());
+                    if (newFileType == null) {
+                        throw new DetectException("no file type :" + oldFileType.getId());
+                    }
+                    List<String> extensions = magic.getExtensions();
+                    if (extensions == null) {
+                        extensions = Lists.newArrayList();
+                        magic.setExtensions(extensions);
+                    }
+                    extensions.add(newFileType.getExtension());
+
+                    newFileType.reCalMaxMagicLen(magic.getLength());
+                    return newFileType;
+                }).collect(Collectors.toList());
+        magic.setFileTypes(fileTypes);
+        magic.setFileType(fileTypes.get(0));
+
+        if (magic.getLength() > this.magicMaxLength) {
+            this.magicMaxLength = magic.getLength();
         }
     }
 
@@ -145,17 +132,15 @@ public class MagicManager {
     }
 
     /**
-     * @param detectConext detectConext
+     * @param possibleMagicNumber possibleMagicNumber
      * @return com.kylinhunter.plat.file.detector.bean.DetectConext
      * @title detect
      * @description
      * @author BiJi'an
      * @date 2022-10-26 00:56
      */
-    public DetectConext detect(DetectConext detectConext) {
-        String possibleMagicNumber = detectConext.getPossibleMagicNumber();
+    public List<Magic> detect(String possibleMagicNumber) {
         List<Magic> detectedMagics = Lists.newArrayList();
-        detectConext.setDetectedMagics(detectedMagics);
         if (!StringUtils.isEmpty(possibleMagicNumber)) {
             for (Magic magic : allMagics) {
                 String number = magic.getNumber();
@@ -184,7 +169,7 @@ public class MagicManager {
             }
 
         }
-        return detectConext;
+        return detectedMagics;
     }
 
 }

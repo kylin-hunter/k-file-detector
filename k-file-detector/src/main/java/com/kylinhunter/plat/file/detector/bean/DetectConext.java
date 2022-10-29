@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.kylinhunter.plat.file.detector.config.Magic;
+import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.Data;
 

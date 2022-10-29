@@ -1,7 +1,6 @@
-package com.kylinhunter.plat.file.detector.config;
+package com.kylinhunter.plat.file.detector.config.bean;
 
 import java.util.List;
-import java.util.StringJoiner;
 
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
 
@@ -24,10 +23,9 @@ public class Magic implements Comparable<Magic> {
     private int id;
     private int offset;
     private String desc; // the description for the magic number
-    private List<String> fileTypeIds;  // the file type id can be detected
 
     /* ==== extended  properties===*/
-    private int magicLength; //  magic number's bytes size
+    private int length; //  magic number's bytes size
     private MagicMode mode; // magic mode for diffrent detecting action
     private FileType fileType; // first  best  file type
     private List<FileType> fileTypes; // the file type  can be detected  ,reference  the field=> fileTypeIds
@@ -46,16 +44,11 @@ public class Magic implements Comparable<Magic> {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Magic.class.getSimpleName() + "[", "]")
-                .add("number='" + number + "'")
-                .add("desc='" + desc + "'")
-                .add("fileTypeIds=" + fileTypeIds)
-                .add("extensions=" + extensions)
-                .toString();
+        return number + "/" + extensions;
     }
 
     @Override
     public int compareTo(Magic o) {
-        return o.magicLength - this.magicLength;
+        return o.length - this.length;
     }
 }

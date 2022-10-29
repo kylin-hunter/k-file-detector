@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.config.FileType;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.common.util.StringUtil;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -160,7 +160,6 @@ public class MagicReader {
         if (accurate && !StringUtils.isEmpty(fileName)) {
             String extension = FilenameUtils.getExtension(fileName);
             Set<FileType> fileTypes = this.fileTypeManager.getFileTypesByExtension(extension);
-
             for (FileType fileType : fileTypes) {
                 if (fileType.getMagicMaxLength() > magicLen) {
                     magicLen = fileType.getMagicMaxLength();

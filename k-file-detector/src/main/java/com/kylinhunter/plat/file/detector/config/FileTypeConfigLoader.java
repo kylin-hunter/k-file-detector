@@ -2,13 +2,12 @@ package com.kylinhunter.plat.file.detector.config;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
-import com.kylinhunter.plat.file.detector.constant.FileFamily;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
 
 import lombok.Data;
 
@@ -68,13 +67,8 @@ public class FileTypeConfigLoader {
      **/
     @Data
     public static class FileTypeConfig {
-        private Map<FileFamily, FileFamilyData> config; // all file types
+        private List<FileType> fileTypes;
     }
 
-    @Data
-    public static class FileFamilyData {
-        private String tolerateTag;
-        private List<FileType> list;
-    }
 
 }

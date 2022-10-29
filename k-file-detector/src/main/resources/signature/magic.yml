@@ -1,277 +1,3593 @@
-magics:
-  - number: "########000000006231050009000000002000000009000000000000"
-    desc: "High Efficiency Image Container "
-    fileTypeIds:
-      - 100003
-  - number: "########000000006231050009000000002000000009000000000000"
-    desc: "Bitcoin Core wallet.dat file"
-    fileTypeIds:
-      - 100004
-  - number: "000000206674797068656963"
-    desc: "High Efficiency Image Container "
-    fileTypeIds:
-      - 100003
-  - number: "0000000014000000"
-    desc: "Windows Disk Image file"
-    fileTypeIds:
-      - 100002
-  - number: "0D444F43"
-    desc: "DeskMate Document file"
-    fileTypeIds:
-      - 10001
-  - number: "DBA52D00"
-    desc: "Word 2.0 file"
-    fileTypeIds:
-      - 10002
-  - number: "CF11E0A1B11AE100"
-    desc: "Perfect Office document"
-    fileTypeIds:
-      - 100001
-  - number: "D0CF11E0A1B11AE1"
-    desc: "MS_OFFICE_97_2003"
-    fileTypeIds:
-      - 20001
-      - 20002
-      - 20003
-      - 20004
-  - number: "504B030414000600"
-    desc: "MS_OFFICE"
-    fileTypeIds:
-      - 30001
-      - 30002
-      - 30003
-      - 30004
-  - number: "474946383761"
-    desc: "Graphics interchange format file(GIF87a)"
-    fileTypeIds:
-      - 40002
-  - number: "474946383961"
-    desc: "Graphics interchange format file(GIF89a)"
-    fileTypeIds:
-      - 40003
-  - number: "FFD8FFE0####4A46494600"
-    desc: "JPEG/JFIF graphics file"
-    fileTypeIds:
-      - 40004
-      - 40005
-      - 40006
-      - 40007
-  - number: "FFD8FFE1####4578696600"
-    desc: "JPG"
-    fileTypeIds:
-      - 40005
-  - number: "FFD8FFE8####535049464600"
-    desc: "JPG"
-    fileTypeIds:
-      - 40005
-  - number: "424D"
-    desc: "Windows (or device-independent) bitmap image"
-    fileTypeIds:
-      - 40001
-  - number: "89504E470D0A1A0A"
-    desc: "Portable Network Graphics file"
-    fileTypeIds:
-      - 40009
-  - number: "4D4D002B"
-    desc: "Tagged Image File Format file"
-    fileTypeIds:
-      - 40010
-      - 40011
-  - number: "4D4D002A"
-    desc: "Tagged Image File Format file"
-    fileTypeIds:
-      - 40010
-      - 40011
-  - number: "49492A00"
-    desc: "Tagged Image File Format file"
-    fileTypeIds:
-      - 40010
-      - 40011
-  - number: "492049"
-    desc: "Tagged Image File Format file"
-    fileTypeIds:
-      - 40010
-      - 40011
-  - number: "0000000C6A5020200D0A"
-    desc: "JPEG-2000 image file formats"
-    fileTypeIds:
-      - 40008
-  - number: "########667479704D344120"
-    desc: "Apple Lossless Audio Codec file"
-    fileTypeIds:
-      - 50004
-      - 50008
-  - number: "########6674797069736F6D"
-    desc: "ISO Base Media file (MPEG-4) v1"
-    fileTypeIds:
-      - 50008
-  - number: "52494646########415649204C495354"
-    desc: " Resource Interchange File Format -- Windows Audio Video Interleave file"
-    fileTypeIds:
-      - 50002
-  - number: "########706E6F74"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "1A45DFA3"
-    desc: "Matroska stream file"
-    fileTypeIds:
-      - 50006
-      - 50014
-  - number: "494433"
-    desc: "MPEG-1 Audio Layer 3 (MP3) audio file"
-    fileTypeIds:
-      - 50017
-  - number: "3026B2758E66CF11A6D900AA0062CE6C"
-    desc: "Microsoft Windows Media Audio/Video File"
-    fileTypeIds:
-      - 50016
-      - 50001
-      - 50015
-  - number: "########667479704D345620"
-    desc: "ISO Media, MPEG v4 system, or iTunes AVC-LC file"
-    fileTypeIds:
-      - 50008
-      - 50003
-      - 50005
-  - number: "000001B_"
-    desc: "MPEG video file"
-    fileTypeIds:
-      - 50009
-      - 50010
-  - number: "########6674797071742020"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "########66726565"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "########6D6F6F76"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "########667479704D534E56"
-    desc: "MPEG-4 video file"
-    fileTypeIds:
-      - 50008
-  - number: "2E524D46"
-    desc: "RealMedia streaming media file"
-    fileTypeIds:
-      - 50012
-      - 50013
-  - number: "########667479706D703432"
-    desc: "MPEG-4 video|QuickTime file"
-    fileTypeIds:
-      - 50008
-      - 50005
-  - number: "########6D646174"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "000001BA"
-    desc: "MPEG video file"
-    fileTypeIds:
-      - 50009
-      - 50010
-      - 50013
-  - number: "464C5601"
-    desc: "Flash video file"
-    fileTypeIds:
-      - 50003
-  - number: "########77696465"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "FFF_"
-    desc: "MPEG video file"
-    fileTypeIds:
-      - 50009
-      - 50017
-      - 50010
-  - number: "########736B6970"
-    desc: "QuickTime movie file"
-    fileTypeIds:
-      - 50007
-  - number: "25504446"
-    desc: "Adobe Portable Document Format"
-    fileTypeIds:
-      - 90002
-  - number: "504B0708"
-    desc: "PKZIP multivolume archive file"
-    fileTypeIds:
-      - 90004
-  - number: "504B0506"
-    desc: "PKZIP empty archive file"
-    fileTypeIds:
-      - 90004
-  - number: "504B0304"
-    desc: "some archive file"
-    fileTypeIds:
-      - 90004
-      - 90001
-      - 30001
-      - 30002
-      - 30003
-      - 30004
-  - number: "504B030414000100630000000000"
-    desc: "ZLock Pro encrypted ZIP"
-    fileTypeIds:
-      - 90004
-  - number: "526172211A0700"
-    desc: "RAR (v4.x) compressed archive file"
-    fileTypeIds:
-      - 90003
-  - number: "526172211A070100"
-    desc: "RAR (v5) compressed archive file"
-    fileTypeIds:
-      - 90003
-  - number: "4D5A"
-
-
-    desc: "Windows/DOS executable file and so on"
-    fileTypeIds:
-      - 60001
-      - 60002
-      - 60003
-      - 60004
-      - 60005
-      - 60006
-      - 60007
-      - 60008
-      - 90006
-      - 90007
-      - 90008
-      - 90009
-      - 90010
-      - 90011
-      - 90012
-      - 60009
-      - 90013
-      - 90005
-  - number: "6465780A"
-
-    desc: "Dalvik executable file (Android)"
-    fileTypeIds:
-      - 80002
-  - number: "7F454C46"
-
-    desc: "Executable and Linking Format executable file (Linux/Unix)"
-    fileTypeIds:
-      - 80001
-  - number: "CFFAEDFE"
-    desc: "Apple OS X ABI Mach-O binary file(64-bit)"
-    fileTypeIds:
-      - 70001
-  - number: "CEFAEDFE"
-    desc: "Apple OS X ABI Mach-O binary file (32-bit)"
-    fileTypeIds:
-      - 70002
-  - number: "FEEDFACF"
-    desc: "Apple OS X ABI Mach-O binary file(64-bit)"
-    fileTypeIds:
-      - 70003
-  - number: "FEEDFACE"
-    desc: "Apple OS X ABI Mach-O binary file (32-bit)"
-    fileTypeIds:
-      - 70004
+magics: 
+  - number: 00
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 1
+        extension: "pic"
+      - id: 2
+        extension: "mov"
+      - id: 3
+        extension: "pif"
+      - id: 4
+        extension: "sea"
+      - id: 5
+        extension: "ytr"
+  - number: 03
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 61
+        extension: "dat"
+      - id: 62
+        extension: "db3"
+  - number: 04
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 67
+        extension: "db4"
+  - number: 07
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 71
+        extension: "drw"
+  - number: 08
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 74
+        extension: "db"
+  - number: 21
+    offset: 0
+    desc: '!'
+    fileTypes:  
+      - id: 100
+        extension: "bsb"
+  - number: 30
+    offset: 0
+    desc: '0'
+    fileTypes:  
+      - id: 137
+        extension: "cat"
+  - number: 3C
+    offset: 0
+    desc: '<'
+    fileTypes:  
+      - id: 152
+        extension: "asx"
+      - id: 153
+        extension: "xdr"
+      - id: 154
+        extension: "wsf"
+  - number: 47
+    offset: 0
+    desc: 'G'
+    fileTypes:  
+      - id: 247
+        extension: "ts"
+      - id: 248
+        extension: "tsa"
+      - id: 249
+        extension: "tsv"
+  - number: 80
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 543
+        extension: "obj"
+  - number: 99
+    offset: 0
+    desc: '�'
+    fileTypes:  
+      - id: 554
+        extension: "gpg"
+  - number: E8
+    offset: 0
+    desc: '�'
+    fileTypes:  
+      - id: 618
+        extension: "com"
+      - id: 619
+        extension: "sys"
+  - number: E9
+    offset: 0
+    desc: '�'
+    fileTypes:  
+      - id: 618
+        extension: "com"
+      - id: 619
+        extension: "sys"
+  - number: EB
+    offset: 0
+    desc: '�'
+    fileTypes:  
+      - id: 618
+        extension: "com"
+      - id: 619
+        extension: "sys"
+  - number: FF
+    offset: 0
+    desc: '�'
+    fileTypes:  
+      - id: 641
+        extension: "sys"
+  - number: 00BF
+    offset: 0
+    desc: '.�'
+    fileTypes:  
+      - id: 47
+        extension: "sol"
+  - number: 0110
+    offset: 0
+    desc: '..'
+    fileTypes:  
+      - id: 57
+        extension: "tr1"
+  - number: 0CED
+    offset: 0
+    desc: '.�'
+    fileTypes:  
+      - id: 79
+        extension: "mp"
+  - number: 1A0B
+    offset: 0
+    desc: '..'
+    fileTypes:  
+      - id: 87
+        extension: "pak"
+  - number: 1A0x
+    offset: 0
+    desc: '..'
+    fileTypes:  
+      - id: 88
+        extension: "arc"
+  - number: 1D7D
+    offset: 0
+    desc: '.}'
+    fileTypes:  
+      - id: 93
+        extension: "ws"
+  - number: 1F9D
+    offset: 0
+    desc: '..'
+    fileTypes:  
+      - id: 98
+        extension: "tar.z"
+  - number: 1FA0
+    offset: 0
+    desc: '.'
+    fileTypes:  
+      - id: 99
+        extension: "tar.z"
+  - number: 2112
+    offset: 0
+    desc: '!.'
+    fileTypes:  
+      - id: 102
+        extension: "ain"
+  - number: 2320
+    offset: 0
+    desc: '#'
+    fileTypes:  
+      - id: 108
+        extension: "msi"
+  - number: 31BE
+    offset: 0
+    desc: '2�'
+    fileTypes:  
+      - id: 146
+        extension: "wri"
+  - number: 32BE
+    offset: 0
+    desc: '2�'
+    fileTypes:  
+      - id: 146
+        extension: "wri"
+  - number: 3C3F
+    offset: 0
+    desc: '<?'
+    fileTypes:  
+      - id: 156
+        extension: "wsc"
+  - number: 4143
+    offset: 0
+    desc: 'AC'
+    fileTypes:  
+      - id: 171
+        extension: "dwg"
+  - number: 424D
+    offset: 0
+    desc: 'BM'
+    fileTypes:  
+      - id: 190
+        extension: "bmp"
+      - id: 191
+        extension: "dib"
+  - number: 4550
+    offset: 0
+    desc: 'EP'
+    fileTypes:  
+      - id: 231
+        extension: "mdi"
+  - number: 4C01
+    offset: 0
+    desc: 'L.'
+    fileTypes:  
+      - id: 283
+        extension: "obj"
+  - number: 4D56
+    offset: 0
+    desc: 'MV'
+    fileTypes:  
+      - id: 316
+        extension: "dsn"
+  - number: 4D5A
+    offset: 0
+    desc: 'MZ'
+    fileTypes:  
+      - id: 319
+        extension: "com"
+      - id: 320
+        extension: "dll"
+      - id: 321
+        extension: "drv"
+      - id: 322
+        extension: "exe"
+      - id: 323
+        extension: "pif"
+      - id: 324
+        extension: "qts"
+      - id: 325
+        extension: "qtx"
+      - id: 326
+        extension: "sys"
+      - id: 327
+        extension: "acm"
+      - id: 328
+        extension: "ax"
+      - id: 329
+        extension: "cpl"
+      - id: 330
+        extension: "fon"
+      - id: 331
+        extension: "ocx"
+      - id: 332
+        extension: "olb"
+      - id: 333
+        extension: "scr"
+      - id: 334
+        extension: "vbx"
+      - id: 335
+        extension: "vxd"
+      - id: 336
+        extension: "386"
+  - number: 4F7B
+    offset: 0
+    desc: 'O{'
+    fileTypes:  
+      - id: 358
+        extension: "dw4"
+  - number: 582D
+    offset: 0
+    desc: 'X-'
+    fileTypes:  
+      - id: 459
+        extension: "eml"
+  - number: 5854
+    offset: 0
+    desc: 'XT..'
+    fileTypes:  
+      - id: 463
+        extension: "bdr"
+  - number: 60EA
+    offset: 0
+    desc: '`�'
+    fileTypes:  
+      - id: 479
+        extension: "arj"
+  - number: 6F3C
+    offset: 0
+    desc: 'o<'
+    fileTypes:  
+      - id: 512
+        extension: ""
+  - number: 8000
+    offset: 0
+    desc: '..'
+    fileTypes:  
+      - id: 544
+        extension: "adx"
+  - number: 9500
+    offset: 0
+    desc: '�.'
+    fileTypes:  
+      - id: 552
+        extension: "skr"
+  - number: 9501
+    offset: 0
+    desc: '�.'
+    fileTypes:  
+      - id: 552
+        extension: "skr"
+  - number: 9901
+    offset: 0
+    desc: '�.'
+    fileTypes:  
+      - id: 555
+        extension: "pkr"
+  - number: ACED
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 561
+        extension: ""
+  - number: D42A
+    offset: 0
+    desc: '�*'
+    fileTypes:  
+      - id: 608
+        extension: "arl"
+      - id: 609
+        extension: "aut"
+  - number: DCDC
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 613
+        extension: "cpl"
+  - number: DCFE
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 614
+        extension: "efx"
+  - number: FEEF
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 638
+        extension: "gho"
+      - id: 639
+        extension: "ghs"
+  - number: FEFF
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 640
+        extension: ""
+  - number: FFD8
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 652
+        extension: "jpe"
+      - id: 653
+        extension: "jpeg"
+      - id: 654
+        extension: "jpg"
+  - number: FFEx
+    offset: 0
+    desc: '�.'
+    fileTypes:  
+      - id: 668
+        extension: "mpeg"
+      - id: 669
+        extension: "mpg"
+      - id: 670
+        extension: "mp3"
+  - number: FFF1
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 661
+        extension: "aac"
+  - number: FFF9
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 662
+        extension: "aac"
+  - number: FFFE
+    offset: 0
+    desc: '��'
+    fileTypes:  
+      - id: 663
+        extension: "reg"
+      - id: 664
+        extension: ""
+  - number: FFFx
+    offset: 0
+    desc: '�.'
+    fileTypes:  
+      - id: 668
+        extension: "mpeg"
+      - id: 669
+        extension: "mpg"
+      - id: 670
+        extension: "mp3"
+  - number: 000000
+    offset: 0
+    desc: '...'
+    fileTypes:  
+      - id: 6
+        extension: "avif"
+  - number: 000101
+    offset: 0
+    desc: '...'
+    fileTypes:  
+      - id: 36
+        extension: "flt"
+  - number: 0011AF
+    offset: 0
+    desc: '..�'
+    fileTypes:  
+      - id: 41
+        extension: "fli"
+  - number: 080045
+    offset: 0
+    desc: '..E'
+    fileTypes:  
+      - id: 75
+        extension: ""
+  - number: 0Ann01
+    offset: 0
+    desc: '...'
+    fileTypes:  
+      - id: 78
+        extension: "pcx"
+  - number: 1A0000
+    offset: 0
+    desc: '...'
+    fileTypes:  
+      - id: 85
+        extension: "ntf"
+  - number: 1F8B08
+    offset: 0
+    desc: '.�.'
+    fileTypes:  
+      - id: 94
+        extension: "gz"
+      - id: 95
+        extension: "tgz"
+      - id: 96
+        extension: "vlt"
+  - number: 2D6C68
+    offset: 2
+    desc: '[2 byte offset] -lh'
+    fileTypes:  
+      - id: 128
+        extension: "lha"
+      - id: 129
+        extension: "lzh"
+  - number: 414376
+    offset: 0
+    desc: 'ACL'
+    fileTypes:  
+      - id: 173
+        extension: "sle"
+  - number: 414553
+    offset: 0
+    desc: 'AES'
+    fileTypes:  
+      - id: 174
+        extension: "aes"
+  - number: 425A68
+    offset: 0
+    desc: 'BZh'
+    fileTypes:  
+      - id: 194
+        extension: "bz2"
+      - id: 195
+        extension: "tar.bz2"
+      - id: 196
+        extension: "tbz2"
+      - id: 197
+        extension: "tb2"
+      - id: 198
+        extension: "dmg"
+  - number: 435753
+    offset: 0
+    desc: 'CWS'
+    fileTypes:  
+      - id: 213
+        extension: "swf"
+  - number: 444F53
+    offset: 0
+    desc: 'DOS'
+    fileTypes:  
+      - id: 224
+        extension: "adf"
+  - number: 445644
+    offset: 0
+    desc: 'DVD'
+    fileTypes:  
+      - id: 227
+        extension: "dvr"
+      - id: 228
+        extension: "ifo"
+  - number: 465753
+    offset: 0
+    desc: 'FWS'
+    fileTypes:  
+      - id: 245
+        extension: "swf"
+  - number: 475832
+    offset: 0
+    desc: 'GX2'
+    fileTypes:  
+      - id: 254
+        extension: "gx2"
+  - number: 492049
+    offset: 0
+    desc: 'I I'
+    fileTypes:  
+      - id: 259
+        extension: "tif"
+      - id: 260
+        extension: "tiff"
+  - number: 494433
+    offset: 0
+    desc: 'ID3'
+    fileTypes:  
+      - id: 261
+        extension: "mp3"
+  - number: 4B444D
+    offset: 0
+    desc: 'KDM'
+    fileTypes:  
+      - id: 277
+        extension: "vmdk"
+  - number: 4C413A
+    offset: 0
+    desc: 'LA:'
+    fileTypes:  
+      - id: 284
+        extension: "dst"
+  - number: 50350A
+    offset: 0
+    desc: 'P5.'
+    fileTypes:  
+      - id: 360
+        extension: "pgm"
+  - number: 504158
+    offset: 0
+    desc: 'PAX'
+    fileTypes:  
+      - id: 364
+        extension: "pax"
+  - number: 5A5753
+    offset: 0
+    desc: 'ZWS'
+    fileTypes:  
+      - id: 465
+        extension: "swf"
+  - number: 736D5F
+    offset: 0
+    desc: 'sm_'
+    fileTypes:  
+      - id: 519
+        extension: "pdb"
+  - number: 81CDAB
+    offset: 0
+    desc: '.ͫ'
+    fileTypes:  
+      - id: 547
+        extension: "wpf"
+  - number: 86DD6x
+    offset: 0
+    desc: '��{lower_case letter}'
+    fileTypes:  
+      - id: 548
+        extension: ""
+  - number: EFBBBF
+    offset: 0
+    desc: '﻿'
+    fileTypes:  
+      - id: 625
+        extension: ""
+  - number: FF0A00
+    offset: 0
+    desc: '�..'
+    fileTypes:  
+      - id: 643
+        extension: "qrp"
+  - number: 00000100
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 14
+        extension: "ico"
+      - id: 15
+        extension: "spl"
+  - number: 000001BA
+    offset: 0
+    desc: '....�'
+    fileTypes:  
+      - id: 16
+        extension: "mpg"
+      - id: 17
+        extension: "vob"
+  - number: 000001Bx
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 18
+        extension: "mpeg"
+      - id: 19
+        extension: "mpg"
+  - number: 00000200
+    offset: 0
+    desc: '......'
+    fileTypes:  
+      - id: 20
+        extension: "cur"
+      - id: 21
+        extension: "wb2"
+  - number: 000003F3
+    offset: 0
+    desc: '...�'
+    fileTypes:  
+      - id: 23
+        extension: ""
+  - number: 0000FEFF
+    offset: 0
+    desc: '..��'
+    fileTypes:  
+      - id: 29
+        extension: ""
+  - number: 00014241
+    offset: 0
+    desc: '..BA'
+    fileTypes:  
+      - id: 37
+        extension: "aba"
+  - number: 00014244
+    offset: 0
+    desc: '..BD'
+    fileTypes:  
+      - id: 38
+        extension: "dba"
+  - number: 000DBBA0
+    offset: 0
+    desc: '..�'
+    fileTypes:  
+      - id: 40
+        extension: ""
+  - number: 0020AF30
+    offset: 0
+    desc: '. �0'
+    fileTypes:  
+      - id: 44
+        extension: "tpl"
+  - number: 006E1EF0
+    offset: 512
+    desc: '[512 (0x200) byte offset] .n.�'
+    fileTypes:  
+      - id: 46
+        extension: "ppt"
+  - number: 01000000
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 49
+        extension: "emf"
+  - number: 01000200
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 51
+        extension: "arf"
+  - number: 01003930
+    offset: 0
+    desc: '..90'
+    fileTypes:  
+      - id: 53
+        extension: "fdb"
+      - id: 54
+        extension: "gdb"
+  - number: 010F0000
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 56
+        extension: "mdf"
+  - number: 02647373
+    offset: 0
+    desc: '.dss'
+    fileTypes:  
+      - id: 60
+        extension: "dss"
+  - number: 03000000
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 63
+        extension: "nfc"
+      - id: 64
+        extension: "qph"
+  - number: 03647373
+    offset: 0
+    desc: '.dss'
+    fileTypes:  
+      - id: 66
+        extension: "dss"
+  - number: 07534B46
+    offset: 0
+    desc: '.SKF'
+    fileTypes:  
+      - id: 72
+        extension: "skf"
+  - number: 0D444F43
+    offset: 0
+    desc: '.DOC'
+    fileTypes:  
+      - id: 80
+        extension: "doc"
+  - number: 0E574B53
+    offset: 0
+    desc: '.WKS'
+    fileTypes:  
+      - id: 82
+        extension: "wks"
+  - number: 0F00E803
+    offset: 512
+    desc: '[512 (0x200) byte offset] ..�.'
+    fileTypes:  
+      - id: 46
+        extension: "ppt"
+  - number: 10000000
+    offset: 0
+    desc: '....'
+    fileTypes:  
+      - id: 84
+        extension: "cl5"
+  - number: 1A350100
+    offset: 0
+    desc: '.5..'
+    fileTypes:  
+      - id: 89
+        extension: "eth"
+  - number: 1A45DFA3
+    offset: 0
+    desc: '.Eߣ'
+    fileTypes:  
+      - id: 90
+        extension: "mkv"
+      - id: 91
+        extension: "webm"
+  - number: 1F8B0800
+    offset: 0
+    desc: '.�..'
+    fileTypes:  
+      - id: 97
+        extension: "dss"
+  - number: 2142444E
+    offset: 0
+    desc: '!BDN'
+    fileTypes:  
+      - id: 104
+        extension: ""
+      - id: 105
+        extension: "ost"
+      - id: 106
+        extension: "pab"
+      - id: 107
+        extension: "pst"
+  - number: 23407E5E
+    offset: 0
+    desc: '#@~^'
+    fileTypes:  
+      - id: 115
+        extension: "vbe"
+  - number: 234E4246
+    offset: 0
+    desc: '#NBF'
+    fileTypes:  
+      - id: 116
+        extension: "nbf"
+  - number: 25504446
+    offset: 0
+    desc: '%PDF'
+    fileTypes:  
+      - id: 122
+        extension: "pdf"
+      - id: 123
+        extension: "fdf"
+      - id: 124
+        extension: "ai"
+  - number: 2E524543
+    offset: 0
+    desc: '.REC'
+    fileTypes:  
+      - id: 130
+        extension: "ivr"
+  - number: 2E524D46
+    offset: 0
+    desc: '.RMF'
+    fileTypes:  
+      - id: 131
+        extension: "rm"
+      - id: 132
+        extension: "rmvb"
+  - number: 2E736E64
+    offset: 0
+    desc: '.snd'
+    fileTypes:  
+      - id: 135
+        extension: "au"
+  - number: 34CDB2A1
+    offset: 0
+    desc: '4Ͳ�'
+    fileTypes:  
+      - id: 147
+        extension: ""
+  - number: 38425053
+    offset: 0
+    desc: '8BPS'
+    fileTypes:  
+      - id: 150
+        extension: "psd"
+  - number: 3F5F0300
+    offset: 0
+    desc: '?_..'
+    fileTypes:  
+      - id: 168
+        extension: "gid"
+      - id: 30
+        extension: "hlp"
+  - number: 41426F78
+    offset: 0
+    desc: 'ABox'
+    fileTypes:  
+      - id: 170
+        extension: "abox2"
+  - number: 41435344
+    offset: 0
+    desc: 'ACSD'
+    fileTypes:  
+      - id: 172
+        extension: ""
+  - number: 414D594F
+    offset: 0
+    desc: 'AMYO'
+    fileTypes:  
+      - id: 175
+        extension: "syw"
+  - number: 41724301
+    offset: 0
+    desc: 'ArC.'
+    fileTypes:  
+      - id: 184
+        extension: "arc"
+  - number: 42414144
+    offset: 0
+    desc: 'BAAD'
+    fileTypes:  
+      - id: 185
+        extension: ""
+  - number: 42446963
+    offset: 0
+    desc: 'BDic'
+    fileTypes:  
+      - id: 186
+        extension: "bdic"
+  - number: 425047FB
+    offset: 0
+    desc: 'BPG#xFB;'
+    fileTypes:  
+      - id: 193
+        extension: "bpg"
+  - number: 43415420
+    offset: 0
+    desc: 'CAT'
+    fileTypes:  
+      - id: 202
+        extension: "iff"
+  - number: 4349534F
+    offset: 0
+    desc: 'CISO'
+    fileTypes:  
+      - id: 205
+        extension: "cso"
+  - number: 434D5831
+    offset: 0
+    desc: 'CMX1'
+    fileTypes:  
+      - id: 207
+        extension: "clb"
+  - number: 434F4D2B
+    offset: 0
+    desc: 'COM+'
+    fileTypes:  
+      - id: 208
+        extension: "clb"
+  - number: 434F5744
+    offset: 0
+    desc: 'COWD'
+    fileTypes:  
+      - id: 209
+        extension: "vmdk"
+  - number: 43524547
+    offset: 0
+    desc: 'CREG'
+    fileTypes:  
+      - id: 211
+        extension: "dat"
+  - number: 43723234
+    offset: 0
+    desc: 'Cr24'
+    fileTypes:  
+      - id: 217
+        extension: "crx"
+  - number: 43724F44
+    offset: 0
+    desc: 'CrOD'
+    fileTypes:  
+      - id: 218
+        extension: "crx"
+  - number: 44415800
+    offset: 0
+    desc: 'DAX.'
+    fileTypes:  
+      - id: 221
+        extension: "dax"
+  - number: 44424648
+    offset: 0
+    desc: 'DBFH'
+    fileTypes:  
+      - id: 222
+        extension: "db"
+  - number: 444D5321
+    offset: 0
+    desc: 'DMS!'
+    fileTypes:  
+      - id: 223
+        extension: "dms"
+  - number: 44534420
+    offset: 0
+    desc: 'DSD'
+    fileTypes:  
+      - id: 225
+        extension: "dsf"
+  - number: 44535462
+    offset: 0
+    desc: 'DSTb'
+    fileTypes:  
+      - id: 226
+        extension: "dst"
+  - number: 46454446
+    offset: 0
+    desc: 'FEDF'
+    fileTypes:  
+      - id: 240
+        extension: "sbv"
+  - number: 46494C45
+    offset: 0
+    desc: 'FILE'
+    fileTypes:  
+      - id: 185
+        extension: ""
+  - number: 464C5601
+    offset: 0
+    desc: 'FLV.'
+    fileTypes:  
+      - id: 241
+        extension: "flv"
+  - number: 464F524D
+    offset: 0
+    desc: 'FORM'
+    fileTypes:  
+      - id: 242
+        extension: "anm"
+      - id: 202
+        extension: "iff"
+  - number: 47504154
+    offset: 0
+    desc: 'GPAT'
+    fileTypes:  
+      - id: 252
+        extension: "pat"
+  - number: 47524942
+    offset: 0
+    desc: 'GRIB'
+    fileTypes:  
+      - id: 253
+        extension: "grb"
+  - number: 49492A00
+    offset: 0
+    desc: 'II*.'
+    fileTypes:  
+      - id: 264
+        extension: "tif"
+      - id: 265
+        extension: "tiff"
+  - number: 49536328
+    offset: 0
+    desc: 'ISc('
+    fileTypes:  
+      - id: 268
+        extension: "cab"
+      - id: 269
+        extension: "hdr"
+  - number: 49545346
+    offset: 0
+    desc: 'ITSF'
+    fileTypes:  
+      - id: 271
+        extension: "chi"
+      - id: 272
+        extension: "chm"
+  - number: 4A47030E
+    offset: 0
+    desc: 'JG..'
+    fileTypes:  
+      - id: 276
+        extension: "art"
+  - number: 4A47040E
+    offset: 0
+    desc: 'JG..'
+    fileTypes:  
+      - id: 276
+        extension: "art"
+  - number: 4B444D56
+    offset: 0
+    desc: 'KDMV'
+    fileTypes:  
+      - id: 278
+        extension: "vmdk"
+  - number: 4B490000
+    offset: 0
+    desc: 'KI..'
+    fileTypes:  
+      - id: 280
+        extension: "shd"
+  - number: 4C495354
+    offset: 0
+    desc: 'LIST'
+    fileTypes:  
+      - id: 202
+        extension: "iff"
+  - number: 4C4E0200
+    offset: 0
+    desc: 'LN..'
+    fileTypes:  
+      - id: 168
+        extension: "gid"
+      - id: 30
+        extension: "hlp"
+  - number: 4D415243
+    offset: 0
+    desc: 'MARC'
+    fileTypes:  
+      - id: 289
+        extension: "mar"
+  - number: 4D4C5357
+    offset: 0
+    desc: 'MLSW'
+    fileTypes:  
+      - id: 296
+        extension: "mls"
+  - number: 4D4D002A
+    offset: 0
+    desc: 'MM.*'
+    fileTypes:  
+      - id: 297
+        extension: "tif"
+      - id: 298
+        extension: "tiff"
+  - number: 4D4D002B
+    offset: 0
+    desc: 'MM.+'
+    fileTypes:  
+      - id: 299
+        extension: "tif"
+      - id: 300
+        extension: "tiff"
+  - number: 4D52564E
+    offset: 0
+    desc: 'MRVN'
+    fileTypes:  
+      - id: 302
+        extension: "nvram"
+  - number: 4D534346
+    offset: 0
+    desc: 'MSCF'
+    fileTypes:  
+      - id: 303
+        extension: "cab"
+      - id: 304
+        extension: "onepkg"
+      - id: 305
+        extension: "ppz"
+      - id: 306
+        extension: "snp"
+  - number: 4D546864
+    offset: 0
+    desc: 'MThd'
+    fileTypes:  
+      - id: 313
+        extension: "mid"
+      - id: 314
+        extension: "midi"
+      - id: 315
+        extension: "pcs"
+  - number: 4D563243
+    offset: 0
+    desc: 'MV2C'
+    fileTypes:  
+      - id: 318
+        extension: "mls"
+  - number: 4E422A00
+    offset: 0
+    desc: 'NB*.'
+    fileTypes:  
+      - id: 346
+        extension: "jnt"
+      - id: 347
+        extension: "jtp"
+  - number: 5041434B
+    offset: 0
+    desc: 'PACK'
+    fileTypes:  
+      - id: 361
+        extension: "pak"
+  - number: 50455354
+    offset: 0
+    desc: 'PEST'
+    fileTypes:  
+      - id: 365
+        extension: "dat"
+  - number: 504B0304
+    offset: 0
+    desc: 'PK..'
+    fileTypes:  
+      - id: 368
+        extension: "zip"
+      - id: 369
+        extension: "zip"
+      - id: 370
+        extension: "apk"
+      - id: 371
+        extension: "jar"
+      - id: 372
+        extension: "kmz"
+      - id: 373
+        extension: "kwd"
+      - id: 374
+        extension: "odt"
+      - id: 375
+        extension: "odp"
+      - id: 376
+        extension: "ott"
+      - id: 377
+        extension: "oxps"
+      - id: 378
+        extension: "sxc"
+      - id: 379
+        extension: "sxd"
+      - id: 380
+        extension: "sxi"
+      - id: 381
+        extension: "sxw"
+      - id: 382
+        extension: "sxc"
+      - id: 383
+        extension: "wmz"
+      - id: 384
+        extension: "xpi"
+      - id: 385
+        extension: "xps"
+      - id: 386
+        extension: "xpt"
+  - number: 504B0506
+    offset: 0
+    desc: 'PK..'
+    fileTypes:  
+      - id: 393
+        extension: "zip"
+  - number: 504B0708
+    offset: 0
+    desc: 'PK..'
+    fileTypes:  
+      - id: 394
+        extension: "zip"
+  - number: 504D4343
+    offset: 0
+    desc: 'PMCC'
+    fileTypes:  
+      - id: 397
+        extension: "grp"
+  - number: 50534612
+    offset: 0
+    desc: 'PSF.'
+    fileTypes:  
+      - id: 400
+        extension: "dsf"
+  - number: 50554658
+    offset: 0
+    desc: 'PUFX'
+    fileTypes:  
+      - id: 401
+        extension: "puf"
+  - number: 50615645
+    offset: 0
+    desc: 'PaVE'
+    fileTypes:  
+      - id: 402
+        extension: ""
+  - number: 51454C20
+    offset: 92
+    desc: '[92 (0x5C) byte offset] QEL'
+    fileTypes:  
+      - id: 403
+        extension: "qel"
+  - number: 514649FB
+    offset: 0
+    desc: 'QFI�'
+    fileTypes:  
+      - id: 404
+        extension: "img"
+  - number: 52494646
+    offset: 0
+    desc: 'RIFF'
+    fileTypes:  
+      - id: 413
+        extension: "ani"
+      - id: 414
+        extension: "cmx"
+      - id: 415
+        extension: "cdr"
+      - id: 416
+        extension: "dat"
+      - id: 417
+        extension: "ds4"
+      - id: 418
+        extension: "4xm"
+  - number: 52545353
+    offset: 0
+    desc: 'RTSS'
+    fileTypes:  
+      - id: 425
+        extension: "cap"
+  - number: 53434341
+    offset: 4
+    desc: '[4 byte offset] SCCA'
+    fileTypes:  
+      - id: 429
+        extension: "pf"
+  - number: 5343486C
+    offset: 0
+    desc: 'SCHl'
+    fileTypes:  
+      - id: 430
+        extension: "ast"
+  - number: 53434D49
+    offset: 0
+    desc: 'SCMI'
+    fileTypes:  
+      - id: 431
+        extension: "img"
+  - number: 53445058
+    offset: 0
+    desc: 'SDPX'
+    fileTypes:  
+      - id: 432
+        extension: "dpx"
+  - number: 53484F57
+    offset: 0
+    desc: 'SHOW'
+    fileTypes:  
+      - id: 433
+        extension: "shw"
+  - number: 53505642
+    offset: 0
+    desc: 'SPVB'
+    fileTypes:  
+      - id: 439
+        extension: "spvchain"
+  - number: 536D626C
+    offset: 0
+    desc: 'Smbl'
+    fileTypes:  
+      - id: 444
+        extension: "sym"
+  - number: 54485000
+    offset: 0
+    desc: 'THP.'
+    fileTypes:  
+      - id: 446
+        extension: "thp"
+  - number: 55434558
+    offset: 0
+    desc: 'UCEX'
+    fileTypes:  
+      - id: 448
+        extension: "uce"
+  - number: 574D4D50
+    offset: 0
+    desc: 'WMMP'
+    fileTypes:  
+      - id: 456
+        extension: "dat"
+  - number: 58435000
+    offset: 0
+    desc: 'XCP.'
+    fileTypes:  
+      - id: 460
+        extension: "cap"
+  - number: 58504453
+    offset: 0
+    desc: 'XPDS'
+    fileTypes:  
+      - id: 462
+        extension: "dpx"
+  - number: 5A4F4F20
+    offset: 0
+    desc: 'ZOO'
+    fileTypes:  
+      - id: 464
+        extension: "zoo"
+  - number: 5DFCC800
+    offset: 0
+    desc: ']��.'
+    fileTypes:  
+      - id: 475
+        extension: "hus"
+  - number: 5F27A889
+    offset: 0
+    desc: '_''��'
+    fileTypes:  
+      - id: 476
+        extension: "jar"
+  - number: 63616666
+    offset: 0
+    desc: 'caff'
+    fileTypes:  
+      - id: 483
+        extension: "caf"
+  - number: 64000000
+    offset: 0
+    desc: 'd...'
+    fileTypes:  
+      - id: 487
+        extension: "p10"
+  - number: 6465780A
+    offset: 0
+    desc: 'dex.'
+    fileTypes:  
+      - id: 489
+        extension: "dex"
+  - number: 646E732E
+    offset: 0
+    desc: 'dns.'
+    fileTypes:  
+      - id: 490
+        extension: "au"
+  - number: 66490000
+    offset: 0
+    desc: 'fI..'
+    fileTypes:  
+      - id: 493
+        extension: "shd"
+  - number: 67490000
+    offset: 0
+    desc: 'gI..'
+    fileTypes:  
+      - id: 505
+        extension: "shd"
+  - number: 68490000
+    offset: 0
+    desc: 'hI..'
+    fileTypes:  
+      - id: 507
+        extension: "shd"
+  - number: 69636E73
+    offset: 0
+    desc: 'icns'
+    fileTypes:  
+      - id: 508
+        extension: "icns"
+  - number: 6C33336C
+    offset: 0
+    desc: 'l33l'
+    fileTypes:  
+      - id: 509
+        extension: "dbb"
+  - number: 6D6F6F76
+    offset: 4
+    desc: '[4 byte offset] moov'
+    fileTypes:  
+      - id: 504
+        extension: "mov"
+  - number: 72656766
+    offset: 0
+    desc: 'regf'
+    fileTypes:  
+      - id: 514
+        extension: "dat"
+  - number: 72696666
+    offset: 0
+    desc: 'riff'
+    fileTypes:  
+      - id: 515
+        extension: "acd"
+  - number: 736C6821
+    offset: 0
+    desc: 'slh!'
+    fileTypes:  
+      - id: 517
+        extension: "dat"
+  - number: 736C682E
+    offset: 0
+    desc: 'slh.'
+    fileTypes:  
+      - id: 518
+        extension: "dat"
+  - number: 737A657A
+    offset: 0
+    desc: 'szez'
+    fileTypes:  
+      - id: 522
+        extension: "pdb"
+  - number: 762F3101
+    offset: 0
+    desc: 'v/1.'
+    fileTypes:  
+      - id: 525
+        extension: "exr"
+  - number: 774F4632
+    offset: 0
+    desc: 'wOF2'
+    fileTypes:  
+      - id: 527
+        extension: "woff2"
+  - number: 774F4646
+    offset: 0
+    desc: 'wOFF'
+    fileTypes:  
+      - id: 528
+        extension: "woff"
+  - number: 78617221
+    offset: 0
+    desc: 'xar!'
+    fileTypes:  
+      - id: 530
+        extension: "xar"
+  - number: 7A626578
+    offset: 0
+    desc: 'zbex'
+    fileTypes:  
+      - id: 531
+        extension: "info"
+  - number: 7E424B00
+    offset: 0
+    desc: '~BK.'
+    fileTypes:  
+      - id: 539
+        extension: "psp"
+  - number: 7F454C46
+    offset: 0
+    desc: '.ELF'
+    fileTypes:  
+      - id: 542
+        extension: ""
+  - number: 802A5FD7
+    offset: 0
+    desc: '.*_.'
+    fileTypes:  
+      - id: 545
+        extension: "cin"
+  - number: 91334846
+    offset: 0
+    desc: '�3HF'
+    fileTypes:  
+      - id: 551
+        extension: "hap"
+  - number: A0461DF0
+    offset: 512
+    desc: '[512 (0x200) byte offset] F.�'
+    fileTypes:  
+      - id: 46
+        extension: "ppt"
+  - number: A1B2C3D4
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 557
+        extension: ""
+  - number: A1B2CD34
+    offset: 0
+    desc: '���4'
+    fileTypes:  
+      - id: 147
+        extension: ""
+  - number: B04D4643
+    offset: 0
+    desc: '�MFC'
+    fileTypes:  
+      - id: 563
+        extension: "pwl"
+  - number: B168DE3A
+    offset: 0
+    desc: '�h�:'
+    fileTypes:  
+      - id: 564
+        extension: "dcx"
+  - number: B46E6844
+    offset: 0
+    desc: '�nhd'
+    fileTypes:  
+      - id: 565
+        extension: "tib"
+  - number: B8C90C00
+    offset: 0
+    desc: '��..'
+    fileTypes:  
+      - id: 567
+        extension: "ins"
+  - number: C3ABCDAB
+    offset: 0
+    desc: 'ëͫ'
+    fileTypes:  
+      - id: 570
+        extension: "acs"
+  - number: C5D0D3C6
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 571
+        extension: "eps"
+  - number: C8007900
+    offset: 0
+    desc: '�.y.'
+    fileTypes:  
+      - id: 572
+        extension: "lbk"
+  - number: CAFEBABE
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 573
+        extension: "class"
+  - number: CECECECE
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 577
+        extension: "jceks"
+  - number: CEFAEDFE
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 578
+        extension: ""
+  - number: CFAD12FE
+    offset: 0
+    desc: 'ϭ.�'
+    fileTypes:  
+      - id: 580
+        extension: "dbx"
+  - number: CFFAEDFE
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 581
+        extension: ""
+  - number: D20A0000
+    offset: 0
+    desc: '�...'
+    fileTypes:  
+      - id: 607
+        extension: "ftr"
+  - number: D4C3B2A1
+    offset: 0
+    desc: '�ò�'
+    fileTypes:  
+      - id: 610
+        extension: ""
+  - number: D7CDC69A
+    offset: 0
+    desc: '��ƚ'
+    fileTypes:  
+      - id: 611
+        extension: "wmf"
+  - number: DBA52D00
+    offset: 0
+    desc: 'ۥ-.'
+    fileTypes:  
+      - id: 612
+        extension: "doc"
+  - number: E3828596
+    offset: 0
+    desc: 'ゅ�'
+    fileTypes:  
+      - id: 616
+        extension: "pwl"
+  - number: EB3C902A
+    offset: 0
+    desc: '�<.*'
+    fileTypes:  
+      - id: 620
+        extension: "img"
+  - number: ECA5C100
+    offset: 512
+    desc: '[512 (0x200) byte offset] ��.'
+    fileTypes:  
+      - id: 623
+        extension: "doc"
+  - number: EDABEEDB
+    offset: 0
+    desc: '���'
+    fileTypes:  
+      - id: 624
+        extension: "rpm"
+  - number: EFBBBF3C
+    offset: 0
+    desc: '﻿<'
+    fileTypes:  
+      - id: 626
+        extension: "wsf"
+  - number: F9BEB4D9
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 629
+        extension: "dat"
+  - number: FEEDFACE
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 635
+        extension: ""
+  - number: FEEDFACF
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 636
+        extension: ""
+  - number: FEEDFEED
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 637
+        extension: "jks"
+  - number: FF575043
+    offset: 0
+    desc: '�WPC'
+    fileTypes:  
+      - id: 646
+        extension: "wp"
+      - id: 647
+        extension: "wpd"
+      - id: 648
+        extension: "wpg"
+      - id: 649
+        extension: "wpp"
+      - id: 650
+        extension: "wp5"
+      - id: 651
+        extension: "wp6"
+  - number: FFFE0000
+    offset: 0
+    desc: '��..'
+    fileTypes:  
+      - id: 665
+        extension: ""
+  - number: FFFFFFFF
+    offset: 0
+    desc: '����'
+    fileTypes:  
+      - id: 667
+        extension: "sys"
+  - number: 0001000000
+    offset: 0
+    desc: '.....'
+    fileTypes:  
+      - id: 31
+        extension: "ttf"
+  - number: 005C41B1FF
+    offset: 0
+    desc: '.\A��'
+    fileTypes:  
+      - id: 45
+        extension: "enc"
+  - number: 0100000001
+    offset: 0
+    desc: '.....'
+    fileTypes:  
+      - id: 50
+        extension: "pic"
+  - number: 2321414D52
+    offset: 0
+    desc: '#!AMR'
+    fileTypes:  
+      - id: 112
+        extension: "amr"
+  - number: 2350455330
+    offset: 0
+    desc: '#PES0'
+    fileTypes:  
+      - id: 118
+        extension: "pes"
+  - number: 2E7261FD00
+    offset: 0
+    desc: '.ra�.'
+    fileTypes:  
+      - id: 134
+        extension: "ra"
+  - number: 414F4C4442
+    offset: 0
+    desc: 'AOLDB'
+    fileTypes:  
+      - id: 177
+        extension: "aby"
+      - id: 178
+        extension: "idx"
+  - number: 4344303031
+    offset: 0
+    desc: 'CD001'
+    fileTypes:  
+      - id: 204
+        extension: "iso"
+  - number: 4552020000
+    offset: 0
+    desc: 'CD...'
+    fileTypes:  
+      - id: 232
+        extension: "iso"
+  - number: 4644424800
+    offset: 0
+    desc: 'FDBH.'
+    fileTypes:  
+      - id: 239
+        extension: "fdb"
+  - number: 464F524D00
+    offset: 0
+    desc: 'FORM.'
+    fileTypes:  
+      - id: 243
+        extension: "aiff"
+      - id: 244
+        extension: "dax"
+  - number: 4848474231
+    offset: 0
+    desc: 'HHGB1'
+    fileTypes:  
+      - id: 258
+        extension: "sh3"
+  - number: 4D41523100
+    offset: 0
+    desc: 'MAR1.'
+    fileTypes:  
+      - id: 288
+        extension: "mar"
+  - number: 4D41723000
+    offset: 0
+    desc: 'MAr0.'
+    fileTypes:  
+      - id: 291
+        extension: "mar"
+  - number: 4D494C4553
+    offset: 0
+    desc: 'MILES'
+    fileTypes:  
+      - id: 295
+        extension: "mls"
+  - number: 4D5357494D
+    offset: 0
+    desc: 'MSWIM'
+    fileTypes:  
+      - id: 309
+        extension: "wim"
+  - number: 4D56323134
+    offset: 0
+    desc: 'MV214'
+    fileTypes:  
+      - id: 317
+        extension: "mls"
+  - number: 4D73526366
+    offset: 0
+    desc: 'MsRcf'
+    fileTypes:  
+      - id: 344
+        extension: "gdb"
+  - number: 4E49544630
+    offset: 0
+    desc: 'NITF0'
+    fileTypes:  
+      - id: 349
+        extension: "ntf"
+  - number: 4F54544F00
+    offset: 0
+    desc: 'OTTO.'
+    fileTypes:  
+      - id: 353
+        extension: "otf"
+  - number: 504B537058
+    offset: 526
+    desc: '[526 (0x20E) byte offset] PKSFX'
+    fileTypes:  
+      - id: 396
+        extension: "zip"
+  - number: 524458320A
+    offset: 0
+    desc: 'RDX2.'
+    fileTypes:  
+      - id: 409
+        extension: "rdata"
+  - number: 5349542100
+    offset: 0
+    desc: 'SIT!.'
+    fileTypes:  
+      - id: 436
+        extension: "sit"
+  - number: 5350464900
+    offset: 0
+    desc: 'SPFI.'
+    fileTypes:  
+      - id: 438
+        extension: "spf"
+  - number: 5B4D535643
+    offset: 0
+    desc: '[MSVC'
+    fileTypes:  
+      - id: 467
+        extension: "vcw"
+  - number: 5B5645525D
+    offset: 0
+    desc: '[ver]'
+    fileTypes:  
+      - id: 474
+        extension: "sam"
+  - number: 5B564D445D
+    offset: 0
+    desc: '[VMD]'
+    fileTypes:  
+      - id: 469
+        extension: "vmd"
+  - number: 5B7665725D
+    offset: 0
+    desc: '[ver]'
+    fileTypes:  
+      - id: 474
+        extension: "sam"
+  - number: 626567696E
+    offset: 0
+    desc: 'begin'
+    fileTypes:  
+      - id: 480
+        extension: ""
+  - number: 736F6C6964
+    offset: 0
+    desc: 'solid'
+    fileTypes:  
+      - id: 520
+        extension: "stl"
+  - number: 7472756500
+    offset: 0
+    desc: 'true.'
+    fileTypes:  
+      - id: 31
+        extension: "ttf"
+  - number: 7573746172
+    offset: 257
+    desc: '[257 (0x101) byte offset] ustar'
+    fileTypes:  
+      - id: 524
+        extension: "tar"
+  - number: 7B0D0A6F20
+    offset: 0
+    desc: '{..o'
+    fileTypes:  
+      - id: 532
+        extension: "lgc"
+      - id: 533
+        extension: "lgd"
+  - number: 7B5C707769
+    offset: 0
+    desc: '{\pwi'
+    fileTypes:  
+      - id: 536
+        extension: "pwi"
+  - number: 7B5C727466
+    offset: 0
+    desc: '{\rtf'
+    fileTypes:  
+      - id: 537
+        extension: "rtf"
+  - number: EFBBBF3C3F
+    offset: 0
+    desc: '﻿<?'
+    fileTypes:  
+      - id: 627
+        extension: "wsc"
+  - number: FDFFFFFF02
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����.'
+    fileTypes:  
+      - id: 631
+        extension: "pub"
+  - number: FDFFFFFF04
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����.'
+    fileTypes:  
+      - id: 601
+        extension: "qbm"
+      - id: 632
+        extension: "suo"
+  - number: FF464F4E54
+    offset: 0
+    desc: '�FONT'
+    fileTypes:  
+      - id: 644
+        extension: "cpi"
+  - number: 0000FFFFFFFF
+    offset: 6
+    desc: '[6 byte offset] ..����'
+    fileTypes:  
+      - id: 30
+        extension: "hlp"
+  - number: 010009000003
+    offset: 0
+    desc: '......'
+    fileTypes:  
+      - id: 52
+        extension: "wmf"
+  - number: 01DA01010003
+    offset: 0
+    desc: '.�....'
+    fileTypes:  
+      - id: 58
+        extension: "rgb"
+  - number: 01FF02040302
+    offset: 0
+    desc: '.�....'
+    fileTypes:  
+      - id: 59
+        extension: "drw"
+  - number: 1A0000040000
+    offset: 0
+    desc: '......'
+    fileTypes:  
+      - id: 86
+        extension: "nsf"
+  - number: 302048454144
+    offset: 0
+    desc: '0 HEAD'
+    fileTypes:  
+      - id: 139
+        extension: "ged"
+  - number: 3037303730nn
+    offset: 0
+    desc: '07070.'
+    fileTypes:  
+      - id: 144
+        extension: ""
+  - number: 377ABCAF271C
+    offset: 0
+    desc: '7z��''.'
+    fileTypes:  
+      - id: 148
+        extension: "7z"
+  - number: 414F4C494458
+    offset: 0
+    desc: 'AOLIDX'
+    fileTypes:  
+      - id: 179
+        extension: "ind"
+  - number: 424C49323233
+    offset: 0
+    desc: 'BLI223'
+    fileTypes:  
+      - id: 188
+        extension: "bli"
+      - id: 189
+        extension: "rbi"
+  - number: 434246494C45
+    offset: 0
+    desc: 'CBFILE'
+    fileTypes:  
+      - id: 203
+        extension: "cbd"
+  - number: 458600000600
+    offset: 0
+    desc: 'E�....'
+    fileTypes:  
+      - id: 237
+        extension: "qbb"
+  - number: 46726F6D3A20
+    offset: 0
+    desc: 'From:'
+    fileTypes:  
+      - id: 246
+        extension: "eml"
+  - number: 474946383761
+    offset: 0
+    desc: 'GIF89a'
+    fileTypes:  
+      - id: 251
+        extension: "gif"
+  - number: 474946383961
+    offset: 0
+    desc: 'GIF89a'
+    fileTypes:  
+      - id: 251
+        extension: "gif"
+  - number: 4A4152435300
+    offset: 0
+    desc: 'JARCS.'
+    fileTypes:  
+      - id: 275
+        extension: "jar"
+  - number: 4C5046200001
+    offset: 0
+    desc: 'LPF ..'
+    fileTypes:  
+      - id: 285
+        extension: "anm"
+  - number: 4D444D5093A7
+    offset: 0
+    desc: 'MDMP��'
+    fileTypes:  
+      - id: 293
+        extension: "hdmp"
+      - id: 294
+        extension: "dmp"
+  - number: 4D4D4D440000
+    offset: 0
+    desc: 'MMMD..'
+    fileTypes:  
+      - id: 301
+        extension: "mmf"
+  - number: 4E45534D1A01
+    offset: 0
+    desc: 'NESM..'
+    fileTypes:  
+      - id: 348
+        extension: "nsf"
+  - number: 4E616D653A20
+    offset: 0
+    desc: 'Name:'
+    fileTypes:  
+      - id: 350
+        extension: "cod"
+  - number: 504943540008
+    offset: 0
+    desc: 'PICT..'
+    fileTypes:  
+      - id: 367
+        extension: "img"
+  - number: 504B4C495445
+    offset: 30
+    desc: '[30 (0x1E) byte offset] PKLITE'
+    fileTypes:  
+      - id: 395
+        extension: "zip"
+  - number: 554641C6D2C1
+    offset: 0
+    desc: 'UFA���'
+    fileTypes:  
+      - id: 449
+        extension: "ufa"
+  - number: 564350434830
+    offset: 0
+    desc: 'VCPCH0'
+    fileTypes:  
+      - id: 452
+        extension: "pch"
+  - number: 575332303030
+    offset: 0
+    desc: 'WS2000'
+    fileTypes:  
+      - id: 457
+        extension: "ws2"
+  - number: 5F434153455F
+    offset: 0
+    desc: '_CASE_'
+    fileTypes:  
+      - id: 477
+        extension: "cas"
+      - id: 478
+        extension: "cbk"
+  - number: 62706C697374
+    offset: 0
+    desc: 'bplist'
+    fileTypes:  
+      - id: 482
+        extension: "plist"
+  - number: AC9EBD8F0000
+    offset: 0
+    desc: '�.�...'
+    fileTypes:  
+      - id: 560
+        extension: "qdf"
+  - number: FD377A585A00
+    offset: 0
+    desc: '�7zXZ.'
+    fileTypes:  
+      - id: 630
+        extension: "xz"
+  - number: FDFFFFFFnn00
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����..'
+    fileTypes:  
+      - id: 76
+        extension: "xls"
+  - number: FDFFFFFFnn02
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����..'
+    fileTypes:  
+      - id: 76
+        extension: "xls"
+  - number: 00001A00051004
+    offset: 0
+    desc: '.......'
+    fileTypes:  
+      - id: 27
+        extension: "123"
+  - number: 00004949585052
+    offset: 0
+    desc: '..MMXPR'
+    fileTypes:  
+      - id: 28
+        extension: "qxd"
+  - number: 00004D4D585052
+    offset: 0
+    desc: '..MMXPR'
+    fileTypes:  
+      - id: 28
+        extension: "qxd"
+  - number: 232153494C4B0A
+    offset: 0
+    desc: '#!SILK.'
+    fileTypes:  
+      - id: 113
+        extension: "sil"
+  - number: 256269746D6170
+    offset: 0
+    desc: '%bitmap'
+    fileTypes:  
+      - id: 125
+        extension: "fbm"
+  - number: 43505446494C45
+    offset: 0
+    desc: 'CPTFILE'
+    fileTypes:  
+      - id: 210
+        extension: "cpt"
+  - number: 43525553482076
+    offset: 0
+    desc: 'CRUSH v'
+    fileTypes:  
+      - id: 212
+        extension: "cru"
+  - number: 455646320D0A81
+    offset: 0
+    desc: 'EVF2...'
+    fileTypes:  
+      - id: 235
+        extension: "exnn"
+  - number: 46726F6D202020
+    offset: 0
+    desc: 'From:'
+    fileTypes:  
+      - id: 246
+        extension: "eml"
+  - number: 49443303000000
+    offset: 0
+    desc: 'ID3....'
+    fileTypes:  
+      - id: 262
+        extension: "koz"
+  - number: 4F50434C444154
+    offset: 0
+    desc: 'OPCLDAT'
+    fileTypes:  
+      - id: 351
+        extension: "attachment"
+  - number: 52454745444954
+    offset: 0
+    desc: 'REGEDIT'
+    fileTypes:  
+      - id: 410
+        extension: "reg"
+      - id: 411
+        extension: "sud"
+  - number: 526172211A0700
+    offset: 0
+    desc: 'Rar!...'
+    fileTypes:  
+      - id: 426
+        extension: "rar"
+  - number: 556E46696E4D46
+    offset: 0
+    desc: 'UnFinMF'
+    fileTypes:  
+      - id: 451
+        extension: "mf4"
+  - number: 576F726450726F
+    offset: 0
+    desc: 'WordPro'
+    fileTypes:  
+      - id: 458
+        extension: "lwp"
+  - number: 5B50686F6E655D
+    offset: 0
+    desc: '[Phone]'
+    fileTypes:  
+      - id: 468
+        extension: "dun"
+  - number: 64737766696C65
+    offset: 0
+    desc: 'dswfile'
+    fileTypes:  
+      - id: 491
+        extension: "dsw"
+  - number: 66747970336770
+    offset: 4
+    desc: '[4 byte offset] ftyp3gp'
+    fileTypes:  
+      - id: 495
+        extension: "3gg"
+      - id: 496
+        extension: "3gp"
+      - id: 497
+        extension: "3g2"
+  - number: 727473703A2F2F
+    offset: 0
+    desc: 'rtsp://'
+    fileTypes:  
+      - id: 516
+        extension: "ram"
+  - number: 7801730D626260
+    offset: 0
+    desc: 'x.s.bb`'
+    fileTypes:  
+      - id: 529
+        extension: "dmg"
+  - number: 0000000000000000
+    offset: 512
+    desc: '[512 (0x200) byte offset] ........'
+    fileTypes:  
+      - id: 7
+        extension: "rvt"
+  - number: 0000000014000000
+    offset: 0
+    desc: '........'
+    fileTypes:  
+      - id: 10
+        extension: "tbi"
+  - number: 001E849000000000
+    offset: 0
+    desc: '..�.....'
+    fileTypes:  
+      - id: 43
+        extension: "snm"
+  - number: 0300000041505052
+    offset: 0
+    desc: '....APPR'
+    fileTypes:  
+      - id: 65
+        extension: "adx"
+  - number: 0764743264647464
+    offset: 0
+    desc: '.dt2ddtd'
+    fileTypes:  
+      - id: 73
+        extension: "dtd"
+  - number: 0908100000060500
+    offset: 512
+    desc: '[512 (0x200) byte offset] ........'
+    fileTypes:  
+      - id: 76
+        extension: "xls"
+  - number: 0E4E65726F49534F
+    offset: 0
+    desc: '.NeroISO'
+    fileTypes:  
+      - id: 81
+        extension: "nri"
+  - number: 213C617263683E0A
+    offset: 0
+    desc: '!<arch>.'
+    fileTypes:  
+      - id: 103
+        extension: "lib"
+  - number: 300000004C664C65
+    offset: 0
+    desc: '0...LfLe'
+    fileTypes:  
+      - id: 138
+        extension: "evt"
+  - number: 37E45396C9DBD607
+    offset: 0
+    desc: '7�S���.'
+    fileTypes:  
+      - id: 149
+        extension: ""
+  - number: 3A56455253494F4E
+    offset: 0
+    desc: ':VERSION'
+    fileTypes:  
+      - id: 151
+        extension: "sle"
+  - number: 3C21646F63747970
+    offset: 0
+    desc: '<!doctyp'
+    fileTypes:  
+      - id: 155
+        extension: "dci"
+  - number: 414F4C494E444558
+    offset: 0
+    desc: 'AOLINDEX'
+    fileTypes:  
+      - id: 180
+        extension: "abi"
+  - number: 414F4C564D313030
+    offset: 0
+    desc: 'AOLVM100'
+    fileTypes:  
+      - id: 181
+        extension: "org"
+      - id: 182
+        extension: "pfc"
+  - number: 424F4F4B4D4F4249
+    offset: 0
+    desc: 'BOOKMOBI'
+    fileTypes:  
+      - id: 192
+        extension: "prc"
+  - number: 434D4D4D15000000
+    offset: 0
+    desc: 'CMMM....'
+    fileTypes:  
+      - id: 206
+        extension: "db"
+  - number: 4350543746494C45
+    offset: 0
+    desc: 'CPT7FILE'
+    fileTypes:  
+      - id: 210
+        extension: "cpt"
+  - number: 4441410000000000
+    offset: 0
+    desc: 'DAA.....'
+    fileTypes:  
+      - id: 220
+        extension: "daa"
+  - number: 455646090D0AFF00
+    offset: 0
+    desc: 'EVF...�.'
+    fileTypes:  
+      - id: 234
+        extension: "enn"
+  - number: 456C6646696C6500
+    offset: 0
+    desc: 'ElfFile.'
+    fileTypes:  
+      - id: 236
+        extension: "evtx"
+  - number: 46726F6D203F3F3F
+    offset: 0
+    desc: 'From:'
+    fileTypes:  
+      - id: 246
+        extension: "eml"
+  - number: 4746315041544348
+    offset: 0
+    desc: 'GF1PATCH'
+    fileTypes:  
+      - id: 250
+        extension: "pat"
+  - number: 494D4D4D15000000
+    offset: 0
+    desc: 'IMMM....'
+    fileTypes:  
+      - id: 267
+        extension: "db"
+  - number: 49544F4C49544C53
+    offset: 0
+    desc: 'ITOLITLS'
+    fileTypes:  
+      - id: 270
+        extension: "lit"
+  - number: 4B57414A88F027D1
+    offset: 0
+    desc: 'KWAJ��''�'
+    fileTypes:  
+      - id: 281
+        extension: ""
+  - number: 4C00000001140200
+    offset: 0
+    desc: 'L.......'
+    fileTypes:  
+      - id: 282
+        extension: "lnk"
+  - number: 4C5646090D0AFF00
+    offset: 0
+    desc: 'LVF...�.'
+    fileTypes:  
+      - id: 286
+        extension: "enn"
+  - number: 4D53465402000100
+    offset: 0
+    desc: 'MSFT....'
+    fileTypes:  
+      - id: 307
+        extension: "tlb"
+  - number: 4D535F564F494345
+    offset: 0
+    desc: 'MS_VOICE'
+    fileTypes:  
+      - id: 310
+        extension: "cdr"
+      - id: 311
+        extension: "dvf"
+      - id: 312
+        extension: "msv"
+  - number: 4D5A900003000000
+    offset: 0
+    desc: 'MZ......'
+    fileTypes:  
+      - id: 337
+        extension: "api"
+      - id: 338
+        extension: "ax"
+      - id: 339
+        extension: "flt"
+  - number: 5000000020000000
+    offset: 0
+    desc: 'P... ...'
+    fileTypes:  
+      - id: 359
+        extension: "idx"
+  - number: 5041474544553634
+    offset: 0
+    desc: 'PAGEDU64'
+    fileTypes:  
+      - id: 362
+        extension: "dmp"
+  - number: 5041474544554D50
+    offset: 0
+    desc: 'PAGEDUMP'
+    fileTypes:  
+      - id: 363
+        extension: "dmp"
+  - number: 504750644D41494E
+    offset: 0
+    desc: 'PGPdMAIN'
+    fileTypes:  
+      - id: 366
+        extension: "pgd"
+  - number: 504B03040A000200
+    offset: 0
+    desc: 'PK......'
+    fileTypes:  
+      - id: 387
+        extension: "epub"
+  - number: 504B030414000600
+    offset: 0
+    desc: 'PK......'
+    fileTypes:  
+      - id: 389
+        extension: "docx"
+      - id: 390
+        extension: "pptx"
+      - id: 391
+        extension: "xlsx"
+  - number: 504D4F43434D4F43
+    offset: 0
+    desc: 'PMOCCMOC'
+    fileTypes:  
+      - id: 398
+        extension: "dat"
+  - number: 504E4349554E444F
+    offset: 0
+    desc: 'PNCIUNDO'
+    fileTypes:  
+      - id: 399
+        extension: "dat"
+  - number: 5157205665722E20
+    offset: 0
+    desc: 'QW Ver.'
+    fileTypes:  
+      - id: 405
+        extension: "abd"
+      - id: 406
+        extension: "qsd"
+  - number: 52415A4154444231
+    offset: 0
+    desc: 'RAZATDB1'
+    fileTypes:  
+      - id: 408
+        extension: "dat"
+  - number: 5245564E554D3A2C
+    offset: 0
+    desc: 'REVNUM:,'
+    fileTypes:  
+      - id: 412
+        extension: "adf"
+  - number: 526172211A070100
+    offset: 0
+    desc: 'Rar!....'
+    fileTypes:  
+      - id: 427
+        extension: "rar"
+  - number: 534D415254445257
+    offset: 0
+    desc: 'SMARTDRW'
+    fileTypes:  
+      - id: 437
+        extension: "sdr"
+  - number: 535A2088F02733D1
+    offset: 0
+    desc: 'SZ ��''3�'
+    fileTypes:  
+      - id: 442
+        extension: ""
+  - number: 535A444488F02733
+    offset: 0
+    desc: 'SZDD��''3'
+    fileTypes:  
+      - id: 443
+        extension: ""
+  - number: 5468697320697320
+    offset: 0
+    desc: 'This is'
+    fileTypes:  
+      - id: 447
+        extension: "info"
+  - number: 55464F4F72626974
+    offset: 0
+    desc: 'UFOOrbit'
+    fileTypes:  
+      - id: 450
+        extension: "dat"
+  - number: 56455253494F4E20
+    offset: 0
+    desc: 'VERSION'
+    fileTypes:  
+      - id: 453
+        extension: "ctl"
+  - number: 56657273696F6E20
+    offset: 0
+    desc: 'Version'
+    fileTypes:  
+      - id: 454
+        extension: "mif"
+  - number: 5B56657273696F6E
+    offset: 2
+    desc: '[2 byte offset] [Version'
+    fileTypes:  
+      - id: 470
+        extension: "cif"
+  - number: 63647361656E6372
+    offset: 0
+    desc: 'cdsaencr'
+    fileTypes:  
+      - id: 484
+        extension: "dmg"
+  - number: 636F6E6563746978
+    offset: 0
+    desc: 'conectix'
+    fileTypes:  
+      - id: 485
+        extension: "vhd"
+  - number: 656E637263647361
+    offset: 0
+    desc: 'encrcdsa'
+    fileTypes:  
+      - id: 492
+        extension: "dmg"
+  - number: 664C614300000022
+    offset: 0
+    desc: 'fLaC..."'
+    fileTypes:  
+      - id: 494
+        extension: "flac"
+  - number: 667479704D344120
+    offset: 4
+    desc: '[4 byte offset] ftypM4A'
+    fileTypes:  
+      - id: 498
+        extension: "m4a"
+  - number: 667479704D345620
+    offset: 4
+    desc: '[4 byte offset] ftypM4V'
+    fileTypes:  
+      - id: 499
+        extension: "flv"
+      - id: 500
+        extension: "m4v"
+  - number: 667479704D534E56
+    offset: 4
+    desc: '[4 byte offset] ftypMSNV'
+    fileTypes:  
+      - id: 501
+        extension: "mp4"
+  - number: 6674797069736F6D
+    offset: 4
+    desc: '[4 byte offset] ftypisom'
+    fileTypes:  
+      - id: 502
+        extension: "mp4"
+  - number: 667479706D703432
+    offset: 4
+    desc: '[4 byte offset] ftypmp42'
+    fileTypes:  
+      - id: 503
+        extension: "m4v"
+  - number: 6674797071742020
+    offset: 4
+    desc: '[4 byte offset] ftypqt'
+    fileTypes:  
+      - id: 504
+        extension: "mov"
+  - number: 6F70646174613031
+    offset: 0
+    desc: 'opdata01'
+    fileTypes:  
+      - id: 513
+        extension: ""
+  - number: 74424D504B6E5772
+    offset: 60
+    desc: '[60 (0x3C) byte offset] tBMPKnWr'
+    fileTypes:  
+      - id: 523
+        extension: "prc"
+  - number: 89504E470D0A1A0A
+    offset: 0
+    desc: '�PNG....'
+    fileTypes:  
+      - id: 549
+        extension: "png"
+  - number: 974A42320D0A1A0A
+    offset: 0
+    desc: '�JB2....'
+    fileTypes:  
+      - id: 553
+        extension: "jb2"
+  - number: A90D000000000000
+    offset: 0
+    desc: '�.......'
+    fileTypes:  
+      - id: 558
+        extension: "dat"
+  - number: B5A2B0B3B3B0A5B5
+    offset: 0
+    desc: '��������'
+    fileTypes:  
+      - id: 566
+        extension: "cal"
+  - number: CD20AAAA02000000
+    offset: 0
+    desc: '� ��....'
+    fileTypes:  
+      - id: 575
+        extension: ""
+  - number: CE24B9A220000000
+    offset: 0
+    desc: '�$�� ...'
+    fileTypes:  
+      - id: 576
+        extension: "tib"
+  - number: CF11E0A1B11AE100
+    offset: 0
+    desc: '�.ࡱ.�.'
+    fileTypes:  
+      - id: 579
+        extension: "doc"
+  - number: D0CF11E0A1B11AE1
+    offset: 0
+    desc: '��.ࡱ.�'
+    fileTypes:  
+      - id: 582
+        extension: "doc"
+      - id: 583
+        extension: "dot"
+      - id: 584
+        extension: "pps"
+      - id: 585
+        extension: "ppt"
+      - id: 586
+        extension: "xla"
+      - id: 587
+        extension: "xls"
+      - id: 588
+        extension: "wiz"
+      - id: 589
+        extension: "ac_"
+      - id: 590
+        extension: "adp"
+      - id: 591
+        extension: "apr"
+      - id: 592
+        extension: "db"
+      - id: 593
+        extension: "msc"
+      - id: 594
+        extension: "msg"
+      - id: 595
+        extension: "msi"
+      - id: 596
+        extension: "msp"
+      - id: 597
+        extension: "mtw"
+      - id: 598
+        extension: "mxd"
+      - id: 599
+        extension: "opt"
+      - id: 600
+        extension: "pub"
+      - id: 601
+        extension: "qbm"
+      - id: 602
+        extension: "rvt"
+      - id: 603
+        extension: "sou"
+      - id: 604
+        extension: "spo"
+      - id: 605
+        extension: "vsd"
+      - id: 606
+        extension: "wps"
+  - number: E310000100000000
+    offset: 0
+    desc: '�.......'
+    fileTypes:  
+      - id: 615
+        extension: "info"
+  - number: FDFFFFFF20000000
+    offset: 512
+    desc: '[512 (0x200) byte offset] ���� ...'
+    fileTypes:  
+      - id: 633
+        extension: "opt"
+      - id: 76
+        extension: "xls"
+  - number: FDFFFFFFnnnn0000
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����....'
+    fileTypes:  
+      - id: 46
+        extension: "ppt"
+  - number: FF4B455942202020
+    offset: 0
+    desc: '�KEYB'
+    fileTypes:  
+      - id: 645
+        extension: "sys"
+  - number: 000100080001000101
+    offset: 0
+    desc: '........ .'
+    fileTypes:  
+      - id: 35
+        extension: "img"
+  - number: 001400000102xxxx03
+    offset: 0
+    desc: '........ .'
+    fileTypes:  
+      - id: 42
+        extension: ""
+  - number: 0F534942454C495553
+    offset: 0
+    desc: '.SIBELIU S'
+    fileTypes:  
+      - id: 83
+        extension: "sib"
+  - number: 2E524D460000001200
+    offset: 0
+    desc: '.RMF.... .'
+    fileTypes:  
+      - id: 133
+        extension: "ra"
+  - number: 3C4B6579686F6C653E
+    offset: 0
+    desc: '<Keyhole>'
+    fileTypes:  
+      - id: 162
+        extension: "eta"
+  - number: 3E000300FEFF090006
+    offset: 24
+    desc: '[24 (0x18) byte offset] >...��.. .'
+    fileTypes:  
+      - id: 167
+        extension: "wb3"
+  - number: 4D53487C5E7E5C267C
+    offset: 0
+    desc: 'MSH|^~\& |'
+    fileTypes:  
+      - id: 308
+        extension: "hl7"
+  - number: 537570657243616C63
+    offset: 0
+    desc: 'SuperCal c'
+    fileTypes:  
+      - id: 445
+        extension: "cal"
+  - number: 67696d702078636620
+    offset: 0
+    desc: 'gimp xcf'
+    fileTypes:  
+      - id: 506
+        extension: "xcf"
+  - number: 737263646F6369643A
+    offset: 0
+    desc: 'srcdocid :'
+    fileTypes:  
+      - id: 521
+        extension: "cal"
+  - number: 0000000C6A5020200D0A
+    offset: 0
+    desc: '....jP ..'
+    fileTypes:  
+      - id: 12
+        extension: "jp2"
+  - number: 40404020000040404040
+    offset: 32
+    desc: '[32 (0x20) byte offset] @@@ ..@@ @@'
+    fileTypes:  
+      - id: 169
+        extension: "enl"
+  - number: 49492A00100000004352
+    offset: 0
+    desc: 'II*..... CR'
+    fileTypes:  
+      - id: 266
+        extension: "cr2"
+  - number: 4B47425F61726368202D
+    offset: 0
+    desc: 'KGB_arch -'
+    fileTypes:  
+      - id: 279
+        extension: "kgb"
+  - number: 4E415654524146464943
+    offset: 0
+    desc: 'NAVTRAFF IC'
+    fileTypes:  
+      - id: 345
+        extension: "dat"
+  - number: 504B0304140008000800
+    offset: 0
+    desc: 'PK...... ..'
+    fileTypes:  
+      - id: 392
+        extension: "jar"
+  - number: 5B666C7473696D2E305D
+    offset: 0
+    desc: '[fltsim. 0]'
+    fileTypes:  
+      - id: 472
+        extension: "cfg"
+  - number: 5B706C61796C6973745D
+    offset: 0
+    desc: '[playlis t]'
+    fileTypes:  
+      - id: 473
+        extension: "pls"
+  - number: FF000200040405540200
+    offset: 0
+    desc: '�......T ..'
+    fileTypes:  
+      - id: 642
+        extension: "wks"
+  - number: 233F52414449414E43450A
+    offset: 0
+    desc: '#?RADIAN CE.'
+    fileTypes:  
+      - id: 114
+        extension: "hdr"
+  - number: 23504543303030314C413A
+    offset: 0
+    desc: '#PEC0001 LA:'
+    fileTypes:  
+      - id: 117
+        extension: "pec"
+  - number: 252150532D41646F62652D
+    offset: 0
+    desc: '%!PS-Ado be-'
+    fileTypes:  
+      - id: 120
+        extension: "ps"
+  - number: 3C4D616B657246696C6520
+    offset: 0
+    desc: '<MakerFi le'
+    fileTypes:  
+      - id: 163
+        extension: "fm"
+      - id: 164
+        extension: "mif"
+  - number: 414F4C2046656564626167
+    offset: 0
+    desc: 'AOL Feed bag'
+    fileTypes:  
+      - id: 176
+        extension: "bag"
+  - number: 43232B44A4434DA5486472
+    offset: 0
+    desc: 'C#+D�CM� Hdr'
+    fileTypes:  
+      - id: 201
+        extension: "rtd"
+  - number: 6375736800000002000000
+    offset: 0
+    desc: 'cush.... ...'
+    fileTypes:  
+      - id: 486
+        extension: "csh"
+  - number: 64383A616E6E6F756E6365
+    offset: 0
+    desc: 'd8:annou nce'
+    fileTypes:  
+      - id: 488
+        extension: "torrent"
+  - number: EB52902D4656452D46532D
+    offset: 0
+    desc: '�R.-FVE- FS-'
+    fileTypes:  
+      - id: 621
+        extension: ""
+  - number: EB58902D4656452D46532D
+    offset: 0
+    desc: '�X.-FVE- FS-'
+    fileTypes:  
+      - id: 622
+        extension: ""
+  - number: FFD8FFE0xxxx4A46494600
+    offset: 0
+    desc: '����..JF IF.'
+    fileTypes:  
+      - id: 655
+        extension: "jfif"
+      - id: 656
+        extension: "jpe"
+      - id: 657
+        extension: "jpeg"
+      - id: 658
+        extension: "jpg"
+  - number: FFD8FFE1xxxx4578696600
+    offset: 0
+    desc: '����..Ex if.'
+    fileTypes:  
+      - id: 659
+        extension: "jpg"
+  - number: 000000206674797068656963
+    offset: 0
+    desc: '... ftyp heic'
+    fileTypes:  
+      - id: 13
+        extension: "heic"
+  - number: 00001A000010040000000000
+    offset: 0
+    desc: '........ ....'
+    fileTypes:  
+      - id: 24
+        extension: "wk3"
+  - number: 00001A000210040000000000
+    offset: 0
+    desc: '........ ....'
+    fileTypes:  
+      - id: 25
+        extension: "wk4"
+      - id: 26
+        extension: "wk5"
+  - number: 01014719A400000000000000
+    offset: 0
+    desc: '..G.#xA4... ....'
+    fileTypes:  
+      - id: 55
+        extension: "tbi"
+  - number: 464158434F5645522D564552
+    offset: 0
+    desc: 'FAXCOVER -VER'
+    fileTypes:  
+      - id: 238
+        extension: "cpe"
+  - number: 52494646xxxxxxxx57454250
+    offset: 0
+    desc: 'RIFF.... WEBP'
+    fileTypes:  
+      - id: 424
+        extension: "webp"
+  - number: 626567696E2D626173653634
+    offset: 0
+    desc: 'begin-ba se64'
+    fileTypes:  
+      - id: 481
+        extension: "b64"
+  - number: 6D7346696C7465724C697374
+    offset: 0
+    desc: 'msFilter List'
+    fileTypes:  
+      - id: 510
+        extension: "tpl"
+  - number: 8A0109000000E10800009919
+    offset: 0
+    desc: '�.....�. ..�.'
+    fileTypes:  
+      - id: 550
+        extension: "aw"
+  - number: AB4B5458203131BB0D0A1A0A
+    offset: 0
+    desc: '�KTX 11� ....'
+    fileTypes:  
+      - id: 559
+        extension: "ktx"
+  - number: FFD8FFE8xxxx535049464600
+    offset: 0
+    desc: '����..SP IFF.'
+    fileTypes:  
+      - id: 660
+        extension: "jpg"
+  - number: 3C7E363C5C255F30675371683B
+    offset: 0
+    desc: '<~6<\%_0 gSqh;'
+    fileTypes:  
+      - id: 166
+        extension: "b85"
+  - number: 424547494E3A56434152440D0A
+    offset: 0
+    desc: 'BEGIN:VC ARD..'
+    fileTypes:  
+      - id: 187
+        extension: "vcf"
+  - number: 436174616C6F6720332E303000
+    offset: 0
+    desc: 'Catalog 3.00.'
+    fileTypes:  
+      - id: 215
+        extension: "ctf"
+  - number: 52657475726E2D506174683A20
+    offset: 0
+    desc: 'Return-P ath:'
+    fileTypes:  
+      - id: 428
+        extension: "eml"
+  - number: 5850434F4D0A547970654C6962
+    offset: 0
+    desc: 'XPCOM.Ty peLib'
+    fileTypes:  
+      - id: 461
+        extension: "xpt"
+  - number: 6D756C74694269742E696E666F
+    offset: 0
+    desc: 'multiBit .info'
+    fileTypes:  
+      - id: 511
+        extension: "info"
+  - number: 76323030332E31300D0A300D0A
+    offset: 0
+    desc: 'v2003.10 ..0..'
+    fileTypes:  
+      - id: 526
+        extension: "flt"
+  - number: BE000000AB0000000000000000
+    offset: 0
+    desc: '�...�... ....'
+    fileTypes:  
+      - id: 568
+        extension: "wri"
+  - number: 0000020006040600080000000000
+    offset: 0
+    desc: '........ ......'
+    fileTypes:  
+      - id: 22
+        extension: "wk1"
+  - number: 060E2B34020501010D0102010102
+    offset: 0
+    desc: '..+4.... ......'
+    fileTypes:  
+      - id: 70
+        extension: "mxf"
+  - number: 3C3F786D6C2076657273696F6E3D
+    offset: 0
+    desc: '<?xml ve rsion='
+    fileTypes:  
+      - id: 157
+        extension: "manifest"
+  - number: 426C696E6B20627920442E542E53
+    offset: 0
+    desc: 'Blink by D.T.S'
+    fileTypes:  
+      - id: 200
+        extension: "bli"
+  - number: 4D5A90000300000004000000FFFF
+    offset: 0
+    desc: 'MZ...... ....��'
+    fileTypes:  
+      - id: 340
+        extension: "zap"
+  - number: 4F67675300020000000000000000
+    offset: 0
+    desc: 'OggS.... ......'
+    fileTypes:  
+      - id: 354
+        extension: "oga"
+      - id: 355
+        extension: "ogg"
+      - id: 356
+        extension: "ogv"
+      - id: 357
+        extension: "ogx"
+  - number: 504B030414000100630000000000
+    offset: 0
+    desc: 'PK...... c.....'
+    fileTypes:  
+      - id: 388
+        extension: "zip"
+  - number: 4F504C446174616261736546696C65
+    offset: 0
+    desc: 'OPLDatab aseFile'
+    fileTypes:  
+      - id: 352
+        extension: "dbf"
+  - number: 5B57696E646F7773204C6174696E20
+    offset: 0
+    desc: '[Windows Latin'
+    fileTypes:  
+      - id: 471
+        extension: "cpx"
+  - number: 00000000000000000000000000000000
+    offset: 0
+    desc: '........ ........'
+    fileTypes:  
+      - id: 8
+        extension: "xxx"
+  - number: 0006156100000002000004D200001000
+    offset: 0
+    desc: '...a.... ...�....'
+    fileTypes:  
+      - id: 39
+        extension: "db"
+  - number: 00FFFFFFFFFFFFFFFFFFFF0000020001
+    offset: 0
+    desc: '.������� ���.....'
+    fileTypes:  
+      - id: 48
+        extension: "mdf"
+  - number: 04000000xxxxxxxxxxxxxxxx20030000
+    offset: 0
+    desc: '........ .... ...'
+    fileTypes:  
+      - id: 68
+        extension: ""
+  - number: 05000000xxxxxxxxxxxxxxxx20030000
+    offset: 0
+    desc: '........ .... ...'
+    fileTypes:  
+      - id: 68
+        extension: ""
+  - number: 0606EDF5D81D46E5BD31EFE7FE74B71D
+    offset: 0
+    desc: '..���.F� �1���t�.'
+    fileTypes:  
+      - id: 69
+        extension: "indd"
+  - number: 0A166F72672E626974636F696E2E7072
+    offset: 0
+    desc: '..org.bi tcoin.pr'
+    fileTypes:  
+      - id: 77
+        extension: "wallet"
+  - number: 23204469736B2044657363726970746F
+    offset: 0
+    desc: '# Disk D escripto'
+    fileTypes:  
+      - id: 109
+        extension: "vmdk"
+  - number: 23205468697320697320616E204B6579
+    offset: 0
+    desc: '# This i s an Key'
+    fileTypes:  
+      - id: 111
+        extension: "eta"
+  - number: 3026B2758E66CF11A6D900AA0062CE6C
+    offset: 0
+    desc: '0&�u.f�. ��.�.b�l'
+    fileTypes:  
+      - id: 140
+        extension: "asf"
+      - id: 141
+        extension: "wma"
+      - id: 142
+        extension: "wmv"
+  - number: 3203100000000000000080000000FF00
+    offset: 0
+    desc: '2....... ......�.'
+    fileTypes:  
+      - id: 145
+        extension: "pcs"
+  - number: 3C435472616E7354696D656C696E653E
+    offset: 0
+    desc: '<CTransT imeline>'
+    fileTypes:  
+      - id: 160
+        extension: "mxf"
+  - number: 3C43736F756E6453796E74686573697A
+    offset: 0
+    desc: '<CsoundS ynthesiz'
+    fileTypes:  
+      - id: 161
+        extension: "csd"
+  - number: 43616C63756C757820496E646F6F7220
+    offset: 0
+    desc: 'Calculux Indoor'
+    fileTypes:  
+      - id: 214
+        extension: "cin"
+  - number: 437265617469766520566F6963652046
+    offset: 0
+    desc: 'Creative Voice F'
+    fileTypes:  
+      - id: 219
+        extension: "voc"
+  - number: 454C49544520436F6D6D616E64657220
+    offset: 0
+    desc: 'ELITE Co mmander'
+    fileTypes:  
+      - id: 229
+        extension: "cdr"
+  - number: 454E5452595643440200000102001858
+    offset: 0
+    desc: 'ENTRYVCD .......X'
+    fileTypes:  
+      - id: 230
+        extension: "vcd"
+  - number: 45524653534156454441544146494C45
+    offset: 0
+    desc: 'ERFSSAVE DATAFILE'
+    fileTypes:  
+      - id: 233
+        extension: "dat"
+  - number: 47656E65746563204F6D6E6963617374
+    offset: 0
+    desc: 'Genetec Omnicast'
+    fileTypes:  
+      - id: 255
+        extension: "g64"
+  - number: 4844522A506F7765724275696C646572
+    offset: 0
+    desc: 'HDR*Powe rBuilder'
+    fileTypes:  
+      - id: 256
+        extension: "pbd"
+  - number: 484541444552205245434F52442A2A2A
+    offset: 0
+    desc: 'HEADER R ECORD***'
+    fileTypes:  
+      - id: 257
+        extension: "xpt"
+  - number: 49491A00000048454150434344520200
+    offset: 0
+    desc: 'II....HE APCCDR..'
+    fileTypes:  
+      - id: 263
+        extension: "crw"
+  - number: 496E7465724063746976652050616765
+    offset: 0
+    desc: 'Inter@ct ive Page'
+    fileTypes:  
+      - id: 274
+        extension: "ipd"
+  - number: 4D2D5720506F636B6574204469637469
+    offset: 0
+    desc: 'M-W Pock et Dicti'
+    fileTypes:  
+      - id: 287
+        extension: "pdb"
+  - number: 4D435720546563686E6F676F6C696573
+    offset: 0
+    desc: 'MCW Tech nogolies'
+    fileTypes:  
+      - id: 292
+        extension: "mte"
+  - number: 4D6963726F736F667420432F432B2B20
+    offset: 0
+    desc: 'Microsof t C/C++'
+    fileTypes:  
+      - id: 341
+        extension: "pdb"
+  - number: 52494646xxxxxxxx415649204C495354
+    offset: 0
+    desc: 'RIFF.... AVI LIST'
+    fileTypes:  
+      - id: 419
+        extension: "avi"
+  - number: 52494646xxxxxxxx43444441666D7420
+    offset: 0
+    desc: 'RIFF.... CDDAfmt'
+    fileTypes:  
+      - id: 420
+        extension: "cda"
+  - number: 52494646xxxxxxxx514C434D666D7420
+    offset: 0
+    desc: 'RIFF.... QLCMfmt'
+    fileTypes:  
+      - id: 421
+        extension: "qcp"
+  - number: 52494646xxxxxxxx524D494464617461
+    offset: 0
+    desc: 'RIFF.... RMIDdata'
+    fileTypes:  
+      - id: 422
+        extension: "rmi"
+  - number: 52494646xxxxxxxx57415645666D7420
+    offset: 0
+    desc: 'RIFF.... WAVEfmt'
+    fileTypes:  
+      - id: 423
+        extension: "wav"
+  - number: 53514C4F434F4E5648440000312E3000
+    offset: 0
+    desc: 'SQLOCONV HD..1.0.'
+    fileTypes:  
+      - id: 440
+        extension: "cnv"
+  - number: 53514C69746520666F726D6174203300
+    offset: 0
+    desc: 'SQLite f ormat 3.'
+    fileTypes:  
+      - id: 441
+        extension: "db"
+  - number: 5374756666497420286329313939372D
+    offset: 0
+    desc: 'StuffIt (c)1997-'
+    fileTypes:  
+      - id: 436
+        extension: "sit"
+  - number: 57040000535053532074656D706C6174
+    offset: 0
+    desc: 'W...SPSS templat'
+    fileTypes:  
+      - id: 455
+        extension: "sct"
+  - number: 7B2275726C223A202268747470733A2F
+    offset: 0
+    desc: '{"url": "https:/'
+    fileTypes:  
+      - id: 534
+        extension: "gdoc"
+      - id: 535
+        extension: "gdraw"
+  - number: 7C4BC374E1C853A479B9011DFC4FDD13
+    offset: 0
+    desc: '|K�t��S� y�..�O�.'
+    fileTypes:  
+      - id: 538
+        extension: "csd"
+  - number: 813284C18505D011B29000AA003CF676
+    offset: 0
+    desc: '.2���.�. �..�.<�v'
+    fileTypes:  
+      - id: 546
+        extension: "wab"
+  - number: 9CCBCB8D1375D211915800C04F7956A4
+    offset: 0
+    desc: '���..U�. �X.�OyV�'
+    fileTypes:  
+      - id: 556
+        extension: "wab"
+  - number: ACED0005737200126267626C69747A2E
+    offset: 0
+    desc: '��..sr.. bgblitz.'
+    fileTypes:  
+      - id: 562
+        extension: "pdb"
+  - number: BEBAFECA0F50616C6D53472044617461
+    offset: 0
+    desc: '����.Pal mSG Data'
+    fileTypes:  
+      - id: 569
+        extension: "dat"
+  - number: CC5233FCE92C1848AFE336301A394006
+    offset: 0
+    desc: '�R3��,.H ��60.9@.'
+    fileTypes:  
+      - id: 574
+        extension: "nbu"
+  - number: E4525C7B8CD8A74DAEB15378D02996D3
+    offset: 0
+    desc: '�R\{�اM ��Sx�)��'
+    fileTypes:  
+      - id: 617
+        extension: "one"
+  - number: EFBBBF3C3F786D6C2076657273696F6E
+    offset: 0
+    desc: '﻿<?xml version'
+    fileTypes:  
+      - id: 628
+        extension: "ytt"
+  - number: FDFFFFFFxxxxxxxxxxxxxxxx04000000
+    offset: 512
+    desc: '[512 (0x200) byte offset] ����.... ........'
+    fileTypes:  
+      - id: 634
+        extension: "db"
+  - number: FFFE23006C0069006E00650020003100
+    offset: 0
+    desc: '��#.l.i. n.e. .1.'
+    fileTypes:  
+      - id: 666
+        extension: "mof"
+  - number: 3C6770782076657273696F6E3D22312E31
+    offset: 0
+    desc: '<gpx ver sion="1. 1'
+    fileTypes:  
+      - id: 165
+        extension: "gpx"
+  - number: 000100004D534953414D204461746162617365
+    offset: 0
+    desc: '....MSIS AM Datab ase'
+    fileTypes:  
+      - id: 32
+        extension: "mny"
+  - number: 000100005374616E6461726420414345204442
+    offset: 0
+    desc: '....Stan dard ACE DB'
+    fileTypes:  
+      - id: 33
+        extension: "accdb"
+  - number: 000100005374616E64617264204A6574204442
+    offset: 0
+    desc: '....Stan dard Jet DB'
+    fileTypes:  
+      - id: 34
+        extension: "mdb"
+  - number: 2F2F203C212D2D203C6D64623A6D6F726B3A7A
+    offset: 0
+    desc: '// <!-- <mdb:mor k:z'
+    fileTypes:  
+      - id: 136
+        extension: "msf"
+  - number: 426567696E2050756666657220446174610D0A
+    offset: 0
+    desc: 'Begin Pu ffer Dat a..'
+    fileTypes:  
+      - id: 199
+        extension: "apuf"
+  - number: 4D41544C414220352E30204D41542D66696C65
+    offset: 0
+    desc: 'MATLAB 5 .0 MAT-f ile'
+    fileTypes:  
+      - id: 290
+        extension: "mat"
+  - number: 53494554524F4E49435320585244205343414E
+    offset: 0
+    desc: 'SIETRONI CS XRD S CAN'
+    fileTypes:  
+      - id: 434
+        extension: "cpi"
+  - number: 52006F006F007400200045006E00740072007900
+    offset: 512
+    desc: '[512 (0x200) byte offset] R.o.o.t. .E.n.t. r.y.'
+    fileTypes:  
+      - id: 407
+        extension: "msg"
+  - number: 3C3F786D6C2076657273696F6E3D22312E30223F3E
+    offset: 0
+    desc: '<?xml ve rsion="1 .0"?>'
+    fileTypes:  
+      - id: 158
+        extension: "xul"
+  - number: 24464C3240282329205350535320444154412046494C45
+    offset: 0
+    desc: '$FL2@(#) SPSS DA TA FILE'
+    fileTypes:  
+      - id: 119
+        extension: "sav"
+  - number: 252150532D41646F62652D332E3020455053462D332030
+    offset: 0
+    desc: '%!PS-Ado be-3.0 E PSF-3.0'
+    fileTypes:  
+      - id: 121
+        extension: "eps"
+  - number: 415647365F496E746567726974795F4461746162617365
+    offset: 0
+    desc: 'AVG6_Int egrity_D atabase'
+    fileTypes:  
+      - id: 183
+        extension: "dat"
+  - number: 000000000000000000000000000000000000000000000000
+    offset: 11
+    desc: '[11 byte offset] ........ ........ ........'
+    fileTypes:  
+      - id: 9
+        extension: "pdb"
+  - number: 000000006231050009000000002000000009000000000000
+    offset: 8
+    desc: '[8 byte offset] ....b1.. ..... .. ........'
+    fileTypes:  
+      - id: 11
+        extension: "dat"
+  - number: 30314F52444E414E43452053555256455920202020202020
+    offset: 0
+    desc: '01ORDNAN CE SURVE Y'
+    fileTypes:  
+      - id: 143
+        extension: "ntf"
+  - number: 436C69656E742055726C4361636865204D4D462056657220
+    offset: 0
+    desc: 'Client U rlCache MMF Ver'
+    fileTypes:  
+      - id: 216
+        extension: "dat"
+  - number: 2A2A2A2020496E7374616C6C6174696F6E205374617274656420
+    offset: 0
+    desc: '*** Ins tallatio n Starte d'
+    fileTypes:  
+      - id: 127
+        extension: "log"
+  - number: 1A52545320434F4D5052455353454420494D4147452056312E301A
+    offset: 0
+    desc: '.RTS COM PRESSED IMAGE V1 .0.'
+    fileTypes:  
+      - id: 92
+        extension: "dat"
+  - number: 23204D6963726F736F667420446576656C6F7065722053747564696F
+    offset: 0
+    desc: '# Micros oft Deve loper St udio'
+    fileTypes:  
+      - id: 110
+        extension: "dsp"
+  - number: 496E6E6F20536574757020556E696E7374616C6C204C6F6720286229
+    offset: 0
+    desc: 'Inno Set up Unins tall Log (b)'
+    fileTypes:  
+      - id: 273
+        extension: "dat"
+  - number: 7E45534477F6853EBF6AD21145617379205374726565742044726177
+    offset: 0
+    desc: '~ESDw��> �j�.Easy Street Draw'
+    fileTypes:  
+      - id: 540
+        extension: "esd"
+  - number: 53494D504C4520203D202020202020202020202020202020202020202054
+    offset: 0
+    desc: 'SIMPLE = T'
+    fileTypes:  
+      - id: 435
+        extension: "fits"
+  - number: 4D6963726F736F66742057696E646F7773204D6564696120506C61796572202D2D20
+    offset: 84
+    desc: '[84 (0x54) byte offset] Microsof t Window s Media Player - -'
+    fileTypes:  
+      - id: 343
+        extension: "wpl"
+  - number: 5B47656E6572616C5D0D0A446973706C6179204E616D653D3C446973706C61794E616D65
+    offset: 0
+    desc: '[General ]..Displ ay Name= <Display Name'
+    fileTypes:  
+      - id: 466
+        extension: "ecf"
+  - number: 4D6963726F736F66742056697375616C2053747564696F20536F6C7574696F6E2046696C65
+    offset: 0
+    desc: 'Microsof t Visual Studio Solution File'
+    fileTypes:  
+      - id: 342
+        extension: "sln"
+  - number: 28546869732066696C65206D75737420626520636F6E76657274656420776974682042696E48657820
+    offset: 0
+    desc: '(This fi le must be conve rted wit h BinHex'
+    fileTypes:  
+      - id: 126
+        extension: "hqx"
+  - number: 7E742C015070024D52010000000800000001000031000000310000004301FF0001000800010000007e742c01
+    offset: 0
+    desc: '~t,.Pp.M R....... ....1... 1...C.�. ........ ~t,.'
+    fileTypes:  
+      - id: 541
+        extension: "img"
+  - number: 3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C4D4D435F436F6E736F6C6546696C6520436F6E736F6C6556657273696F6E3D22
+    offset: 0
+    desc: '<?xml ve rsion="1 .0"?>..< MMC_Cons oleFile ConsoleV ersion="'
+    fileTypes:  
+      - id: 159
+        extension: "msc"
+  - number: 210D0A4352522F5468697320656C656374726F6E6963206368617274207761732070726F647563656420756E6465722074686520617574686F72697479206F66205553412D4E4F41412F4E4F532E0D0A
+    offset: 0
+    desc: '!..CRR/T his elec tronic c hart was produce d under the auth ority of USA-NOA A/NOS...'
+    fileTypes:  
+      - id: 101
+        extension: "bsb"

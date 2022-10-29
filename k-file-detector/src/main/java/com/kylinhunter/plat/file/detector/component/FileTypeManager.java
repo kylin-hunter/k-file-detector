@@ -1,18 +1,17 @@
 package com.kylinhunter.plat.file.detector.component;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.config.FileType;
 import com.kylinhunter.plat.file.detector.config.FileTypeConfigLoader;
-import com.kylinhunter.plat.file.detector.constant.FileFamily;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
 import lombok.Getter;
@@ -25,17 +24,13 @@ import lombok.Getter;
 
 @Component
 public class FileTypeManager {
-    @Getter
+    private final String EXTENSIN_EMPTY = "!@#$%^";
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();
-    @Getter
-    private final Set<FileType> noExtensionFileTypes = Sets.newHashSet();
-    @Getter
-    private final Map<String, FileType> idToFileTyes = Maps.newHashMap();
+    private final Map<Integer, FileType> idToFileTyes = Maps.newHashMap();
     @Getter
     private final Set<FileType> allFileTypes = Sets.newHashSet();
     @Getter
-    private final Map<FileFamily, Set<FileType>> fileFamilyDatas = Maps.newHashMap();
-    private final Map<String, Set<FileType>> allTolerateFileTypes = Maps.newHashMap();
+    private final Set<String> allExtensions = Sets.newHashSet();
 
     public FileTypeManager() {
         init(FileTypeConfigLoader.load());
@@ -50,31 +45,9 @@ public class FileTypeManager {
      * @date 2022-10-20 16:12
      */
     private void init(FileTypeConfigLoader.FileTypeConfig fileTypeConfig) {
-        Map<FileFamily, FileTypeConfigLoader.FileFamilyData> familyFileDatas = fileTypeConfig.getConfig();
-
-        Set<FileFamily> duplicateFamilies = Sets.newHashSet();
-
-        familyFileDatas.forEach((fileFamily, fileFamilyData) -> {
-            if (duplicateFamilies.contains(fileFamily)) {
-                throw new DetectException(" duplicate fileFamily " + fileFamily);
-            }
-            duplicateFamilies.add(fileFamily);
-
-            List<FileType> familyFileTypes = fileFamilyData.getList();
-            if (familyFileTypes == null || familyFileTypes.size() <= 0) {
-                throw new DetectException(" fileTypes can't be  empty");
-
-            }
-
-            familyFileTypes.forEach(fileType -> {
-                check(fileFamily, fileFamilyData, fileType);
-                processBasic(fileType);
-                proccessExtensionToFile(fileType);
-                processFileFamilyDatas(fileFamily, fileType);
-                processTolerateTag(fileType);
-
-            });
-
+        fileTypeConfig.getFileTypes().forEach(fileType -> {
+            check(fileType);
+            process(fileType);
         });
 
     }
@@ -87,51 +60,19 @@ public class FileTypeManager {
      * @author BiJi'an
      * @date 2022-10-24 02:05
      */
-    private void processBasic(FileType fileType) {
+    private void process(FileType fileType) {
+
         allFileTypes.add(fileType);
         idToFileTyes.put(fileType.getId(), fileType);
-    }
 
-    /**
-     * @param fileType fileType
-     * @return void
-     * @title check
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 01:54
-     */
-    private void check(FileFamily fileFamily, FileTypeConfigLoader.FileFamilyData fileFamilyData, FileType fileType) {
         String extension = fileType.getExtension();
         if (!StringUtils.isEmpty(extension)) {
-            fileType.setExtension(extension.toLowerCase());
+            allExtensions.add(extension);
         } else {
-            fileType.setExtension(StringUtils.EMPTY);
+            extension = EXTENSIN_EMPTY;
         }
 
-        if (StringUtils.isEmpty(fileType.getId())) {
-            throw new DetectException(" file type id can't be empty");
-
-        }
-        if (StringUtils.isEmpty(fileType.getTolerateTag())) {
-            fileType.setTolerateTag(fileFamilyData.getTolerateTag());
-        }
-        if (allFileTypes.contains(fileType)) {
-            throw new DetectException(" duplicate fileType " + fileType);
-        }
-        fileType.setFamily(fileFamily);
-
-    }
-
-    /**
-     * @param fileFamily fileFamily
-     * @return void
-     * @title processFileFamilyDatas
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 01:52
-     */
-    private void processFileFamilyDatas(FileFamily fileFamily, FileType fileType) {
-        fileFamilyDatas.compute(fileFamily, (k, v) -> {
+        extensionToFileTypes.compute(extension, (k, v) -> {
             if (v == null) {
                 v = Sets.newHashSet();
             }
@@ -143,70 +84,29 @@ public class FileTypeManager {
     /**
      * @param fileType fileType
      * @return void
-     * @title proccessExtensionToFile
+     * @title check
      * @description
      * @author BiJi'an
-     * @date 2022-10-24 01:51
+     * @date 2022-10-24 01:54
      */
-
-    private void proccessExtensionToFile(FileType fileType) {
-
+    private void check(FileType fileType) {
         String extension = fileType.getExtension();
         if (!StringUtils.isEmpty(extension)) {
-            extensionToFileTypes.compute(extension, (k, v) -> {
-                if (v == null) {
-                    v = Sets.newHashSet();
-                }
-                v.add(fileType);
-                return v;
-            });
+            fileType.setExtension(extension.toLowerCase());
         } else {
-            noExtensionFileTypes.add(fileType);
+            fileType.setExtension(StringUtils.EMPTY);
+        }
+        Preconditions.checkArgument(fileType.getId() > 0, " file type id can't <=0");
+
+        if (allFileTypes.contains(fileType)) {
+            throw new DetectException(" duplicate fileType " + fileType);
         }
 
-    }
-
-    /**
-     * @param fileType fileType
-     * @return void
-     * @title processTolerateTag
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-24 02:01
-     */
-    private void processTolerateTag(FileType fileType) {
-        String tolerateTag = fileType.getTolerateTag();
-
-        if (tolerateTag != null) {
-            Set<FileType> tolerateFileTypes = allTolerateFileTypes.compute(tolerateTag,
-                    (k, v) -> {
-                        if (v == null) {
-                            v = Sets.newHashSet();
-                        }
-                        v.add(fileType);
-                        return v;
-                    });
-            fileType.setTolerateFileTypes(tolerateFileTypes);
-        }
-
-    }
-
-    /**
-     * @param fileFamily fileFamily
-     * @return java.util.Set<config.FileType>
-     * @title getFileTypes
-     * @description
-     * @author BiJi'an`
-     * @date 2022-10-20 16:36
-     */
-    @SuppressWarnings("unchecked")
-    public Set<FileType> getFileTypesByExtension(FileFamily fileFamily) {
-        return fileFamilyDatas.getOrDefault(fileFamily, Collections.EMPTY_SET);
     }
 
     /**
      * @param extension extension
-     * @return java.util.Set<com.kylinhunter.plat.file.detector.config.FileType>
+     * @return java.util.Set<com.kylinhunter.plat.file.detector.config.bean.FileType>
      * @title getFileTypes
      * @description
      * @author BiJi'an
@@ -221,14 +121,27 @@ public class FileTypeManager {
     }
 
     /**
+     * @return java.util.Set<com.kylinhunter.plat.file.detector.config.bean.FileType>
+     * @title getFileTypesWithNoExtension
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-29 16:14
+     */
+
+    @SuppressWarnings("unchecked")
+    public Set<FileType> getFileTypesWithNoExtension() {
+        return extensionToFileTypes.getOrDefault(EXTENSIN_EMPTY, Collections.EMPTY_SET);
+    }
+
+    /**
      * @param id id
-     * @return com.kylinhunter.plat.file.detector.config.FileType
+     * @return com.kylinhunter.plat.file.detector.config.bean.FileType
      * @title getFileType
      * @description
      * @author BiJi'an
      * @date 2022-10-24 01:48
      */
-    public FileType getFileTypeById(String id) {
+    public FileType getFileTypeById(int id) {
 
         return idToFileTyes.get(id);
 

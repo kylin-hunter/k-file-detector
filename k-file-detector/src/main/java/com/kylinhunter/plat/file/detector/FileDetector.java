@@ -108,7 +108,8 @@ public class FileDetector {
 
     private static DetectResult detect(String possibleMagicNumber, String fileName) {
         DetectConext detectConext = new DetectConext(possibleMagicNumber, fileName);
-        return magicSelector.selectBest(magicManager.detect(detectConext));
+        detectConext.setDetectedMagics(magicManager.detect(detectConext.getPossibleMagicNumber()));
+        return magicSelector.selectBest(detectConext);
 
     }
 
