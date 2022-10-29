@@ -21,7 +21,7 @@ class MagicReaderTest {
     @Test
     void read() throws IOException {
 
-        File file = ResourceHelper.getFileInClassPath("files/basic/doc.doc");
+        File file = ResourceHelper.getFileInClassPath("files/basic/office/doc.doc");
 
         String read1 = magicReader.read(file);
 

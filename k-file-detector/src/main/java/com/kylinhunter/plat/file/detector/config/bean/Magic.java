@@ -23,19 +23,18 @@ public class Magic implements Comparable<Magic> {
     private int id;
     private int offset;
     private String desc; // the description for the magic number
+    private List<FileType> fileTypes; // the file types
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size
     private MagicMode mode; // magic mode for diffrent detecting action
-    private FileType fileType; // first  best  file type
-    private List<FileType> fileTypes; // the file type  can be detected  ,reference  the field=> fileTypeIds
     private List<String> extensions; // the extension can be detected
 
     public Magic(String number) {
         this.number = number;
     }
 
-    public FileType getFileType() {
+    public FileType getFirstFileType() {
         if (fileTypes != null && fileTypes.size() > 0) {
             return fileTypes.get(0);
         }

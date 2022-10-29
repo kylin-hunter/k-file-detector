@@ -1,0 +1,14 @@
+fileTypes:
+  - id: 100001
+    extension: ppsx
+    desc: 'Microsoft Office  PowerPoint  File (show mode)'
+  - id: 100002
+    extension: dotx
+    desc: 'ms word template'
+  - id: 100003
+    extension: xltx
+    desc: 'ms excel template'
+  - id: 100004
+    extension: xlt
+    desc: 'ms excel template for 97-2004'
+

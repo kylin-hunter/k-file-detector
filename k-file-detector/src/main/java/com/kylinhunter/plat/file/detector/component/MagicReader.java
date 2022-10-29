@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.Component;
-import com.kylinhunter.plat.file.detector.common.util.StringUtil;
+import com.kylinhunter.plat.file.detector.common.util.HexUtil;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
@@ -54,7 +54,7 @@ public class MagicReader {
         if (content != null && content.length > 0) {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
-            return StringUtil.bytesToHexStringV2(content, 0, magicLen);
+            return HexUtil.toString(content, 0, magicLen);
         }
         return StringUtils.EMPTY;
     }
@@ -89,7 +89,7 @@ public class MagicReader {
         } catch (Exception e) {
             log.error("read magic number error", e);
         }
-        return StringUtil.EMPTY;
+        return StringUtils.EMPTY;
     }
 
     /**
@@ -119,7 +119,7 @@ public class MagicReader {
         } catch (Exception e) {
             log.error("read magic number error", e);
         }
-        return StringUtil.EMPTY;
+        return StringUtils.EMPTY;
     }
 
     /**
@@ -137,9 +137,9 @@ public class MagicReader {
             byte[] b = new byte[calMacgiclen(fileName, fileSize, accurate)];
             int len = inputStream.read(b);
             if (len > 0) {
-                return StringUtil.bytesToHexStringV2(b, 0, len);
+                return HexUtil.toString(b, 0, len);
             }
-            return StringUtil.EMPTY;
+            return StringUtils.EMPTY;
         } catch (IOException e) {
             throw new DetectException("read error", e);
         }

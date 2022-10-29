@@ -27,6 +27,10 @@ import lombok.Getter;
  **/
 @Component
 public class MagicManager {
+
+    private final static char MAGIC_SKIP_X = 'x';
+    private final static char MAGIC_SKIP_N = 'n';
+
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
 
@@ -112,7 +116,6 @@ public class MagicManager {
                     return newFileType;
                 }).collect(Collectors.toList());
         magic.setFileTypes(fileTypes);
-        magic.setFileType(fileTypes.get(0));
 
         if (magic.getLength() > this.magicMaxLength) {
             this.magicMaxLength = magic.getLength();
@@ -144,28 +147,36 @@ public class MagicManager {
         if (!StringUtils.isEmpty(possibleMagicNumber)) {
             for (Magic magic : allMagics) {
                 String number = magic.getNumber();
-                if (magic.getMode() == MagicMode.PREFIX) {
-                    if (possibleMagicNumber.startsWith(number)) {
-                        detectedMagics.add(magic);
-                    }
-                } else {
-                    int i;
-                    int offset = magic.getOffset() * 2;
 
-                    for (i = 0; i < number.length(); i++) {
-                        if (offset < possibleMagicNumber.length()) {
-                            if (number.charAt(i) != possibleMagicNumber.charAt(offset++)) {
-                                break;
+                int magicIndex;
+                int offset = magic.getOffset() * 2;
+                for (magicIndex = 0; magicIndex < number.length(); magicIndex++) {
+                    if (offset < possibleMagicNumber.length()) {
+                        char c = number.charAt(magicIndex);
+                        if (c != MAGIC_SKIP_X) {
+                            char c2 = possibleMagicNumber.charAt(offset);
+
+                            if (c == MAGIC_SKIP_N) {
+                                if (!Character.isDigit(c2)) {
+                                    break;
+                                }
+                            } else {
+                                if (c != c2) {
+                                    break;
+                                }
                             }
-                        } else {
-                            break;
-                        }
 
+                        }
+                    } else {
+                        break;
                     }
-                    if (i == number.length()) {
-                        detectedMagics.add(magic);
-                    }
+                    offset++;
+
                 }
+                if (magicIndex == number.length()) {
+                    detectedMagics.add(magic);
+                }
+
             }
 
         }

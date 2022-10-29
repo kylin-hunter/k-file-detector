@@ -56,7 +56,7 @@ public class MagicSelector {
             }
             if (bestFileType == null) {
                 if (bestMagic != null) {
-                    bestFileType = bestMagic.getFileType();
+                    bestFileType = bestMagic.getFirstFileType();
                 }
             }
 

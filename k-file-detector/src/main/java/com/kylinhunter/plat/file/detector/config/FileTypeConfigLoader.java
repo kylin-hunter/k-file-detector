@@ -20,6 +20,7 @@ import lombok.Data;
 public class FileTypeConfigLoader {
     private static FileTypeConfig CACHED_DATA;
     private static final String MAGIC_FILE_TYPES_LOCATION = "signature/file_types.yml";
+    private static final String MAGIC_FILE_TYPES_EX_LOCATION = "signature/file_types_ex.yml";
 
     /**
      * @return com.kylinhunter.file.detector.config.MagicConfig
@@ -51,7 +52,19 @@ public class FileTypeConfigLoader {
      */
     public static FileTypeConfig load0() {
 
-        InputStream resource = ResourceHelper.getInputStreamInClassPath(MAGIC_FILE_TYPES_LOCATION);
+        FileTypeConfig fileTypeConfig = load0(MAGIC_FILE_TYPES_LOCATION);
+        Objects.requireNonNull(fileTypeConfig);
+
+        FileTypeConfig fileTypeConfigEx = load0(MAGIC_FILE_TYPES_EX_LOCATION);
+        Objects.requireNonNull(fileTypeConfigEx);
+
+        fileTypeConfig.fileTypes.addAll(fileTypeConfigEx.getFileTypes());
+        return fileTypeConfig;
+    }
+
+    public static FileTypeConfig load0(String path) {
+
+        InputStream resource = ResourceHelper.getInputStreamInClassPath(path);
         Objects.requireNonNull(resource);
         Yaml yaml = new Yaml();
 
@@ -69,6 +82,5 @@ public class FileTypeConfigLoader {
     public static class FileTypeConfig {
         private List<FileType> fileTypes;
     }
-
 
 }

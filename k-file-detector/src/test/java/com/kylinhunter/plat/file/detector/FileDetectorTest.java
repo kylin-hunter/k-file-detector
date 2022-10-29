@@ -55,9 +55,10 @@ class FileDetectorTest {
 
     @Test
     @Order(1)
-    void detectBasic() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/basic");
-        File[] files = Objects.requireNonNull(dir.listFiles());
+    void detectAllRight() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files");
+        File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
+        Assertions.assertEquals(33, files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
             if (file.isFile()) {
@@ -82,12 +83,11 @@ class FileDetectorTest {
                 Assertions.assertNotNull(bestFileType);
                 Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
                 if (!StringUtils.isEmpty(extension)) {
-                    if (!extension.equals("mp4") && !extension.equals("ppsx")) {
+
                         Assertions.assertEquals(extension, bestFileType.getExtension());
 
-                    }
-                } else {
 
+                } else {
 
                 }
 
@@ -211,19 +211,13 @@ class FileDetectorTest {
 
     @Test
     @Order(99)
-    void test() {
-        File dir = ResourceHelper.getFileInClassPath("files/test");
-        File[] files = Objects.requireNonNull(dir.listFiles());
-        for (File file : files) {
-            if (file.isFile()) {
-                DetectResult detectResult = FileDetector.detect(file);
-                printDetectResult(detectResult);
+    void testTmp() {
+        File file = ResourceHelper.getFileInClassPath("files/all/audio_video/avi.avi");
+        DetectResult detectResult = FileDetector.detect(file);
+        printDetectResult(detectResult);
+        Assertions.assertNotNull(detectResult.getBestFileType());
+        Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
 
-                Assertions.assertNotNull(detectResult.getBestFileType());
-                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
-
-            }
-        }
     }
 
 }

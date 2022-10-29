@@ -15,17 +15,15 @@ class MagicManagerTest {
 
     static void print(Magic magic) {
         System.out.println("======================================");
-        System.out.println("    i、id: \"" + magic.getId() + "\"");
+        System.out.println("    0、id: \"" + magic.getId() + "\"");
         System.out.println("    1、number: \"" + magic.getNumber() + "\"");
         System.out.println("    2、desc: \"" + magic.getDesc() + "\"");
         System.out.println("    3、offset: \"" + magic.getOffset() + "\"");
+        System.out.println("    4、ex--fileTypes: " + magic.getFileTypes());
 
-        System.out.println("    4、ex--length:" + magic.getLength());
-        System.out.println("    5、ex--mode:" + magic.getMode());
-
-        System.out.println("    6、ex--fileType: " + magic.getFileType());
-        System.out.println("    7、ex--fileTypes: " + magic.getFileTypes());
-        System.out.println("    8、ex--extensions:" + magic.getExtensions());
+        System.out.println("    5、ex--length:" + magic.getLength());
+        System.out.println("    6、ex--mode:" + magic.getMode());
+        System.out.println("    7、ex--extensions:" + magic.getExtensions());
         System.out.println("======================================");
     }
 
@@ -52,6 +50,11 @@ class MagicManagerTest {
         Magic magic = magicManager.getMagic("0D444F43");
         System.out.println("0D444F43:" + magic);
         Assertions.assertNotNull(magic);
+
+        magic = magicManager.getMagic("504B030414000600");
+        System.out.println("504B030414000600:" + magic);
+        Assertions.assertNotNull(magic);
+
     }
 
     @Test
