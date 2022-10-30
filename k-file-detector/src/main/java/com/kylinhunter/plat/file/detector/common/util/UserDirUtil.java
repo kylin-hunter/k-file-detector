@@ -39,7 +39,9 @@ public class UserDirUtil {
                 return dir;
             }
         } else {
-            FileUtils.forceMkdir(dir);
+            if (create) {
+                FileUtils.forceMkdir(dir);
+            }
             return dir;
         }
 
