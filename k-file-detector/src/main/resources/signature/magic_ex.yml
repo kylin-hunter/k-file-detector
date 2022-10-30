@@ -2,13 +2,7 @@ magics:
   - number: 504B030414000600
     offset: 0
     desc: 'PK......'
-    fileTypes:
-      - id: 389
-        extension: "docx"
-      - id: 390
-        extension: "pptx"
-      - id: 391
-        extension: "xlsx"
+    includeFileTypes:
       - id: 100001
         extension: "ppsx"
       - id: 100002
@@ -18,78 +12,22 @@ magics:
   - number: D0CF11E0A1B11AE1
     offset: 0
     desc: ' may be a ms office docuemnt (97-2004) or other file type '
-    fileTypes:
-      - id: 582
-        extension: "doc"
-      - id: 583
-        extension: "dot"
-      - id: 584
-        extension: "pps"
-      - id: 585
-        extension: "ppt"
-      - id: 586
-        extension: "xla"
-      - id: 587
-        extension: "xls"
-      - id: 588
-        extension: "wiz"
-      - id: 589
-        extension: "ac_"
-      - id: 590
-        extension: "adp"
-      - id: 591
-        extension: "apr"
-      - id: 592
-        extension: "db"
-      - id: 593
-        extension: "msc"
-      - id: 594
-        extension: "msg"
-      - id: 595
-        extension: "msi"
-      - id: 596
-        extension: "msp"
-      - id: 597
-        extension: "mtw"
-      - id: 598
-        extension: "mxd"
-      - id: 599
-        extension: "opt"
-      - id: 600
-        extension: "pub"
-      - id: 601
-        extension: "qbm"
-      - id: 602
-        extension: "rvt"
-      - id: 603
-        extension: "sou"
-      - id: 604
-        extension: "spo"
-      - id: 605
-        extension: "vsd"
-      - id: 606
-        extension: "wps"
+    includeFileTypes:
       - id: 100004
         extension: "xlt"
   - number: 667479704D345620
     offset: 4
-    desc: '[4 byte offset] ftypM4V'
-    fileTypes:
-      - id: 499
-        extension: "flv"
-      - id: 500
-        extension: "m4v"
-      - id: 501
+    desc: 'ftypM4V'
+    includeFileTypes:
+      - id: 0_mp4
         extension: mp4
-      - id: 502
+      - id: 0_mp4_1893411598
         extension: mp4
   - number: 667479706D703432
     offset: 4
-    desc: '[4 byte offset] ftypmp42'
-    fileTypes:
-      - id: 503
-        extension: "m4v"
-      - id: 501
+    desc: 'ftypmp42'
+    includeFileTypes:
+      - id: 0_mp4
         extension: mp4
-      - id: 502
+      - id: 0_mp4_1893411598
         extension: mp4

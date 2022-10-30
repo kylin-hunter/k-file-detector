@@ -49,19 +49,20 @@ class MagicYamlCreatorTest {
         ParseContext parseContext = yamlMessage.getParseContext();
         ParseStat parseStat = parseContext.getParseStat();
         Assertions.assertEquals(1173, parseStat.getTrNums());
-        Assertions.assertEquals(5, parseStat.getInvalidTrNums());
-        Assertions.assertEquals(1168, parseStat.getValidTrNums());
+        Assertions.assertEquals(5, parseStat.getTrInvalidNums());
+        Assertions.assertEquals(1168, parseStat.getTrValidNums());
+        Assertions.assertEquals(parseStat.getTrNums(), parseStat.getTrInvalidNums() + parseStat.getTrValidNums());
 
-        Assertions.assertEquals(5, parseStat.getInvalidMagicNums());
-        Assertions.assertEquals(546, parseStat.getValidMagicNums());
+        Assertions.assertEquals(5, parseStat.getMagicInvalidNums());
+        Assertions.assertEquals(546, parseStat.getMagicValidNums());
 
         Assertions.assertEquals(650, parseStat.getExtensionNums());
-        Assertions.assertEquals(37, parseStat.getNoExtensionNums());
-        Assertions.assertEquals(670, parseContext.getMaxFileTypeId());
-        Assertions.assertEquals(17, parseStat.getDuplicateFileTypeNums());
+        Assertions.assertEquals(37, parseStat.getExtensionNoneNums());
+        Assertions.assertEquals(670, parseStat.getFileTypeNums());
+        Assertions.assertEquals(17, parseStat.getFileTypeDuplicateNums());
 
-        Assertions.assertEquals(parseContext.getMaxFileTypeId() + parseStat.getDuplicateFileTypeNums(),
-                parseStat.getExtensionNums() + parseStat.getNoExtensionNums());
+        Assertions.assertEquals(parseStat.getFileTypeNums() + parseStat.getFileTypeDuplicateNums(),
+                parseStat.getExtensionNums() + parseStat.getExtensionNoneNums());
 
     }
 }

@@ -1,15 +1,20 @@
 package com.kylinhunter.plat.file.detector.config;
 
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
+import com.kylinhunter.plat.file.detector.config.bean.MagicEx;
 
 import lombok.Data;
 
@@ -22,7 +27,7 @@ import lombok.Data;
 public class MagicConfigLoader {
     private static MagicConfig CACHED_DATA;
     private static final String MAGIC_LOCATION = "signature/magic.yml";
-    private static final String MAGIC_EX_LOCATION = "signature/magic_ex.yml";
+    private static final String MAGIC_LOCATION_EX = "signature/magic_ex.yml";
 
     /**
      * @return void
@@ -47,23 +52,49 @@ public class MagicConfigLoader {
 
     public static MagicConfig load0() {
 
-        MagicConfig magicConfig = load0(MAGIC_LOCATION);
+        MagicConfig magicConfig = load0(MagicConfig.class, MAGIC_LOCATION);
         Objects.requireNonNull(magicConfig);
 
-        MagicConfig magicConfigEx = load0(MAGIC_EX_LOCATION);
+        MagicConfigEx magicConfigEx = load0(MagicConfigEx.class, MAGIC_LOCATION_EX);
         Objects.requireNonNull(magicConfigEx);
 
-        Map<String, Magic> exMagics = magicConfigEx.magics.stream()
-                .collect(Collectors.toMap(Magic::getNumber, e -> e));
+        Map<String, MagicEx> exMagics = magicConfigEx.magics.stream()
+                .collect(Collectors.toMap(MagicEx::getNumber, e -> e));
         List<Magic> magics = magicConfig.magics;
         for (int i = 0; i < magics.size(); i++) {
             Magic magic = magics.get(i);
-            Magic magicEx = exMagics.get(magic.getNumber());
+            MagicEx magicEx = exMagics.get(magic.getNumber());
             if (magicEx != null) {
-                magics.set(i, magicEx);
+                copy(magicEx, magic);
             }
         }
         return magicConfig;
+    }
+
+    private static void copy(MagicEx magicEx, Magic magic) {
+        if (magicEx.getOffset() > 0) {
+            magic.setOffset(magicEx.getOffset());
+        }
+        if (!StringUtils.isEmpty(magicEx.getDesc())) {
+            magic.setDesc(magicEx.getDesc());
+        }
+        List<FileType> excludeFileTypes = magicEx.getExcludeFileTypes();
+        if (!CollectionUtils.isEmpty(excludeFileTypes)) {
+            Iterator<FileType> iterator = magic.getFileTypes().iterator();
+            while (iterator.hasNext()) {
+                FileType fileType = iterator.next();
+                if (excludeFileTypes.contains(fileType)) {
+                    iterator.remove();
+                }
+            }
+        }
+        List<FileType> includeFileTypes = magicEx.getIncludeFileTypes();
+        if (!CollectionUtils.isEmpty(includeFileTypes)) {
+            includeFileTypes.forEach(fileType -> {
+                magic.getFileTypes().add(fileType);
+            });
+        }
+
     }
 
     /**
@@ -73,11 +104,11 @@ public class MagicConfigLoader {
      * @author BiJi'an
      * @date 2022-10-03 23:14
      */
-    private static MagicConfig load0(String path) {
+    private static <T> T load0(Class<T> clazz, String path) {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(path);
         Objects.requireNonNull(resource);
-        MagicConfig magicConfig = new Yaml().loadAs(resource, MagicConfig.class);
+        T magicConfig = new Yaml().loadAs(resource, clazz);
         Objects.requireNonNull(magicConfig);
         return magicConfig;
     }
@@ -90,5 +121,15 @@ public class MagicConfigLoader {
     @Data
     public static class MagicConfig {
         private List<Magic> magics;
+    }
+
+    /**
+     * @author BiJi'an
+     * @description
+     * @date 2022-10-02 19:55
+     **/
+    @Data
+    public static class MagicConfigEx {
+        private List<MagicEx> magics;
     }
 }

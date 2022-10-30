@@ -26,7 +26,7 @@ import lombok.Getter;
 public class FileTypeManager {
     private final String EXTENSIN_EMPTY = "!@#$%^";
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();
-    private final Map<Integer, FileType> idToFileTyes = Maps.newHashMap();
+    private final Map<String, FileType> idToFileTyes = Maps.newHashMap();
     @Getter
     private final Set<FileType> allFileTypes = Sets.newHashSet();
     @Getter
@@ -96,7 +96,7 @@ public class FileTypeManager {
         } else {
             fileType.setExtension(StringUtils.EMPTY);
         }
-        Preconditions.checkArgument(fileType.getId() > 0, " file type id can't <=0");
+        Preconditions.checkArgument(!StringUtils.isEmpty(fileType.getId()), " file type id can't be empty");
 
         if (allFileTypes.contains(fileType)) {
             throw new DetectException(" duplicate fileType " + fileType);
@@ -141,7 +141,7 @@ public class FileTypeManager {
      * @author BiJi'an
      * @date 2022-10-24 01:48
      */
-    public FileType getFileTypeById(int id) {
+    public FileType getFileTypeById(String id) {
 
         return idToFileTyes.get(id);
 

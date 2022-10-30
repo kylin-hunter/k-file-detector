@@ -23,37 +23,28 @@ public class ParseContext {
     @Getter
     @Setter
     private ParseMagic currentParseMagic;
-    private int nextFileTypeId;
 
     @Getter
     private final Map<String, ParseMagic> numberMaps = Maps.newTreeMap();
 
     public void add(ParseMagic parseMagic) {
         if (parseMagic.isValid()) {
-            this.parseStat.validMagicNums++;
+            this.parseStat.magicValidNums++;
             if (numberMaps.containsKey(parseMagic.getNumber())) {
                 throw new DetectException("duplicate magic number:" + parseMagic.getNumber());
             }
             numberMaps.put(parseMagic.getNumber(), parseMagic);
         } else {
-            this.parseStat.invalidMagicNums++;
+            this.parseStat.magicInvalidNums++;
         }
     }
 
-    public int generateNextFileTypeId() {
-        return ++nextFileTypeId;
-    }
 
-    public int getMaxFileTypeId() {
-        return nextFileTypeId;
-    }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", ParseContext.class.getSimpleName() + "[", "]")
                 .add("parseStat=" + parseStat)
-
-                .add("nextFileTypeId=" + nextFileTypeId)
                 .add("currentParseMagic='" + currentParseMagic.getNumber() + "'")
                 .add("numberMaps=" + numberMaps.size())
                 .toString();

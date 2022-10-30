@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class FileType implements Comparable<FileType> {
     /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
-    int id;
+    String id;
     private String extension;
     private String desc;
     private int magicMaxLength;
@@ -35,6 +35,6 @@ public class FileType implements Comparable<FileType> {
 
     @Override
     public int compareTo(FileType o) {
-        return id - o.id;
+        return id.compareTo(o.id);
     }
 }

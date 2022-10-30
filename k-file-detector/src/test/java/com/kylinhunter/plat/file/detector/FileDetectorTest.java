@@ -3,7 +3,6 @@ package com.kylinhunter.plat.file.detector;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -24,6 +24,7 @@ import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.common.util.UserDirUtil;
 import com.kylinhunter.plat.file.detector.component.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
@@ -55,66 +56,94 @@ class FileDetectorTest {
 
     @Test
     @Order(1)
-    void detectAllRight() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files");
+    void allDetected() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(33, files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            if (file.isFile()) {
-                int index = i % 4;
-                DetectResult detectResult;
-                if (index == 0) {
-                    detectResult = FileDetector.detect(file);
-                } else if (index == 1) {
-                    MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
-                    detectResult = FileDetector.detect(multipartFile);
-                } else if (index == 2) {
-                    byte[] bytes = FileUtils.readFileToByteArray(file);
-                    detectResult = FileDetector.detect(bytes, file.getName());
-                } else {
-                    FileInputStream inputStream = FileUtils.openInputStream(file);
-                    detectResult = FileDetector.detect(inputStream, file.getName());
-                }
-                printDetectResult(detectResult);
-                String extension = FilenameUtils.getExtension(file.getName());
+            int index = i % 4;
+            DetectResult detectResult;
+            if (index == 0) {
+                detectResult = FileDetector.detect(file);
+            } else if (index == 1) {
+                MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
+                detectResult = FileDetector.detect(multipartFile);
+            } else if (index == 2) {
+                byte[] bytes = FileUtils.readFileToByteArray(file);
+                detectResult = FileDetector.detect(bytes, file.getName());
+            } else {
+                FileInputStream inputStream = FileUtils.openInputStream(file);
+                detectResult = FileDetector.detect(inputStream, file.getName());
+            }
+            printDetectResult(detectResult);
+            String extension = FilenameUtils.getExtension(file.getName());
 
-                FileType bestFileType = detectResult.getBestFileType();
-                Assertions.assertNotNull(bestFileType);
-                Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
-                if (!StringUtils.isEmpty(extension)) {
-
-                        Assertions.assertEquals(extension, bestFileType.getExtension());
-
-
-                } else {
-
-                }
+            FileType bestFileType = detectResult.getBestFileType();
+            Assertions.assertNotNull(bestFileType);
+            Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+            if (!StringUtils.isEmpty(extension)) {
+                Assertions.assertEquals(extension, bestFileType.getExtension());
+            } else {
+                System.out.println(file.getName()+"=>"+bestFileType);
 
             }
+
         }
     }
 
     @Test
     @Order(2)
-    void detectSpecialExtension() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/extension");
-        System.out.println(dir.getAbsolutePath());
-        Arrays.stream(Objects.requireNonNull(dir.listFiles()))
-                .filter(File::isFile).forEach(file -> {
+    void allUndetected() {
+        File dir = ResourceHelper.getFileInClassPath("files/undetected");
+        File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
+        Assertions.assertEquals(1, files.length);
+        for (File file : files) {
             DetectResult detectResult = FileDetector.detect(file);
             printDetectResult(detectResult);
-            Assertions.assertNotNull(detectResult.getBestFileType());
-            Assertions.assertTrue(detectResult.getAllPossibleFileTypes().size() > 0);
+            Assertions.assertNull(detectResult.getBestFileType());
+            Assertions.assertNull(detectResult.getAllPossibleFileTypes());
 
-        });
+        }
+    }
+
+    private List<File> disguise(File[] files, File disguiseDir) throws IOException {
+
+        List<File> disguisFiles = Lists.newArrayList();
+        for (File file : files) {
+            if (file.isFile()) {
+                for (String extension : fileTypeManager.getAllExtensions()) {
+                    File disguisFile = new File(disguiseDir, file.getName() + "." + extension);
+                    if (!disguisFile.exists()) {
+                        FileUtils.copyFile(file, disguisFile);
+                    }
+                    disguisFiles.add(disguisFile);
+
+                }
+
+            }
+        }
+        return disguisFiles;
+
+    }
+
+    @Test
+    @Order(3)
+    void detectDisguiseAudioVideo() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected/audio_video");
+        File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
+        Assertions.assertEquals(9, files.length);
+
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/audio/video", true);
+        List<File> disguiseFiles = disguise(files, disguiseDir);
+        Assertions.assertEquals(4176, disguiseFiles.size());
 
     }
 
     @Test
     @Order(3)
     void detectSpecialNoExtension() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/no_extension");
+        File dir = ResourceHelper.getFileInClassPath("tmp/special/no_extension");
         System.out.println(dir.getAbsolutePath());
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
@@ -165,21 +194,6 @@ class FileDetectorTest {
 
     }
 
-    @Test
-    @Order(4)
-    void detectUnknown() {
-        File dir = ResourceHelper.getFileInClassPath("files/special/unknown");
-        System.out.println(dir.getAbsolutePath());
-        for (File file : Objects.requireNonNull(dir.listFiles())) {
-            if (file.isFile()) {
-                DetectResult detectResult = FileDetector.detect(file);
-                printDetectResult(detectResult);
-                Assertions.assertNull(detectResult.getBestFileType());
-                Assertions.assertNull(detectResult.getAllPossibleFileTypes());
-            }
-        }
-    }
-
     //    @Test
     //    @Order(5)
     void detectAllPossible() throws IOException {
@@ -211,8 +225,8 @@ class FileDetectorTest {
 
     @Test
     @Order(99)
-    void testTmp() {
-        File file = ResourceHelper.getFileInClassPath("files/all/audio_video/avi.avi");
+    void testOne() {
+        File file = ResourceHelper.getFileInClassPath("files/detected/audio_video/avi.avi");
         DetectResult detectResult = FileDetector.detect(file);
         printDetectResult(detectResult);
         Assertions.assertNotNull(detectResult.getBestFileType());

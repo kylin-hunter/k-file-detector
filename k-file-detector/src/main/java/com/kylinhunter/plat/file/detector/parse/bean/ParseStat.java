@@ -13,40 +13,48 @@ public class ParseStat {
     @Setter
     private int trNums;
     @Getter
-    private int invalidTrNums;
+    private int trInvalidNums;
     @Getter
-    private int validTrNums;
-    @Getter
-    protected int invalidMagicNums;
-    @Getter
-    protected int validMagicNums;
+    private int trValidNums;
 
     @Getter
-    private int duplicateFileTypeNums;
+    protected int magicInvalidNums;
+    @Getter
+    protected int magicValidNums;
 
     @Getter
-    private int noExtensionNums;
+    private int extensionNoneNums;
 
     @Getter
     private int extensionNums;
 
-    public void incrementDuplicateFileTypeNums() {
-        duplicateFileTypeNums++;
+    @Getter
+    private int fileTypeDuplicateNums;
+    @Getter
+    private int fileTypeNums;
+
+    public void incrementTrInvalidNum() {
+        trInvalidNums++;
     }
 
-    public void incrementInvalidTrNums() {
-        invalidTrNums++;
+    public void incrementTrValidNum() {
+        trValidNums++;
     }
 
-    public void incrementNoExtensionNums() {
-        noExtensionNums++;
+    public void incrementExtensionNoneNum() {
+        extensionNoneNums++;
     }
 
-    public void incrementExtensionNums() {
+    public void incrementExtensionNum() {
         extensionNums++;
     }
 
-    public void incrementValidTrNums() {
-        validTrNums++;
+    public void incrementFileTypeNum() {
+        fileTypeNums++;
     }
+
+    public void incrementFileTypeDuplicateNum() {
+        fileTypeDuplicateNums++;
+    }
+
 }

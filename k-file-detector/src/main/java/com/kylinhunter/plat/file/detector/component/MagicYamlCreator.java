@@ -30,6 +30,7 @@ import com.kylinhunter.plat.file.detector.parse.ParseMagicHelper;
 import com.kylinhunter.plat.file.detector.parse.bean.ParseContext;
 import com.kylinhunter.plat.file.detector.parse.bean.ParseMagic;
 import com.kylinhunter.plat.file.detector.parse.bean.YamlMessage;
+import com.kylinhunter.plat.file.detector.type.FileTypeIdGenerator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -130,10 +131,10 @@ public class MagicYamlCreator {
     private void processTr(ParseContext parseContext, Element tr) {
         Elements tds = tr.select("td");
         if (tds.size() == 3) {
-            parseContext.getParseStat().incrementValidTrNums();
+            parseContext.getParseStat().incrementTrValidNum();
             processTds(parseContext, tds);
         } else {
-            parseContext.getParseStat().incrementInvalidTrNums();
+            parseContext.getParseStat().incrementTrInvalidNum();
             log.warn("invalid tr(tds.size={}),trText=>{} ", tds.size(),
                     StringUtils.substring(tr.text(), 0, 30));
         }
@@ -302,14 +303,14 @@ public class MagicYamlCreator {
                          String extension,
                          String desc) {
         if (StringUtils.isEmpty(extension)) {
-            parseContext.getParseStat().incrementNoExtensionNums();
+            parseContext.getParseStat().incrementExtensionNoneNum();
             log.warn("extenion is empty,td0Text=> " + td0Text + ",td2Text=> "
                     + StringUtils.substring(td2Text, 0, 20));
         } else {
             if (!ParseMagicHelper.isValidExtension(extension)) {
                 throw new DetectException("invalid extension,td0Text=> " + td0Text);
             }
-            parseContext.getParseStat().incrementExtensionNums();
+            parseContext.getParseStat().incrementExtensionNum();
         }
 
         FileType fileType = new FileType();
@@ -362,19 +363,20 @@ public class MagicYamlCreator {
         Map<String, FileType> duplicateFileTypes = Maps.newHashMap();
 
         Collection<ParseMagic> parseMagics = numberMaps.values();
-
+        FileTypeIdGenerator fileTypeIdGenerator = new FileTypeIdGenerator();
         parseMagics.forEach(parseMagic -> {
                     List<FileType> newFileTypes = parseMagic.getFileTypes().stream().map(fileType -> {
-                        String duplicateFileTypeKey = fileType.getExtension() + fileType.getDesc();
 
-                        FileType distFileType = duplicateFileTypes.get(duplicateFileTypeKey);
+                        String id = fileTypeIdGenerator.generateId(fileType.getExtension(), fileType.getDesc());
+                        FileType distFileType = duplicateFileTypes.get(id);
                         if (distFileType != null) {
                             log.info("duplicate file type=>{}", distFileType);
-                            parseContext.getParseStat().incrementDuplicateFileTypeNums();
+                            parseContext.getParseStat().incrementFileTypeDuplicateNum();
                             return distFileType;
                         } else {
-                            fileType.setId(parseContext.generateNextFileTypeId());
-                            duplicateFileTypes.put(duplicateFileTypeKey, fileType);
+                            fileType.setId(id);
+                            duplicateFileTypes.put(id, fileType);
+                            parseContext.getParseStat().incrementFileTypeNum();
                             return fileType;
 
                         }
