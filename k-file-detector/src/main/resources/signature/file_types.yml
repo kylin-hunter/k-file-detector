@@ -149,9 +149,6 @@ fileTypes:
   - id: 0_avi
     extension: avi
     desc: 'Resource Interchange File Format -- Windows Audio Video Interleave file, where xx xx xx xx is the file size (little endian)'
-  - id: 0_avif
-    extension: avif
-    desc: 'Alliance for Open Media (AOMedia) Video 1 (AV1) Image File'
   - id: 0_aw
     extension: aw
     desc: 'MS Answer Wizard file'
@@ -1024,9 +1021,6 @@ fileTypes:
     desc: 'Windows MSinfo file'
   - id: 0_mov
     extension: mov
-    desc: 'Apple QuickTime movie file'
-  - id: 0_mov_1165321746
-    extension: mov
     desc: 'QuickTime movie file'
   - id: 0_mp
     extension: mp
@@ -1264,14 +1258,8 @@ fileTypes:
     desc: 'Portable Graymap Graphic'
   - id: 0_pic
     extension: pic
-    desc: 'IBM Storyboard bitmap file'
-  - id: 0_pic_1180358670
-    extension: pic
     desc: 'Unknown type picture file'
   - id: 0_pif
-    extension: pif
-    desc: 'Windows Program Information File'
-  - id: 0_pif_921175948
     extension: pif
     desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: 0_pkr
@@ -1442,9 +1430,6 @@ fileTypes:
   - id: 0_sdr
     extension: sdr
     desc: 'SmartDraw Drawing file'
-  - id: 0_sea
-    extension: sea
-    desc: 'Mac Stuffit Self-Extracting Archive'
   - id: 0_sh3
     extension: sh3
     desc: 'Harvard Graphics presentation file'
@@ -1871,9 +1856,6 @@ fileTypes:
   - id: 0_xz
     extension: xz
     desc: 'XZ archive file'
-  - id: 0_ytr
-    extension: ytr
-    desc: 'IRIS OCR data file'
   - id: 0_ytt
     extension: ytt
     desc: 'YouTube Timed Text (subtitle) file'
@@ -1904,84 +1886,63 @@ fileTypes:
   - id: 0_zoo
     extension: zoo
     desc: 'ZOO compressed archive'
-  - id: 1_-1106141271
+  - id: 1_1106141271
     extension: 
     desc: 'QBASIC SZDD file header variant. (See the SZDD or KWAJ format entries for additional information.)'
-  - id: 1_-1200239712
-    extension: 
-    desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv4 packet. See Hints About Looking for Network Packet Fragments.'
-  - id: 1_-1282912849
-    extension: 
-    desc: 'Miscellaneous AOL parameter and information files'
-  - id: 1_-1325533953
-    extension: 
-    desc: 'UUencoded files start with a string: begin mode path where mode is the set of permissions as used in Linux/Unix and path is the name given to the decoded file. (See this uuencode page for more information.)'
-  - id: 1_-153872850
-    extension: 
-    desc: 'KWAJ file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
-  - id: 1_-1585267497
-    extension: 
-    desc: 'Parrot Video Encapsulation file'
-  - id: 1_-1600260370
-    extension: 
-    desc: 'Apple OS X ABI Mach-O binary file (64-bit, where target system has reverse byte ordering from host running compiler)'
-  - id: 1_-1617636318
-    extension: 
-    desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv6 packet. See Hints About Looking for Network Packet Fragments.'
-  - id: 1_-1947915715
-    extension: 
-    desc: 'INFO2 Windows recycle bin file. NOTE: Bytes 12-13 indicate the size of each INFO2 record; the most common value is 0x20-03 (0x0320 = 800 bytes).'
-  - id: 1_-2008839644
-    extension: 
-    desc: 'Header of boot sector in BitLocker protected volume (Vista)'
-  - id: 1_-393747943
-    extension: 
-    desc: 'Microsoft Outlook Personal Folder Files (PFF):'
-  - id: 1_-439067208
-    extension: 
-    desc: 'Short Message Service (SMS), or text, message stored on a Subscriber Identification Module (SIM).'
-  - id: 1_-468283815
-    extension: 
-    desc: '1Password 4 Cloud Keychain encrypted data'
-  - id: 1_-519535975
-    extension: 
-    desc: 'Norton Anti-Virus quarantined virus file'
-  - id: 1_-598077635
-    extension: 
-    desc: 'Byte-order mark (BOM) for 16-bit Unicode Transformation Format/ 2-octet Universal Character Set (UTF-16/UCS-2), big-endian files. (See the Unicode Home Page.)'
-  - id: 1_-619417758
-    extension: 
-    desc: 'BIOS details in RAM images'
-  - id: 1_-739084563
-    extension: 
-    desc: 'Byte-order mark (BOM) for 8-bit Unicode Transformation Format (UTF-8) files. (See the Unicode Home Page.)'
-  - id: 1_-876181654
-    extension: 
-    desc: 'Byte-order mark for 32-bit Unicode Transformation Format/ 4-octet Universal Character Set (UTF-32/UCS-4), big-endian files. (See the Unicode Home Page.)'
-  - id: 1_-897356096
-    extension: 
-    desc: 'SZDD file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
-  - id: 1_-959369983
-    extension: 
-    desc: 'WinDump (winpcap) capture file (Windows)'
   - id: 1_1128999213
     extension: 
     desc: 'Apple OS X ABI Mach-O binary file (32-bit, where target system has reverse byte ordering from host running compiler)'
   - id: 1_1177830037
     extension: 
     desc: 'Java serialization data (see Object Serialization Stream Protocol)'
+  - id: 1_1200239712
+    extension: 
+    desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv4 packet. See Hints About Looking for Network Packet Fragments.'
+  - id: 1_1282912849
+    extension: 
+    desc: 'Miscellaneous AOL parameter and information files'
+  - id: 1_1325533953
+    extension: 
+    desc: 'UUencoded files start with a string: begin mode path where mode is the set of permissions as used in Linux/Unix and path is the name given to the decoded file. (See this uuencode page for more information.)'
   - id: 1_1364371826
     extension: 
     desc: 'NTFS Master File Table (MFT) entry (1,024 bytes)'
+  - id: 1_153872850
+    extension: 
+    desc: 'KWAJ file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
+  - id: 1_1585267497
+    extension: 
+    desc: 'Parrot Video Encapsulation file'
+  - id: 1_1600260370
+    extension: 
+    desc: 'Apple OS X ABI Mach-O binary file (64-bit, where target system has reverse byte ordering from host running compiler)'
+  - id: 1_1617636318
+    extension: 
+    desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv6 packet. See Hints About Looking for Network Packet Fragments.'
   - id: 1_1677331947
     extension: 
     desc: 'Archive created with the cpio utility (where nn values 0x37 ("7"), 0x31 ("1"), and 0x32 ("2") refer to the standard ASCII format, new ASCII (aka SVR4) format, and CRC format, respectively. (The swpackage(8) page has additional information.) (Thanks to F. Webber for this....)'
+  - id: 1_1947915715
+    extension: 
+    desc: 'INFO2 Windows recycle bin file. NOTE: Bytes 12-13 indicate the size of each INFO2 record; the most common value is 0x20-03 (0x0320 = 800 bytes).'
+  - id: 1_2008839644
+    extension: 
+    desc: 'Header of boot sector in BitLocker protected volume (Vista)'
   - id: 1_2044333878
     extension: 
     desc: 'Apple OS X ABI Mach-O binary file (32-bit)'
   - id: 1_29837182
     extension: 
     desc: 'Executable and Linking Format executable file (Linux/Unix)'
+  - id: 1_393747943
+    extension: 
+    desc: 'Microsoft Outlook Personal Folder Files (PFF):'
+  - id: 1_439067208
+    extension: 
+    desc: 'Short Message Service (SMS), or text, message stored on a Subscriber Identification Module (SIM).'
+  - id: 1_468283815
+    extension: 
+    desc: '1Password 4 Cloud Keychain encrypted data'
   - id: 1_469135927
     extension: 
     desc: 'Apple OS X ABI Mach-O binary file (64-bit)'
@@ -1994,18 +1955,39 @@ fileTypes:
   - id: 1_511262519
     extension: 
     desc: 'Byte-order mark (BOM) for 16-bit Unicode Transformation Format/ 2-octet Universal Character Set (UTF-16/UCS-2), little-endian files. (See the Unicode Home Page.)'
+  - id: 1_519535975
+    extension: 
+    desc: 'Norton Anti-Virus quarantined virus file'
+  - id: 1_598077635
+    extension: 
+    desc: 'Byte-order mark (BOM) for 16-bit Unicode Transformation Format/ 2-octet Universal Character Set (UTF-16/UCS-2), big-endian files. (See the Unicode Home Page.)'
+  - id: 1_619417758
+    extension: 
+    desc: 'BIOS details in RAM images'
   - id: 1_687977503
     extension: 
     desc: 'zisofs compression format, recognized by some Linux kernels. See the libburnia page for additional information.'
   - id: 1_72186999
     extension: 
     desc: 'Header of boot sector in BitLocker protected volume (Windows 7)'
+  - id: 1_739084563
+    extension: 
+    desc: 'Byte-order mark (BOM) for 8-bit Unicode Transformation Format (UTF-8) files. (See the Unicode Home Page.)'
+  - id: 1_876181654
+    extension: 
+    desc: 'Byte-order mark for 32-bit Unicode Transformation Format/ 4-octet Universal Character Set (UTF-32/UCS-4), big-endian files. (See the Unicode Home Page.)'
   - id: 1_877029067
     extension: 
     desc: 'Mbox table of contents file. (NOTE: The next four bytes appear to be the number of e-mails in the associated mbox file.)'
+  - id: 1_897356096
+    extension: 
+    desc: 'SZDD file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
   - id: 1_910304519
     extension: 
     desc: 'tcpdump (libpcap) capture file (Linux/Unix)'
   - id: 1_911163584
     extension: 
     desc: 'Extended tcpdump (libpcap) capture file (Linux/Unix)'
+  - id: 1_959369983
+    extension: 
+    desc: 'WinDump (winpcap) capture file (Windows)'

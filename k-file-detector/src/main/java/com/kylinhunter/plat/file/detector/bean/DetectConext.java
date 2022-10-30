@@ -2,8 +2,7 @@ package com.kylinhunter.plat.file.detector.bean;
 
 import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
-
+import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.Data;
@@ -23,7 +22,7 @@ public class DetectConext {
     public DetectConext(String possibleMagicNumber, String fileName) {
         this.possibleMagicNumber = possibleMagicNumber;
         this.fileName = fileName;
-        this.extension = FilenameUtils.getExtension(fileName);
+        this.extension = FilenameUtil.getExtension(fileName);
         if (this.extension != null) {
             this.extension = extension.toLowerCase();
         }

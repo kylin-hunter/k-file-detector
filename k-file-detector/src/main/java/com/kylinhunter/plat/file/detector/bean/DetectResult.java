@@ -3,8 +3,8 @@ package com.kylinhunter.plat.file.detector.bean;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.kylinhunter.plat.file.detector.config.bean.Magic;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
+import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,36 +21,29 @@ public class DetectResult {
 
     @Getter
     @Setter
-    private FileType bestFileType; // the best  of all detected file type
+    private List<Magic> allPossibleMagics; // the possible magic number
+    @Getter
+    private List<FileType> allPossibleFileTypes = Lists.newArrayList();  // all possible file type
 
     @Getter
-    private List<FileType> allPossibleFileTypes;  // all possible file type
-
-    @Getter
-    @Setter
-    private Magic bestMagic; // the best of all detedted magics
-
-    @Getter
-    private final List<Magic> detectedMagics; // the detected magic number
+    private List<Magic> allBestMagics = Lists.newArrayList(); // the best of all detedted magics
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();
-        this.detectedMagics = detectConext.getDetectedMagics();
     }
 
-    /**
-     * @param fileType fileType
-     * @return void
-     * @title addPossibleFileType
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-25 02:01
-     */
-    public void addPossibleFileType(FileType fileType) {
-        if (allPossibleFileTypes == null) {
-            allPossibleFileTypes = Lists.newArrayList();
+    public FileType getFirstFileType() {
+        if (allPossibleFileTypes != null && allPossibleFileTypes.size() > 0) {
+            return allPossibleFileTypes.get(0);
         }
-        allPossibleFileTypes.add(fileType);
+        return null;
+    }
+
+    public FileType getSecondFileType() {
+        if (allPossibleFileTypes != null && allPossibleFileTypes.size() > 1) {
+            return allPossibleFileTypes.get(1);
+        }
+        return null;
     }
 }
 

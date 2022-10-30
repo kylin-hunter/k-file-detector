@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.common.util.HexUtil;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
@@ -158,7 +158,7 @@ public class MagicReader {
     private int calMacgiclen(String fileName, long fileSize, boolean accurate) {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
-            String extension = FilenameUtils.getExtension(fileName);
+            String extension = FilenameUtil.getExtension(fileName);
             Set<FileType> fileTypes = this.fileTypeManager.getFileTypesByExtension(extension);
             for (FileType fileType : fileTypes) {
                 if (fileType.getMagicMaxLength() > magicLen) {

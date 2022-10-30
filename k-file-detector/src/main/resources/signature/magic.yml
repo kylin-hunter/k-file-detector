@@ -1,18 +1,4 @@
 magics: 
-  - number: 00
-    offset: 0
-    desc: '.'
-    fileTypes:  
-      - id: 0_pic
-        extension: "pic"
-      - id: 0_mov
-        extension: "mov"
-      - id: 0_pif
-        extension: "pif"
-      - id: 0_sea
-        extension: "sea"
-      - id: 0_ytr
-        extension: "ytr"
   - number: 03
     offset: 0
     desc: '.'
@@ -235,7 +221,7 @@ magics:
         extension: "drv"
       - id: 0_exe
         extension: "exe"
-      - id: 0_pif_921175948
+      - id: 0_pif
         extension: "pif"
       - id: 0_qts
         extension: "qts"
@@ -291,7 +277,7 @@ magics:
     offset: 0
     desc: 'o<'
     fileTypes:  
-      - id: 1_-439067208
+      - id: 1_439067208
         extension: ""
   - number: 8000
     offset: 0
@@ -355,7 +341,7 @@ magics:
     offset: 0
     desc: '��'
     fileTypes:  
-      - id: 1_-598077635
+      - id: 1_598077635
         extension: ""
   - number: FFD8
     offset: 0
@@ -407,12 +393,6 @@ magics:
         extension: "mpg"
       - id: 0_mp3_306770805
         extension: "mp3"
-  - number: 000000
-    offset: 0
-    desc: '...'
-    fileTypes:  
-      - id: 0_avif
-        extension: "avif"
   - number: 000101
     offset: 0
     desc: '...'
@@ -429,7 +409,7 @@ magics:
     offset: 0
     desc: '..E'
     fileTypes:  
-      - id: 1_-1200239712
+      - id: 1_1200239712
         extension: ""
   - number: 0Ann01
     offset: 0
@@ -579,13 +559,13 @@ magics:
     offset: 0
     desc: '��{lower_case letter}'
     fileTypes:  
-      - id: 1_-1617636318
+      - id: 1_1617636318
         extension: ""
   - number: EFBBBF
     offset: 0
     desc: '﻿'
     fileTypes:  
-      - id: 1_-739084563
+      - id: 1_739084563
         extension: ""
   - number: FF0A00
     offset: 0
@@ -635,7 +615,7 @@ magics:
     offset: 0
     desc: '..��'
     fileTypes:  
-      - id: 1_-876181654
+      - id: 1_876181654
         extension: ""
   - number: 00014241
     offset: 0
@@ -767,7 +747,7 @@ magics:
     offset: 0
     desc: '!BDN'
     fileTypes:  
-      - id: 1_-393747943
+      - id: 1_393747943
         extension: ""
       - id: 0_ost
         extension: "ost"
@@ -847,7 +827,7 @@ magics:
     offset: 0
     desc: 'ACSD'
     fileTypes:  
-      - id: 1_-1282912849
+      - id: 1_1282912849
         extension: ""
   - number: 414D594F
     offset: 0
@@ -1215,7 +1195,7 @@ magics:
     offset: 0
     desc: 'PaVE'
     fileTypes:  
-      - id: 1_-1585267497
+      - id: 1_1585267497
         extension: ""
   - number: 51454C20
     offset: 92
@@ -1399,7 +1379,7 @@ magics:
     offset: 4
     desc: '[4 byte offset] moov'
     fileTypes:  
-      - id: 0_mov_1165321746
+      - id: 0_mov
         extension: "mov"
   - number: 72656766
     offset: 0
@@ -1573,7 +1553,7 @@ magics:
     offset: 0
     desc: '����'
     fileTypes:  
-      - id: 1_-1600260370
+      - id: 1_1600260370
         extension: ""
   - number: D20A0000
     offset: 0
@@ -1585,7 +1565,7 @@ magics:
     offset: 0
     desc: '�ò�'
     fileTypes:  
-      - id: 1_-959369983
+      - id: 1_959369983
         extension: ""
   - number: D7CDC69A
     offset: 0
@@ -1697,7 +1677,7 @@ magics:
     offset: 0
     desc: '.....'
     fileTypes:  
-      - id: 0_pic_1180358670
+      - id: 0_pic
         extension: "pic"
   - number: 2321414D52
     offset: 0
@@ -1857,7 +1837,7 @@ magics:
     offset: 0
     desc: 'begin'
     fileTypes:  
-      - id: 1_-1325533953
+      - id: 1_1325533953
         extension: ""
   - number: 736F6C6964
     offset: 0
@@ -2397,7 +2377,7 @@ magics:
     offset: 0
     desc: 'KWAJ��''�'
     fileTypes:  
-      - id: 1_-153872850
+      - id: 1_153872850
         extension: ""
   - number: 4C00000001140200
     offset: 0
@@ -2525,13 +2505,13 @@ magics:
     offset: 0
     desc: 'SZ ��''3�'
     fileTypes:  
-      - id: 1_-1106141271
+      - id: 1_1106141271
         extension: ""
   - number: 535A444488F02733
     offset: 0
     desc: 'SZDD��''3'
     fileTypes:  
-      - id: 1_-897356096
+      - id: 1_897356096
         extension: ""
   - number: 5468697320697320
     offset: 0
@@ -2623,13 +2603,13 @@ magics:
     offset: 4
     desc: '[4 byte offset] ftypqt'
     fileTypes:  
-      - id: 0_mov_1165321746
+      - id: 0_mov
         extension: "mov"
   - number: 6F70646174613031
     offset: 0
     desc: 'opdata01'
     fileTypes:  
-      - id: 1_-468283815
+      - id: 1_468283815
         extension: ""
   - number: 74424D504B6E5772
     offset: 60
@@ -2665,7 +2645,7 @@ magics:
     offset: 0
     desc: '� ��....'
     fileTypes:  
-      - id: 1_-519535975
+      - id: 1_519535975
         extension: ""
   - number: CE24B9A220000000
     offset: 0
@@ -2769,7 +2749,7 @@ magics:
     offset: 0
     desc: '........ .'
     fileTypes:  
-      - id: 1_-619417758
+      - id: 1_619417758
         extension: ""
   - number: 0F534942454C495553
     offset: 0
@@ -2927,7 +2907,7 @@ magics:
     offset: 0
     desc: '�R.-FVE- FS-'
     fileTypes:  
-      - id: 1_-2008839644
+      - id: 1_2008839644
         extension: ""
   - number: EB58902D4656452D46532D
     offset: 0
@@ -3151,13 +3131,13 @@ magics:
     offset: 0
     desc: '........ .... ...'
     fileTypes:  
-      - id: 1_-1947915715
+      - id: 1_1947915715
         extension: ""
   - number: 05000000xxxxxxxxxxxxxxxx20030000
     offset: 0
     desc: '........ .... ...'
     fileTypes:  
-      - id: 1_-1947915715
+      - id: 1_1947915715
         extension: ""
   - number: 0606EDF5D81D46E5BD31EFE7FE74B71D
     offset: 0

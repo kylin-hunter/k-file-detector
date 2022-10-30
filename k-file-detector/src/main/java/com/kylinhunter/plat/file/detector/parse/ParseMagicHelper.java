@@ -18,6 +18,8 @@ public class ParseMagicHelper {
 
     private static final Map<String, String> SAME_MAGIC_NUMBERS = Maps.newTreeMap();
     private static final Set<String> INVALID_NUMBER_SPLITS = Sets.newHashSet();
+
+    private static final Set<String> INVALID_NUMBER = Sets.newHashSet();
     private static final Pattern PATTERN_VALID_MAGIC_NUMBER = Pattern.compile("^[A-Fa-f0-9xn]+$");
     private static final Pattern PATTERN_VALID_EXTENSION = Pattern.compile("^[a-z0-9\\._]+$");
 
@@ -39,6 +41,11 @@ public class ParseMagicHelper {
     static {
         INVALID_NUMBER_SPLITS.add("[At a cluster boundary]");
         INVALID_NUMBER_SPLITS.add("29,152");
+    }
+
+    static {
+        INVALID_NUMBER.add("00");
+        INVALID_NUMBER.add("000000");
     }
 
     static {
@@ -85,9 +92,27 @@ public class ParseMagicHelper {
      * @author BiJi'an
      * @date 2022-10-28 01:42
      */
-    public static boolean isSkipParseMagicNumber(String text) {
+    public static boolean isSkipParseMagicNumberBySplit(String text) {
         for (String invalidNumberSplit : INVALID_NUMBER_SPLITS) {
             if (text.contains(invalidNumberSplit)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param text
+     * @return boolean
+     * @throws
+     * @title isSkipParseMagicNumber
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-30 21:18
+     */
+    public static boolean isSkipParseMagicNumber(String text) {
+        for (String number : INVALID_NUMBER) {
+            if (text.equals(number)) {
                 return true;
             }
         }

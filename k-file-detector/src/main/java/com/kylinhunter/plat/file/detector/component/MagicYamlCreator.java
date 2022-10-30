@@ -192,17 +192,28 @@ public class MagicYamlCreator {
      */
     public ParseMagic processTdsMagicDefault(String td0Text) {
         ParseMagic parseMagic = new ParseMagic(td0Text);
-        if (ParseMagicHelper.isSkipParseMagicNumber(td0Text)) {
+        if (ParseMagicHelper.isSkipParseMagicNumberBySplit(td0Text)) {
             parseMagic.setValid(false);
             log.warn("skip magic number,td0Text=>" + td0Text);
             return parseMagic;
         } else {
             processTdsMagicDefault(parseMagic);
             if (parseMagic.isValid()) {
+                if (ParseMagicHelper.isSkipParseMagicNumber(parseMagic.getNumber())) {
+                    parseMagic.setValid(false);
+                    log.warn("skip magic number,td0Text=>" + td0Text);
+                    return parseMagic;
+                }
                 return parseMagic;
             } else {
                 processTdsMagicByReg(parseMagic);
                 if (parseMagic.isValid()) {
+
+                    if (ParseMagicHelper.isSkipParseMagicNumber(parseMagic.getNumber())) {
+                        parseMagic.setValid(false);
+                        log.warn("skip magic number,td0Text=>" + td0Text);
+                        return parseMagic;
+                    }
                     return parseMagic;
                 } else {
                     throw new DetectException("can't parse  magic number, td0Text=>" + td0Text);

@@ -34,7 +34,7 @@ public class UserDirUtil {
         File dir = new File(USER_DIR, child);
         if (dir.exists()) {
             if (dir.isFile()) {
-                throw new IOException("dir is a file " + dir.getAbsolutePath());
+                throw new IOException(" is a file " + dir.getAbsolutePath());
             } else {
                 return dir;
             }
@@ -43,6 +43,23 @@ public class UserDirUtil {
                 FileUtils.forceMkdir(dir);
             }
             return dir;
+        }
+
+    }
+
+    public static File getFile(String child, boolean create) throws IOException {
+        File file = new File(USER_DIR, child);
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                throw new IOException(" is a file " + file.getAbsolutePath());
+            } else {
+                return file;
+            }
+        } else {
+            if (create) {
+                FileUtils.forceMkdirParent(file);
+            }
+            return file;
         }
 
     }

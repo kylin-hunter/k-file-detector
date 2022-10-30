@@ -38,7 +38,7 @@ public class FileTypeIdGenerator {
             }
 
         } else {
-            id = BASE_NO_EXTENSION + desc.hashCode();
+            id = BASE_NO_EXTENSION + Math.abs(desc.hashCode());
             String oldContent = duplicateId.get(id);
             if (oldContent != null && !content.equals(oldContent)) {
                 throw new DetectException("duplicate id=> " + id + "," + oldContent + "," + content);

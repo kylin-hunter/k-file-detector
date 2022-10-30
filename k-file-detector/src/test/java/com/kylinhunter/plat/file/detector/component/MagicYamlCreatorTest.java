@@ -44,7 +44,7 @@ class MagicYamlCreatorTest {
         FileUtils.forceMkdirParent(fileFileTypes);
 
         YamlMessage yamlMessage = magicYamlCreator.toYaml(fileMagic, fileFileTypes);
-        Assertions.assertEquals(546, yamlMessage.getParseMagics().size());
+        Assertions.assertEquals(544, yamlMessage.getParseMagics().size());
 
         ParseContext parseContext = yamlMessage.getParseContext();
         ParseStat parseStat = parseContext.getParseStat();
@@ -53,12 +53,12 @@ class MagicYamlCreatorTest {
         Assertions.assertEquals(1168, parseStat.getTrValidNums());
         Assertions.assertEquals(parseStat.getTrNums(), parseStat.getTrInvalidNums() + parseStat.getTrValidNums());
 
-        Assertions.assertEquals(5, parseStat.getMagicInvalidNums());
-        Assertions.assertEquals(546, parseStat.getMagicValidNums());
+        Assertions.assertEquals(7, parseStat.getMagicInvalidNums());
+        Assertions.assertEquals(544, parseStat.getMagicValidNums());
 
-        Assertions.assertEquals(650, parseStat.getExtensionNums());
+        Assertions.assertEquals(644, parseStat.getExtensionNums());
         Assertions.assertEquals(37, parseStat.getExtensionNoneNums());
-        Assertions.assertEquals(670, parseStat.getFileTypeNums());
+        Assertions.assertEquals(664, parseStat.getFileTypeNums());
         Assertions.assertEquals(17, parseStat.getFileTypeDuplicateNums());
 
         Assertions.assertEquals(parseStat.getFileTypeNums() + parseStat.getFileTypeDuplicateNums(),
