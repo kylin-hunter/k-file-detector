@@ -50,14 +50,44 @@ public class MagicSelector {
             List<FileType> allBestFileTypes = Lists.newArrayList();
 
             Magic firstMagic = allPossibleMagics.get(0);
-            for (Magic magic : allPossibleMagics) {
-                FileType fileType = this.getBestFileType(magic, extension);
-                if (fileType != null) {
-                    if (!allBestFileTypes.contains(fileType)) {
-                        allBestFileTypes.add(fileType);
+
+            for (int i = 0; i < allPossibleMagics.size(); i++) {
+
+                Magic curMagic = allPossibleMagics.get(i);
+
+                if (i + 1 < allPossibleMagics.size()) {
+                    Magic nextMagic = allPossibleMagics.get(i + 1);
+                    if (curMagic.getNumber().contains(nextMagic.getNumber())) {
+                        if (curMagic.isFatherFirstNoExtensionHit()) {
+                            FileType fileType = this.getBestFileType(curMagic, extension);
+                            if (fileType != null) {
+                                if (!allBestFileTypes.contains(fileType)) {
+                                    allBestFileTypes.add(fileType);
+                                }
+                                allBestMagics.add(curMagic);
+                            }
+                        }
+
+                    } else {
+
+                        FileType fileType = this.getBestFileType(curMagic, extension);
+                        if (fileType != null) {
+                            if (!allBestFileTypes.contains(fileType)) {
+                                allBestFileTypes.add(fileType);
+                            }
+                            allBestMagics.add(curMagic);
+                        }
                     }
-                    allBestMagics.add(magic);
+                } else {
+                    FileType fileType = this.getBestFileType(curMagic, extension);
+                    if (fileType != null) {
+                        if (!allBestFileTypes.contains(fileType)) {
+                            allBestFileTypes.add(fileType);
+                        }
+                        allBestMagics.add(curMagic);
+                    }
                 }
+
             }
 
             if (allBestMagics.size() <= 0) {
