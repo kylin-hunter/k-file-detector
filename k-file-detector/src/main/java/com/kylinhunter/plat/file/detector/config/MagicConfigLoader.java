@@ -1,7 +1,6 @@
 package com.kylinhunter.plat.file.detector.config;
 
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -61,8 +60,7 @@ public class MagicConfigLoader {
         Map<String, MagicEx> exMagics = magicConfigEx.magics.stream()
                 .collect(Collectors.toMap(MagicEx::getNumber, e -> e));
         List<Magic> magics = magicConfig.magics;
-        for (int i = 0; i < magics.size(); i++) {
-            Magic magic = magics.get(i);
+        for (Magic magic : magics) {
             MagicEx magicEx = exMagics.get(magic.getNumber());
             if (magicEx != null) {
                 copy(magicEx, magic);
@@ -72,6 +70,7 @@ public class MagicConfigLoader {
     }
 
     private static void copy(MagicEx magicEx, Magic magic) {
+        magic.setFatherFirstNoExtensionHit(magicEx.isFatherFirstNoExtensionHit());
         if (magicEx.getOffset() > 0) {
             magic.setOffset(magicEx.getOffset());
         }
@@ -80,19 +79,17 @@ public class MagicConfigLoader {
         }
         List<FileType> excludeFileTypes = magicEx.getExcludeFileTypes();
         if (!CollectionUtils.isEmpty(excludeFileTypes)) {
-            Iterator<FileType> iterator = magic.getFileTypes().iterator();
-            while (iterator.hasNext()) {
-                FileType fileType = iterator.next();
-                if (excludeFileTypes.contains(fileType)) {
-                    iterator.remove();
-                }
-            }
+            magic.getFileTypes().removeIf(excludeFileTypes::contains);
         }
         List<FileType> includeFileTypes = magicEx.getIncludeFileTypes();
         if (!CollectionUtils.isEmpty(includeFileTypes)) {
-            includeFileTypes.forEach(fileType -> {
-                magic.getFileTypes().add(fileType);
-            });
+            includeFileTypes.forEach(fileType -> magic.getFileTypes().add(fileType));
+        }
+        List<FileType> topFileTypes = magicEx.getTopFileTypes();
+        if (!CollectionUtils.isEmpty(topFileTypes)) {
+            List<FileType> fileTypes = magic.getFileTypes();
+            fileTypes.removeIf(topFileTypes::contains);
+            fileTypes.addAll(0, topFileTypes);
         }
 
     }

@@ -3,6 +3,7 @@ package com.kylinhunter.plat.file.detector.config.bean;
 import java.util.List;
 
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,7 @@ public class Magic implements Comparable<Magic> {
     private int offset;
     private String desc; // the description for the magic number
     private List<FileType> fileTypes; // the file types
+    private boolean fatherFirstNoExtensionHit = true;
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size
@@ -37,6 +39,13 @@ public class Magic implements Comparable<Magic> {
     public FileType getFirstFileType() {
         if (fileTypes != null && fileTypes.size() > 0) {
             return fileTypes.get(0);
+        }
+        throw new DetectException("no first file type");
+    }
+
+    public FileType getSecondFileType() {
+        if (fileTypes != null && fileTypes.size() > 1) {
+            return fileTypes.get(1);
         }
         return null;
     }

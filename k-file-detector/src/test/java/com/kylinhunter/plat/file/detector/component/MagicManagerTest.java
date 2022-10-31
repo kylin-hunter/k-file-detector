@@ -51,8 +51,8 @@ class MagicManagerTest {
         System.out.println("0D444F43:" + magic);
         Assertions.assertNotNull(magic);
 
-        magic = magicManager.getMagic("504B030414000600");
-        System.out.println("504B030414000600:" + magic);
+        magic = magicManager.getMagic("1A45DFA3");
+        System.out.println("1A45DFA3:" + magic);
         Assertions.assertNotNull(magic);
 
     }

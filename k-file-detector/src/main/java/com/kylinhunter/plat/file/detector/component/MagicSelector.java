@@ -1,6 +1,5 @@
 package com.kylinhunter.plat.file.detector.component;
 
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -11,6 +10,7 @@ import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.Component;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
+import com.kylinhunter.plat.file.detector.selector.MagicComparator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,20 +45,12 @@ public class MagicSelector {
             List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();  // all possible file type
             List<Magic> allBestMagics = detectResult.getAllBestMagics();
 
-            allPossibleMagics.forEach(magic -> {
-                magic.getFileTypes().forEach(fileType -> {
-                    if (!allPossibleFileTypes.contains(fileType)) {
-                        allPossibleFileTypes.add(fileType);
-                    }
-                });
-            });
-
             String extension = detectConext.getExtension();
 
             List<FileType> allBestFileTypes = Lists.newArrayList();
 
-            for (int i = 0; i < allPossibleMagics.size(); i++) {
-                Magic magic = allPossibleMagics.get(i);
+            Magic firstMagic = allPossibleMagics.get(0);
+            for (Magic magic : allPossibleMagics) {
                 FileType fileType = this.getBestFileType(magic, extension);
                 if (fileType != null) {
                     if (!allBestFileTypes.contains(fileType)) {
@@ -69,14 +61,74 @@ public class MagicSelector {
             }
 
             if (allBestMagics.size() <= 0) {
-                allBestMagics.add(allPossibleMagics.get(0));
+
+                Magic bestMagic = null;
+                for (int i = 0; i < allPossibleMagics.size(); i++) {
+
+                    Magic curMagic = allPossibleMagics.get(i);
+
+                    if (i + 1 < allPossibleMagics.size()) {
+                        Magic nextMagic = allPossibleMagics.get(i + 1);
+                        if (curMagic.getNumber().contains(nextMagic.getNumber())) {
+                            if (curMagic.isFatherFirstNoExtensionHit()) {
+                                bestMagic = curMagic;
+                                break;
+                            }
+
+                        } else {
+                            bestMagic = curMagic;
+                            break;
+                        }
+                    } else {
+                        bestMagic = curMagic;
+                    }
+
+                }
+                if (bestMagic == null) {
+                    bestMagic = firstMagic;
+                }
+                allBestMagics.add(bestMagic);
+                allBestFileTypes.addAll(bestMagic.getFileTypes());
+            } else {
+                if (firstMagic != allBestMagics.get(0)) {
+                    Magic bestMagic = allBestMagics.get(0);
+                    if (firstMagic.getNumber().contains(bestMagic.getNumber())) {
+                        if (firstMagic.isFatherFirstNoExtensionHit()) {
+                            allBestMagics.add(0, firstMagic);
+                            FileType firstFileType = firstMagic.getFirstFileType();
+                            if (!allBestFileTypes.contains(firstFileType)) {
+                                allBestFileTypes.add(0, firstFileType);
+                            }
+                        }
+                    }
+
+                }
+
             }
-            if (allPossibleFileTypes.size() <= 0) {
-                allPossibleFileTypes.add(allBestMagics.get(0).getFirstFileType());
+
+            allBestMagics.forEach(magic -> magic.getFileTypes().forEach(fileType -> {
+                if (!allPossibleFileTypes.contains(fileType)) {
+                    allPossibleFileTypes.add(fileType);
+                }
+            }));
+
+            allPossibleMagics.forEach(magic -> {
+                if (!allBestMagics.contains(magic)) {
+                    magic.getFileTypes().forEach(fileType -> {
+                        if (!allPossibleFileTypes.contains(fileType)) {
+                            allPossibleFileTypes.add(fileType);
+                        }
+                    });
+                }
+            });
+            if (allBestMagics.size() >= 2 && allBestFileTypes.size() >= 2) {
+                if (allBestFileTypes.get(0).extensionEquals(allBestFileTypes.get(1).getExtension())) {
+                    allBestFileTypes.set(1, allBestMagics.get(1).getFirstFileType());
+                }
             }
 
             for (int i = allBestFileTypes.size() - 1; i >= 0; i--) {
-                FileType fileType = allBestFileTypes.get(0);
+                FileType fileType = allBestFileTypes.get(i);
                 allPossibleFileTypes.remove(fileType);
                 allPossibleFileTypes.add(0, fileType);
 
@@ -105,24 +157,6 @@ public class MagicSelector {
             }
         }
         return null;
-    }
-
-    public static class MagicComparator implements Comparator<Magic> {
-
-        @Override
-        public int compare(Magic o1, Magic o2) {
-            int dimensionOffset = o1.getOffset() - o2.getOffset();
-
-            if (dimensionOffset < 0) {
-                return -1;
-            } else if (dimensionOffset > 0) {
-                return 1;
-            } else {
-                int dimensionMagicLen = o2.getLength() - o1.getLength();
-                return Integer.compare(dimensionMagicLen, 0);
-            }
-
-        }
     }
 
 }

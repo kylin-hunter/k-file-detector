@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MagicMode {
     PREFIX(1, "prefix magic number"),
-    PREFIX_FUZZY(2, "fuzzy prefix  magic number");
+    OFFSET(2, "fuzzy prefix  magic number");
     private final int code;
     private final String name;
 

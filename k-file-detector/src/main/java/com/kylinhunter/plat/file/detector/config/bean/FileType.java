@@ -24,8 +24,21 @@ public class FileType implements Comparable<FileType> {
         }
     }
 
-    public boolean extensionEquals(String extension) {
-        return this.extension != null && this.extension.equals(extension);
+    public boolean extensionEquals(String extension, String... extensions) {
+        if (this.extension != null && this.extension.length() > 0) {
+            if (this.extension.equals(extension)) {
+                return true;
+            } else {
+                for (String tmpExtension : extensions) {
+                    if (this.extension.equals(tmpExtension)) {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+
     }
 
     @Override

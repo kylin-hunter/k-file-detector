@@ -147,4 +147,8 @@ public class FileTypeManager {
 
     }
 
+    public int allExtensionSize() {
+        return allExtensions.size();
+    }
+
 }

@@ -31,3 +31,15 @@ magics:
         extension: mp4
       - id: 0_mp4_1893411598
         extension: mp4
+  - number: 504B0304140008000800
+    fatherFirstNoExtensionHit: false
+  - number: 4D5A90000300000004000000FFFF
+    fatherFirstNoExtensionHit: false
+  - number: 4D5A900003000000
+    fatherFirstNoExtensionHit: false
+  - number: 4D5A
+    topFileTypes:
+      - id: 0_exe
+        extension: exe
+      - id: 0_com
+        extension: com

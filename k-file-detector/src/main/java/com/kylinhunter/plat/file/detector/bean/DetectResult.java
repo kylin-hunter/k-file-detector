@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,10 @@ public class DetectResult {
     @Getter
     @Setter
     private List<Magic> allPossibleMagics; // the possible magic number
+
+    @Getter(AccessLevel.PUBLIC)
+    private List<Magic> oriMagics; // the possible magic number
+
     @Getter
     private List<FileType> allPossibleFileTypes = Lists.newArrayList();  // all possible file type
 
@@ -30,6 +35,7 @@ public class DetectResult {
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();
+        this.oriMagics = detectConext.getDetectedMagics();
     }
 
     public FileType getFirstFileType() {

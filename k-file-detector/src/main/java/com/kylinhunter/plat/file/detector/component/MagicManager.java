@@ -92,7 +92,7 @@ public class MagicManager {
         magic.setLength(magic.getNumber().length() / 2);
 
         if (magic.getOffset() > 0) {
-            magic.setMode(MagicMode.PREFIX_FUZZY);
+            magic.setMode(MagicMode.OFFSET);
         } else {
             magic.setMode(MagicMode.PREFIX);
         }

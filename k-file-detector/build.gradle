@@ -6,6 +6,10 @@ dependencies {
     api('org.yaml:snakeyaml')
     api(rootProject.dep['reflections'])
 
+    implementation 'org.apache.poi:poi-ooxml-full:5.2.3'
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-examples:5.2.3'
+
     implementation(rootProject.dep['commons-fileupload'])
     implementation('org.springframework:spring-web')
     implementation(rootProject.dep['jsoup'])

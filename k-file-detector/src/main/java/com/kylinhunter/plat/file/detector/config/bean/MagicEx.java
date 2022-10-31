@@ -22,5 +22,8 @@ public class MagicEx {
     private String desc; // the description for the magic number
     private List<FileType> includeFileTypes; // the file types
     private List<FileType> excludeFileTypes; // the file types
+    private List<FileType> topFileTypes; // the file types
+    private boolean fatherFirstNoExtensionHit = true;
+
 
 }
