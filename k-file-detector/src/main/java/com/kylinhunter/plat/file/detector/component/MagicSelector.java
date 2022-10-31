@@ -125,6 +125,7 @@ public class MagicSelector {
                     if (firstMagic.getNumber().contains(bestMagic.getNumber())) {
                         if (firstMagic.isFatherFirstNoExtensionHit()) {
                             allBestMagics.add(0, firstMagic);
+
                             FileType firstFileType = firstMagic.getFirstFileType();
                             if (!allBestFileTypes.contains(firstFileType)) {
                                 allBestFileTypes.add(0, firstFileType);
