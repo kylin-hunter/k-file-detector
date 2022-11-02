@@ -71,6 +71,8 @@ public class MagicConfigLoader {
 
     private static void copy(MagicEx magicEx, Magic magic) {
         magic.setFatherFirstNoExtensionHit(magicEx.isFatherFirstNoExtensionHit());
+
+        magic.setFatherMustExtensionHit(magicEx.isFatherMustExtensionHit());
         if (magicEx.getOffset() > 0) {
             magic.setOffset(magicEx.getOffset());
         }

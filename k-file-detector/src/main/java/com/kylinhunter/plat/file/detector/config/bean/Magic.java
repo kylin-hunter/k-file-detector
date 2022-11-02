@@ -27,6 +27,8 @@ public class Magic implements Comparable<Magic> {
     private List<FileType> fileTypes; // the file types
     private boolean fatherFirstNoExtensionHit = true;
 
+    private boolean fatherMustExtensionHit = false;
+
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size
     private MagicMode mode; // magic mode for diffrent detecting action
@@ -34,6 +36,7 @@ public class Magic implements Comparable<Magic> {
 
     public Magic(String number) {
         this.number = number;
+        this.setLength(number.length() / 2);
     }
 
     public FileType getFirstFileType() {

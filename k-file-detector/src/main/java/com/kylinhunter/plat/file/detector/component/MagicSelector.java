@@ -1,16 +1,18 @@
 package com.kylinhunter.plat.file.detector.component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.compress.utils.Lists;
 
-import com.google.common.collect.Lists;
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.Component;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
-import com.kylinhunter.plat.file.detector.selector.MagicComparator;
+import com.kylinhunter.plat.file.detector.selector.MagicDefaultComparator;
+import com.kylinhunter.plat.file.detector.selector.SortMagic;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class MagicSelector {
 
-    private final MagicComparator magicComparator = new MagicComparator();
+    private final MagicDefaultComparator magicDefaultComparator = new MagicDefaultComparator();
+
+    private final int LEVEL_FILE_TYPE = 1000000000;
 
     /**
      * @param detectConext detectConext
@@ -39,135 +43,125 @@ public class MagicSelector {
 
         List<Magic> allPossibleMagics = detectConext.getDetectedMagics();
         if (!CollectionUtils.isEmpty(allPossibleMagics)) { // check extension consistent
-            allPossibleMagics.sort(magicComparator);
-            detectResult.setAllPossibleMagics(allPossibleMagics);
-
-            List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();  // all possible file type
-            List<Magic> allBestMagics = detectResult.getAllBestMagics();
-
             String extension = detectConext.getExtension();
 
-            List<FileType> allBestFileTypes = Lists.newArrayList();
+            SortMagic firsNoMatchExtension = null;
+            int extensionMatch = 0;
+            List<SortMagic> sortMagics = Lists.newArrayList();
+            for (Magic magic : allPossibleMagics) {
+                SortMagic sortMagic = new SortMagic(magic, extension);
+                if (firsNoMatchExtension == null) {
+                    if (sortMagic.getMatchExtension() == 1) {
+                        extensionMatch++;
+                    } else {
+                        firsNoMatchExtension = sortMagic;
 
-            Magic firstMagic = allPossibleMagics.get(0);
+                    }
+                }
+                sortMagics.add(sortMagic);
+            }
+            if (sortMagics.size() > 0) {
 
-            for (int i = 0; i < allPossibleMagics.size(); i++) {
+                sortMagics.sort(magicDefaultComparator);
 
-                Magic curMagic = allPossibleMagics.get(i);
-
-                if (i + 1 < allPossibleMagics.size()) {
-                    Magic nextMagic = allPossibleMagics.get(i + 1);
-                    if (curMagic.getNumber().contains(nextMagic.getNumber())) {
-                        if (curMagic.isFatherFirstNoExtensionHit()) {
-                            FileType fileType = this.getBestFileType(curMagic, extension);
-                            if (fileType != null) {
-                                if (!allBestFileTypes.contains(fileType)) {
-                                    allBestFileTypes.add(fileType);
+                for (int i = 0; i < sortMagics.size(); i++) {
+                    SortMagic curMagic = sortMagics.get(i);
+                    if (i + 1 < sortMagics.size()) {
+                        SortMagic nexSortMagic = sortMagics.get(i + 1);
+                        if (curMagic.getMagic().getNumber().contains(nexSortMagic.getMagic().getNumber())) {
+                            if (curMagic.getMagic().isFatherMustExtensionHit()) {
+                                if (curMagic.getMatchExtension() != 1) {
+                                    sortMagics.set(i, nexSortMagic);
+                                    sortMagics.set(i + 1, curMagic);
                                 }
-                                allBestMagics.add(curMagic);
-                            }
-                        }
 
-                    } else {
-
-                        FileType fileType = this.getBestFileType(curMagic, extension);
-                        if (fileType != null) {
-                            if (!allBestFileTypes.contains(fileType)) {
-                                allBestFileTypes.add(fileType);
                             }
-                            allBestMagics.add(curMagic);
                         }
                     }
-                } else {
-                    FileType fileType = this.getBestFileType(curMagic, extension);
-                    if (fileType != null) {
-                        if (!allBestFileTypes.contains(fileType)) {
-                            allBestFileTypes.add(fileType);
+
+                }
+            }
+
+            SortMagic sortMagic = sortMagics.get(0);
+            //            if (firsNoMatchExtension != null && firsNoMatchExtension != sortMagic) {
+            //                if (firsNoMatchExtension.getMagic().getNumber().contains(sortMagic.getMagic().getNumber
+            //                ())) {
+            //                    sortMagics.remove(firsNoMatchExtension);
+            //                    sortMagics.add(0, firsNoMatchExtension);
+            //                }
+            //            }
+
+            List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();  // all possible file type
+
+            if (sortMagics.size() > 1) {
+                SortMagic sortMagic1 = sortMagics.get(0);
+                Magic magic1 = sortMagic1.getMagic();
+                SortMagic sortMagic2 = sortMagics.get(1);
+                Magic magic2 = sortMagic2.getMagic();
+                if (magic2.getNumber().contains(magic1.getNumber())) {
+
+                    if (sortMagics.get(1).getMatchExtension() == 0) {
+                        if (!magic2.isFatherMustExtensionHit()) {
+                            sortMagics.set(0, sortMagic2);
+                            sortMagics.set(1, sortMagic1);
+                            sortMagic2.setMustFirst(true);
                         }
-                        allBestMagics.add(curMagic);
+
+
                     }
                 }
 
             }
 
-            if (allBestMagics.size() <= 0) {
+            List<Magic> allPossibleMagics1 = sortMagics.stream().map(e ->
+                    e.getMagic()
+            ).collect(Collectors.toList());
 
-                Magic bestMagic = null;
-                for (int i = 0; i < allPossibleMagics.size(); i++) {
+            detectResult
+                    .setAllPossibleMagics(allPossibleMagics1);
 
-                    Magic curMagic = allPossibleMagics.get(i);
-
-                    if (i + 1 < allPossibleMagics.size()) {
-                        Magic nextMagic = allPossibleMagics.get(i + 1);
-                        if (curMagic.getNumber().contains(nextMagic.getNumber())) {
-                            if (curMagic.isFatherFirstNoExtensionHit()) {
-                                bestMagic = curMagic;
-                                break;
-                            }
-
-                        } else {
-                            bestMagic = curMagic;
-                            break;
-                        }
-                    } else {
-                        bestMagic = curMagic;
-                    }
-
-                }
-                if (bestMagic == null) {
-                    bestMagic = firstMagic;
-                }
-                allBestMagics.add(bestMagic);
-                allBestFileTypes.addAll(bestMagic.getFileTypes());
-            } else {
-                if (firstMagic != allBestMagics.get(0)) {
-                    Magic bestMagic = allBestMagics.get(0);
-                    if (firstMagic.getNumber().contains(bestMagic.getNumber())) {
-                        if (firstMagic.isFatherFirstNoExtensionHit()) {
-                            allBestMagics.add(0, firstMagic);
-
-                            FileType firstFileType = firstMagic.getFirstFileType();
-                            if (!allBestFileTypes.contains(firstFileType)) {
-                                allBestFileTypes.add(0, firstFileType);
-                            }
-                        }
-                    }
-
-                }
-
-            }
-
-            allBestMagics.forEach(magic -> magic.getFileTypes().forEach(fileType -> {
-                if (!allPossibleFileTypes.contains(fileType)) {
-                    allPossibleFileTypes.add(fileType);
-                }
-            }));
-
-            allPossibleMagics.forEach(magic -> {
-                if (!allBestMagics.contains(magic)) {
-                    magic.getFileTypes().forEach(fileType -> {
-                        if (!allPossibleFileTypes.contains(fileType)) {
-                            allPossibleFileTypes.add(fileType);
-                        }
-                    });
-                }
+            sortMagics.forEach(e -> {
+                allPossibleFileTypes.addAll(e.getMagic().getFileTypes());
             });
-            if (allBestMagics.size() >= 2 && allBestFileTypes.size() >= 2) {
-                if (allBestFileTypes.get(0).extensionEquals(allBestFileTypes.get(1).getExtension())) {
-                    allBestFileTypes.set(1, allBestMagics.get(1).getFirstFileType());
+
+            int index = 0;
+            while (true) {
+                boolean has = false;
+                for (int i = 0; i < sortMagics.size(); i++) {
+                    sortMagic = sortMagics.get(i);
+                    List<FileType> fileTypes = sortMagic.getMagic().getFileTypes();
+                    if (index < fileTypes.size()) {
+                        //                        allPossibleFileTypes.add(fileTypes.get(index));
+                        has = true;
+                    }
+
+                }
+                if (!has) {
+                    break;
+                }
+                index++;
+
+            }
+            for (int i = sortMagics.size() - 1; i >= 0; i--) {
+                SortMagic e = sortMagics.get(i);
+                if (e.getMatchExtension() == 1) {
+                    allPossibleFileTypes.remove(e.getTargetExtension());
+                    allPossibleFileTypes.add(0, e.getTargetExtension());
+                } else {
+                    if (e.isMustFirst()) {
+                        allPossibleFileTypes.remove(e.getMagic().getFirstFileType());
+                        allPossibleFileTypes.add(0, e.getMagic().getFirstFileType());
+                    }
                 }
             }
 
-            for (int i = allBestFileTypes.size() - 1; i >= 0; i--) {
-                FileType fileType = allBestFileTypes.get(i);
-                allPossibleFileTypes.remove(fileType);
-                allPossibleFileTypes.add(0, fileType);
-
-            }
-
+            return detectResult;
         }
+        return null;
+    }
 
-        return detectResult;
+    protected void a() {
+
     }
 
     /**

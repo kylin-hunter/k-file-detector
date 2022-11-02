@@ -68,7 +68,7 @@ class FileDetectorTest {
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
-        DetectStatstic detectStatstic = FileDetectorHelper.detectStatstic(disguiseFiles);
+        DetectStatstic detectStatstic = FileDetectorHelper.detectStatstic(disguiseFiles, 2, true);
         Assertions.assertEquals(1, detectStatstic.getBestMatchRatio());
 
     }
@@ -139,9 +139,9 @@ class FileDetectorTest {
     @Order(99)
     void testTmp() throws IOException {
         File file1 = ResourceHelper.getFileInClassPath("files/detected/other/zip.zip");
-        //        FileDetectorHelper.assertFile(file1, FileDetector.detect(file1), 1);
-        File file2 = UserDirUtil.getFile("tmp/execute_disguise_by_extension/exe.exe#.scr", false);
-        FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), 1, true);
+                FileDetectorHelper.assertFile(file1, FileDetector.detect(file1), 1);
+//        File file2 = UserDirUtil.getFile("tmp/audio_video_disguise_by_extension/avi.avi#.cdr", false);
+//        FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), 1, true);
 
     }
 

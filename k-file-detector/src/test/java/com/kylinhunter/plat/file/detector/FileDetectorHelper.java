@@ -61,17 +61,17 @@ class FileDetectorHelper {
         if (CollectionUtils.isNotEmpty(allPossibleMagics)) {
             List<String> numbers = allPossibleMagics.stream().map(Magic::getNumber).collect(Collectors.toList());
             System.out.print(numbers);
-            System.out.println();
-        }
 
+        }
+        System.out.println();
         List<Magic> allBestMagics = detectResult.getAllBestMagics();
         System.out.print("\t 3、allBestMagics=>");
         if (CollectionUtils.isNotEmpty(allBestMagics)) {
             List<String> numbers = allBestMagics.stream().map(Magic::getNumber).collect(Collectors.toList());
             System.out.print(numbers);
-            System.out.println();
 
         }
+        System.out.println();
         FileType firstFileType = detectResult.getFirstFileType();
         System.out.println("\t 4、firstFileType=>" + firstFileType);
 
@@ -93,7 +93,11 @@ class FileDetectorHelper {
     public static int assertFile(File file, DetectResult detectResult, int targetLevel, boolean printLevel) {
         FileType firstFileType = detectResult.getFirstFileType();
         FileType secondFileType = detectResult.getSecondFileType();
+if(firstFileType==null){
+    System.out.println();
+}
         Assertions.assertNotNull(firstFileType);
+
         List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
         Assertions.assertTrue(allPossibleFileTypes.size() > 0);
         String fileName = file.getName();

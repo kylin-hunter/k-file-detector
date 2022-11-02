@@ -6,6 +6,7 @@ import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author BiJi'an
@@ -13,6 +14,7 @@ import lombok.Data;
  * @date 2022-10-01 22:37
  **/
 @Data
+@NoArgsConstructor
 public class DetectConext {
     private String possibleMagicNumber; // potential magic number
     private String fileName; // file name
