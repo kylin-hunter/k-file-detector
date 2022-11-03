@@ -15,7 +15,7 @@ public class MagicDefaultComparator implements Comparator<SortMagic> {
     @Override
     public int compare(SortMagic o1, SortMagic o2) {
 
-        int matchExtension = o2.getMatchExtension() - o1.getMatchExtension();
+        int matchExtension = o2.getMatchExtensionInt() - o1.getMatchExtensionInt();
         if (matchExtension < 0) {
             return -1;
         } else if (matchExtension > 0) {

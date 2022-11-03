@@ -24,6 +24,6 @@ public class MagicEx {
     private List<FileType> excludeFileTypes; // the file types
     private List<FileType> topFileTypes; // the file types
     private boolean fatherFirstNoExtensionHit = true;
-    private boolean fatherMustExtensionHit;
+    private boolean extensionMustHitAsFather;
 
 }

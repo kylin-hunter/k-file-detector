@@ -1,8 +1,8 @@
 package com.kylinhunter.plat.file.detector.bean;
 
+import java.util.Collections;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
@@ -20,18 +20,17 @@ public class DetectResult {
     @Getter
     private final String fileName;
 
+    @Getter(AccessLevel.PUBLIC)
+    private final List<Magic> oriMagics; // the possible magic number
+
     @Getter
     @Setter
     private List<Magic> allPossibleMagics; // the possible magic number
 
-    @Getter(AccessLevel.PUBLIC)
-    private List<Magic> oriMagics; // the possible magic number
-
+    @SuppressWarnings("unchecked")
     @Getter
-    private List<FileType> allPossibleFileTypes = Lists.newArrayList();  // all possible file type
-
-    @Getter
-    private List<Magic> allBestMagics = Lists.newArrayList(); // the best of all detedted magics
+    @Setter
+    private List<FileType> allPossibleFileTypes = Collections.EMPTY_LIST;  // all possible file type
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();
@@ -39,14 +38,14 @@ public class DetectResult {
     }
 
     public FileType getFirstFileType() {
-        if (allPossibleFileTypes != null && allPossibleFileTypes.size() > 0) {
+        if (allPossibleFileTypes.size() > 0) {
             return allPossibleFileTypes.get(0);
         }
         return null;
     }
 
     public FileType getSecondFileType() {
-        if (allPossibleFileTypes != null && allPossibleFileTypes.size() > 1) {
+        if (allPossibleFileTypes.size() > 1) {
             return allPossibleFileTypes.get(1);
         }
         return null;

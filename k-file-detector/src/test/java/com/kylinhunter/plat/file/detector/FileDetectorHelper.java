@@ -56,30 +56,23 @@ class FileDetectorHelper {
 
         List<Magic> allPossibleMagics = detectResult.getAllPossibleMagics();
 
-        System.out.print("\t 2-2、allPossibleMagics=>");
+        System.out.print("\t allPossibleMagics=>");
 
         if (CollectionUtils.isNotEmpty(allPossibleMagics)) {
             List<String> numbers = allPossibleMagics.stream().map(Magic::getNumber).collect(Collectors.toList());
             System.out.print(numbers);
 
         }
-        System.out.println();
-        List<Magic> allBestMagics = detectResult.getAllBestMagics();
-        System.out.print("\t 3、allBestMagics=>");
-        if (CollectionUtils.isNotEmpty(allBestMagics)) {
-            List<String> numbers = allBestMagics.stream().map(Magic::getNumber).collect(Collectors.toList());
-            System.out.print(numbers);
 
-        }
         System.out.println();
         FileType firstFileType = detectResult.getFirstFileType();
-        System.out.println("\t 4、firstFileType=>" + firstFileType);
+        System.out.println("\t firstFileType=>" + firstFileType);
 
         FileType secondFileType = detectResult.getSecondFileType();
-        System.out.println("\t 5、secondFileType=>" + secondFileType);
+        System.out.println("\t secondFileType=>" + secondFileType);
 
         List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
-        System.out.println("\t 6、allPossibleFileTypes=>" + allPossibleFileTypes);
+        System.out.println("\t allPossibleFileTypes=>" + allPossibleFileTypes);
 
         System.out.println("===============================================");
         System.out.println();

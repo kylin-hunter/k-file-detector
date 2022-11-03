@@ -50,7 +50,7 @@ class DetectContextBuilder {
         magic.setFileTypes(fileTypes);
         magic.setId(magicId);
         magic.setOffset(offset);
-        magic.setFatherFirstNoExtensionHit(fatherFirstNoExtensionHit);
+        magic.setExtensionMustHitAsFather(fatherFirstNoExtensionHit);
         if (number == null || number.length() <= 0 || number.length() % 2 != 0) {
             throw new DetectException("invalid number=>" + number);
         } else {

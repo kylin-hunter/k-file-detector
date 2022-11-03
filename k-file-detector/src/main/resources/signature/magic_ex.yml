@@ -33,13 +33,13 @@ magics:
         extension: mp4
   - number: 504B0304140008000800
     fatherFirstNoExtensionHit: false
-    fatherMustExtensionHit: true
+    extensionMustHitAsFather: true
   - number: 4D5A90000300000004000000FFFF
     fatherFirstNoExtensionHit: false
-    fatherMustExtensionHit: true
+    extensionMustHitAsFather: true
   - number: 4D5A900003000000
     fatherFirstNoExtensionHit: false
-    fatherMustExtensionHit: true
+    extensionMustHitAsFather: true
   - number: 4D5A
     topFileTypes:
       - id: 0_exe

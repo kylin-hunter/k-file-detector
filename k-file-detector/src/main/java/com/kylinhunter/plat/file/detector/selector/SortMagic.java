@@ -15,22 +15,25 @@ import lombok.Data;
 @Data
 public class SortMagic {
     private Magic magic;
-    private int matchExtension;
-    private FileType targetExtension;
+    private boolean matchExtension;
+    private int matchExtensionInt;
+    private FileType matchFileType;
     private String extension;
     private boolean mustFirst;
 
     public SortMagic(Magic magic, String extension) {
         this.magic = magic;
         this.extension = extension;
-        this.matchExtension = 0;
+        this.matchExtension = false;
+        this.matchExtensionInt = 0;
 
         List<FileType> fileTypes = magic.getFileTypes();
 
         for (FileType fileType : fileTypes) {
             if (fileType.extensionEquals(extension)) {
-                this.matchExtension = 1;
-                this.targetExtension = fileType;
+                this.matchExtension = true;
+                this.matchExtensionInt = 1;
+                this.matchFileType = fileType;
                 break;
             }
         }

@@ -140,7 +140,7 @@ class FileDetectorTest {
     void testTmp() throws IOException {
         File file1 = ResourceHelper.getFileInClassPath("files/detected/other/zip.zip");
                 FileDetectorHelper.assertFile(file1, FileDetector.detect(file1), 1);
-//        File file2 = UserDirUtil.getFile("tmp/audio_video_disguise_by_extension/avi.avi#.cdr", false);
+        File file2 = UserDirUtil.getFile("tmp/audio_video_disguise_by_extension/avi.avi#.cdr", false);
 //        FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), 1, true);
 
     }
