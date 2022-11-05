@@ -16,11 +16,11 @@ public class FileType implements Comparable<FileType> {
     String id;
     private String extension;
     private String desc;
-    private int magicMaxLength;
+    private int magicMaxLengthWithOffset;
 
-    public void reCalMaxMagicLen(int magicLen) {
-        if (magicLen > this.magicMaxLength) {
-            this.magicMaxLength = magicLen;
+    public void reCalMagicMaxLengthWithOffset(int offset, int magicLen) {
+        if (offset + magicLen > this.magicMaxLengthWithOffset) {
+            this.magicMaxLengthWithOffset = offset + magicLen;
         }
     }
 

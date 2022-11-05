@@ -60,7 +60,7 @@ class MagicManagerTest {
 
     @Test
     void getMagicMaxLength() {
-        int magicMaxLength = magicManager.getMagicMaxLength();
+        int magicMaxLength = magicManager.getMagicMaxLengthWitOffset();
         System.out.println("magicMaxLength:" + magicMaxLength);
         Assertions.assertTrue(magicMaxLength > 0);
 

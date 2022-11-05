@@ -20,44 +20,44 @@ class MagicReaderTest {
     @Test
     void read() throws IOException {
 
-        File file = ResourceHelper.getFileInClassPath("files/detected/office/doc.doc");
+        File file = ResourceHelper.getFileInClassPath("files/detected/other/pdf.pdf");
 
         String read1 = magicReader.read(file);
 
         System.out.println(read1);
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read1.length());
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read1.substring(0, 16));
+        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read1.length());
+        Assertions.assertEquals("25504446", read1.substring(0, 8));
 
         read1 = magicReader.read(file, true);
         System.out.println(read1);
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read1);
+        Assertions.assertEquals("25504446", read1);
 
         MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
 
         String read2 = magicReader.read(multipartFile);
         System.out.println(read2);
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read2.length());
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read2.substring(0, 16));
+        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read2.length());
+        Assertions.assertEquals("25504446", read2.substring(0, 8));
 
         read2 = magicReader.read(multipartFile, true);
         System.out.println(read2);
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read2);
+        Assertions.assertEquals("25504446", read2);
 
         byte[] bytes = FileUtils.readFileToByteArray(file);
 
         String read3 = magicReader.read(bytes);
         System.out.println(read3);
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals("25504446", read3.substring(0, 8));
+        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read3.length());
 
-        read3 = magicReader.read(bytes, "1.doc", true);
+        read3 = magicReader.read(bytes, "1.pdf", true);
         System.out.println(read3);
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read3);
+        Assertions.assertEquals("25504446", read3);
 
-        read3 = magicReader.read(bytes, "1.doc", false);
+        read3 = magicReader.read(bytes, "1.pdf", false);
         System.out.println(read3);
-        Assertions.assertEquals("D0CF11E0A1B11AE1", read3.substring(0, 16));
-        Assertions.assertEquals(magicManager.getMagicMaxLength() * 2, read3.length());
+        Assertions.assertEquals("25504446", read3.substring(0, 8));
+        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read3.length());
 
     }
 

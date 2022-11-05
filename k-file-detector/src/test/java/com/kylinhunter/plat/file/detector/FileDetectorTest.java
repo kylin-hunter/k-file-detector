@@ -137,7 +137,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(12, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/pic_disguise_by_extension", true);
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office_disguise_by_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
@@ -155,7 +155,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(12, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/pic_remove_extension", true);
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office_remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -256,7 +256,7 @@ class FileDetectorTest {
         //                FileDetectorHelper.assertFile(file1, FileDetector.detect(file1), 1);
         //        File file2 = UserDirUtil.getFile("tmp/disguise/audio_video_disguise_by_extension/avi.avi#.cdr",
         //        false);
-        File file2 = UserDirUtil.getFile("tmp/disguise/execute_disguise_by_extension/exe.exe#.dll", false);
+        File file2 = UserDirUtil.getFile("tmp/disguise/office_remove_extension/xls@xls#_noextension", false);
 
         FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), Arrays.asList(
                 -1, 102, 202, 300), true);

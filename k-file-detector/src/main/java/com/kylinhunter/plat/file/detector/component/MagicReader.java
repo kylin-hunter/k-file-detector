@@ -161,14 +161,14 @@ public class MagicReader {
             String extension = FilenameUtil.getExtension(fileName);
             Set<FileType> fileTypes = this.fileTypeManager.getFileTypesByExtension(extension);
             for (FileType fileType : fileTypes) {
-                if (fileType.getMagicMaxLength() > magicLen) {
-                    magicLen = fileType.getMagicMaxLength();
+                if (fileType.getMagicMaxLengthWithOffset() > magicLen) {
+                    magicLen = fileType.getMagicMaxLengthWithOffset();
                 }
             }
         }
 
         if (magicLen <= 0) {
-            magicLen = this.magicManager.getMagicMaxLength();
+            magicLen = this.magicManager.getMagicMaxLengthWitOffset();
         }
 
         if (fileSize > 0 && magicLen > fileSize) {

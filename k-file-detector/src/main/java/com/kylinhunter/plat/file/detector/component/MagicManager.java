@@ -40,7 +40,7 @@ public class MagicManager {
     private final FileTypeManager fileTypeManager;
 
     @Getter
-    private int magicMaxLength = 1;
+    private int magicMaxLengthWitOffset = 1;
 
     public MagicManager(FileTypeManager fileTypeManager) {
         this.fileTypeManager = fileTypeManager;
@@ -106,14 +106,14 @@ public class MagicManager {
                     if (newFileType == null) {
                         throw new DetectException("no file type :" + oldFileType.getId());
                     }
-                    newFileType.reCalMaxMagicLen(magic.getLength());
+                    newFileType.reCalMagicMaxLengthWithOffset(magic.getOffset(), magic.getLength());
                     return newFileType;
                 }).collect(Collectors.toList());
         magic.setFileTypes(fileTypes);
         magic.setFileTypesWrapper(new FileTypesWrapper(fileTypes));
 
-        if (magic.getLength() > this.magicMaxLength) {
-            this.magicMaxLength = magic.getLength();
+        if (magic.getOffset() + magic.getLength() > this.magicMaxLengthWitOffset) {
+            this.magicMaxLengthWitOffset = magic.getOffset() + magic.getLength();
         }
     }
 
