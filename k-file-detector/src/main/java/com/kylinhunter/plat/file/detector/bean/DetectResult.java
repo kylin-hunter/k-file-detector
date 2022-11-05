@@ -2,6 +2,7 @@ package com.kylinhunter.plat.file.detector.bean;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
@@ -27,28 +28,42 @@ public class DetectResult {
     @Setter
     private List<Magic> allPossibleMagics; // the possible magic number
 
-    @SuppressWarnings("unchecked")
-    @Getter
-    @Setter
-    private List<FileType> allPossibleFileTypes = Collections.EMPTY_LIST;  // all possible file type
+    private List<FileType> allPossibleFileTypes;
 
     public DetectResult(DetectConext detectConext) {
         this.fileName = detectConext.getFileName();
         this.oriMagics = detectConext.getDetectedMagics();
     }
 
-    public FileType getFirstFileType() {
-        if (allPossibleFileTypes.size() > 0) {
-            return allPossibleFileTypes.get(0);
+    @SuppressWarnings("unchecked")
+    public List<FileType> getFirstFileTypes() {
+        if (allPossibleMagics != null && allPossibleMagics.size() > 0) {
+            return allPossibleMagics.get(0).getFileTypes();
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
-    public FileType getSecondFileType() {
-        if (allPossibleFileTypes.size() > 1) {
-            return allPossibleFileTypes.get(1);
+    @SuppressWarnings("unchecked")
+    public List<FileType> getSecondFileType() {
+        if (allPossibleMagics != null && allPossibleMagics.size() > 1) {
+            return allPossibleMagics.get(1).getFileTypes();
         }
-        return null;
+        return Collections.EMPTY_LIST;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<FileType> getAllPossibleFileTypes() {
+        if (allPossibleFileTypes == null) {
+            if (allPossibleMagics != null) {
+                allPossibleFileTypes =
+                        allPossibleMagics.stream().flatMap(e -> e.getFileTypes().stream()).collect(Collectors.toList());
+
+            } else {
+                allPossibleFileTypes = Collections.EMPTY_LIST;
+            }
+        }
+        return allPossibleFileTypes;
+
     }
 }
 

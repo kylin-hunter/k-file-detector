@@ -32,13 +32,10 @@ magics:
       - id: 0_mp4_1893411598
         extension: mp4
   - number: 504B0304140008000800
-    fatherFirstNoExtensionHit: false
     extensionMustHitAsFather: true
   - number: 4D5A90000300000004000000FFFF
-    fatherFirstNoExtensionHit: false
     extensionMustHitAsFather: true
   - number: 4D5A900003000000
-    fatherFirstNoExtensionHit: false
     extensionMustHitAsFather: true
   - number: 4D5A
     topFileTypes:
@@ -46,3 +43,13 @@ magics:
         extension: exe
       - id: 0_com
         extension: com
+  - number: FFD8FFE0xxxx4A46494600
+    topFileTypes:
+      - id: 0_jpg_2066877226
+        extension: "jpg"
+      - id: 0_jpeg_2066877226
+        extension: "jpeg"
+      - id: 0_jpe_2066877226
+        extension: "jpe"
+      - id: 0_jfif
+        extension: "jfif"

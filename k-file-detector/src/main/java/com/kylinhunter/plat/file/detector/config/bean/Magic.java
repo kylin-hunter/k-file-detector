@@ -25,14 +25,13 @@ public class Magic implements Comparable<Magic> {
     private int offset;
     private String desc; // the description for the magic number
     private List<FileType> fileTypes; // the file types
-    private boolean fatherFirstNoExtensionHit = true;
 
     private boolean extensionMustHitAsFather = false;
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size
     private MagicMode mode; // magic mode for diffrent detecting action
-    private List<String> extensions; // the extension can be detected
+    private FileTypesWrapper fileTypesWrapper;
 
     public Magic(String number) {
         this.number = number;
@@ -55,7 +54,7 @@ public class Magic implements Comparable<Magic> {
 
     @Override
     public String toString() {
-        return number + "/" + extensions;
+        return number + "/" + fileTypesWrapper.extensions;
     }
 
     @Override

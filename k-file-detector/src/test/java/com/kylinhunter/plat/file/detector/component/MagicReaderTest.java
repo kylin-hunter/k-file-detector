@@ -2,8 +2,7 @@ package com.kylinhunter.plat.file.detector.component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +20,7 @@ class MagicReaderTest {
     @Test
     void read() throws IOException {
 
-        File file = ResourceHelper.getFileInClassPath("files/basic/office/doc.doc");
+        File file = ResourceHelper.getFileInClassPath("files/detected/office/doc.doc");
 
         String read1 = magicReader.read(file);
 
@@ -65,9 +64,10 @@ class MagicReaderTest {
     @Test
     void readAll() {
 
-        File dir = ResourceHelper.getFileInClassPath("files/basic");
+        File dir = ResourceHelper.getFileInClassPath("files/detected");
         System.out.println(dir.getAbsolutePath());
-        Arrays.stream(Objects.requireNonNull(dir.listFiles())).filter(File::isFile).forEach(file -> System.out
+        Collection<File> files = FileUtils.listFiles(dir, null, true);
+        files.forEach(file -> System.out
                 .println("file=>" + file.getName() + "\t magic_number=>" + magicReader.read(file, true)));
 
     }

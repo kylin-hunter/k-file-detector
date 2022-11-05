@@ -1,5 +1,6 @@
 package com.kylinhunter.plat.file.detector.component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ class MagicManagerTest {
 
         System.out.println("    5、ex--length:" + magic.getLength());
         System.out.println("    6、ex--mode:" + magic.getMode());
-        System.out.println("    7、ex--extensions:" + magic.getExtensions());
+        System.out.println("    7、ex--extensions:" + magic.getFileTypesWrapper().getExtensions());
         System.out.println("======================================");
     }
 
@@ -70,7 +71,38 @@ class MagicManagerTest {
 
         List<Magic> detectMagics = magicManager.detect("25504446");
         Assertions.assertTrue(detectMagics.size() > 0);
-        Assertions.assertTrue(detectMagics.get(0).getExtensions().contains("pdf"));
+        Assertions.assertTrue(detectMagics.get(0).getFileTypesWrapper().getExtensions().contains("pdf"));
+    }
+
+    @Test
+    void printAllFather() {
+
+        List<Magic> magics = new ArrayList<>(magicManager.getAllMagics());
+        magics.sort((o1, o2) -> {
+            int i = o1.getOffset() - o2.getOffset();
+            if (i != 0) {
+                return i;
+            } else {
+                return o1.getNumber().compareTo(o2.getNumber());
+            }
+        });
+
+        int lastPrint = 0;
+
+        for (int i = 0; i < magics.size() - 1; i++) {
+            Magic cur = magics.get(i);
+            Magic next = magics.get(i + 1);
+            if (next.getNumber().startsWith(cur.getNumber())) {
+                if (i != lastPrint) {
+                    System.out.println(i + " \t=>" + cur.getNumber());
+                }
+                System.out.println((i + 1) + " \t=>" + next.getNumber() + "，has child=>" + true);
+
+                lastPrint = i + 1;
+            }
+
+        }
+
     }
 
 }

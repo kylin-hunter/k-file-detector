@@ -19,7 +19,6 @@ import com.kylinhunter.plat.file.detector.exception.DetectException;
 class DetectContextBuilder {
     private final List<Magic> magics;
     private final DetectConext detectConext;
-    private int magicId;
     private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
 
     public DetectContextBuilder() {
@@ -44,13 +43,14 @@ class DetectContextBuilder {
         return this;
     }
 
-    public DetectContextBuilder add(int magicId, boolean fatherFirstNoExtensionHit,int offset, String number, String... fileTypeIds) {
+    public DetectContextBuilder add(int magicId, boolean extensionMustHitAsFather, int offset, String number,
+                                    String... fileTypeIds) {
         Magic magic = new Magic();
         List<FileType> fileTypes = Lists.newArrayList();
         magic.setFileTypes(fileTypes);
         magic.setId(magicId);
         magic.setOffset(offset);
-        magic.setExtensionMustHitAsFather(fatherFirstNoExtensionHit);
+        magic.setExtensionMustHitAsFather(extensionMustHitAsFather);
         if (number == null || number.length() <= 0 || number.length() % 2 != 0) {
             throw new DetectException("invalid number=>" + number);
         } else {

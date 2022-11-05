@@ -14,6 +14,7 @@ import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.common.component.Component;
 import com.kylinhunter.plat.file.detector.config.MagicConfigLoader;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
+import com.kylinhunter.plat.file.detector.config.bean.FileTypesWrapper;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 import com.kylinhunter.plat.file.detector.constant.MagicMode;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
@@ -105,17 +106,11 @@ public class MagicManager {
                     if (newFileType == null) {
                         throw new DetectException("no file type :" + oldFileType.getId());
                     }
-                    List<String> extensions = magic.getExtensions();
-                    if (extensions == null) {
-                        extensions = Lists.newArrayList();
-                        magic.setExtensions(extensions);
-                    }
-                    extensions.add(newFileType.getExtension());
-
                     newFileType.reCalMaxMagicLen(magic.getLength());
                     return newFileType;
                 }).collect(Collectors.toList());
         magic.setFileTypes(fileTypes);
+        magic.setFileTypesWrapper(new FileTypesWrapper(fileTypes));
 
         if (magic.getLength() > this.magicMaxLength) {
             this.magicMaxLength = magic.getLength();

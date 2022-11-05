@@ -107,7 +107,7 @@ public class FileTypeManager {
     /**
      * @param extension extension
      * @return java.util.Set<com.kylinhunter.plat.file.detector.config.bean.FileType>
-     * @title getFileTypes
+     * @title getFileTypeWrappers
      * @description
      * @author BiJi'an
      * @date 2022-10-24 01:48

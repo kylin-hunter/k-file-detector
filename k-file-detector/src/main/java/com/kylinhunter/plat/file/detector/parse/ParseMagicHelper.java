@@ -111,6 +111,7 @@ public class ParseMagicHelper {
      * @date 2022-10-30 21:18
      */
     public static boolean isSkipParseMagicNumber(String text) {
+
         for (String number : INVALID_NUMBER) {
             if (text.equals(number)) {
                 return true;

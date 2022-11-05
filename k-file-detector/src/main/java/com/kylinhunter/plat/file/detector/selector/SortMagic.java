@@ -39,4 +39,13 @@ public class SortMagic {
         }
 
     }
+
+    public String getNumber() {
+        return magic.getNumber();
+    }
+
+    public FileType getFirstFileType() {
+        return magic.getFirstFileType();
+    }
+
 }
