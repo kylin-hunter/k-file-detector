@@ -11,4 +11,7 @@ fileTypes:
   - id: 100004
     extension: xlt
     desc: 'ms excel template for 97-2004'
+  - id: 100005
+    extension: potx
+    desc: 'ppt template for 97-2004'
 

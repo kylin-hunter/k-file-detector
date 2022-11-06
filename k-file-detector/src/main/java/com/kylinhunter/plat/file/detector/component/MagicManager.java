@@ -139,6 +139,7 @@ public class MagicManager {
      */
     public List<Magic> detect(String possibleMagicNumber) {
         List<Magic> detectedMagics = Lists.newArrayList();
+
         if (!StringUtils.isEmpty(possibleMagicNumber)) {
             for (Magic magic : allMagics) {
                 String number = magic.getNumber();
