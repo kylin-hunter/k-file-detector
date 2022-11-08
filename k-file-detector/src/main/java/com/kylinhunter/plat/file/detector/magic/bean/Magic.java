@@ -28,7 +28,7 @@ public class Magic implements Comparable<Magic> {
     private List<FileType> fileTypes; // the file types
 
     private boolean extensionMustHitAsFather = false;
-    private boolean loadAll;
+    private boolean detectContentSupport;
 
 
     /* ==== extended  properties===*/

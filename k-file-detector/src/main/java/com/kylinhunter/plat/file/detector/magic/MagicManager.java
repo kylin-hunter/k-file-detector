@@ -38,7 +38,7 @@ public class MagicManager {
     private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
 
     @Getter
-    private final Set<String> loadAllMagics = Sets.newHashSet();
+    private final Set<String> detectContentSupportMagics = Sets.newHashSet();
 
     private final FileTypeManager fileTypeManager;
 
@@ -90,8 +90,8 @@ public class MagicManager {
      * @date 2022-10-24 02:13
      */
     private void process(Magic magic) {
-        if (magic.isLoadAll()) {
-            loadAllMagics.add(magic.getNumber());
+        if (magic.isDetectContentSupport()) {
+            detectContentSupportMagics.add(magic.getNumber());
         }
         allMagics.add(magic);
         numberMagics.put(magic.getNumber(), magic);
@@ -138,7 +138,7 @@ public class MagicManager {
 
 
     public  boolean isLoadAll(String number){
-        return  loadAllMagics.contains(number);
+        return  detectContentSupportMagics.contains(number);
     }
 
 }

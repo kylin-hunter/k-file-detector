@@ -20,7 +20,6 @@ public class ContentDetector implements Detector {
     public DetectConext detect(DetectConext detectConext) {
 
         ReadMagic readMagic = detectConext.getReadMagic();
-        readMagic.isCheckContent();
         return detectConext;
     }
 }

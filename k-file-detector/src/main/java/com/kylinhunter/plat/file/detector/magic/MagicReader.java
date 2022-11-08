@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.common.util.HexUtil;
-import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,11 +59,11 @@ public class MagicReader {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
             String possibleNumber = HexUtil.toString(content, 0, magicLen);
-            if (loadAll(possibleNumber)) {
-                return new ReadMagic(possibleNumber, content);
+            if (isDetectContentSupport(possibleNumber)) {
+                return new ReadMagic(fileName, possibleNumber, true, content);
 
             } else {
-                return new ReadMagic(possibleNumber);
+                return new ReadMagic(fileName, possibleNumber);
 
             }
 
@@ -150,7 +150,7 @@ public class MagicReader {
             int len = inputStream.read(headContent);
             if (len > 0) {
                 String possibleMagic = HexUtil.toString(headContent, 0, len);
-                if (loadAll(possibleMagic)) {
+                if (isDetectContentSupport(possibleMagic)) {
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     IOUtils.copy(inputStream, byteArrayOutputStream);
@@ -158,9 +158,9 @@ public class MagicReader {
                     byte[] content = new byte[len + remainedContent.length];
                     System.arraycopy(headContent, 0, content, 0, len);
                     System.arraycopy(remainedContent, 0, content, len, remainedContent.length);
-                    return new ReadMagic(possibleMagic, content);
+                    return new ReadMagic(fileName, possibleMagic, true, content);
                 } else {
-                    return new ReadMagic(possibleMagic);
+                    return new ReadMagic(fileName, possibleMagic);
 
                 }
             }
@@ -205,15 +205,15 @@ public class MagicReader {
     /**
      * @param possibleNumber possibleNumber
      * @return boolean
-     * @title loadAll
+     * @title detectContentSupport
      * @description
      * @author BiJi'an
      * @date 2022-11-07 14:42
      */
-    private boolean loadAll(String possibleNumber) {
-        Set<String> loadAllMagics = magicManager.getLoadAllMagics();
-        for (String loadAllMagic : loadAllMagics) {
-            if (possibleNumber.startsWith(loadAllMagic)) {
+    private boolean isDetectContentSupport(String possibleNumber) {
+        Set<String> detectContentSupportMagics = magicManager.getDetectContentSupportMagics();
+        for (String magicNumber : detectContentSupportMagics) {
+            if (possibleNumber.startsWith(magicNumber)) {
                 return true;
             }
 

@@ -20,8 +20,8 @@ public class MixDetector {
     private final ContentDetector contentDetector;
     private final BestSelector bestSelector;
 
-    public DetectResult detect(ReadMagic readMagic, String fileName) {
-        DetectConext detectConext = new DetectConext(readMagic, fileName);
+    public DetectResult detect(ReadMagic readMagic) {
+        DetectConext detectConext = new DetectConext(readMagic);
         magicDetector.detect(detectConext);
         contentDetector.detect(detectConext);
         return bestSelector.selectBest(detectConext);

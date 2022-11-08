@@ -3,9 +3,9 @@ package com.kylinhunter.plat.file.detector.detect.bean;
 import java.util.List;
 
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
-import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,11 +25,9 @@ public class DetectConext {
     private ReadMagic readMagic;
 
     public DetectConext(ReadMagic readMagic) {
-        this(readMagic, null);
-    }
 
-    public DetectConext(ReadMagic readMagic, String fileName) {
         this.readMagic = readMagic;
+        String fileName = readMagic.getFileName();
         if (fileName != null && fileName.length() > 0) {
             this.fileName = fileName;
             this.extension = FilenameUtil.getExtension(fileName);
@@ -44,7 +42,4 @@ public class DetectConext {
         return readMagic.getPossibleMagicNumber();
     }
 
-    public boolean isCheckContent() {
-        return readMagic.isCheckContent();
-    }
 }

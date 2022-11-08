@@ -5,11 +5,11 @@ import java.io.InputStream;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 import com.kylinhunter.plat.file.detector.detect.MixDetector;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
+import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
+import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +35,7 @@ public class FileDetector {
      */
     public static DetectResult detect(byte[] content, String fileName) {
         ReadMagic readMagic = MAGIC_READER.read(content, fileName, false);
-        return detect(readMagic, fileName);
+        return detect(readMagic);
 
     }
 
@@ -50,7 +50,7 @@ public class FileDetector {
 
     public static DetectResult detect(MultipartFile file) {
         ReadMagic readMagic = MAGIC_READER.read(file, false);
-        return detect(readMagic, file.getOriginalFilename());
+        return detect(readMagic);
     }
 
     /**
@@ -63,7 +63,7 @@ public class FileDetector {
      */
     public static DetectResult detect(File file) {
         ReadMagic readMagic = MAGIC_READER.read(file, false);
-        return detect(readMagic, file.getName());
+        return detect(readMagic);
     }
 
     /**
@@ -91,12 +91,11 @@ public class FileDetector {
      */
     public static DetectResult detect(InputStream input, String fileName, long fileSize) {
         ReadMagic readMagic = MAGIC_READER.read(input, fileName, fileSize, false);
-        return detect(readMagic, fileName);
+        return detect(readMagic);
     }
 
     /**
      * @param readMagic readMagic
-     * @param fileName  fileName
      * @return com.kylinhunter.file.detector.bean.DetectResult
      * @title safe
      * @description
@@ -104,9 +103,9 @@ public class FileDetector {
      * @date 2022-10-07 10:23
      */
 
-    private static DetectResult detect(ReadMagic readMagic, String fileName) {
+    private static DetectResult detect(ReadMagic readMagic) {
 
-        return MIX_DETECTOR.detect(readMagic, fileName);
+        return MIX_DETECTOR.detect(readMagic);
 
     }
 

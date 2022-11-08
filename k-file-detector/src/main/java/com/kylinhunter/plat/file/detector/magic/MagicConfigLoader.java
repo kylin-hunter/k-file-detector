@@ -73,7 +73,7 @@ public class MagicConfigLoader {
     private static void processMagicEx(MagicEx magicEx, Magic magic) {
 
         magic.setExtensionMustHitAsFather(magicEx.isExtensionMustHitAsFather());
-        magic.setLoadAll(magicEx.isLoadAll());
+        magic.setDetectContentSupport(magicEx.isDetectContentSupport());
         if (magicEx.getOffset() > 0) {
             magic.setOffset(magicEx.getOffset());
         }

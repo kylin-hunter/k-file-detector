@@ -11,23 +11,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ReadMagic {
+    private String fileName;
     private String possibleMagicNumber;
     private byte[] content;
-    private boolean checkContent;
+    private boolean detectContentSupport;
 
-    public ReadMagic(String possibleMagicNumber) {
-        this(possibleMagicNumber, null);
+    public ReadMagic(String fileName, String possibleMagicNumber) {
+        this(fileName, possibleMagicNumber, false, null);
     }
 
-    public ReadMagic(String possibleMagicNumber, byte[] content) {
+    public ReadMagic(String fileName, String possibleMagicNumber, boolean detectContentSupport, byte[] content) {
+        this.fileName = fileName;
         this.possibleMagicNumber = possibleMagicNumber;
+        this.detectContentSupport = detectContentSupport;
         if (content != null && content.length > 0) {
             this.content = content;
-            this.checkContent = true;
         } else {
             this.content = new byte[0];
         }
     }
-
 
 }

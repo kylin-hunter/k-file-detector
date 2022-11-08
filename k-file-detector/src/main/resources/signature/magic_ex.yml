@@ -1,7 +1,7 @@
 magics:
   - number: 504B030414000600
     offset: 0
-    loadAll: true
+    detectContentSupport: true
     desc: 'PK......'
     includeFileTypes:
       - id: 100001
@@ -12,7 +12,7 @@ magics:
         extension: "xltx"
   - number: D0CF11E0A1B11AE1
     offset: 0
-    loadAll: true
+    detectContentSupport: true
     desc: ' may be a ms office docuemnt (97-2004) or other file type '
     includeFileTypes:
       - id: 100004
