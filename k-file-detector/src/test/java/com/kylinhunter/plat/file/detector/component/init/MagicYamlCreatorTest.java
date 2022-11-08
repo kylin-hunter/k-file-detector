@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.init;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.kylinhunter.plat.file.detector.component.init.MagicYamlCreator;
 import com.kylinhunter.plat.file.detector.parse.bean.ParseContext;
 import com.kylinhunter.plat.file.detector.parse.bean.ParseMagic;
 import com.kylinhunter.plat.file.detector.parse.bean.ParseStat;

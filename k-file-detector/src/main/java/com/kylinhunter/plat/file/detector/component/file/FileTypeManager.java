@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.file;
 
 import java.util.Collections;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.config.FileTypeConfigLoader;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
@@ -22,7 +22,7 @@ import lombok.Getter;
  * @date 2022-10-20 15:51
  **/
 
-@Component
+@C
 public class FileTypeManager {
     private final String EXTENSIN_EMPTY = "!@#$%^";
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();

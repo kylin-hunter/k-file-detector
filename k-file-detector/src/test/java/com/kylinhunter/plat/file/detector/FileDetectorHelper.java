@@ -19,21 +19,21 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
-import com.kylinhunter.plat.file.detector.component.FileTypeManager;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorHelper {
-    private static final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
+    private static final FileTypeManager FILE_TYPE_MANAGER = CF.get(FileTypeManager.class);
 
     private static final Map<String, FileType> SPECIAL_FILETYPES = Maps.newHashMap();
 
     static {
-        SPECIAL_FILETYPES.put("linux-execute", fileTypeManager.getFileTypeById("1_29837182"));
-        SPECIAL_FILETYPES.put("mac-execute", fileTypeManager.getFileTypeById("1_1600260370"));
+        SPECIAL_FILETYPES.put("linux-execute", FILE_TYPE_MANAGER.getFileTypeById("1_29837182"));
+        SPECIAL_FILETYPES.put("mac-execute", FILE_TYPE_MANAGER.getFileTypeById("1_1600260370"));
 
     }
 
@@ -168,27 +168,23 @@ class FileDetectorHelper {
 
         int matchLevel = -1;
 
-        if (matchLevel <= 0) {
-
-            if (checkExtensions(firstFileTypes, extension, realExtensions)) {
+        if (checkExtensions(firstFileTypes, extension, realExtensions)) {
+            matchLevel = 100;
+        } else {
+            if (checkSpecialFile(fileName, firstFileTypes)) {
                 matchLevel = 100;
+            }
+        }
+        if (matchLevel == 100) {
+            if (checkExtensions(firstFileTypes.get(0), extension, realExtensions)) {
+                matchLevel = 101;
             } else {
-                if (checkSpecialFile(fileName, firstFileTypes)) {
-                    matchLevel = 100;
+                if (checkSpecialFile(fileName, firstFileTypes.get(0))) {
+                    matchLevel = 101;
                 }
             }
-            if (matchLevel == 100) {
-                if (checkExtensions(firstFileTypes.get(0), extension, realExtensions)) {
-                    matchLevel = 101;
-                } else {
-                    if (checkSpecialFile(fileName, firstFileTypes.get(0))) {
-                        matchLevel = 101;
-                    }
-                }
-                if (matchLevel != 101) {
-                    matchLevel = 102;
-                }
-
+            if (matchLevel != 101) {
+                matchLevel = 102;
             }
 
         }
@@ -247,15 +243,21 @@ class FileDetectorHelper {
 
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static List<File> disguiseByExtension(File[] files, File disguiseDir) throws IOException {
 
         List<File> disguisFiles = Lists.newArrayList();
         for (File file : files) {
             if (file.isFile()) {
                 String fileExtension = FilenameUtil.getExtension(file.getName());
-                for (String extension : fileTypeManager.getAllExtensions()) {
+                for (String extension : FILE_TYPE_MANAGER.getAllExtensions()) {
                     if (!fileExtension.equalsIgnoreCase(extension)) {
                         File disguisFile = new File(disguiseDir, file.getName() + "#." + extension);
+
+                        if (disguisFile.exists() && disguisFile.lastModified() < file.lastModified()) {
+                            disguiseDir.delete();
+                        }
+
                         if (!disguisFile.exists()) {
                             FileUtils.copyFile(file, disguisFile);
                         }
@@ -269,6 +271,7 @@ class FileDetectorHelper {
 
     }
 
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     public static List<File> disguiseRemoveExtension(File[] files, File disguiseDir) throws IOException {
 
         List<File> disguisFiles = Lists.newArrayList();
@@ -279,6 +282,9 @@ class FileDetectorHelper {
                 if (!StringUtils.isEmpty(fileExtension)) {
 
                     File disguisFile = new File(disguiseDir, file.getName().replace(".", "@") + "#_noextension");
+                    if (disguisFile.exists() && disguisFile.lastModified() < file.lastModified()) {
+                        disguiseDir.delete();
+                    }
                     if (!disguisFile.exists()) {
                         FileUtils.copyFile(file, disguisFile);
                     }

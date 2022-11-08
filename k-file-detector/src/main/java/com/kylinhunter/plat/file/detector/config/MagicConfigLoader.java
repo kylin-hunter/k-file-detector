@@ -54,24 +54,25 @@ public class MagicConfigLoader {
         MagicConfig magicConfig = load0(MagicConfig.class, MAGIC_LOCATION);
         Objects.requireNonNull(magicConfig);
 
-        MagicConfigEx magicConfigEx = load0(MagicConfigEx.class, MAGIC_LOCATION_EX);
-        Objects.requireNonNull(magicConfigEx);
+        MagicExConfig magicExConfig = load0(MagicExConfig.class, MAGIC_LOCATION_EX);
+        Objects.requireNonNull(magicExConfig);
 
-        Map<String, MagicEx> exMagics = magicConfigEx.magics.stream()
+        Map<String, MagicEx> exMagics = magicExConfig.magics.stream()
                 .collect(Collectors.toMap(MagicEx::getNumber, e -> e));
         List<Magic> magics = magicConfig.magics;
         for (Magic magic : magics) {
             MagicEx magicEx = exMagics.get(magic.getNumber());
             if (magicEx != null) {
-                copy(magicEx, magic);
+                processMagicEx(magicEx, magic);
             }
         }
         return magicConfig;
     }
 
-    private static void copy(MagicEx magicEx, Magic magic) {
+    private static void processMagicEx(MagicEx magicEx, Magic magic) {
 
         magic.setExtensionMustHitAsFather(magicEx.isExtensionMustHitAsFather());
+        magic.setLoadAll(magicEx.isLoadAll());
         if (magicEx.getOffset() > 0) {
             magic.setOffset(magicEx.getOffset());
         }
@@ -127,7 +128,7 @@ public class MagicConfigLoader {
      * @date 2022-10-02 19:55
      **/
     @Data
-    public static class MagicConfigEx {
+    public static class MagicExConfig {
         private List<MagicEx> magics;
     }
 }

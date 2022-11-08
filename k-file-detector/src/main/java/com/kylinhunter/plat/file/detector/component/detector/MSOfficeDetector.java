@@ -1,6 +1,7 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.detector;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,9 @@ import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 
 import com.google.common.collect.Maps;
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ZipUtil;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
@@ -29,10 +31,9 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022-10-02 16:45
  **/
 @Slf4j
-@Component
+@C
 public class MSOfficeDetector {
-    private FileTypeManager fileTypeManager;
-    private MagicManager magicManager;
+    private final FileTypeManager fileTypeManager;
     private FileType ppsx;
     private FileType dotx;
     private FileType xltx;
@@ -43,9 +44,8 @@ public class MSOfficeDetector {
     private FileType potx;
     private static final Map<String, FileType> DIR_FILE_TYPES = Maps.newHashMap();
 
-    public MSOfficeDetector(FileTypeManager fileTypeManager, MagicManager magicManager) {
+    public MSOfficeDetector(FileTypeManager fileTypeManager) {
         this.fileTypeManager = fileTypeManager;
-        this.magicManager = magicManager;
         init();
     }
 
@@ -60,21 +60,43 @@ public class MSOfficeDetector {
         xlsx = fileTypeManager.getFileTypeById("0_xlsx");
         pptx = fileTypeManager.getFileTypeById("0_pptx");
 
-        DIR_FILE_TYPES.put("word", fileTypeManager.getFileTypeById("0_docx"));
-        DIR_FILE_TYPES.put("xl", fileTypeManager.getFileTypeById("0_xlsx"));
-        DIR_FILE_TYPES.put("ppt", fileTypeManager.getFileTypeById("0_pptx"));
+        DIR_FILE_TYPES.put("word", docx);
+        DIR_FILE_TYPES.put("xl", xlsx);
+        DIR_FILE_TYPES.put("ppt", pptx);
 
     }
 
-    public FileType check(File file) {
+    public FileType detect(byte[] bytes) {
+        try {
+            File tempDirectory = FileUtils.getTempDirectory();
+            File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
+            ZipUtil.unzip(bytes, extractPath);
+            return detectUnzipContent(extractPath);
+        } catch (IOException e) {
+            throw new DetectException("check error", e);
 
-        File tempDirectory = FileUtils.getTempDirectory();
-        File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
+        }
+    }
+
+    public FileType detect(File file) {
+        try {
+            File tempDirectory = FileUtils.getTempDirectory();
+            File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
+            ZipUtil.unzip(file, extractPath);
+            return detectUnzipContent(extractPath);
+        } catch (IOException e) {
+            throw new DetectException("check error", e);
+
+        }
+    }
+
+    public FileType detectUnzipContent(File extractPath) {
+
         //        log.info("exact to ==>" + extractPath.getAbsolutePath());
         try {
-            ZipUtil.unzip(file, extractPath);
-            if (extractPath.exists()) {
-                for (File exFile : extractPath.listFiles()) {
+            File[] files;
+            if (extractPath.exists() && (files = extractPath.listFiles()) != null) {
+                for (File exFile : files) {
                     if (exFile.isDirectory()) {
                         //                        log.info(exFile.getAbsolutePath());
                         FileType fileType = DIR_FILE_TYPES.get(exFile.getName());

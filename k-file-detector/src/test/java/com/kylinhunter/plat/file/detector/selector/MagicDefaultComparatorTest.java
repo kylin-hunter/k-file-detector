@@ -7,13 +7,13 @@ import org.apache.commons.compress.utils.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
-import com.kylinhunter.plat.file.detector.component.FileTypeManager;
+import com.kylinhunter.plat.file.detector.common.component.CF;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 class MagicDefaultComparatorTest {
-    private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
+    private final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);
 
     @Test
     void test() {

@@ -1,17 +1,21 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.magic;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.common.util.HexUtil;
+import com.kylinhunter.plat.file.detector.component.bean.ReadMagic;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 
@@ -25,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @RequiredArgsConstructor
-@Component
+@C
 public class MagicReader {
     private final FileTypeManager fileTypeManager;
     private final MagicManager magicManager;
@@ -38,7 +42,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-22 00:38
      */
-    public String read(byte[] content) {
+    public ReadMagic read(byte[] content) {
         return read(content, null, false);
     }
 
@@ -50,13 +54,21 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:09
      */
-    public String read(byte[] content, String fileName, boolean accurate) {
+    public ReadMagic read(byte[] content, String fileName, boolean accurate) {
         if (content != null && content.length > 0) {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
-            return HexUtil.toString(content, 0, magicLen);
+            String possibleNumber = HexUtil.toString(content, 0, magicLen);
+            if (loadAll(possibleNumber)) {
+                return new ReadMagic(possibleNumber, content);
+
+            } else {
+                return new ReadMagic(possibleNumber);
+
+            }
+
         }
-        return StringUtils.EMPTY;
+        return null;
     }
 
     /**
@@ -68,7 +80,7 @@ public class MagicReader {
      * @date 2022-10-02 16:47
      */
 
-    public String read(MultipartFile file) {
+    public ReadMagic read(MultipartFile file) {
         return read(file, false);
 
     }
@@ -82,14 +94,14 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:09
      */
-    public String read(MultipartFile file, boolean accurate) {
+    public ReadMagic read(MultipartFile file, boolean accurate) {
 
         try (InputStream is = file.getInputStream()) {
             return read(is, file.getOriginalFilename(), file.getSize(), accurate);
         } catch (Exception e) {
             log.error("read magic number error", e);
         }
-        return StringUtils.EMPTY;
+        return null;
     }
 
     /**
@@ -100,7 +112,7 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 10:31
      */
-    public String read(File file) {
+    public ReadMagic read(File file) {
         return read(file, false);
     }
 
@@ -113,13 +125,13 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 17:10
      */
-    public String read(File file, boolean accurate) {
+    public ReadMagic read(File file, boolean accurate) {
         try (InputStream is = new FileInputStream(file)) {
             return read(is, file.getName(), file.length(), accurate);
         } catch (Exception e) {
             log.error("read magic number error", e);
         }
-        return StringUtils.EMPTY;
+        return null;
     }
 
     /**
@@ -131,15 +143,28 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-10-04 10:31
      */
-    public String read(InputStream inputStream, String fileName, long fileSize, boolean accurate) {
+    public ReadMagic read(InputStream inputStream, String fileName, long fileSize, boolean accurate) {
 
         try {
-            byte[] b = new byte[calMacgiclen(fileName, fileSize, accurate)];
-            int len = inputStream.read(b);
+            byte[] headContent = new byte[calMacgiclen(fileName, fileSize, accurate)];
+            int len = inputStream.read(headContent);
             if (len > 0) {
-                return HexUtil.toString(b, 0, len);
+                String possibleMagic = HexUtil.toString(headContent, 0, len);
+                if (loadAll(possibleMagic)) {
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    IOUtils.copy(inputStream, byteArrayOutputStream);
+                    byte[] remainedContent = byteArrayOutputStream.toByteArray();
+                    byte[] content = new byte[len + remainedContent.length];
+                    System.arraycopy(headContent, 0, content, 0, len);
+                    System.arraycopy(remainedContent, 0, content, len, remainedContent.length);
+                    return new ReadMagic(possibleMagic, content);
+                } else {
+                    return new ReadMagic(possibleMagic);
+
+                }
             }
-            return StringUtils.EMPTY;
+            return null;
         } catch (IOException e) {
             throw new DetectException("read error", e);
         }
@@ -175,6 +200,25 @@ public class MagicReader {
             magicLen = (int) fileSize;
         }
         return magicLen;
+    }
+
+    /**
+     * @param possibleNumber possibleNumber
+     * @return boolean
+     * @title loadAll
+     * @description
+     * @author BiJi'an
+     * @date 2022-11-07 14:42
+     */
+    private boolean loadAll(String possibleNumber) {
+        Set<String> loadAllMagics = magicManager.getLoadAllMagics();
+        for (String loadAllMagic : loadAllMagics) {
+            if (possibleNumber.startsWith(loadAllMagic)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
 }

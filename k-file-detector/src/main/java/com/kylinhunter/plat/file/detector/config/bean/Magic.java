@@ -27,6 +27,8 @@ public class Magic implements Comparable<Magic> {
     private List<FileType> fileTypes; // the file types
 
     private boolean extensionMustHitAsFather = false;
+    private boolean loadAll;
+
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size

@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.magic;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -6,7 +6,8 @@ import java.util.stream.Stream;
 import org.apache.commons.compress.utils.Lists;
 
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.component.CF;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
@@ -19,7 +20,7 @@ import com.kylinhunter.plat.file.detector.exception.DetectException;
 class DetectContextBuilder {
     private final List<Magic> magics;
     private final DetectConext detectConext;
-    private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
+    private final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);
 
     public DetectContextBuilder() {
 
@@ -29,7 +30,7 @@ class DetectContextBuilder {
     }
 
     public DetectContextBuilder setPossibleMagicNumber(String possibleMagicNumber) {
-        detectConext.setPossibleMagicNumber(possibleMagicNumber);
+        detectConext.getReadMagic().setPossibleMagicNumber(possibleMagicNumber);
         return this;
     }
 

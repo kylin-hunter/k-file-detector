@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.magic;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.config.MagicConfigLoader;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.config.bean.FileTypesWrapper;
@@ -26,17 +27,21 @@ import lombok.Getter;
  * @description
  * @date 2022-10-21 02:38
  **/
-@Component
+@C
 public class MagicManager {
 
-    private final static char MAGIC_SKIP_X = 'x';
-    private final static char MAGIC_SKIP_N = 'n';
+    public final static char MAGIC_SKIP_X = 'x';
+    public final static char MAGIC_SKIP_N = 'n';
 
     @Getter
     private final Map<String, Magic> numberMagics = Maps.newHashMap(); // magic number to Magic object
 
     @Getter
     private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
+
+    @Getter
+    private final Set<String> loadAllMagics = Sets.newHashSet();
+
     private final FileTypeManager fileTypeManager;
 
     @Getter
@@ -87,6 +92,9 @@ public class MagicManager {
      * @date 2022-10-24 02:13
      */
     private void process(Magic magic) {
+        if (magic.isLoadAll()) {
+            loadAllMagics.add(magic.getNumber());
+        }
         allMagics.add(magic);
         numberMagics.put(magic.getNumber(), magic);
 
@@ -129,54 +137,10 @@ public class MagicManager {
         return numberMagics.get(number);
     }
 
-    /**
-     * @param possibleMagicNumber possibleMagicNumber
-     * @return com.kylinhunter.plat.file.detector.bean.DetectConext
-     * @title detect
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-26 00:56
-     */
-    public List<Magic> detect(String possibleMagicNumber) {
-        List<Magic> detectedMagics = Lists.newArrayList();
 
-        if (!StringUtils.isEmpty(possibleMagicNumber)) {
-            for (Magic magic : allMagics) {
-                String number = magic.getNumber();
 
-                int magicIndex;
-                int offset = magic.getOffset() * 2;
-                for (magicIndex = 0; magicIndex < number.length(); magicIndex++) {
-                    if (offset < possibleMagicNumber.length()) {
-                        char c = number.charAt(magicIndex);
-                        if (c != MAGIC_SKIP_X) {
-                            char c2 = possibleMagicNumber.charAt(offset);
-
-                            if (c == MAGIC_SKIP_N) {
-                                if (!Character.isDigit(c2)) {
-                                    break;
-                                }
-                            } else {
-                                if (c != c2) {
-                                    break;
-                                }
-                            }
-
-                        }
-                    } else {
-                        break;
-                    }
-                    offset++;
-
-                }
-                if (magicIndex == number.length()) {
-                    detectedMagics.add(magic);
-                }
-
-            }
-
-        }
-        return detectedMagics;
+    public  boolean isLoadAll(String number){
+        return  loadAllMagics.contains(number);
     }
 
 }

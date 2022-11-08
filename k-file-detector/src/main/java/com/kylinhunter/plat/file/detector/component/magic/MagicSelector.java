@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.magic;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import org.apache.commons.compress.utils.Lists;
 
 import com.kylinhunter.plat.file.detector.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 import com.kylinhunter.plat.file.detector.selector.MagicDefaultComparator;
 import com.kylinhunter.plat.file.detector.selector.SortMagic;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022-10-02 14:08
  **/
 @Slf4j
-@Component
+@C
 public class MagicSelector {
 
     private final MagicDefaultComparator magicDefaultComparator = new MagicDefaultComparator();

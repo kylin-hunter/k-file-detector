@@ -16,23 +16,23 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.bean.DetectResult;
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.common.util.UserDirUtil;
-import com.kylinhunter.plat.file.detector.component.FileTypeManager;
+import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {
 
-    private static final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
+    private static final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);
 
     @Test
     @Order(11)
     void detectAll() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(33, files.length);
+        Assertions.assertEquals(34, files.length);
         DetectStatstic detectStatstic = new DetectStatstic(files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
@@ -132,12 +132,12 @@ class FileDetectorTest {
 
     @Test
     @Order(41)
-    void detectOfficeDisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office");
+    void detectOffice97DisguiseByExtension() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(12, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office_disguise_by_extension", true);
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/97-2004/disguise_by_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
@@ -150,12 +150,48 @@ class FileDetectorTest {
 
     @Test
     @Order(42)
-    void detectOfficeDisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office");
+    void detectOffice97DisguiseWithRemoveExtension() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(12, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office_remove_extension", true);
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/97-2004/remove_extension", true);
+        List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
+        Assertions.assertEquals(files.length, disguiseFiles.size());
+
+        DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
+                -1, 102, 202, 300));
+        Assertions.assertTrue(detectStatstic.getFirstFileTypesMatchRatio() > 0.99);
+        Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.9);
+
+    }
+
+    @Test
+    @Order(43)
+    void detectOffice2007DisguiseByExtension() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
+        File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
+        Assertions.assertEquals(12, files.length);
+
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/2007/disguise_by_extension", true);
+        List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
+        Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
+
+        DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
+                -1, 102, 202, 300), true);
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.8);
+
+    }
+
+    @Test
+    @Order(44)
+    void detectOffice2007DisguiseWithRemoveExtension() throws IOException {
+        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
+        File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
+        Assertions.assertEquals(12, files.length);
+
+        File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/2007/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 

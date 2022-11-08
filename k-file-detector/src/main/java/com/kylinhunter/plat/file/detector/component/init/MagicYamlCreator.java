@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.init;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import org.jsoup.select.Elements;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import com.kylinhunter.plat.file.detector.common.component.Component;
+import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2022-10-02 14:08
  **/
 @Slf4j
-@Component
+@C
 public class MagicYamlCreator {
     private static final String HTML_PATH = "/signature/File-Signatures-2022-10-26.html";
     private static final String TR_MAGIC_NUMBER_TAG = "face=\"courier\"";

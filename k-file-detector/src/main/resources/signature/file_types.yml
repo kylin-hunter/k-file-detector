@@ -508,7 +508,7 @@ fileTypes:
     desc: 'Word document subheader (MS Office)'
   - id: 0_doc_348975583
     extension: doc
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_doc_755445786
     extension: doc
     desc: 'Perfect Office document [Note similarity to MS Office header, below]'
@@ -520,7 +520,7 @@ fileTypes:
     desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'
   - id: 0_dot
     extension: dot
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_dpx
     extension: dpx
     desc: 'Society of Motion Picture and Television Engineers (SMPTE) Digital Picture Exchange (DPX) image file (big endian)'
@@ -1276,13 +1276,13 @@ fileTypes:
     desc: 'Portable Network Graphics file Trailer: 49 45 4E 44 AE 42 60 82 (IEND�B`�...)'
   - id: 0_pps
     extension: pps
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_ppt
     extension: ppt
     desc: 'PowerPoint presentation subheader (MS Office)'
   - id: 0_ppt_348975583
     extension: ppt
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_pptx
     extension: pptx
     desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'
@@ -1720,7 +1720,7 @@ fileTypes:
     desc: 'Microsoft Windows Imaging Format file'
   - id: 0_wiz
     extension: wiz
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_wk1
     extension: wk1
     desc: 'Lotus 1-2-3 spreadsheet (v1) file'
@@ -1801,16 +1801,16 @@ fileTypes:
     desc: 'WordStar for Windows Ver. 2 document'
   - id: 0_wsc
     extension: wsc
-    desc: 'Windows Script Component'
+    desc: 'Windows Script C'
   - id: 0_wsc_1216505340
     extension: wsc
-    desc: 'Windows Script Component (UTF-8)'
+    desc: 'Windows Script C (UTF-8)'
   - id: 0_wsf
     extension: wsf
-    desc: 'Windows Script Component'
+    desc: 'Windows Script C'
   - id: 0_wsf_1216505340
     extension: wsf
-    desc: 'Windows Script Component (UTF-8)'
+    desc: 'Windows Script C (UTF-8)'
   - id: 0_xar
     extension: xar
     desc: 'eXtensible ARchive file'
@@ -1822,13 +1822,13 @@ fileTypes:
     desc: 'BizTalk XML-Data Reduced Schema file'
   - id: 0_xla
     extension: xla
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_xls
     extension: xls
     desc: 'Excel spreadsheet subheader (MS Office)'
   - id: 0_xls_348975583
     extension: xls
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for C Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: 0_xlsx
     extension: xlsx
     desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'

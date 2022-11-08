@@ -1,15 +1,15 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.file;
 
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.config.bean.FileType;
 
 class FileTypeManagerTest {
-    private final FileTypeManager fileTypeManager = ComponentFactory.get(FileTypeManager.class);
+    private final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);
 
     private static void print(FileType fileType) {
         System.out.println("\t ======================================");

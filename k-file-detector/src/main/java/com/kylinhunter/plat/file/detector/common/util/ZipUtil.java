@@ -1,5 +1,6 @@
 package com.kylinhunter.plat.file.detector.common.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import org.apache.commons.compress.archivers.zip.Zip64Mode;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.io.FileUtils;
@@ -82,6 +84,30 @@ public class ZipUtil {
             throw new IOException("unzip error", e);
         } finally {
             IOUtils.closeQuietly(zipFile);
+        }
+    }
+
+    public static void unzip(byte[] content, File unzipPath) throws IOException {
+
+        try (ZipArchiveInputStream zipArchiveInputStream = new ZipArchiveInputStream(
+                new ByteArrayInputStream(content))) {
+            byte[] buffer = new byte[IOUtils.DEFAULT_BUFFER_SIZE];
+
+            ZipArchiveEntry entry;
+
+            while ((entry = zipArchiveInputStream.getNextZipEntry()) != null) {
+                if (!entry.isDirectory()) {
+                    File outputFile = new File(unzipPath + File.separator + entry.getName());
+                    if (!outputFile.getParentFile().exists()) {
+                        FileUtils.forceMkdirParent(outputFile);
+                    }
+                    try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+                        IOUtils.copyLarge(zipArchiveInputStream, fos, buffer);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new IOException("unzip error", e);
         }
     }
 }

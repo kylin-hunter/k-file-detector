@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.component;
+package com.kylinhunter.plat.file.detector.component.magic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.common.component.ComponentFactory;
+import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.config.bean.Magic;
 
 class MagicManagerTest {
 
-    private final MagicManager magicManager = ComponentFactory.get(MagicManager.class);
+    private final MagicManager magicManager = CF.get(MagicManager.class);
 
     static void print(Magic magic) {
         System.out.println("======================================");
@@ -67,14 +67,6 @@ class MagicManagerTest {
     }
 
     @Test
-    void detect() {
-
-        List<Magic> detectMagics = magicManager.detect("25504446");
-        Assertions.assertTrue(detectMagics.size() > 0);
-        Assertions.assertTrue(detectMagics.get(0).getFileTypesWrapper().getExtensions().contains("pdf"));
-    }
-
-    @Test
     void printAllFather() {
 
         List<Magic> magics = new ArrayList<>(magicManager.getAllMagics());
@@ -105,4 +97,11 @@ class MagicManagerTest {
 
     }
 
+    @Test
+    void isLoadAll() {
+
+        Assertions.assertTrue(magicManager.isLoadAll("504B030414000600"));
+        Assertions.assertTrue(magicManager.isLoadAll("D0CF11E0A1B11AE1"));
+        Assertions.assertFalse(magicManager.isLoadAll("667479704D345620"));
+    }
 }
