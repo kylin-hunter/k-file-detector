@@ -11,12 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.common.component.C;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.FileTypesWrapper;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 import com.kylinhunter.plat.file.detector.magic.constant.MagicMode;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
 
 import lombok.Getter;
 
@@ -38,7 +38,7 @@ public class MagicManager {
     private final Set<Magic> allMagics = Sets.newHashSet(); // all Magic objects
 
     @Getter
-    private final Set<String> detectContentSupportMagics = Sets.newHashSet();
+    private final Set<Magic> contentSupportMagics = Sets.newHashSet();
 
     private final FileTypeManager fileTypeManager;
 
@@ -91,7 +91,7 @@ public class MagicManager {
      */
     private void process(Magic magic) {
         if (magic.isDetectContentSupport()) {
-            detectContentSupportMagics.add(magic.getNumber());
+            contentSupportMagics.add(magic);
         }
         allMagics.add(magic);
         numberMagics.put(magic.getNumber(), magic);
@@ -133,12 +133,6 @@ public class MagicManager {
      */
     public Magic getMagic(String number) {
         return numberMagics.get(number);
-    }
-
-
-
-    public  boolean isLoadAll(String number){
-        return  detectContentSupportMagics.contains(number);
     }
 
 }

@@ -11,9 +11,9 @@ import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 
-class BestSelectorTest {
+class MagicSelectorTest {
 
-    private final BestSelector bestSelector = new BestSelector();
+    private final MagicSelector magicSelector = new MagicSelector();
 
     @Test
     void selectBest1() {
@@ -31,7 +31,7 @@ class BestSelectorTest {
                 .add(34, true, 0, "12347890", "0_mp3_306770805")
                 .add(4, true, 2, "123456", "0_mp3").get();
 
-        DetectResult detectResult = bestSelector.selectBest(detectConext);
+        DetectResult detectResult = magicSelector.selectBest(detectConext);
 
         List<Magic> allBestMagics = detectResult.getAllPossibleMagics();
 
@@ -66,7 +66,7 @@ class BestSelectorTest {
                 .add(34, true, 0, "123478", "0_mp3_306770805", "0_mp4")
                 .add(4, true, 2, "123456", "0_mp3").get();
 
-        DetectResult detectResult = bestSelector.selectBest(detectConext);
+        DetectResult detectResult = magicSelector.selectBest(detectConext);
 
         List<Magic> allBestMagics = detectResult.getAllPossibleMagics();
 

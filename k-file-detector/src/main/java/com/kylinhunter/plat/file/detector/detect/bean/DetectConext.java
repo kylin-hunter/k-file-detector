@@ -2,6 +2,8 @@ package com.kylinhunter.plat.file.detector.detect.bean;
 
 import java.util.List;
 
+import org.apache.commons.compress.utils.Lists;
+
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
@@ -33,6 +35,18 @@ public class DetectConext {
             this.extension = FilenameUtil.getExtension(fileName);
             if (this.extension != null) {
                 this.extension = extension.toLowerCase();
+            }
+        }
+
+    }
+
+    public void addContentFileType(FileType fileType) {
+        if (fileType != null) {
+            if (contentFileTypes == null) {
+                contentFileTypes = Lists.newArrayList();
+            }
+            if (!contentFileTypes.contains(fileType)) {
+                contentFileTypes.add(fileType);
             }
         }
 

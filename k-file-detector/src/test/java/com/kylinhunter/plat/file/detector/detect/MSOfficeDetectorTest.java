@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.detect.content.MSOfficeDetector;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 
 class MSOfficeDetectorTest {

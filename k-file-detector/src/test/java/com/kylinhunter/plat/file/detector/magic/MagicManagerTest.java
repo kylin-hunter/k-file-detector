@@ -92,16 +92,8 @@ class MagicManagerTest {
 
                 lastPrint = i + 1;
             }
-
         }
 
     }
 
-    @Test
-    void isLoadAll() {
-
-        Assertions.assertTrue(magicManager.isLoadAll("504B030414000600"));
-        Assertions.assertTrue(magicManager.isLoadAll("D0CF11E0A1B11AE1"));
-        Assertions.assertFalse(magicManager.isLoadAll("667479704D345620"));
-    }
 }

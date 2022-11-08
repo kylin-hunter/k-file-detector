@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.selector;
+package com.kylinhunter.plat.file.detector.selector.comparator;
 
 import java.util.Comparator;
 

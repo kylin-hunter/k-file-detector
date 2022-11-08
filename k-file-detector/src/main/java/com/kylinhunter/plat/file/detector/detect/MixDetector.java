@@ -4,7 +4,7 @@ import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
-import com.kylinhunter.plat.file.detector.selector.BestSelector;
+import com.kylinhunter.plat.file.detector.selector.MagicSelector;
 
 import lombok.Data;
 
@@ -17,13 +17,13 @@ import lombok.Data;
 @Data
 public class MixDetector {
     private final MagicDetector magicDetector;
-    private final ContentDetector contentDetector;
-    private final BestSelector bestSelector;
+    private final MixContentDetector mixContentDetector;
+    private final MagicSelector magicSelector;
 
     public DetectResult detect(ReadMagic readMagic) {
         DetectConext detectConext = new DetectConext(readMagic);
         magicDetector.detect(detectConext);
-        contentDetector.detect(detectConext);
-        return bestSelector.selectBest(detectConext);
+        mixContentDetector.detect(detectConext);
+        return magicSelector.selectBest(detectConext);
     }
 }

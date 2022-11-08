@@ -17,6 +17,7 @@ import com.kylinhunter.plat.file.detector.common.util.HexUtil;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
+import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
 import lombok.RequiredArgsConstructor;
@@ -59,14 +60,12 @@ public class MagicReader {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
             String possibleNumber = HexUtil.toString(content, 0, magicLen);
-            if (isDetectContentSupport(possibleNumber)) {
-                return new ReadMagic(fileName, possibleNumber, true, content);
-
-            } else {
-                return new ReadMagic(fileName, possibleNumber);
-
+            ReadMagic readMagic = new ReadMagic(fileName, possibleNumber);
+            detectContentSupport(readMagic);
+            if (readMagic.hasContentMagics()) {
+                readMagic.setContent(content);
             }
-
+            return readMagic;
         }
         return null;
     }
@@ -150,7 +149,9 @@ public class MagicReader {
             int len = inputStream.read(headContent);
             if (len > 0) {
                 String possibleMagic = HexUtil.toString(headContent, 0, len);
-                if (isDetectContentSupport(possibleMagic)) {
+                ReadMagic readMagic = new ReadMagic(fileName, possibleMagic);
+                detectContentSupport(readMagic);
+                if (readMagic.hasContentMagics()) {
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     IOUtils.copy(inputStream, byteArrayOutputStream);
@@ -158,11 +159,9 @@ public class MagicReader {
                     byte[] content = new byte[len + remainedContent.length];
                     System.arraycopy(headContent, 0, content, 0, len);
                     System.arraycopy(remainedContent, 0, content, len, remainedContent.length);
-                    return new ReadMagic(fileName, possibleMagic, true, content);
-                } else {
-                    return new ReadMagic(fileName, possibleMagic);
-
+                    readMagic.setContent(content);
                 }
+                return readMagic;
             }
             return null;
         } catch (IOException e) {
@@ -203,22 +202,21 @@ public class MagicReader {
     }
 
     /**
-     * @param possibleNumber possibleNumber
+     * @param readMagic readMagic
      * @return boolean
      * @title detectContentSupport
      * @description
      * @author BiJi'an
      * @date 2022-11-07 14:42
      */
-    private boolean isDetectContentSupport(String possibleNumber) {
-        Set<String> detectContentSupportMagics = magicManager.getDetectContentSupportMagics();
-        for (String magicNumber : detectContentSupportMagics) {
-            if (possibleNumber.startsWith(magicNumber)) {
-                return true;
+    private void detectContentSupport(ReadMagic readMagic) {
+        String possibleNumber = readMagic.getPossibleMagicNumber();
+        Set<Magic> contentSupportMagics = magicManager.getContentSupportMagics();
+        for (Magic magic : contentSupportMagics) {
+            if (magic.getOffset() == 0 && possibleNumber.startsWith(magic.getNumber())) {
+                readMagic.addContentMagic(magic);
             }
-
         }
-        return false;
     }
 
 }

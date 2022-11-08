@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
 
-import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
-import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.C;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.selector.bean.SortMagic;
+import com.kylinhunter.plat.file.detector.selector.comparator.MagicDefaultComparator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @C
-public class BestSelector {
+public class MagicSelector {
 
     private final MagicDefaultComparator magicDefaultComparator = new MagicDefaultComparator();
 
@@ -40,11 +41,33 @@ public class BestSelector {
         List<Magic> detectedMagics = detectConext.getDetectedMagics();
         if (!CollectionUtils.isEmpty(detectedMagics)) { // check extension consistent
             List<SortMagic> sortMagics = toSortMagics(detectedMagics, detectConext.getExtension());
-            detectResult.setAllPossibleMagics(
-                    sortMagics.stream().map(SortMagic::getMagic).collect(Collectors.toList()));
+            detectResult.setAllPossibleMagics(sortMagics.stream().map(SortMagic::getMagic).collect(Collectors.toList()));
         }
 
         return detectResult;
+    }
+
+    /**
+     * @param allPossibleMagics allPossibleMagics
+     * @param extension         extension
+     * @return java.util.List<com.kylinhunter.plat.file.detector.selector.bean.SortMagic>
+     * @title toSortMagics
+     * @description
+     * @author BiJi'an
+     * @date 2022-11-03 23:22
+     */
+    private List<SortMagic> toSortMagics(List<Magic> allPossibleMagics, String extension) {
+        List<SortMagic> sortMagics = Lists.newArrayList();
+        for (Magic magic : allPossibleMagics) {
+            SortMagic sortMagic = new SortMagic(magic, extension);
+            sortMagics.add(sortMagic);
+        }
+        if (sortMagics.size() > 1) {
+            sortMagics.sort(magicDefaultComparator);
+        }
+        revise(sortMagics);
+        return sortMagics;
+
     }
 
     /**
@@ -104,28 +127,5 @@ public class BestSelector {
                 }
             }
         }
-    }
-
-    /**
-     * @param allPossibleMagics allPossibleMagics
-     * @param extension         extension
-     * @return java.util.List<com.kylinhunter.plat.file.detector.selector.bean.SortMagic>
-     * @title toSortMagics
-     * @description
-     * @author BiJi'an
-     * @date 2022-11-03 23:22
-     */
-    private List<SortMagic> toSortMagics(List<Magic> allPossibleMagics, String extension) {
-        List<SortMagic> sortMagics = Lists.newArrayList();
-        for (Magic magic : allPossibleMagics) {
-            SortMagic sortMagic = new SortMagic(magic, extension);
-            sortMagics.add(sortMagic);
-        }
-        if (sortMagics.size() > 1) {
-            sortMagics.sort(magicDefaultComparator);
-        }
-        revise(sortMagics);
-        return sortMagics;
-
     }
 }

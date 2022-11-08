@@ -189,7 +189,7 @@ class FileDetectorTest {
     void detectOffice2007DisguiseWithRemoveExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(12, files.length);
+        Assertions.assertEquals(7, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/2007/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);

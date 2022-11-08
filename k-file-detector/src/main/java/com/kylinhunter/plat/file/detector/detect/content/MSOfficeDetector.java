@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.detect;
+package com.kylinhunter.plat.file.detector.detect.content;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +19,15 @@ import org.dom4j.io.SAXReader;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ZipUtil;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.magic.MagicManager;
+import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,8 +37,11 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @C
-public class MSOfficeDetector {
+@Getter
+public class MSOfficeDetector implements ContentDetector {
     private final FileTypeManager fileTypeManager;
+    private final MagicManager magicManager;
+    private Magic magic;
     private FileType ppsx;
     private FileType dotx;
     private FileType xltx;
@@ -44,12 +52,15 @@ public class MSOfficeDetector {
     private FileType potx;
     private static final Map<String, FileType> DIR_FILE_TYPES = Maps.newHashMap();
 
-    public MSOfficeDetector(FileTypeManager fileTypeManager) {
+    public MSOfficeDetector(FileTypeManager fileTypeManager, MagicManager magicManager) {
         this.fileTypeManager = fileTypeManager;
+        this.magicManager = magicManager;
         init();
+
     }
 
     private void init() {
+        this.magic = magicManager.getMagic("504B030414000600");
 
         ppsx = fileTypeManager.getFileTypeById("100001");
         dotx = fileTypeManager.getFileTypeById("100002");
@@ -66,12 +77,24 @@ public class MSOfficeDetector {
 
     }
 
+    @Override
+    public DetectConext detect(DetectConext detectConext) {
+        ReadMagic readMagic = detectConext.getReadMagic();
+        detectConext.addContentFileType(detect(readMagic.getContent()));
+        return detectConext;
+    }
+
     public FileType detect(byte[] bytes) {
         try {
-            File tempDirectory = FileUtils.getTempDirectory();
-            File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
-            ZipUtil.unzip(bytes, extractPath);
-            return detectUnzipContent(extractPath);
+            if (bytes != null && bytes.length > 0) {
+                File tempDirectory = FileUtils.getTempDirectory();
+                File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
+                ZipUtil.unzip(bytes, extractPath);
+                return detectUnzipContent(extractPath);
+            } else {
+                return null;
+            }
+
         } catch (IOException e) {
             throw new DetectException("check error", e);
 

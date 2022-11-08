@@ -12,6 +12,7 @@ import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 import com.kylinhunter.plat.file.detector.selector.bean.SortMagic;
+import com.kylinhunter.plat.file.detector.selector.comparator.MagicDefaultComparator;
 
 class MagicDefaultComparatorTest {
     private final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);
