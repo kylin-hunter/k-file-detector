@@ -5,11 +5,11 @@ import java.io.InputStream;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.bean.DetectResult;
+import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.component.bean.ReadMagic;
-import com.kylinhunter.plat.file.detector.component.detector.MixDetector;
-import com.kylinhunter.plat.file.detector.component.magic.MagicReader;
+import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
+import com.kylinhunter.plat.file.detector.detect.MixDetector;
+import com.kylinhunter.plat.file.detector.magic.MagicReader;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
-import com.kylinhunter.plat.file.detector.config.bean.FileType;
-import com.kylinhunter.plat.file.detector.config.bean.Magic;
+import com.kylinhunter.plat.file.detector.file.FileTypeManager;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
+import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import com.kylinhunter.plat.file.detector.selector.bean.SortMagic;
 
 class MagicDefaultComparatorTest {
     private final FileTypeManager fileTypeManager = CF.get(FileTypeManager.class);

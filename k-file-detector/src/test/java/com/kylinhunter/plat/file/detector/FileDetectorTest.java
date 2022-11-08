@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.bean.DetectResult;
+import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.common.util.UserDirUtil;
-import com.kylinhunter.plat.file.detector.component.file.FileTypeManager;
+import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorTest {

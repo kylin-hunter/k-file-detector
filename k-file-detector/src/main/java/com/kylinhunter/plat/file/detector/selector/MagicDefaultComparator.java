@@ -2,6 +2,8 @@ package com.kylinhunter.plat.file.detector.selector;
 
 import java.util.Comparator;
 
+import com.kylinhunter.plat.file.detector.selector.bean.SortMagic;
+
 import lombok.RequiredArgsConstructor;
 
 /**
