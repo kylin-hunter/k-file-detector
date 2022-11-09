@@ -1,11 +1,11 @@
-package com.kylinhunter.plat.file.detector.selector;
+package com.kylinhunter.plat.file.detector.detect;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.apache.commons.compress.utils.Lists;
 
-import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.content.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;

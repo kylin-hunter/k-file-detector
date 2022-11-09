@@ -6,10 +6,10 @@ import java.io.InputStream;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.detect.MixDetector;
+import com.kylinhunter.plat.file.detector.detect.DetectManager;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
-import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileDetector {
 
-    private static final MixDetector MIX_DETECTOR = CF.get(MixDetector.class);
+    private static final DetectManager DETECT_MANAGER = CF.get(DetectManager.class);
     private static final MagicReader MAGIC_READER = CF.get(MagicReader.class);
 
     /**
@@ -105,7 +105,7 @@ public class FileDetector {
 
     private static DetectResult detect(ReadMagic readMagic) {
 
-        return MIX_DETECTOR.detect(readMagic);
+        return DETECT_MANAGER.detect(readMagic);
 
     }
 

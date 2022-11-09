@@ -18,12 +18,12 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.google.common.collect.Maps;
-import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorHelper {
@@ -113,14 +113,13 @@ class FileDetectorHelper {
             System.out.println();
         }
 
-        List<Magic> allPossibleMagics = detectResult.getAllPossibleMagics();
+        List<Magic> allPossibleMagics = detectResult.getPossibleMagics();
 
-        System.out.print("\t allPossibleMagics=>");
+        System.out.print("\t possibleMagics=>");
 
         if (CollectionUtils.isNotEmpty(allPossibleMagics)) {
             List<String> numbers = allPossibleMagics.stream().map(Magic::getNumber).collect(Collectors.toList());
             System.out.print(numbers);
-
         }
 
         System.out.println();
@@ -130,8 +129,8 @@ class FileDetectorHelper {
         List<FileType> secondFileTypes = detectResult.getSecondFileType();
         System.out.println("\t secondFileTypes=>" + secondFileTypes);
 
-        List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
-        System.out.println("\t allPossibleFileTypes=>" + allPossibleFileTypes);
+        List<FileType> allPossibleFileTypes = detectResult.getPossibleFileTypes();
+        System.out.println("\t possibleFileTypes=>" + allPossibleFileTypes);
 
         System.out.println("===============================================");
         System.out.println();
@@ -147,7 +146,7 @@ class FileDetectorHelper {
         List<FileType> secondFileTypes = detectResult.getSecondFileType();
         Assertions.assertFalse(CollectionUtils.isEmpty(firstFileTypes));
 
-        List<FileType> allPossibleFileTypes = detectResult.getAllPossibleFileTypes();
+        List<FileType> allPossibleFileTypes = detectResult.getPossibleFileTypes();
         Assertions.assertTrue(allPossibleFileTypes.size() > 0);
         String fileName = file.getName();
         fileName = fileName.replace("@", ".");

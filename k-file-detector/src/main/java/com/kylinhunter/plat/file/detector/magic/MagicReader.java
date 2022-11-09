@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
@@ -62,7 +64,7 @@ public class MagicReader {
             String possibleNumber = HexUtil.toString(content, 0, magicLen);
             ReadMagic readMagic = new ReadMagic(fileName, possibleNumber);
             detectContentSupport(readMagic);
-            if (readMagic.hasContentMagics()) {
+            if (readMagic.isDetectContent()) {
                 readMagic.setContent(content);
             }
             return readMagic;
@@ -151,8 +153,7 @@ public class MagicReader {
                 String possibleMagic = HexUtil.toString(headContent, 0, len);
                 ReadMagic readMagic = new ReadMagic(fileName, possibleMagic);
                 detectContentSupport(readMagic);
-                if (readMagic.hasContentMagics()) {
-
+                if (readMagic.isDetectContent()) {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     IOUtils.copy(inputStream, byteArrayOutputStream);
                     byte[] remainedContent = byteArrayOutputStream.toByteArray();
@@ -209,14 +210,26 @@ public class MagicReader {
      * @author BiJi'an
      * @date 2022-11-07 14:42
      */
+    @SuppressWarnings("unchecked")
     private void detectContentSupport(ReadMagic readMagic) {
         String possibleNumber = readMagic.getPossibleMagicNumber();
-        Set<Magic> contentSupportMagics = magicManager.getContentSupportMagics();
-        for (Magic magic : contentSupportMagics) {
-            if (magic.getOffset() == 0 && possibleNumber.startsWith(magic.getNumber())) {
-                readMagic.addContentMagic(magic);
+        List<Magic> detectedMagics = magicManager.detect(possibleNumber);
+        if (detectedMagics.size() > 0) {
+            readMagic.setDetectedMagics(detectedMagics);
+
+            Set<Magic> contentSupportMagics = magicManager.getContentSupportMagics();
+            for (Magic magic : contentSupportMagics) {
+                if (magic.getOffset() == 0 && possibleNumber.startsWith(magic.getNumber())) {
+                    readMagic.addContentMagic(magic);
+                    readMagic.setDetectContent(true);
+                }
             }
+        } else {
+            readMagic.setDetectedMagics(Collections.EMPTY_LIST);
+            readMagic.setContentMagics(Collections.EMPTY_LIST);
+            readMagic.setDetectContent(true);
         }
+
     }
 
 }

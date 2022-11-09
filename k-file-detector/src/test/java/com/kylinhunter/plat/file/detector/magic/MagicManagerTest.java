@@ -96,4 +96,12 @@ class MagicManagerTest {
 
     }
 
+    @Test
+    void detect() {
+
+        List<Magic> detectMagics = magicManager.detect("25504446");
+        Assertions.assertTrue(detectMagics.size() > 0);
+        Assertions.assertTrue(detectMagics.get(0).getFileTypesWrapper().getExtensions().contains("pdf"));
+    }
+
 }

@@ -10,6 +10,8 @@ magics:
         extension: "dotx"
       - id: 100003
         extension: "xltx"
+      - id: 100005
+        extension: potx
   - number: D0CF11E0A1B11AE1
     offset: 0
     detectContentSupport: true

@@ -1,10 +1,11 @@
-package com.kylinhunter.plat.file.detector.detect.bean;
+package com.kylinhunter.plat.file.detector.content.bean;
 
 import java.util.List;
 
 import org.apache.commons.compress.utils.Lists;
 
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
+import com.kylinhunter.plat.file.detector.detect.bean.SortMagic;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
@@ -25,10 +26,12 @@ public class DetectConext {
     private List<Magic> detectedMagics; // the detected magic messages
     private List<FileType> contentFileTypes; // the detected file types by content
     private ReadMagic readMagic;
+    private List<SortMagic> sortMagics;
 
     public DetectConext(ReadMagic readMagic) {
 
         this.readMagic = readMagic;
+        this.detectedMagics = readMagic.getDetectedMagics();
         String fileName = readMagic.getFileName();
         if (fileName != null && fileName.length() > 0) {
             this.fileName = fileName;

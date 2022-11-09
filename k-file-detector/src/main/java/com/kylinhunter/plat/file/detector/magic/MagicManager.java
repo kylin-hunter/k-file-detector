@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.common.component.C;
@@ -105,6 +106,10 @@ public class MagicManager {
         }
 
         List<FileType> fileTypes = magic.getFileTypes();
+        if (CollectionUtils.isEmpty(fileTypes)) {
+            throw new DetectException("fileTypes can't be empty");
+
+        }
         fileTypes = fileTypes.stream().
                 map(oldFileType -> {
 
@@ -135,4 +140,53 @@ public class MagicManager {
         return numberMagics.get(number);
     }
 
+    /**
+     * @param possibleMagicNumber possibleMagicNumber
+     * @return com.kylinhunter.plat.file.detector.detect.bean.DetectConext
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-26 00:56
+     */
+    public List<Magic> detect(String possibleMagicNumber) {
+        List<Magic> detectedMagics = Lists.newArrayList();
+
+        if (!StringUtils.isEmpty(possibleMagicNumber)) {
+            for (Magic magic : allMagics) {
+                String number = magic.getNumber();
+
+                int magicIndex;
+                int offset = magic.getOffset() * 2;
+                for (magicIndex = 0; magicIndex < number.length(); magicIndex++) {
+                    if (offset < possibleMagicNumber.length()) {
+                        char c = number.charAt(magicIndex);
+                        if (c != MagicManager.MAGIC_SKIP_X) {
+                            char c2 = possibleMagicNumber.charAt(offset);
+
+                            if (c == MagicManager.MAGIC_SKIP_N) {
+                                if (!Character.isDigit(c2)) {
+                                    break;
+                                }
+                            } else {
+                                if (c != c2) {
+                                    break;
+                                }
+                            }
+
+                        }
+                    } else {
+                        break;
+                    }
+                    offset++;
+
+                }
+                if (magicIndex == number.length()) {
+                    detectedMagics.add(magic);
+                }
+
+            }
+
+        }
+        return detectedMagics;
+    }
 }

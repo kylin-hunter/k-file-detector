@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.detect.content;
+package com.kylinhunter.plat.file.detector.content.content;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import org.dom4j.io.SAXReader;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ZipUtil;
-import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.content.bean.DetectConext;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;

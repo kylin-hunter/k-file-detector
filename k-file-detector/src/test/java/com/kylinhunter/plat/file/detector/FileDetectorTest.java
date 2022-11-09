@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.selector.bean.DetectResult;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
@@ -72,7 +72,7 @@ class FileDetectorTest {
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic =
-                FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102, 202, 300), true);
+                FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102,201, 202, 300), true);
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
@@ -281,7 +281,7 @@ class FileDetectorTest {
             DetectResult detectResult = FileDetector.detect(file);
             FileDetectorHelper.printDetectResult(detectResult);
             Assertions.assertTrue(CollectionUtils.isEmpty(detectResult.getFirstFileTypes()));
-            Assertions.assertTrue(CollectionUtils.isEmpty(detectResult.getAllPossibleFileTypes()));
+            Assertions.assertTrue(CollectionUtils.isEmpty(detectResult.getPossibleFileTypes()));
         }
     }
 

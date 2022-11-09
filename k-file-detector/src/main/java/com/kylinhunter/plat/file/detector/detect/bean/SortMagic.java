@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.selector.bean;
+package com.kylinhunter.plat.file.detector.detect.bean;
 
 import java.util.List;
 
@@ -13,26 +13,27 @@ import lombok.Data;
  * @date 2022-11-02 22:13
  **/
 @Data
-public class SortMagic {
+public class SortMagic implements Comparable<SortMagic> {
     private Magic magic;
     private boolean matchExtension;
-    private int matchExtensionInt;
     private FileType matchFileType;
     private String extension;
-    private boolean mustFirst;
+    private int offset;
+    private String number;
+
 
     public SortMagic(Magic magic, String extension) {
         this.magic = magic;
+        this.offset = magic.getOffset();
+        this.number = magic.getNumber();
         this.extension = extension;
         this.matchExtension = false;
-        this.matchExtensionInt = 0;
 
         List<FileType> fileTypes = magic.getFileTypes();
 
         for (FileType fileType : fileTypes) {
             if (fileType.extensionEquals(extension)) {
                 this.matchExtension = true;
-                this.matchExtensionInt = 1;
                 this.matchFileType = fileType;
                 break;
             }
@@ -44,4 +45,16 @@ public class SortMagic {
         return magic.getNumber();
     }
 
+    @Override
+    public int compareTo(SortMagic o) {
+        int offsetDiff = this.offset - o.offset;
+        if (offsetDiff < 0) {
+            return -1;
+        } else if (offsetDiff > 0) {
+            return 1;
+        } else {
+            int dimensionMagicLen = o.number.length() - this.number.length();
+            return Integer.compare(dimensionMagicLen, 0);
+        }
+    }
 }

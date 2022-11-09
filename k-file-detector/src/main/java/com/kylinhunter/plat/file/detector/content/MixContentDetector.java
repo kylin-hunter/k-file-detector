@@ -1,12 +1,12 @@
-package com.kylinhunter.plat.file.detector.detect;
+package com.kylinhunter.plat.file.detector.content;
 
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
-import com.kylinhunter.plat.file.detector.detect.bean.DetectConext;
-import com.kylinhunter.plat.file.detector.detect.content.ContentDetector;
+import com.kylinhunter.plat.file.detector.content.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.content.content.ContentDetector;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
@@ -19,7 +19,8 @@ import lombok.Data;
  **/
 @Data
 @C
-public class MixContentDetector implements Detector {
+public class MixContentDetector {
+
     private Map<String, ContentDetector> contentDetectors = Maps.newHashMap();
 
     public MixContentDetector(List<ContentDetector> detectors) {
@@ -32,14 +33,15 @@ public class MixContentDetector implements Detector {
         }
     }
 
-    @Override
-    public DetectConext detect(DetectConext detectConext) {
+    public DetectConext detect(ReadMagic readMagic) {
+        DetectConext detectConext = new DetectConext(readMagic);
 
-        ReadMagic readMagic = detectConext.getReadMagic();
-        if (readMagic.hasContentMagics()) {
+        if (readMagic.isDetectContent()) {
             for (Magic magic : readMagic.getContentMagics()) {
                 ContentDetector contentDetector = contentDetectors.get(magic.getNumber());
-                contentDetector.detect(detectConext);
+                if (contentDetector != null) {
+                    contentDetector.detect(detectConext);
+                }
             }
         }
 

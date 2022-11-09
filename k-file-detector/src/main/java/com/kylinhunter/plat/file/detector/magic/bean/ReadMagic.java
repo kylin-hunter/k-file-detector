@@ -1,8 +1,8 @@
 package com.kylinhunter.plat.file.detector.magic.bean;
 
-import java.util.Set;
+import java.util.List;
 
-import com.google.common.collect.Sets;
+import org.apache.commons.compress.utils.Lists;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,9 @@ public class ReadMagic {
     private String fileName;
     private String possibleMagicNumber;
     private byte[] content;
-    private Set<Magic> contentMagics;
+    private List<Magic> detectedMagics;
+    private List<Magic> contentMagics;
+    private boolean detectContent;
 
     public ReadMagic(String fileName, String possibleMagicNumber) {
         this(fileName, possibleMagicNumber, null);
@@ -36,13 +38,9 @@ public class ReadMagic {
 
     public void addContentMagic(Magic magic) {
         if (contentMagics == null) {
-            contentMagics = Sets.newHashSet();
+            contentMagics = Lists.newArrayList();
         }
         contentMagics.add(magic);
-    }
-
-    public boolean hasContentMagics() {
-        return contentMagics != null && contentMagics.size() > 0;
     }
 
 }
