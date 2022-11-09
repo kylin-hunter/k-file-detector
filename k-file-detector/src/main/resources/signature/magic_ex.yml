@@ -16,6 +16,10 @@ magics:
     refMagic: 504B030414000600
   - number: 4D5A90000300000004000000FFFF
     enabled: false
+  - number: 4D5A900003000000
+    extensionMustMatch: true
+  - number: 504B0304140008000800
+    extensionMustMatch: true
   - number: D0CF11E0A1B11AE1
     offset: 0
     desc: ' may be a ms office docuemnt (97-2004) or other file type '

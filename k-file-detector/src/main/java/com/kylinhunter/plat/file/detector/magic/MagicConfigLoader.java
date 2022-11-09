@@ -77,6 +77,7 @@ public class MagicConfigLoader {
     }
 
     private static void processMagicEx(MagicEx magicEx, Magic magic, Map<String, Magic> magicMap) {
+        magic.setExtensionMustMatch(magicEx.isExtensionMustMatch());
         magic.setEnabled(magicEx.isEnabled());
         String refMagic = magicEx.getRefMagic();
         if (!StringUtils.isEmpty(refMagic)) {

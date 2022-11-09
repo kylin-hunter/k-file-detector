@@ -28,5 +28,6 @@ public class MagicEx {
     private String refMagic;
     private boolean detectContentSupport;
     private boolean enabled = true;
+    private boolean extensionMustMatch;
 
 }
