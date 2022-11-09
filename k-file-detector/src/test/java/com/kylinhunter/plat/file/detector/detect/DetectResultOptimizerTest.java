@@ -22,13 +22,13 @@ class DetectResultOptimizerTest {
                 .setExtension("mp3")
                 .setPossibleMagicNumber("12")
 
-                .add(1, true, 0, "12")
-                .add(2, true, 2, "1234")
-                .add(31, true, 0, "1234")
-                .add(32, true, 0, "123456")
-                .add(33, true, 0, "123478", "0_mp3_306770805", "0_mp4")
-                .add(34, true, 0, "12347890", "0_mp3_306770805")
-                .add(4, true, 2, "123456", "0_mp3").get();
+                .add(1, 0, "12")
+                .add(2, 2, "1234")
+                .add(31, 0, "1234")
+                .add(32, 0, "123456")
+                .add(33, 0, "123478", "0_mp3_306770805", "0_mp4")
+                .add(34, 0, "12347890", "0_mp3_306770805")
+                .add(4, 2, "123456", "0_mp3").get();
 
         DetectResult detectResult = detectResultOptimizer.optimize(detectConext);
 

@@ -25,7 +25,8 @@ public class MagicEx {
     private List<FileType> includeFileTypes; // the file types
     private List<FileType> excludeFileTypes; // the file types
     private List<FileType> topFileTypes; // the file types
-    private boolean extensionMustHitAsFather;
+    private String refMagic;
     private boolean detectContentSupport;
+    private boolean enabled = true;
 
 }

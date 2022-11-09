@@ -44,9 +44,11 @@ public class DetectResult {
      * @author BiJi'an
      * @date 2022-11-09 20:20
      */
-    public List<FileType> getFirstFileTypes() {
-
-        return possibleFileTypes;
+    public FileType getFirstFileType() {
+        if (possibleFileTypes.size() > 0) {
+            return possibleFileTypes.get(0);
+        }
+        return null;
     }
 
     /**
@@ -56,8 +58,11 @@ public class DetectResult {
      * @author BiJi'an
      * @date 2022-11-09 20:20
      */
-    public List<FileType> getSecondFileType() {
-        return possibleFileTypes;
+    public FileType getSecondFileType() {
+        if (possibleFileTypes.size() > 1) {
+            return possibleFileTypes.get(1);
+        }
+        return null;
     }
 
     public void addPossibleMagic(Magic magic) {

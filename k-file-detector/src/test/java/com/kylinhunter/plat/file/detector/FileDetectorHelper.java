@@ -3,6 +3,7 @@ package com.kylinhunter.plat.file.detector;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -20,10 +21,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
-import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorHelper {
@@ -41,20 +42,6 @@ class FileDetectorHelper {
         FileType realFileType = SPECIAL_FILETYPES.get(fileName);
         if (realFileType != null && fileType != null) {
             return realFileType.equals(fileType);
-        }
-        return false;
-
-    }
-
-    private static boolean checkSpecialFile(String fileName, List<FileType> fileTypes) {
-        FileType realFileType = SPECIAL_FILETYPES.get(fileName);
-        if (realFileType != null && fileTypes != null) {
-            for (FileType fileType : fileTypes) {
-                if (realFileType.equals(fileType)) {
-                    return true;
-                }
-
-            }
         }
         return false;
 
@@ -78,30 +65,10 @@ class FileDetectorHelper {
 
     }
 
-    private static boolean checkExtensions(List<FileType> fileTypes, String extension, String... extensions) {
-        if (extensions != null && fileTypes != null) {
-            for (FileType fileType : fileTypes) {
-                if (fileType.extensionEquals(extension)) {
-                    return true;
-                }
-            }
-
-            for (FileType fileType : fileTypes) {
-                for (String tmpExtension : extensions) {
-                    if (fileType.extensionEquals(tmpExtension)) {
-                        return true;
-                    }
-
-                }
-
-            }
-        }
-        return false;
-
-    }
-
-    public static void printDetectResult(DetectResult detectResult) {
+    public static void printDetectResult(DetectResult detectResult, int matchPositin) {
         System.out.println("===============================================");
+
+        System.out.println("\t matchPositin=>" + matchPositin);
         System.out.println("\t fileName=>" + detectResult.getFileName());
 
         System.out.print("\t oriMagics=>");
@@ -123,11 +90,11 @@ class FileDetectorHelper {
         }
 
         System.out.println();
-        List<FileType> firstFileTypes = detectResult.getFirstFileTypes();
-        System.out.println("\t firstFileTypes=>" + firstFileTypes);
+        FileType firstFileType = detectResult.getFirstFileType();
+        System.out.println("\t firstFileType=>" + firstFileType);
 
-        List<FileType> secondFileTypes = detectResult.getSecondFileType();
-        System.out.println("\t secondFileTypes=>" + secondFileTypes);
+        FileType secondFileType = detectResult.getSecondFileType();
+        System.out.println("\t secondFileType=>" + secondFileType);
 
         List<FileType> allPossibleFileTypes = detectResult.getPossibleFileTypes();
         System.out.println("\t possibleFileTypes=>" + allPossibleFileTypes);
@@ -137,17 +104,15 @@ class FileDetectorHelper {
 
     }
 
-    public static int assertFile(File file, DetectResult detectResult, List<Integer> targetLevels) {
-        return assertFile(file, detectResult, targetLevels, false);
+    public static int assertFile(File file, DetectResult detectResult) {
+        return assertFile(file, detectResult, Collections.singletonList(1));
     }
 
-    public static int assertFile(File file, DetectResult detectResult, List<Integer> targetLevels, boolean printLevel) {
-        List<FileType> firstFileTypes = detectResult.getFirstFileTypes();
-        List<FileType> secondFileTypes = detectResult.getSecondFileType();
-        Assertions.assertFalse(CollectionUtils.isEmpty(firstFileTypes));
+    public static int assertFile(File file, DetectResult detectResult, List<Integer> targetLevels) {
+        Assertions.assertNotNull(detectResult.getFirstFileType());
 
-        List<FileType> allPossibleFileTypes = detectResult.getPossibleFileTypes();
-        Assertions.assertTrue(allPossibleFileTypes.size() > 0);
+        List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
+        Assertions.assertTrue(possibleFileTypes.size() > 0);
         String fileName = file.getName();
         fileName = fileName.replace("@", ".");
         int index = fileName.indexOf("#");
@@ -165,80 +130,30 @@ class FileDetectorHelper {
 
         }
 
-        int matchLevel = -1;
+        int position = -1;
+        for (int i = 0; i < possibleFileTypes.size(); i++) {
 
-        if (checkExtensions(firstFileTypes, extension, realExtensions)) {
-            matchLevel = 100;
-        } else {
-            if (checkSpecialFile(fileName, firstFileTypes)) {
-                matchLevel = 100;
-            }
-        }
-        if (matchLevel == 100) {
-            if (checkExtensions(firstFileTypes.get(0), extension, realExtensions)) {
-                matchLevel = 101;
+            FileType fileType = possibleFileTypes.get(i);
+
+            if (checkExtensions(fileType, extension, realExtensions)) {
+                position = i + 1;
+                break;
             } else {
-                if (checkSpecialFile(fileName, firstFileTypes.get(0))) {
-                    matchLevel = 101;
+                if (checkSpecialFile(fileName, fileType)) {
+                    position = i + 1;
+                    break;
                 }
-            }
-            if (matchLevel != 101) {
-                matchLevel = 102;
             }
 
         }
 
-        if (matchLevel <= 0) {
-
-            if (checkExtensions(secondFileTypes, extension, realExtensions)) {
-                matchLevel = 200;
-            } else {
-                if (checkSpecialFile(fileName, secondFileTypes)) {
-                    matchLevel = 200;
-                }
-            }
-
-            if (matchLevel == 200) {
-                if (checkExtensions(secondFileTypes.get(0), extension, realExtensions)) {
-                    matchLevel = 201;
-                } else {
-                    if (checkSpecialFile(fileName, secondFileTypes.get(0))) {
-                        matchLevel = 201;
-                    }
-                }
-                if (matchLevel != 201) {
-                    matchLevel = 202;
-                }
-
-            }
-
+        //        System.out.println("position=>" + position);
+        if (!targetLevels.contains(position)) {
+            printDetectResult(detectResult, position);
         }
-        if (matchLevel <= 0) {
+        Assertions.assertTrue(position >= 1);
 
-            if (checkExtensions(allPossibleFileTypes, extension, realExtensions)) {
-                matchLevel = 300;
-
-            } else {
-                if (checkSpecialFile(fileName, allPossibleFileTypes)) {
-                    matchLevel = 300;
-
-                }
-
-            }
-
-        }
-
-        //        System.out.println("matchLevel=>" + matchLevel);
-        Assertions.assertTrue(matchLevel >= 1);
-        if (targetLevels.contains(matchLevel)) {
-            if (printLevel) {
-                System.out.println("\t ******matchLevel=>" + matchLevel);
-            }
-            printDetectResult(detectResult);
-
-        }
-
-        return matchLevel;
+        return position;
 
     }
 
@@ -305,22 +220,16 @@ class FileDetectorHelper {
     }
 
     public static DetectStatstic detect(List<File> disguiseFiles) {
-        return detect(disguiseFiles, Arrays.asList(-1, 102, 201, 202, 300), false);
+        return detect(disguiseFiles, Collections.singletonList(1));
 
     }
 
     public static DetectStatstic detect(List<File> disguiseFiles, List<Integer> targetLevel) {
-        return detect(disguiseFiles, targetLevel, false);
-
-    }
-
-    public static DetectStatstic detect(List<File> disguiseFiles, List<Integer> targetLevel,
-                                        boolean printLevel) {
         DetectStatstic detectStatstic = new DetectStatstic(disguiseFiles.size());
-
         for (File file : disguiseFiles) {
-            detectStatstic.calAssertResult(FileDetectorHelper.assertFile(file, FileDetector.detect(file), targetLevel,
-                    printLevel));
+            DetectResult detectResult = FileDetector.detect(file);
+            int assertResult = FileDetectorHelper.assertFile(file, detectResult, targetLevel);
+            detectStatstic.calAssertResult(assertResult);
         }
         detectStatstic.print();
         return detectStatstic;

@@ -12,9 +12,12 @@ magics:
         extension: "xltx"
       - id: 100005
         extension: potx
+  - number: 0000000000000000
+    refMagic: 504B030414000600
+  - number: 4D5A90000300000004000000FFFF
+    enabled: false
   - number: D0CF11E0A1B11AE1
     offset: 0
-    detectContentSupport: true
     desc: ' may be a ms office docuemnt (97-2004) or other file type '
     includeFileTypes:
       - id: 100004
@@ -35,12 +38,6 @@ magics:
         extension: mp4
       - id: 0_mp4_1893411598
         extension: mp4
-  - number: 504B0304140008000800
-    extensionMustHitAsFather: true
-  - number: 4D5A90000300000004000000FFFF
-    extensionMustHitAsFather: true
-  - number: 4D5A900003000000
-    extensionMustHitAsFather: true
   - number: 4D5A
     topFileTypes:
       - id: 0_exe

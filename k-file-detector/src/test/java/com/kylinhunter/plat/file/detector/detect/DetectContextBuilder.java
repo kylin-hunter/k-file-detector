@@ -46,14 +46,13 @@ class DetectContextBuilder {
         return this;
     }
 
-    public DetectContextBuilder add(int magicId, boolean extensionMustHitAsFather, int offset, String number,
+    public DetectContextBuilder add(int magicId, int offset, String number,
                                     String... fileTypeIds) {
         Magic magic = new Magic();
         List<FileType> fileTypes = Lists.newArrayList();
         magic.setFileTypes(fileTypes);
         magic.setId(magicId);
         magic.setOffset(offset);
-        magic.setExtensionMustHitAsFather(extensionMustHitAsFather);
         if (number == null || number.length() <= 0 || number.length() % 2 != 0) {
             throw new DetectException("invalid number=>" + number);
         } else {

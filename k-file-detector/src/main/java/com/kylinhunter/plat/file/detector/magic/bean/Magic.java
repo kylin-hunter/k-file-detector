@@ -2,9 +2,8 @@ package com.kylinhunter.plat.file.detector.magic.bean;
 
 import java.util.List;
 
-import com.kylinhunter.plat.file.detector.magic.constant.MagicMode;
-import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
+import com.kylinhunter.plat.file.detector.magic.constant.MagicMode;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,15 +25,14 @@ public class Magic implements Comparable<Magic> {
     private int offset;
     private String desc; // the description for the magic number
     private List<FileType> fileTypes; // the file types
-
-    private boolean extensionMustHitAsFather = false;
+    private Magic refMagic;
     private boolean detectContentSupport;
-
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size
     private MagicMode mode; // magic mode for diffrent detecting action
     private FileTypesWrapper fileTypesWrapper;
+    private boolean enabled = true;
 
     public Magic(String number) {
         this.number = number;
@@ -45,7 +43,7 @@ public class Magic implements Comparable<Magic> {
         if (fileTypes != null && fileTypes.size() > 0) {
             return fileTypes.get(0);
         }
-        throw new DetectException("no first file type");
+        return null;
     }
 
     public FileType getSecondFileType() {
@@ -57,7 +55,7 @@ public class Magic implements Comparable<Magic> {
 
     @Override
     public String toString() {
-        return number + "/" + fileTypesWrapper.extensions;
+        return number + "/" + (fileTypesWrapper != null ? fileTypesWrapper.extensions : "");
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeConfigLoader;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
@@ -55,24 +56,36 @@ public class MagicConfigLoader {
         MagicConfig magicConfig = load0(MagicConfig.class, MAGIC_LOCATION);
         Objects.requireNonNull(magicConfig);
 
+        Map<String, Magic> magicMap = magicConfig.magics.stream()
+                .collect(Collectors.toMap(Magic::getNumber, e -> e));
+
         MagicExConfig magicExConfig = load0(MagicExConfig.class, MAGIC_LOCATION_EX);
         Objects.requireNonNull(magicExConfig);
 
-        Map<String, MagicEx> exMagics = magicExConfig.magics.stream()
-                .collect(Collectors.toMap(MagicEx::getNumber, e -> e));
-        List<Magic> magics = magicConfig.magics;
-        for (Magic magic : magics) {
-            MagicEx magicEx = exMagics.get(magic.getNumber());
-            if (magicEx != null) {
-                processMagicEx(magicEx, magic);
+        for (MagicEx magicEx : magicExConfig.magics) {
+            Magic magic = magicMap.get(magicEx.getNumber());
+            if (magic != null) {
+                processMagicEx(magicEx, magic, magicMap);
+            } else {
+                throw new DetectException("invalid magic :" + magicEx.getNumber());
+            }
+            if (!magic.isEnabled()) {
+                magicConfig.magics.remove(magic);
             }
         }
         return magicConfig;
     }
 
-    private static void processMagicEx(MagicEx magicEx, Magic magic) {
-
-        magic.setExtensionMustHitAsFather(magicEx.isExtensionMustHitAsFather());
+    private static void processMagicEx(MagicEx magicEx, Magic magic, Map<String, Magic> magicMap) {
+        magic.setEnabled(magicEx.isEnabled());
+        String refMagic = magicEx.getRefMagic();
+        if (!StringUtils.isEmpty(refMagic)) {
+            Magic refrenceMagic = magicMap.get(refMagic);
+            if (refrenceMagic == null) {
+                throw new DetectException("invalid refMagic :" + refMagic);
+            }
+            magic.setRefMagic(refrenceMagic);
+        }
         magic.setDetectContentSupport(magicEx.isDetectContentSupport());
         if (magicEx.getOffset() > 0) {
             magic.setOffset(magicEx.getOffset());

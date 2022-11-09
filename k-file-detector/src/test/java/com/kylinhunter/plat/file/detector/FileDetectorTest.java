@@ -15,11 +15,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.common.util.UserDirUtil;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,7 +32,7 @@ class FileDetectorTest {
     void detectAll() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(34, files.length);
+        Assertions.assertEquals(36, files.length);
         DetectStatstic detectStatstic = new DetectStatstic(files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
@@ -51,11 +51,10 @@ class FileDetectorTest {
                 detectResult = FileDetector.detect(inputStream, file.getName());
             }
 
-            detectStatstic.calAssertResult(
-                    FileDetectorHelper.assertFile(file, detectResult, Arrays.asList(-1, 102, 202, 300)));
+            detectStatstic.calAssertResult(FileDetectorHelper.assertFile(file, detectResult));
         }
         detectStatstic.print();
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.9);
 
     }
@@ -71,9 +70,8 @@ class FileDetectorTest {
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
-        DetectStatstic detectStatstic =
-                FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102,201, 202, 300), true);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
@@ -90,7 +88,7 @@ class FileDetectorTest {
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
@@ -107,8 +105,8 @@ class FileDetectorTest {
         System.out.println("fileTypeManager.allExtensionSize()=>" + fileTypeManager.allExtensionSize());
         Assertions.assertEquals(fileTypeManager.allExtensionSize() * files.length - 1, disguiseFiles.size());
 
-        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102, 201, 202, 300), true);
-        Assertions.assertTrue(ds.getFirstFileTypesMatchRatio() > 0.99);
+        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles);
+        Assertions.assertTrue(ds.getFirstFileTypeMatchRatio() > 0.99);
         Assertions.assertTrue(ds.getFirstFileTypeMatchRatio() > 0.99);
 
     }
@@ -126,7 +124,7 @@ class FileDetectorTest {
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
 
@@ -135,15 +133,15 @@ class FileDetectorTest {
     void detectOffice97DisguiseByExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(12, files.length);
+        Assertions.assertEquals(6, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/97-2004/disguise_by_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
-                -1, 102, 202, 300), true);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+                -1, 2, 3));
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.8);
 
     }
@@ -153,15 +151,15 @@ class FileDetectorTest {
     void detectOffice97DisguiseWithRemoveExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(12, files.length);
+        Assertions.assertEquals(6, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/97-2004/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
-                -1, 102, 202, 300));
-        Assertions.assertTrue(detectStatstic.getFirstFileTypesMatchRatio() > 0.99);
+                -1, 1, 2, 3));
+        Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.99);
         Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.9);
 
     }
@@ -171,15 +169,15 @@ class FileDetectorTest {
     void detectOffice2007DisguiseByExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(12, files.length);
+        Assertions.assertEquals(7, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/office/2007/disguise_by_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
-                -1, 102, 202, 300), true);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+                -1, 2, 3));
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.8);
 
     }
@@ -196,8 +194,8 @@ class FileDetectorTest {
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(
-                -1, 102, 202, 300));
-        Assertions.assertTrue(detectStatstic.getFirstFileTypesMatchRatio() > 0.99);
+                -1, 2, 3));
+        Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.99);
         Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.9);
 
     }
@@ -213,8 +211,8 @@ class FileDetectorTest {
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
-        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102, 201, 202, 300), true);
-        Assertions.assertTrue(ds.getFirstFileTypesMatchRatio() > 0.99);
+        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles);
+        Assertions.assertTrue(ds.getFirstFileTypeMatchRatio() > 0.99);
 
         Assertions.assertTrue(ds.getFirstFileTypeMatchRatio() > 0.99);
 
@@ -232,7 +230,7 @@ class FileDetectorTest {
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
@@ -248,8 +246,8 @@ class FileDetectorTest {
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.allExtensionSize() - 1) * files.length, disguiseFiles.size());
 
-        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles, Arrays.asList(-1, 102, 202, 300), true);
-        Assertions.assertEquals(1, ds.getFirstFileTypesMatchRatio());
+        DetectStatstic ds = FileDetectorHelper.detect(disguiseFiles);
+        Assertions.assertEquals(1, ds.getFirstFileTypeMatchRatio());
         Assertions.assertEquals(1, ds.getFirstFileTypeMatchRatio());
 
     }
@@ -266,7 +264,7 @@ class FileDetectorTest {
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypesMatchRatio());
+        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
@@ -279,8 +277,8 @@ class FileDetectorTest {
         Assertions.assertEquals(1, files.length);
         for (File file : files) {
             DetectResult detectResult = FileDetector.detect(file);
-            FileDetectorHelper.printDetectResult(detectResult);
-            Assertions.assertTrue(CollectionUtils.isEmpty(detectResult.getFirstFileTypes()));
+            FileDetectorHelper.printDetectResult(detectResult, 0);
+            Assertions.assertNull(detectResult.getFirstFileType());
             Assertions.assertTrue(CollectionUtils.isEmpty(detectResult.getPossibleFileTypes()));
         }
     }
@@ -288,14 +286,11 @@ class FileDetectorTest {
     @Test
     @Order(99)
     void testTmp() throws IOException {
-        File file1 = ResourceHelper.getFileInClassPath("files/detected/other/zip.zip");
-        //                FileDetectorHelper.assertFile(file1, FileDetector.detect(file1), 1);
-        //        File file2 = UserDirUtil.getFile("tmp/disguise/audio_video_disguise_by_extension/avi.avi#.cdr",
-        //        false);
+
         File file2 = UserDirUtil.getFile("tmp/disguise/office_remove_extension/xls@xls#_noextension", false);
 
         FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), Arrays.asList(
-                -1, 102, 202, 300), true);
+                -1, 2, 3));
 
     }
 
