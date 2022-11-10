@@ -1,17 +1,14 @@
 fileTypes:
-  - id: 100001
+  - id: ppsx
     extension: ppsx
     desc: 'Microsoft Office  PowerPoint  File (show mode)'
-  - id: 100002
+  - id: dotx
     extension: dotx
-    desc: 'ms word template'
-  - id: 100003
+    desc: 'Microsoft Office  Word Template File'
+  - id: xltx
     extension: xltx
-    desc: 'ms excel template'
-  - id: 100004
-    extension: xlt
-    desc: 'ms excel template for 97-2004'
-  - id: 100005
+    desc: 'Microsoft Office  Excel Template File'
+  - id: potx
     extension: potx
-    desc: 'ppt template for 97-2004'
+    desc: 'Microsoft Office  PowerPoint Template File '
 

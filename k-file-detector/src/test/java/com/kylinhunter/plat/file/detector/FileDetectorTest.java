@@ -32,7 +32,7 @@ class FileDetectorTest {
     void detectAll() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(37, files.length);
+        Assertions.assertEquals(35, files.length);
         DetectStatstic detectStatstic = new DetectStatstic(files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
@@ -55,7 +55,6 @@ class FileDetectorTest {
         }
         detectStatstic.print();
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
-        Assertions.assertTrue(detectStatstic.getFirstFileTypeMatchRatio() > 0.9);
 
     }
 
@@ -89,7 +88,6 @@ class FileDetectorTest {
 
         DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
-        Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
 
@@ -98,7 +96,7 @@ class FileDetectorTest {
     void detectExecuteDisguiseByExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/execute");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(5, files.length);
+        Assertions.assertEquals(3, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/execute_disguise_by_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
@@ -116,7 +114,7 @@ class FileDetectorTest {
     void detectExecuteDisguiseWithRemoveExtension() throws IOException {
         File dir = ResourceHelper.getFileInClassPath("files/detected/execute");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
-        Assertions.assertEquals(5, files.length);
+        Assertions.assertEquals(3, files.length);
 
         File disguiseDir = UserDirUtil.getDir("tmp/disguise/execute_remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
@@ -286,7 +284,7 @@ class FileDetectorTest {
     @Order(99)
     void testTmp() throws IOException {
 
-        File file2 = UserDirUtil.getFile("tmp/disguise/office_remove_extension/xls@xls#_noextension", false);
+        File file2 = UserDirUtil.getFile("tmp/disguise/execute_remove_extension/exe@exe#_noextension", false);
 
         FileDetectorHelper.assertFile(file2, FileDetector.detect(file2), Arrays.asList(
                 -1, 2, 3));

@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.init;
+package com.kylinhunter.plat.file.detector.prepared;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,10 +7,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseContext;
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseMagic;
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseStat;
-import com.kylinhunter.plat.file.detector.init.parse.bean.YamlMessage;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseContext;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseMagic;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseStat;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.YamlMessage;
 
 class MagicYamlCreatorTest {
     MagicYamlCreator magicYamlCreator = new MagicYamlCreator();
@@ -58,8 +58,8 @@ class MagicYamlCreatorTest {
 
         Assertions.assertEquals(644, parseStat.getExtensionNums());
         Assertions.assertEquals(37, parseStat.getExtensionNoneNums());
-        Assertions.assertEquals(664, parseStat.getFileTypeNums());
-        Assertions.assertEquals(17, parseStat.getFileTypeDuplicateNums());
+        Assertions.assertEquals(666, parseStat.getFileTypeNums());
+        Assertions.assertEquals(15, parseStat.getFileTypeDuplicateNums());
 
         Assertions.assertEquals(parseStat.getFileTypeNums() + parseStat.getFileTypeDuplicateNums(),
                 parseStat.getExtensionNums() + parseStat.getExtensionNoneNums());

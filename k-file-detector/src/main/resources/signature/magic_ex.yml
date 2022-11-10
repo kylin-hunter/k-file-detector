@@ -1,17 +1,11 @@
 magics:
   - number: 504B030414000600
-    offset: 0
     detectContentSupport: true
-    desc: 'PK......'
     includeFileTypes:
-      - id: 100001
-        extension: "ppsx"
-      - id: 100002
-        extension: "dotx"
-      - id: 100003
-        extension: "xltx"
-      - id: 100005
-        extension: potx
+      - id: ppsx
+      - id: dotx
+      - id: xltx
+      - id: potx
   - number: 0000000000000000
     refMagic: 504B030414000600
   - number: 4D5A90000300000004000000FFFF
@@ -21,40 +15,22 @@ magics:
   - number: 504B0304140008000800
     extensionMustMatch: true
   - number: D0CF11E0A1B11AE1
-    offset: 0
-    desc: ' may be a ms office docuemnt (97-2004) or other file type '
-    includeFileTypes:
-      - id: 100004
-        extension: "xlt"
+    desc: ' More likely，the file is  Microsoft Office file (97-2004) or some other  types '
   - number: 667479704D345620
-    offset: 4
-    desc: 'ftypM4V'
     includeFileTypes:
-      - id: 0_mp4
-        extension: mp4
-      - id: 0_mp4_1893411598
-        extension: mp4
+      - id: mp4
+      - id: mp4_6674
   - number: 667479706D703432
-    offset: 4
-    desc: 'ftypmp42'
     includeFileTypes:
-      - id: 0_mp4
-        extension: mp4
-      - id: 0_mp4_1893411598
-        extension: mp4
+      - id: mp4
+      - id: mp4_6674
   - number: 4D5A
     topFileTypes:
-      - id: 0_exe
-        extension: exe
-      - id: 0_com
-        extension: com
+      - id: exe
+      - id: com
   - number: FFD8FFE0xxxx4A46494600
     topFileTypes:
-      - id: 0_jpg_2066877226
-        extension: "jpg"
-      - id: 0_jpeg_2066877226
-        extension: "jpeg"
-      - id: 0_jpe_2066877226
-        extension: "jpe"
-      - id: 0_jfif
-        extension: "jfif"
+      - id: jpg_FFD8
+      - id: jpeg_FFD8
+      - id: jpe_FFD8
+      - id: jfif

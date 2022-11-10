@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.init.parse;
+package com.kylinhunter.plat.file.detector.prepared.parse;
 
 import java.util.Map;
 import java.util.Set;

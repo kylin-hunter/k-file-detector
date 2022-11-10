@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.init;
+package com.kylinhunter.plat.file.detector.prepared;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +23,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
-import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.init.parse.MagicYamlWriter;
-import com.kylinhunter.plat.file.detector.init.parse.ParseMagicHelper;
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseContext;
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseMagic;
-import com.kylinhunter.plat.file.detector.init.parse.bean.YamlMessage;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
+import com.kylinhunter.plat.file.detector.prepared.parse.MagicYamlWriter;
+import com.kylinhunter.plat.file.detector.prepared.parse.ParseMagicHelper;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseContext;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseMagic;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.YamlMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -341,7 +341,6 @@ public class MagicYamlCreator {
 
         reviseFileTypes(parseContext);
         Map<String, ParseMagic> numberMaps = parseContext.getNumberMaps();
-
         numberMaps.forEach((magicNumber, parseMagic) -> {
             String sameMagicNumber = ParseMagicHelper.getSameMagicNumber(magicNumber);
             if (!StringUtils.isEmpty(sameMagicNumber)) {
@@ -372,12 +371,13 @@ public class MagicYamlCreator {
         Map<String, ParseMagic> numberMaps = parseContext.getNumberMaps();
         Map<String, FileType> duplicateFileTypes = Maps.newHashMap();
 
-        Collection<ParseMagic> parseMagics = numberMaps.values();
+        List<ParseMagic> parseMagics = numberMaps.values().stream().sorted().collect(Collectors.toList());
         FileTypeIdGenerator fileTypeIdGenerator = new FileTypeIdGenerator();
         parseMagics.forEach(parseMagic -> {
                     List<FileType> newFileTypes = parseMagic.getFileTypes().stream().map(fileType -> {
 
-                        String id = fileTypeIdGenerator.generateId(fileType.getExtension(), fileType.getDesc());
+                        String id = fileTypeIdGenerator.generateId(parseMagic.getNumber(), fileType);
+
                         FileType distFileType = duplicateFileTypes.get(id);
                         if (distFileType != null) {
                             log.info("duplicate file type=>{}", distFileType);

@@ -1,10 +1,13 @@
 package com.kylinhunter.plat.file.detector.file;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 
@@ -21,7 +24,7 @@ class FileTypeManagerTest {
 
     @Test
     void getAllFileTypes() {
-        Set<FileType> allFileTypes = fileTypeManager.getAllFileTypes();
+        List<FileType> allFileTypes = fileTypeManager.getAllFileTypes();
         allFileTypes.forEach(fileType -> {
             System.out.println(fileType.getId());
             FileTypeManagerTest.print(fileType);
@@ -44,10 +47,10 @@ class FileTypeManagerTest {
     @Test
     void getFileTypeById() {
 
-//        FileType fileType = fileTypeManager.getFileTypeById(100);
-//        Assertions.assertNotNull(fileType);
-//        fileType = fileTypeManager.getFileTypeById(100001);
-//        Assertions.assertNotNull(fileType);
+        //        FileType fileType = fileTypeManager.getFileTypeById(100);
+        //        Assertions.assertNotNull(fileType);
+        //        fileType = fileTypeManager.getFileTypeById(100001);
+        //        Assertions.assertNotNull(fileType);
     }
 
     @Test
@@ -65,6 +68,34 @@ class FileTypeManagerTest {
         Set<String> allExtensions = fileTypeManager.getAllExtensions();
         allExtensions.forEach(System.out::println);
         Assertions.assertTrue(allExtensions.size() > 0);
+    }
+
+    @Test
+    void findSameFileType() {
+        List<FileType> allFileTypes = fileTypeManager.getAllFileTypes();
+        Map<String, String> descs = Maps.newHashMap();
+        System.out.println(allFileTypes.size());
+        allFileTypes.forEach(fileType -> {
+
+            String extension = fileType.getExtension();
+            String desc = fileType.getDesc();
+            String duplicatStr = extension + "_" + desc;
+            String duplicateFileTypeId = descs.get(duplicatStr);
+            if (duplicateFileTypeId != null && duplicateFileTypeId.length() > 0) {
+
+                FileType fileTypeOld = fileTypeManager.getFileTypeById(duplicateFileTypeId);
+                System.out.println("duplicateOri :" + fileTypeOld.getId() + "/" + fileTypeOld.getExtension()
+                        + "/" + fileTypeOld.getDesc());
+
+
+                System.out.println("duplicateNew :" + fileType.getId() + "/" + extension + "/" + desc);
+
+
+            } else {
+                descs.put(duplicatStr, fileType.getId());
+            }
+        });
+
     }
 
 }

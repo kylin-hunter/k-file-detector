@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.init.parse;
+package com.kylinhunter.plat.file.detector.prepared.parse;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import org.apache.commons.io.FileUtils;
 import com.google.common.collect.Lists;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
-import com.kylinhunter.plat.file.detector.init.parse.bean.ParseMagic;
-import com.kylinhunter.plat.file.detector.init.parse.bean.YamlMessage;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseMagic;
+import com.kylinhunter.plat.file.detector.prepared.parse.bean.YamlMessage;
 
 /**
  * @author BiJi'an

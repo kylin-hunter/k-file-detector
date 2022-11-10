@@ -1,10 +1,10 @@
-package com.kylinhunter.plat.file.detector.init.parse.bean;
+package com.kylinhunter.plat.file.detector.prepared.parse.bean;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,9 @@ public class ParseMagic implements Comparable<ParseMagic>, Cloneable {
 
     @Override
     public int compareTo(ParseMagic o) {
-        return this.number.length() - o.number.length();
+
+        return number.compareTo(o.number);
+
     }
 
     @Override

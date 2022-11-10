@@ -1,4 +1,4 @@
-package com.kylinhunter.plat.file.detector.init.parse.bean;
+package com.kylinhunter.plat.file.detector.prepared.parse.bean;
 
 import lombok.Getter;
 import lombok.Setter;

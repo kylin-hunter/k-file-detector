@@ -1,17 +1,19 @@
 package com.kylinhunter.plat.file.detector.file;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.kylinhunter.plat.file.detector.common.component.C;
-import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
 
 import lombok.Getter;
 
@@ -27,7 +29,7 @@ public class FileTypeManager {
     private final Map<String, Set<FileType>> extensionToFileTypes = Maps.newHashMap();
     private final Map<String, FileType> idToFileTyes = Maps.newHashMap();
     @Getter
-    private final Set<FileType> allFileTypes = Sets.newHashSet();
+    private final List<FileType> allFileTypes = Lists.newArrayList();
     @Getter
     private final Set<String> allExtensions = Sets.newHashSet();
 

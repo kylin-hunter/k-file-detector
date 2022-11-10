@@ -62,14 +62,14 @@ public class MSOfficeDetector implements ContentDetector {
     private void init() {
         this.magic = magicManager.getMagic("504B030414000600");
 
-        ppsx = fileTypeManager.getFileTypeById("100001");
-        dotx = fileTypeManager.getFileTypeById("100002");
-        xltx = fileTypeManager.getFileTypeById("100003");
-        potx = fileTypeManager.getFileTypeById("100005");
+        ppsx = fileTypeManager.getFileTypeById("ppsx");
+        dotx = fileTypeManager.getFileTypeById("dotx");
+        xltx = fileTypeManager.getFileTypeById("xltx");
+        potx = fileTypeManager.getFileTypeById("potx");
 
-        docx = fileTypeManager.getFileTypeById("0_docx");
-        xlsx = fileTypeManager.getFileTypeById("0_xlsx");
-        pptx = fileTypeManager.getFileTypeById("0_pptx");
+        docx = fileTypeManager.getFileTypeById("docx");
+        xlsx = fileTypeManager.getFileTypeById("xlsx");
+        pptx = fileTypeManager.getFileTypeById("pptx");
 
         DIR_FILE_TYPES.put("word", docx);
         DIR_FILE_TYPES.put("xl", xlsx);
