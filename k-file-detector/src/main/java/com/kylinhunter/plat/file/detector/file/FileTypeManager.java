@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.StringUtils;
 
@@ -66,20 +68,27 @@ public class FileTypeManager {
         allFileTypes.add(fileType);
         idToFileTyes.put(fileType.getId(), fileType);
 
-        String extension = fileType.getExtension();
-        if (!StringUtils.isEmpty(extension)) {
-            allExtensions.add(extension);
+        List<String> extensions = fileType.getExtensions();
+        if (!CollectionUtils.isEmpty(extensions)) {
+            allExtensions.addAll(extensions);
+            extensions.forEach(extension -> extensionToFileTypes.compute(extension, (k, v) -> {
+                if (v == null) {
+                    v = Sets.newHashSet();
+                }
+                v.add(fileType);
+                return v;
+            }));
         } else {
-            extension = EXTENSIN_EMPTY;
+
+            extensionToFileTypes.compute(EXTENSIN_EMPTY, (k, v) -> {
+                if (v == null) {
+                    v = Sets.newHashSet();
+                }
+                v.add(fileType);
+                return v;
+            });
         }
 
-        extensionToFileTypes.compute(extension, (k, v) -> {
-            if (v == null) {
-                v = Sets.newHashSet();
-            }
-            v.add(fileType);
-            return v;
-        });
     }
 
     /**
@@ -91,11 +100,12 @@ public class FileTypeManager {
      * @date 2022-10-24 01:54
      */
     private void check(FileType fileType) {
-        String extension = fileType.getExtension();
-        if (!StringUtils.isEmpty(extension)) {
-            fileType.setExtension(extension.toLowerCase());
+        List<String> extensions = fileType.getExtensions();
+        if (!CollectionUtils.isEmpty(extensions)) {
+
+            fileType.setExtensions(extensions.stream().map(e -> e.toLowerCase()).collect(Collectors.toList()));
         } else {
-            fileType.setExtension(StringUtils.EMPTY);
+            fileType.setExtensions(Collections.EMPTY_LIST);
         }
         Preconditions.checkArgument(!StringUtils.isEmpty(fileType.getId()), " file type id can't be empty");
 

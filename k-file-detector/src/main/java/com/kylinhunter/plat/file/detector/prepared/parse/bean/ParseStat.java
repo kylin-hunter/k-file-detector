@@ -26,9 +26,6 @@ public class ParseStat {
     private int extensionNoneNums;
 
     @Getter
-    private int extensionNums;
-
-    @Getter
     private int fileTypeDuplicateNums;
     @Getter
     private int fileTypeNums;
@@ -45,9 +42,7 @@ public class ParseStat {
         extensionNoneNums++;
     }
 
-    public void incrementExtensionNum() {
-        extensionNums++;
-    }
+
 
     public void incrementFileTypeNum() {
         fileTypeNums++;

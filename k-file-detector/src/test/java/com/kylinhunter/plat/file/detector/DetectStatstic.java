@@ -21,7 +21,7 @@ public class DetectStatstic {
         matchNums.compute(assertResult, (k, v) -> {
             if (v == null) {
                 v = 1;
-            }else{
+            } else {
                 v++;
             }
             return v;
@@ -37,7 +37,6 @@ public class DetectStatstic {
             System.out.printf("position=%d ,%d/%d = %s%n", level, num, allNums, format.format(ratio));
 
         });
-
     }
 
     public double getFirstFileTypeMatchRatio() {
@@ -46,6 +45,10 @@ public class DetectStatstic {
 
     public double getSecondFileTypeMatchRatio() {
         return (double) matchNums.getOrDefault(2, 0) / allNums;
+    }
+
+    public int getMatchNum(int position) {
+        return  matchNums.getOrDefault(position,0);
     }
 
 }

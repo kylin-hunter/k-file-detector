@@ -1,4 +1,4 @@
-magics:
+adjustMagics:
   - number: 504B030414000600
     detectContentSupport: true
     includeFileTypes:
@@ -11,8 +11,12 @@ magics:
   - number: 4D5A90000300000004000000FFFF
     enabled: false
   - number: 4D5A900003000000
+    enabled: false
     extensionMustMatch: true
+  - number: FDFFFFFFxxxxxxxxxxxxxxxx04000000
+    enabled: false
   - number: 504B0304140008000800
+    enabled: false
     extensionMustMatch: true
   - number: D0CF11E0A1B11AE1
     desc: ' More likely，the file is  Microsoft Office file (97-2004) or some other  types '
@@ -25,12 +29,4 @@ magics:
       - id: mp4
       - id: mp4_6674
   - number: 4D5A
-    topFileTypes:
-      - id: exe
-      - id: com
   - number: FFD8FFE0xxxx4A46494600
-    topFileTypes:
-      - id: jpg_FFD8
-      - id: jpeg_FFD8
-      - id: jpe_FFD8
-      - id: jfif

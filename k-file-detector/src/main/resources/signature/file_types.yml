@@ -1,1999 +1,2400 @@
 fileTypes: 
   - id: 123
-    extension: 123
+    extensions: 
+      - "123"
     desc: 'Lotus 1-2-3 spreadsheet (v9) file'
-  - id: 386
-    extension: 386
-    desc: 'Windows virtual device drivers'
-  - id: 3g2
-    extension: 3g2
-    desc: '3rd Generation Partnership Project 3GPP multimedia files'
-  - id: 3gg
-    extension: 3gg
-    desc: '3rd Generation Partnership Project 3GPP multimedia files'
-  - id: 3gp
-    extension: 3gp
+  - id: 3gg,3gp,3g2
+    extensions: 
+      - "3gg"
+      - "3gp"
+      - "3g2"
     desc: '3rd Generation Partnership Project 3GPP multimedia files'
   - id: 4xm
-    extension: 4xm
+    extensions: 
+      - "4xm"
     desc: '4X Movie video'
   - id: 7z
-    extension: 7z
+    extensions: 
+      - "7z"
     desc: '7-Zip compressed file'
   - id: aac
-    extension: aac
+    extensions: 
+      - "aac"
     desc: 'MPEG-4 Advanced Audio Coding (AAC) Low Complexity (LC) audio file'
   - id: aac_FFF9
-    extension: aac
+    extensions: 
+      - "aac"
     desc: 'MPEG-2 Advanced Audio Coding (AAC) Low Complexity (LC) audio file'
   - id: aba
-    extension: aba
+    extensions: 
+      - "aba"
     desc: 'Palm Address Book Archive file'
-  - id: abd
-    extension: abd
+  - id: abd,qsd
+    extensions: 
+      - "abd"
+      - "qsd"
     desc: 'Quicken data file'
   - id: abi
-    extension: abi
+    extensions: 
+      - "abi"
     desc: 'AOL address book index file'
   - id: abox2
-    extension: abox2
+    extensions: 
+      - "abox2"
     desc: 'Analog Box circuit files'
-  - id: aby
-    extension: aby
+  - id: aby,idx
+    extensions: 
+      - "aby"
+      - "idx"
     desc: 'AOL database files: address book (ABY) and user configuration data (MAIN.IDX)'
   - id: ac_
-    extension: ac_
+    extensions: 
+      - "ac_"
     desc: 'CaseWare Working Papers compressed client file'
   - id: accdb
-    extension: accdb
+    extensions: 
+      - "accdb"
     desc: 'Microsoft Access 2007 file'
   - id: acd
-    extension: acd
+    extensions: 
+      - "acd"
     desc: 'Sonic Foundry Acid Music File (Sony)'
   - id: acm
-    extension: acm
+    extensions: 
+      - "acm"
     desc: 'MS audio compression manager driver'
   - id: acs
-    extension: acs
+    extensions: 
+      - "acs"
     desc: 'MS Agent Character file'
   - id: adf
-    extension: adf
+    extensions: 
+      - "adf"
     desc: 'Amiga disk file'
   - id: adf_5245
-    extension: adf
+    extensions: 
+      - "adf"
     desc: 'Antenna data file'
   - id: adp
-    extension: adp
+    extensions: 
+      - "adp"
     desc: 'Access project file'
   - id: adx
-    extension: adx
+    extensions: 
+      - "adx"
     desc: 'Approach index file'
   - id: adx_8000
-    extension: adx
+    extensions: 
+      - "adx"
     desc: 'ADX lossy compressed audio file'
   - id: aes
-    extension: aes
+    extensions: 
+      - "aes"
     desc: 'AES Crypt file format. (The fourth byte is the version number.)'
-  - id: ai
-    extension: ai
-    desc: 'Adobe Portable Document Format, Forms Document Format, and Illustrator graphics files Trailers: 0A 25 25 45 4F 46 (.%%EOF) 0A 25 25 45 4F 46 0A (.%%EOF.) 0D 0A 25 25 45 4F 46 0D 0A (..%%EOF..) 0D 25 25 45 4F 46 0D (.%%EOF.) NOTE: There may be multiple end-of-file marks within the file. When carving, be sure to get the last one.'
   - id: aiff
-    extension: aiff
+    extensions: 
+      - "aiff"
     desc: 'Audio Interchange File'
   - id: ain
-    extension: ain
+    extensions: 
+      - "ain"
     desc: 'AIN Compressed Archive'
   - id: amr
-    extension: amr
+    extensions: 
+      - "amr"
     desc: 'Adaptive Multi-Rate ACELP (Algebraic Code Excited Linear Prediction) Codec, commonly audio format with GSM cell phones. (See RFC 4867.)'
   - id: ani
-    extension: ani
+    extensions: 
+      - "ani"
     desc: 'Windows animated cursor'
   - id: anm
-    extension: anm
+    extensions: 
+      - "anm"
     desc: 'IFF ANIM (Amiga delta/RLE encoded bitmap animation) file'
   - id: anm_4C50
-    extension: anm
+    extensions: 
+      - "anm"
     desc: 'DeluxePaint Animation file'
   - id: api
-    extension: api
+    extensions: 
+      - "api"
     desc: 'Acrobat plug-in'
   - id: apk
-    extension: apk
+    extensions: 
+      - "apk"
     desc: 'Android package'
   - id: apr
-    extension: apr
+    extensions: 
+      - "apr"
     desc: 'Lotus/IBM Approach 97 file'
   - id: apuf
-    extension: apuf
+    extensions: 
+      - "apuf"
     desc: 'Puffer ASCII-armored encrypted archive'
   - id: arc
-    extension: arc
+    extensions: 
+      - "arc"
     desc: 'LH archive file, old version (where x = 0x2, 0x3, 0x4, 0x8 or 0x9 for types 1-5, respectively)'
   - id: arc_4172
-    extension: arc
+    extensions: 
+      - "arc"
     desc: 'FreeArc compressed file'
   - id: arf
-    extension: arf
+    extensions: 
+      - "arf"
     desc: 'Webex Advanced Recording Format files.'
   - id: arj
-    extension: arj
+    extensions: 
+      - "arj"
     desc: 'Compressed archive file'
-  - id: arl
-    extension: arl
+  - id: arl,aut
+    extensions: 
+      - "arl"
+      - "aut"
     desc: 'AOL history (ARL) and typed URL (AUT) files'
   - id: art
-    extension: art
+    extensions: 
+      - "art"
     desc: 'AOL ART file Trailers: For 0x4A-47-03-0E: D0 CB 00 00 (��..) For 0x4A-47-04-0E: CF C7 CB (���)'
-  - id: asf
-    extension: asf
+  - id: asf,wma,wmv
+    extensions: 
+      - "asf"
+      - "wma"
+      - "wmv"
     desc: 'Microsoft Windows Media Audio/Video File (Advanced Systems Format)'
   - id: ast
-    extension: ast
+    extensions: 
+      - "ast"
     desc: 'Need for Speed: Underground Audio file'
   - id: asx
-    extension: asx
+    extensions: 
+      - "asx"
     desc: 'Advanced Stream redirector file'
   - id: attachment
-    extension: attachment
+    extensions: 
+      - "attachment"
     desc: '1Password 4 Cloud Keychain encrypted attachment'
   - id: au
-    extension: au
+    extensions: 
+      - "au"
     desc: 'NeXT/Sun Microsystems �-Law audio file'
   - id: au_646E
-    extension: au
+    extensions: 
+      - "au"
     desc: 'Audacity audio file'
-  - id: aut
-    extension: aut
-    desc: 'AOL history (ARL) and typed URL (AUT) files'
   - id: avi
-    extension: avi
+    extensions: 
+      - "avi"
     desc: 'Resource Interchange File Format -- Windows Audio Video Interleave file, where xx xx xx xx is the file size (little endian)'
   - id: aw
-    extension: aw
+    extensions: 
+      - "aw"
     desc: 'MS Answer Wizard file'
   - id: ax
-    extension: ax
+    extensions: 
+      - "ax"
     desc: 'Library cache file'
   - id: ax_4D5A
-    extension: ax
+    extensions: 
+      - "ax"
     desc: 'DirectShow filter'
   - id: b64
-    extension: b64
+    extensions: 
+      - "b64"
     desc: 'UUencoded BASE64 file Trailer: 0A 3D 3D 3D 3D 0A (.====.)'
   - id: b85
-    extension: b85
+    extensions: 
+      - "b85"
     desc: 'ASCII85 (aka BASE85) encoded file, sometimes used with PostScript and PDF. Trailer: 7E 3E 0A (~>.)'
   - id: bag
-    extension: bag
+    extensions: 
+      - "bag"
     desc: 'AOL and AIM buddy list file'
   - id: bdic
-    extension: bdic
+    extensions: 
+      - "bdic"
     desc: 'Google Chrome dictionary file'
   - id: bdr
-    extension: bdr
+    extensions: 
+      - "bdr"
     desc: 'MS Publisher border'
   - id: bli
-    extension: bli
-    desc: 'Thomson Speedtouch series WLAN router firmware'
-  - id: bli_426C
-    extension: bli
+    extensions: 
+      - "bli"
     desc: 'BLINK compressed archive'
-  - id: bmp
-    extension: bmp
+  - id: bli,rbi
+    extensions: 
+      - "bli"
+      - "rbi"
+    desc: 'Thomson Speedtouch series WLAN router firmware'
+  - id: bmp,dib
+    extensions: 
+      - "bmp"
+      - "dib"
     desc: 'Windows (or device-independent) bitmap image NOTE: Bytes 2-5 contain the file length in little-endian order.'
   - id: bpg
-    extension: bpg
+    extensions: 
+      - "bpg"
     desc: 'Better Portable Graphics image format'
   - id: bsb
-    extension: bsb
+    extensions: 
+      - "bsb"
     desc: 'Pitney Bowes'' MapInfo Sea Chart format'
   - id: bsb_210D
-    extension: bsb
+    extensions: 
+      - "bsb"
     desc: 'NOAA Raster Navigation Chart (RNC�) file (https://charts.noaa.gov/RNCs/RNCs.shtml). See also the BSB/KAP File Format specification'
-  - id: bz2
-    extension: bz2
+  - id: bz2,tar.bz2,tbz2,tb2
+    extensions: 
+      - "bz2"
+      - "tar.bz2"
+      - "tbz2"
+      - "tb2"
     desc: 'bzip2 compressed archive'
   - id: cab
-    extension: cab
-    desc: 'Install Shield v5.x or 6.x compressed file'
-  - id: cab_4D53
-    extension: cab
+    extensions: 
+      - "cab"
     desc: 'Microsoft cabinet file'
+  - id: cab,hdr
+    extensions: 
+      - "cab"
+      - "hdr"
+    desc: 'Install Shield v5.x or 6.x compressed file'
   - id: caf
-    extension: caf
+    extensions: 
+      - "caf"
     desc: 'Apple Core Audio File'
   - id: cal
-    extension: cal
+    extensions: 
+      - "cal"
     desc: 'SuperCalc worksheet'
   - id: cal_7372
-    extension: cal
+    extensions: 
+      - "cal"
     desc: 'CALS raster bitmap file'
   - id: cal_B5A2
-    extension: cal
+    extensions: 
+      - "cal"
     desc: 'Windows calendar file'
   - id: cap
-    extension: cap
+    extensions: 
+      - "cap"
     desc: 'Windows NT Netmon capture file'
   - id: cap_5843
-    extension: cap
+    extensions: 
+      - "cap"
     desc: 'Cinco NetXRay, Network General Sniffer, and Network Associates Sniffer capture file'
-  - id: cas
-    extension: cas
+  - id: cas,cbk
+    extensions: 
+      - "cas"
+      - "cbk"
     desc: 'EnCase case file (and backup)'
   - id: cat
-    extension: cat
+    extensions: 
+      - "cat"
     desc: 'Microsoft security catalog file'
   - id: cbd
-    extension: cbd
+    extensions: 
+      - "cbd"
     desc: 'WordPerfect dictionary file (unconfirmed)'
-  - id: cbk
-    extension: cbk
-    desc: 'EnCase case file (and backup)'
   - id: cda
-    extension: cda
+    extensions: 
+      - "cda"
     desc: 'Resource Interchange File Format -- Compact Disc Digital Audio (CD-DA) file, where xx xx xx xx is the file size (little endian)'
   - id: cdr
-    extension: cdr
+    extensions: 
+      - "cdr"
     desc: 'Elite Plus Commander saved game file'
-  - id: cdr_4D53
-    extension: cdr
+  - id: cdr,dvf
+    extensions: 
+      - "cdr"
+      - "dvf"
     desc: 'Sony Compressed Voice File'
   - id: cdr_5249
-    extension: cdr
+    extensions: 
+      - "cdr"
     desc: 'CorelDraw document'
   - id: cfg
-    extension: cfg
+    extensions: 
+      - "cfg"
     desc: 'Flight Simulator Aircraft Configuration file'
-  - id: chi
-    extension: chi
-    desc: 'Microsoft Compiled HTML Help File'
-  - id: chm
-    extension: chm
+  - id: chi,chm
+    extensions: 
+      - "chi"
+      - "chm"
     desc: 'Microsoft Compiled HTML Help File'
   - id: cif
-    extension: cif
+    extensions: 
+      - "cif"
     desc: '(Unknown file type)'
   - id: cin
-    extension: cin
+    extensions: 
+      - "cin"
     desc: 'Calculux Indoor lighting design software project file'
   - id: cin_802A
-    extension: cin
+    extensions: 
+      - "cin"
     desc: 'Kodak Cineon image file'
   - id: cl5
-    extension: cl5
+    extensions: 
+      - "cl5"
     desc: 'Easy CD Creator 5 Layout file'
   - id: class
-    extension: class
+    extensions: 
+      - "class"
     desc: 'Java bytecode file (also used by Apple iOS apps)'
   - id: clb
-    extension: clb
+    extensions: 
+      - "clb"
     desc: 'Corel Binary metafile'
   - id: clb_434F
-    extension: clb
+    extensions: 
+      - "clb"
     desc: 'COM+ Catalog file'
   - id: cmx
-    extension: cmx
+    extensions: 
+      - "cmx"
     desc: 'Corel Presentation Exchange (Corel 10 CMX) Metafile'
   - id: cnv
-    extension: cnv
+    extensions: 
+      - "cnv"
     desc: 'DB2 conversion file'
   - id: cod
-    extension: cod
+    extensions: 
+      - "cod"
     desc: 'Agent newsreader character map file'
-  - id: com
-    extension: com
+  - id: com,dll,drv,exe,pif,qts,qtx,sys
+    extensions: 
+      - "com"
+      - "dll"
+      - "drv"
+      - "exe"
+      - "pif"
+      - "qts"
+      - "qtx"
+      - "sys"
     desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
-  - id: com_EB
-    extension: com
+  - id: com,sys
+    extensions: 
+      - "com"
+      - "sys"
     desc: 'Windows executable file'
   - id: cpe
-    extension: cpe
+    extensions: 
+      - "cpe"
     desc: 'Microsoft Fax Cover Sheet'
   - id: cpi
-    extension: cpi
+    extensions: 
+      - "cpi"
     desc: 'Sietronics CPI XRD document'
   - id: cpi_FF46
-    extension: cpi
+    extensions: 
+      - "cpi"
     desc: 'Windows international code page'
   - id: cpl
-    extension: cpl
+    extensions: 
+      - "cpl"
     desc: 'Control panel application'
   - id: cpl_DCDC
-    extension: cpl
+    extensions: 
+      - "cpl"
     desc: 'Corel color palette file'
   - id: cpt
-    extension: cpt
+    extensions: 
+      - "cpt"
     desc: 'Corel Photopaint file'
   - id: cpx
-    extension: cpx
+    extensions: 
+      - "cpx"
     desc: 'Microsoft Code Page Translation file'
   - id: cr2
-    extension: cr2
+    extensions: 
+      - "cr2"
     desc: 'Canon digital camera RAW file'
   - id: cru
-    extension: cru
+    extensions: 
+      - "cru"
     desc: 'Crush compressed archive'
   - id: crw
-    extension: crw
+    extensions: 
+      - "crw"
     desc: 'Canon digital camera RAW file'
   - id: crx
-    extension: crx
+    extensions: 
+      - "crx"
     desc: 'Google Chrome Extension'
   - id: crx_4372
-    extension: crx
+    extensions: 
+      - "crx"
     desc: 'Google Chromium patch update'
   - id: csd
-    extension: csd
+    extensions: 
+      - "csd"
     desc: 'Csound music file'
   - id: csd_7C4B
-    extension: csd
+    extensions: 
+      - "csd"
     desc: 'Huskygram, Poem, or Singer embroidery design file'
   - id: csh
-    extension: csh
+    extensions: 
+      - "csh"
     desc: 'Photoshop Custom Shape'
   - id: cso
-    extension: cso
+    extensions: 
+      - "cso"
     desc: 'Compressed ISO (CISO) CD image'
   - id: ctf
-    extension: ctf
+    extensions: 
+      - "ctf"
     desc: 'WhereIsIt Catalog file'
   - id: ctl
-    extension: ctl
+    extensions: 
+      - "ctl"
     desc: 'Visual Basic User-defined Control file'
   - id: cur
-    extension: cur
+    extensions: 
+      - "cur"
     desc: 'Windows cursor file'
   - id: daa
-    extension: daa
+    extensions: 
+      - "daa"
     desc: 'PowerISO Direct-Access-Archive image'
   - id: dat
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Bitcoin Core wallet.dat file'
   - id: dat_03
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'MapInfo Native Data Format'
   - id: dat_1A52
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Runtime Software compressed disk image'
   - id: dat_4156
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'AVG6 Integrity database file'
   - id: dat_4352
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Windows 9x registry hive'
   - id: dat_436C
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Microsoft Internet Explorer cache file (index.dat) file'
   - id: dat_4552
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Kroll EasyRecovery Saved Recovery State file'
   - id: dat_496E
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Inno Setup Uninstall Log file'
   - id: dat_4E41
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'TomTom traffic data file'
   - id: dat_5045
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'PestPatrol data/scan strings'
   - id: dat_504D
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Microsoft� Windows� User State Migration Tool (USMT). USMT 3.0 applies to Windows XP and Windows Vista�, and USMT 4.0 is for Windows 7.'
   - id: dat_504E
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Norton Disk Doctor undo file'
   - id: dat_5241
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Shareaza (Windows P2P client) thumbnail'
   - id: dat_5249
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Video CD MPEG or MPEG1 movie file'
   - id: dat_5546
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'UFO Capture v2 map file'
   - id: dat_574D
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Walkman MP3 container file'
   - id: dat_7265
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Windows NT registry hive file'
   - id: dat_736C
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Allegro Generic Packfile Data file (compressed)'
   - id: dat_736C68
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Allegro Generic Packfile Data file (uncompressed)'
   - id: dat_A90D
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Access Data FTK evidence file'
   - id: dat_BEBA
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Palm Desktop DateBook file'
   - id: dat_F9BE
-    extension: dat
+    extensions: 
+      - "dat"
     desc: 'Bitcoin-Qt blockchain block file'
   - id: dax
-    extension: dax
+    extensions: 
+      - "dax"
     desc: 'DAX Compressed CD image'
   - id: dax_464F
-    extension: dax
+    extensions: 
+      - "dax"
     desc: 'DAKX Compressed Audio'
   - id: db
-    extension: db
+    extensions: 
+      - "db"
     desc: 'Netscape Navigator (v4) database file'
   - id: db3
-    extension: db3
+    extensions: 
+      - "db3"
     desc: 'dBASE III file'
   - id: db4
-    extension: db4
+    extensions: 
+      - "db4"
     desc: 'dBASE IV data file'
   - id: db_08
-    extension: db
+    extensions: 
+      - "db"
     desc: 'dBASE IV or dBFast configuration file'
   - id: db_434D
-    extension: db
+    extensions: 
+      - "db"
     desc: 'Windows 7 thumbcache_sr.db or other thumbcache file (except thumbcache_idx.db)'
   - id: db_4442
-    extension: db
+    extensions: 
+      - "db"
     desc: 'Palm Zire photo database'
   - id: db_494D
-    extension: db
+    extensions: 
+      - "db"
     desc: 'Windows 7 thumbcache_idx.db file'
   - id: db_5351
-    extension: db
+    extensions: 
+      - "db"
     desc: 'SQLite database file'
   - id: db_D0CF
-    extension: db
+    extensions: 
+      - "db"
     desc: 'MSWorks database file'
   - id: db_FDFF
-    extension: db
+    extensions: 
+      - "db"
     desc: 'Thumbs.db subheader (MS Office)'
   - id: dba
-    extension: dba
+    extensions: 
+      - "dba"
     desc: 'Palm DateBook Archive file'
   - id: dbb
-    extension: dbb
+    extensions: 
+      - "dbb"
     desc: 'Skype user data file (profile and contacts)'
   - id: dbf
-    extension: dbf
+    extensions: 
+      - "dbf"
     desc: 'Psion Series 3 Database file'
   - id: dbx
-    extension: dbx
+    extensions: 
+      - "dbx"
     desc: 'Outlook Express e-mail folder'
   - id: dci
-    extension: dci
+    extensions: 
+      - "dci"
     desc: 'AOL HTML mail file'
   - id: dcx
-    extension: dcx
+    extensions: 
+      - "dcx"
     desc: 'Graphics Multipage PCX bitmap file'
   - id: dex
-    extension: dex
+    extensions: 
+      - "dex"
     desc: 'Dalvik executable file (Android)'
-  - id: dib
-    extension: dib
-    desc: 'Windows (or device-independent) bitmap image NOTE: Bytes 2-5 contain the file length in little-endian order.'
-  - id: dll
-    extension: dll
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: dmg
-    extension: dmg
+    extensions: 
+      - "dmg"
     desc: 'Mac Disk image (BZ2 compressed)'
   - id: dmg_6364
-    extension: dmg
+    extensions: 
+      - "dmg"
     desc: 'Macintosh encrypted Disk image (v1)'
   - id: dmg_656E
-    extension: dmg
+    extensions: 
+      - "dmg"
     desc: 'Macintosh encrypted Disk image (v2)'
   - id: dmg_7801
-    extension: dmg
+    extensions: 
+      - "dmg"
     desc: 'Mac OS X Disk Copy Disk Image file'
   - id: dmp
-    extension: dmp
+    extensions: 
+      - "dmp"
     desc: 'Windows minidump file'
   - id: dmp_5041
-    extension: dmp
+    extensions: 
+      - "dmp"
     desc: 'Windows 64-bit memory dump'
   - id: dmp_504147
-    extension: dmp
+    extensions: 
+      - "dmp"
     desc: 'Windows memory dump'
   - id: dms
-    extension: dms
+    extensions: 
+      - "dms"
     desc: 'Amiga DiskMasher compressed archive'
   - id: doc
-    extension: doc
+    extensions: 
+      - "doc"
     desc: 'DeskMate Document file'
-  - id: doc_CF11
-    extension: doc
-    desc: 'Perfect Office document [Note similarity to MS Office header, below]'
-  - id: doc_D0CF
-    extension: doc
+  - id: doc,dot,pps,ppt,xla,xls,wiz
+    extensions: 
+      - "doc"
+      - "dot"
+      - "pps"
+      - "ppt"
+      - "xla"
+      - "xls"
+      - "wiz"
     desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
+  - id: doc_CF11
+    extensions: 
+      - "doc"
+    desc: 'Perfect Office document [Note similarity to MS Office header, below]'
   - id: doc_DBA5
-    extension: doc
+    extensions: 
+      - "doc"
     desc: 'Word 2.0 file'
   - id: doc_ECA5
-    extension: doc
+    extensions: 
+      - "doc"
     desc: 'Word document subheader (MS Office)'
-  - id: docx
-    extension: docx
+  - id: docx,pptx,xlsx
+    extensions: 
+      - "docx"
+      - "pptx"
+      - "xlsx"
     desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'
-  - id: dot
-    extension: dot
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: dpx
-    extension: dpx
+    extensions: 
+      - "dpx"
     desc: 'Society of Motion Picture and Television Engineers (SMPTE) Digital Picture Exchange (DPX) image file (big endian)'
   - id: dpx_5850
-    extension: dpx
+    extensions: 
+      - "dpx"
     desc: 'Society of Motion Picture and Television Engineers (SMPTE) Digital Picture Exchange (DPX) image file (little endian)'
-  - id: drv
-    extension: drv
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: drw
-    extension: drw
+    extensions: 
+      - "drw"
     desc: 'Micrografx vector graphic file'
   - id: drw_07
-    extension: drw
+    extensions: 
+      - "drw"
     desc: 'A common signature and file extension for many drawing programs.'
   - id: ds4
-    extension: ds4
+    extensions: 
+      - "ds4"
     desc: 'Micrografx Designer v4 graphic file'
   - id: dsf
-    extension: dsf
+    extensions: 
+      - "dsf"
     desc: 'DSD Storage Facility audio file'
   - id: dsf_5053
-    extension: dsf
+    extensions: 
+      - "dsf"
     desc: 'Dreamcast Sound Format file, a subset of the Portable Sound Format.'
   - id: dsn
-    extension: dsn
+    extensions: 
+      - "dsn"
     desc: 'CD Stomper Pro label file'
   - id: dsp
-    extension: dsp
+    extensions: 
+      - "dsp"
     desc: 'Microsoft Developer Studio project file'
   - id: dss
-    extension: dss
+    extensions: 
+      - "dss"
     desc: 'Digital Speech Standard (Olympus, Grundig, & Phillips), v2'
   - id: dss_0364
-    extension: dss
+    extensions: 
+      - "dss"
     desc: 'Digital Speech Standard, v3'
   - id: dss_1F8B
-    extension: dss
+    extensions: 
+      - "dss"
     desc: 'Synology router configuration backup file'
   - id: dst
-    extension: dst
+    extensions: 
+      - "dst"
     desc: 'DST compressed file'
   - id: dst_4C41
-    extension: dst
+    extensions: 
+      - "dst"
     desc: 'Tajima embroidery sticj image file'
   - id: dsw
-    extension: dsw
+    extensions: 
+      - "dsw"
     desc: 'Microsoft Visual Studio workspace file'
   - id: dtd
-    extension: dtd
+    extensions: 
+      - "dtd"
     desc: 'DesignTools 2D Design file'
   - id: dun
-    extension: dun
+    extensions: 
+      - "dun"
     desc: 'Dial-up networking file'
-  - id: dvf
-    extension: dvf
-    desc: 'Sony Compressed Voice File'
   - id: dvr
-    extension: dvr
+    extensions: 
+      - "dvr"
     desc: 'DVR-Studio stream file'
   - id: dw4
-    extension: dw4
+    extensions: 
+      - "dw4"
     desc: 'Visio/DisplayWrite 4 text file (unconfirmed)'
   - id: dwg
-    extension: dwg
+    extensions: 
+      - "dwg"
     desc: 'Generic AutoCAD drawing file'
   - id: ecf
-    extension: ecf
+    extensions: 
+      - "ecf"
     desc: 'MS Exchange 2007 extended configuration file'
   - id: efx
-    extension: efx
+    extensions: 
+      - "efx"
     desc: 'eFax file format'
   - id: emf
-    extension: emf
+    extensions: 
+      - "emf"
     desc: 'Extended (Enhanced) Windows Metafile Format, printer spool file (0x18-17 & 0xC4-36 is Win2K/NT; 0x5C0-1 is WinXP)'
   - id: eml
-    extension: eml
+    extensions: 
+      - "eml"
     desc: 'A commmon file extension for e-mail files. Signatures shown here are for Netscape, Eudora, and a generic signature, respectively. EML is also used by Outlook Express and QuickMail.'
   - id: eml_5265
-    extension: eml
+    extensions: 
+      - "eml"
     desc: 'A commmon file header for e-mail files.'
   - id: eml_582D
-    extension: eml
+    extensions: 
+      - "eml"
     desc: 'A commmon file extension for e-mail files. This variant is for Exchange.'
   - id: enc
-    extension: enc
+    extensions: 
+      - "enc"
     desc: 'Mujahideen Secrets 2 encrypted file'
   - id: enl
-    extension: enl
+    extensions: 
+      - "enl"
     desc: 'EndNote Library File'
   - id: enn
-    extension: enn
+    extensions: 
+      - "enn"
     desc: 'Expert Witness Compression Format (EWF) file, including EWF-E01 and EWF-S01, as used in EnCase and SMART evidence files. Byte offset 9 (i.e., byte #10) contains the segment number, starting with 0x01. See the EWF specification.'
   - id: enn_4C56
-    extension: enn
+    extensions: 
+      - "enn"
     desc: 'Logical File Evidence Format (EWF-L01) as used in later versions of EnCase evidence files. See the EWF specification.'
   - id: eps
-    extension: eps
+    extensions: 
+      - "eps"
     desc: 'Adobe encapsulated PostScript file (If this signature is not at the immediate beginning of the file, it will occur early in the file, commonly at byte offset 30 [0x1E])'
   - id: eps_C5D0
-    extension: eps
+    extensions: 
+      - "eps"
     desc: 'Adobe encapsulated PostScript file'
   - id: epub
-    extension: epub
+    extensions: 
+      - "epub"
     desc: 'Open Publication Structure eBook file. (Should also include the string: mimetypeapplication/epub+zip)'
   - id: esd
-    extension: esd
+    extensions: 
+      - "esd"
     desc: 'Easy Street Draw diagram file'
   - id: eta
-    extension: eta
+    extensions: 
+      - "eta"
     desc: 'Google Earth Keyhole Placemark file'
   - id: eta_3C4B
-    extension: eta
+    extensions: 
+      - "eta"
     desc: 'Google Earth Keyhole Overlay file'
   - id: eth
-    extension: eth
+    extensions: 
+      - "eth"
     desc: 'GN Nettest WinPharoah capture file'
   - id: evt
-    extension: evt
+    extensions: 
+      - "evt"
     desc: 'Windows Event Viewer file'
   - id: evtx
-    extension: evtx
+    extensions: 
+      - "evtx"
     desc: 'Windows Vista event log file'
-  - id: exe
-    extension: exe
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: exnn
-    extension: exnn
+    extensions: 
+      - "exnn"
     desc: 'EnCase� Evidence File Format Version 2 (Ex01). See the EVFv2 specification.'
   - id: exr
-    extension: exr
+    extensions: 
+      - "exr"
     desc: 'OpenEXR bitmap image format'
   - id: fbm
-    extension: fbm
+    extensions: 
+      - "fbm"
     desc: 'Fuzzy bitmap (FBM) file'
   - id: fdb
-    extension: fdb
-    desc: 'Firebird and Interbase database files, respectively. See IBPhoenix for more information.'
-  - id: fdb_4644
-    extension: fdb
+    extensions: 
+      - "fdb"
     desc: 'Fiasco database definition file'
-  - id: fdf
-    extension: fdf
-    desc: 'Adobe Portable Document Format, Forms Document Format, and Illustrator graphics files Trailers: 0A 25 25 45 4F 46 (.%%EOF) 0A 25 25 45 4F 46 0A (.%%EOF.) 0D 0A 25 25 45 4F 46 0D 0A (..%%EOF..) 0D 25 25 45 4F 46 0D (.%%EOF.) NOTE: There may be multiple end-of-file marks within the file. When carving, be sure to get the last one.'
+  - id: fdb,gdb
+    extensions: 
+      - "fdb"
+      - "gdb"
+    desc: 'Firebird and Interbase database files, respectively. See IBPhoenix for more information.'
   - id: fits
-    extension: fits
+    extensions: 
+      - "fits"
     desc: 'Flexible Image Transport System (FITS), Version 3.0 file'
   - id: flac
-    extension: flac
+    extensions: 
+      - "flac"
     desc: 'Free Lossless Audio Codec file'
   - id: fli
-    extension: fli
+    extensions: 
+      - "fli"
     desc: 'FLIC Animation file'
   - id: flt
-    extension: flt
+    extensions: 
+      - "flt"
     desc: 'OpenFlight 3D file'
   - id: flt_4D5A
-    extension: flt
+    extensions: 
+      - "flt"
     desc: 'Audition graphic filter file (Adobe)'
   - id: flt_7632
-    extension: flt
+    extensions: 
+      - "flt"
     desc: 'Qimage filter'
   - id: flv
-    extension: flv
+    extensions: 
+      - "flv"
     desc: 'Flash video file'
-  - id: flv_6674
-    extension: flv
+  - id: flv,m4v
+    extensions: 
+      - "flv"
+      - "m4v"
     desc: 'ISO Media, MPEG v4 system, or iTunes AVC-LC file'
-  - id: fm
-    extension: fm
+  - id: fm,mif
+    extensions: 
+      - "fm"
+      - "mif"
     desc: 'Adobe FrameMaker file'
   - id: fon
-    extension: fon
+    extensions: 
+      - "fon"
     desc: 'Font file'
   - id: ftr
-    extension: ftr
+    extensions: 
+      - "ftr"
     desc: 'GN Nettest WinPharoah filter file'
   - id: g64
-    extension: g64
+    extensions: 
+      - "g64"
     desc: 'Genetec video archive'
   - id: gdb
-    extension: gdb
-    desc: 'Firebird and Interbase database files, respectively. See IBPhoenix for more information.'
-  - id: gdb_4D73
-    extension: gdb
+    extensions: 
+      - "gdb"
     desc: 'VMapSource GPS Waypoint Database'
   - id: gdoc
-    extension: gdoc
+    extensions: 
+      - "gdoc"
     desc: 'Google Drive Document link'
   - id: gdraw
-    extension: gdraw
+    extensions: 
+      - "gdraw"
     desc: 'Google Drive Drawing link'
   - id: ged
-    extension: ged
+    extensions: 
+      - "ged"
     desc: 'GEnealogical Data COMmunication (GEDCOM) file'
-  - id: gho
-    extension: gho
-    desc: 'Symantex Ghost image file'
-  - id: ghs
-    extension: ghs
+  - id: gho,ghs
+    extensions: 
+      - "gho"
+      - "ghs"
     desc: 'Symantex Ghost image file'
   - id: gid
-    extension: gid
+    extensions: 
+      - "gid"
     desc: 'Windows Help index file'
   - id: gif
-    extension: gif
+    extensions: 
+      - "gif"
     desc: 'Graphics interchange format file Trailer: 00 3B (.;)'
   - id: gpg
-    extension: gpg
+    extensions: 
+      - "gpg"
     desc: 'GNU Privacy Guard (GPG) public keyring'
   - id: gpx
-    extension: gpx
+    extensions: 
+      - "gpx"
     desc: 'GPS eXchange file (v1.1 schema)'
   - id: grb
-    extension: grb
+    extensions: 
+      - "grb"
     desc: 'GRIdded Binary or General Regularly-distributed Information in Binary file, commonly used in meteorology to store historical and forecast weather data'
   - id: grp
-    extension: grp
+    extensions: 
+      - "grp"
     desc: 'Windows Program Manager group file'
   - id: gx2
-    extension: gx2
+    extensions: 
+      - "gx2"
     desc: 'Show Partner graphics file (not confirmed)'
-  - id: gz
-    extension: gz
+  - id: gz,tgz
+    extensions: 
+      - "gz"
+      - "tgz"
     desc: 'GZIP archive file'
   - id: hap
-    extension: hap
+    extensions: 
+      - "hap"
     desc: 'Hamarsoft HAP 3.x compressed archive'
   - id: hdmp
-    extension: hdmp
+    extensions: 
+      - "hdmp"
     desc: 'Windows heap dump file'
   - id: hdr
-    extension: hdr
+    extensions: 
+      - "hdr"
     desc: 'Radiance High Dynamic Range image file'
-  - id: hdr_4953
-    extension: hdr
-    desc: 'Install Shield v5.x or 6.x compressed file'
   - id: heic
-    extension: heic
+    extensions: 
+      - "heic"
     desc: 'High Efficiency Image Container (HEIC), holding one or more High Efficiency Image File (HEIF) � aka H.265 � images, created using the High Efficiency Video Coding (HEVC) algorithm. Developed by the Moving Pictures Experts Group (MPEG) and adopted by Apple as the standard image file format in 2017.'
   - id: hl7
-    extension: hl7
+    extensions: 
+      - "hl7"
     desc: 'Health Level-7 data (pipe delimited) file'
   - id: hlp
-    extension: hlp
+    extensions: 
+      - "hlp"
     desc: 'Windows Help file'
   - id: hqx
-    extension: hqx
+    extensions: 
+      - "hqx"
     desc: 'Macintosh BinHex 4 Compressed Archive'
   - id: hus
-    extension: hus
+    extensions: 
+      - "hus"
     desc: 'Husqvarna Designer I Embroidery Machine file'
   - id: icns
-    extension: icns
+    extensions: 
+      - "icns"
     desc: 'MacOS icon file'
   - id: ico
-    extension: ico
+    extensions: 
+      - "ico"
     desc: 'Windows icon file'
   - id: idx
-    extension: idx
-    desc: 'AOL database files: address book (ABY) and user configuration data (MAIN.IDX)'
-  - id: idx_5000
-    extension: idx
+    extensions: 
+      - "idx"
     desc: 'Quicken QuickFinder Information File'
   - id: iff
-    extension: iff
+    extensions: 
+      - "iff"
     desc: 'Electronic Arts'' Interchange Format Files (IFF) format.'
   - id: ifo
-    extension: ifo
+    extensions: 
+      - "ifo"
     desc: 'DVD info file'
   - id: img
-    extension: img
+    extensions: 
+      - "img"
     desc: 'Ventura Publisher/GEM VDI Image Format Bitmap file'
   - id: img_5049
-    extension: img
+    extensions: 
+      - "img"
     desc: 'ADEX Corp. ChromaGraph Graphics Card Bitmap Graphic file'
   - id: img_5146
-    extension: img
+    extensions: 
+      - "img"
     desc: 'QEMU Qcow Disk Image'
   - id: img_5343
-    extension: img
+    extensions: 
+      - "img"
     desc: 'Img Software Set Bitmap'
   - id: img_7E74
-    extension: img
+    extensions: 
+      - "img"
     desc: 'Reportedly a proprietary recording system, possibly a Digital Watchdog DW-TP-500G unit.'
   - id: img_EB3C
-    extension: img
+    extensions: 
+      - "img"
     desc: 'GEM Raster file'
   - id: ind
-    extension: ind
+    extensions: 
+      - "ind"
     desc: 'AOL client preferences/settings file (MAIN.IND)'
   - id: indd
-    extension: indd
+    extensions: 
+      - "indd"
     desc: 'Adobe InDesign document'
   - id: info
-    extension: info
+    extensions: 
+      - "info"
     desc: 'UNIX GNU Info Reader File'
   - id: info_6D75
-    extension: info
+    extensions: 
+      - "info"
     desc: 'MultiBit Bitcoin wallet information file'
   - id: info_7A62
-    extension: info
+    extensions: 
+      - "info"
     desc: 'ZoomBrowser Image Index file (ZbThumbnal.info)'
   - id: info_E310
-    extension: info
+    extensions: 
+      - "info"
     desc: 'Amiga Icon file'
   - id: ins
-    extension: ins
+    extensions: 
+      - "ins"
     desc: 'InstallShield Script'
   - id: ipd
-    extension: ipd
+    extensions: 
+      - "ipd"
     desc: 'Inter@ctive Pager Backup (BlackBerry) backup file (See also this IPD File Format paper)'
   - id: iso
-    extension: iso
+    extensions: 
+      - "iso"
     desc: 'ISO-9660 CD Disc Image This signature usually occurs at byte offset 32769 (0x8001), 34817 (0x8801), or 36865 (0x9001). More information can be found at MacTech or at ECMA.'
   - id: iso_4552
-    extension: iso
+    extensions: 
+      - "iso"
     desc: 'Apple ISO 9660/HFS hybrid CD image'
   - id: ivr
-    extension: ivr
+    extensions: 
+      - "ivr"
     desc: 'RealPlayer video file (V11 and later)'
   - id: jar
-    extension: jar
+    extensions: 
+      - "jar"
     desc: 'JARCS compressed archive'
   - id: jar_504B
-    extension: jar
+    extensions: 
+      - "jar"
     desc: 'Java archive; compressed file package for classes and data'
   - id: jar_504B03
-    extension: jar
+    extensions: 
+      - "jar"
     desc: 'Java archive'
   - id: jar_5F27
-    extension: jar
+    extensions: 
+      - "jar"
     desc: 'Jar archive'
   - id: jb2
-    extension: jb2
+    extensions: 
+      - "jb2"
     desc: 'JBOG2 image file Trailer: 03 33 00 01 00 00 00 00 (.3......)'
   - id: jceks
-    extension: jceks
+    extensions: 
+      - "jceks"
     desc: 'Java Cryptography Extension keystore file'
-  - id: jfif
-    extension: jfif
+  - id: jfif,jpe,jpeg,jpg
+    extensions: 
+      - "jfif"
+      - "jpe"
+      - "jpeg"
+      - "jpg"
     desc: 'JPEG/JFIF graphics file Trailer: FF D9 (��)'
   - id: jks
-    extension: jks
+    extensions: 
+      - "jks"
     desc: 'JavaKeyStore file'
-  - id: jnt
-    extension: jnt
+  - id: jnt,jtp
+    extensions: 
+      - "jnt"
+      - "jtp"
     desc: 'MS Windows journal file'
   - id: jp2
-    extension: jp2
+    extensions: 
+      - "jp2"
     desc: 'Various JPEG-2000 image file formats'
-  - id: jpe
-    extension: jpe
+  - id: jpe,jpeg,jpg
+    extensions: 
+      - "jpe"
+      - "jpeg"
+      - "jpg"
     desc: 'Generic JPEGimage file Trailer: FF D9 (��)'
-  - id: jpe_FFD8
-    extension: jpe
-    desc: 'JPEG/JFIF graphics file Trailer: FF D9 (��)'
-  - id: jpeg
-    extension: jpeg
-    desc: 'Generic JPEGimage file Trailer: FF D9 (��)'
-  - id: jpeg_FFD8
-    extension: jpeg
-    desc: 'JPEG/JFIF graphics file Trailer: FF D9 (��)'
   - id: jpg
-    extension: jpg
-    desc: 'Generic JPEGimage file Trailer: FF D9 (��)'
-  - id: jpg_FFD8
-    extension: jpg
-    desc: 'JPEG/JFIF graphics file Trailer: FF D9 (��)'
-  - id: jpg_FFD8FF
-    extension: jpg
+    extensions: 
+      - "jpg"
     desc: 'Digital camera JPG using Exchangeable Image File Format (EXIF) Trailer: FF D9 (��) See "Using Extended File Information (EXIF) File Headers in Digital Evidence Analysis" (P. Alvarez, IJDE, 2(3), Winter 2004) and ExifTool Tag Names'
-  - id: jpg_FFD8FFE8
-    extension: jpg
+  - id: jpg_FFD8
+    extensions: 
+      - "jpg"
     desc: 'Still Picture Interchange File Format (SPIFF) Trailer: FF D9 (��)'
-  - id: jtp
-    extension: jtp
-    desc: 'MS Windows journal file'
   - id: kgb
-    extension: kgb
+    extensions: 
+      - "kgb"
     desc: 'KGB archive'
   - id: kmz
-    extension: kmz
+    extensions: 
+      - "kmz"
     desc: 'Google Earth saved working session file'
   - id: koz
-    extension: koz
+    extensions: 
+      - "koz"
     desc: 'Sprint Music Store audio file (for mobile devices)'
   - id: ktx
-    extension: ktx
+    extensions: 
+      - "ktx"
     desc: 'Khronos texture file for OpenGL and OpenGL ES applications'
   - id: kwd
-    extension: kwd
+    extensions: 
+      - "kwd"
     desc: 'KWord document'
   - id: lbk
-    extension: lbk
+    extensions: 
+      - "lbk"
     desc: 'Jeppesen FliteLog file'
-  - id: lgc
-    extension: lgc
+  - id: lgc,lgd
+    extensions: 
+      - "lgc"
+      - "lgd"
     desc: 'Windows application log'
-  - id: lgd
-    extension: lgd
-    desc: 'Windows application log'
-  - id: lha
-    extension: lha
+  - id: lha,lzh
+    extensions: 
+      - "lha"
+      - "lzh"
     desc: 'Compressed archive file'
   - id: lib
-    extension: lib
+    extensions: 
+      - "lib"
     desc: 'Unix archiver (ar) files and Microsoft Program Library Common Object File Format (COFF)'
   - id: lit
-    extension: lit
+    extensions: 
+      - "lit"
     desc: 'Microsoft Reader eBook file'
   - id: lnk
-    extension: lnk
+    extensions: 
+      - "lnk"
     desc: 'Windows shell link (shortcut) file. See also The Meaning of Linkfiles in Forensic Examinations and Evidentiary Value of Link Files.'
   - id: log
-    extension: log
+    extensions: 
+      - "log"
     desc: 'Symantec Wise Installer log file'
   - id: lwp
-    extension: lwp
+    extensions: 
+      - "lwp"
     desc: 'Lotus WordPro document.'
-  - id: lzh
-    extension: lzh
-    desc: 'Compressed archive file'
   - id: m4a
-    extension: m4a
+    extensions: 
+      - "m4a"
     desc: 'Apple Lossless Audio Codec file'
   - id: m4v
-    extension: m4v
-    desc: 'ISO Media, MPEG v4 system, or iTunes AVC-LC file'
-  - id: m4v_6674
-    extension: m4v
+    extensions: 
+      - "m4v"
     desc: 'MPEG-4 video|QuickTime file'
   - id: manifest
-    extension: manifest
+    extensions: 
+      - "manifest"
     desc: 'Windows Visual Stylesheet XML file'
   - id: mar
-    extension: mar
+    extensions: 
+      - "mar"
     desc: 'Mozilla archive'
   - id: mar_4D41
-    extension: mar
+    extensions: 
+      - "mar"
     desc: 'Microsoft/MSN MARC archive'
   - id: mar_4D4172
-    extension: mar
+    extensions: 
+      - "mar"
     desc: 'MAr compressed archive'
   - id: mat
-    extension: mat
+    extensions: 
+      - "mat"
     desc: 'MATLAB v5 workspace file (includes creation timestamp)'
   - id: mdb
-    extension: mdb
+    extensions: 
+      - "mdb"
     desc: 'Microsoft Access file'
   - id: mdf
-    extension: mdf
+    extensions: 
+      - "mdf"
     desc: 'Alcohol 120% CD image'
   - id: mdf_010F
-    extension: mdf
+    extensions: 
+      - "mdf"
     desc: 'Microsoft SQL Server 2000 database'
   - id: mdi
-    extension: mdi
+    extensions: 
+      - "mdi"
     desc: 'Microsoft Document Imaging file'
   - id: mf4
-    extension: mf4
+    extensions: 
+      - "mf4"
     desc: 'Unfinalized Measurement Data Format (MDF) file'
-  - id: mid
-    extension: mid
-    desc: 'Musical Instrument Digital Interface (MIDI) sound file'
-  - id: midi
-    extension: midi
+  - id: mid,midi
+    extensions: 
+      - "mid"
+      - "midi"
     desc: 'Musical Instrument Digital Interface (MIDI) sound file'
   - id: mif
-    extension: mif
-    desc: 'Adobe FrameMaker file'
-  - id: mif_5665
-    extension: mif
+    extensions: 
+      - "mif"
     desc: 'MapInfo Interchange Format file'
   - id: mkv
-    extension: mkv
+    extensions: 
+      - "mkv"
     desc: 'Matroska stream file'
   - id: mls
-    extension: mls
+    extensions: 
+      - "mls"
     desc: 'Milestones v1.0 project management and scheduling software (Also see "MV2C" and "MV214" signatures)'
   - id: mls_4D4C
-    extension: mls
+    extensions: 
+      - "mls"
     desc: 'Skype localization data file'
   - id: mls_4D56
-    extension: mls
+    extensions: 
+      - "mls"
     desc: 'Milestones v2.1b project management and scheduling software (Also see "MILES" and "MV2C" signatures)'
   - id: mls_4D5632
-    extension: mls
+    extensions: 
+      - "mls"
     desc: 'Milestones v2.1a project management and scheduling software (Also see "MILES" and "MV214" signatures)'
   - id: mmf
-    extension: mmf
+    extensions: 
+      - "mmf"
     desc: 'Yamaha Corp. Synthetic music Mobile Application Format (SMAF) for multimedia files that can be played on hand-held devices.'
   - id: mny
-    extension: mny
+    extensions: 
+      - "mny"
     desc: 'Microsoft Money file'
   - id: mof
-    extension: mof
+    extensions: 
+      - "mof"
     desc: 'Windows MSinfo file'
   - id: mov
-    extension: mov
+    extensions: 
+      - "mov"
     desc: 'QuickTime movie file'
   - id: mp
-    extension: mp
+    extensions: 
+      - "mp"
     desc: 'Monochrome Picture TIFF bitmap file (unconfirmed)'
   - id: mp3
-    extension: mp3
+    extensions: 
+      - "mp3"
     desc: 'MPEG-1 Audio Layer 3 (MP3) audio file'
-  - id: mp3_FFFx
-    extension: mp3
-    desc: 'MPEG audio file frame synch pattern'
   - id: mp4
-    extension: mp4
+    extensions: 
+      - "mp4"
     desc: 'MPEG-4 video file'
   - id: mp4_6674
-    extension: mp4
+    extensions: 
+      - "mp4"
     desc: 'ISO Base Media file (MPEG-4) v1'
-  - id: mpeg
-    extension: mpeg
+  - id: mpeg,mpg
+    extensions: 
+      - "mpeg"
+      - "mpg"
     desc: 'MPEG video file Trailer: 00 00 01 B7 (...�)'
-  - id: mpeg_FFFx
-    extension: mpeg
+  - id: mpeg,mpg,mp3
+    extensions: 
+      - "mpeg"
+      - "mpg"
+      - "mp3"
     desc: 'MPEG audio file frame synch pattern'
-  - id: mpg
-    extension: mpg
+  - id: mpg,vob
+    extensions: 
+      - "mpg"
+      - "vob"
     desc: 'DVD Video Movie File (video/dvd, video/mpeg) or DVD MPEG2 Trailer: 00 00 01 B9 (...�)'
-  - id: mpg_0000
-    extension: mpg
-    desc: 'MPEG video file Trailer: 00 00 01 B7 (...�)'
-  - id: mpg_FFFx
-    extension: mpg
-    desc: 'MPEG audio file frame synch pattern'
   - id: msc
-    extension: msc
+    extensions: 
+      - "msc"
     desc: 'Microsoft Management Console Snap-in Control file'
   - id: msc_D0CF
-    extension: msc
+    extensions: 
+      - "msc"
     desc: 'Microsoft Common Console Document'
   - id: msf
-    extension: msf
+    extensions: 
+      - "msf"
     desc: 'Thunderbird|Mozilla Mail Summary File'
   - id: msg
-    extension: msg
+    extensions: 
+      - "msg"
     desc: 'Outlook/Exchange message subheader (MS Office)'
   - id: msg_D0CF
-    extension: msg
+    extensions: 
+      - "msg"
     desc: 'Microsoft Outlook/Exchange Message'
   - id: msi
-    extension: msi
+    extensions: 
+      - "msi"
     desc: 'Cerius2 file'
   - id: msi_D0CF
-    extension: msi
+    extensions: 
+      - "msi"
     desc: 'Microsoft Installer package'
   - id: msp
-    extension: msp
+    extensions: 
+      - "msp"
     desc: 'Windows Installer Patch'
   - id: msv
-    extension: msv
+    extensions: 
+      - "msv"
     desc: 'Sony Memory Stick Compressed Voice file'
   - id: mte
-    extension: mte
+    extensions: 
+      - "mte"
     desc: 'TargetExpress target file'
   - id: mtw
-    extension: mtw
+    extensions: 
+      - "mtw"
     desc: 'Minitab data file'
   - id: mxd
-    extension: mxd
+    extensions: 
+      - "mxd"
     desc: 'ArcMap GIS project file'
   - id: mxf
-    extension: mxf
+    extensions: 
+      - "mxf"
     desc: 'Material Exchange Format file'
   - id: mxf_3C43
-    extension: mxf
+    extensions: 
+      - "mxf"
     desc: 'Picasa movie project file'
   - id: nbf
-    extension: nbf
+    extensions: 
+      - "nbf"
     desc: 'NVIDIA Scene Graph binary file'
   - id: nbu
-    extension: nbu
+    extensions: 
+      - "nbu"
     desc: 'Nokia phone backup file'
   - id: nfc
-    extension: nfc
+    extensions: 
+      - "nfc"
     desc: 'Nokia PC Suite Content Copier file'
   - id: none_0000
-    extension: 
+    extensions: 
     desc: 'Amiga Hunk executable file'
   - id: none_0000FE
-    extension: 
+    extensions: 
     desc: 'Byte-order mark for 32-bit Unicode Transformation Format/ 4-octet Universal Character Set (UTF-32/UCS-4), big-endian files. (See the Unicode Home Page.)'
   - id: none_000D
-    extension: 
+    extensions: 
     desc: 'Mbox table of contents file. (NOTE: The next four bytes appear to be the number of e-mails in the associated mbox file.)'
   - id: none_0014
-    extension: 
+    extensions: 
     desc: 'BIOS details in RAM images'
   - id: none_0500
-    extension: 
+    extensions: 
     desc: 'INFO2 Windows recycle bin file. NOTE: Bytes 12-13 indicate the size of each INFO2 record; the most common value is 0x20-03 (0x0320 = 800 bytes).'
   - id: none_0800
-    extension: 
+    extensions: 
     desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv4 packet. See Hints About Looking for Network Packet Fragments.'
   - id: none_2142
-    extension: 
+    extensions: 
     desc: 'Microsoft Outlook Personal Folder Files (PFF):'
   - id: none_3037
-    extension: 
+    extensions: 
     desc: 'Archive created with the cpio utility (where nn values 0x37 ("7"), 0x31 ("1"), and 0x32 ("2") refer to the standard ASCII format, new ASCII (aka SVR4) format, and CRC format, respectively. (The swpackage(8) page has additional information.) (Thanks to F. Webber for this....)'
   - id: none_34CD
-    extension: 
+    extensions: 
     desc: 'Extended tcpdump (libpcap) capture file (Linux/Unix)'
   - id: none_37E4
-    extension: 
+    extensions: 
     desc: 'zisofs compression format, recognized by some Linux kernels. See the libburnia page for additional information.'
   - id: none_4143
-    extension: 
+    extensions: 
     desc: 'Miscellaneous AOL parameter and information files'
   - id: none_4241
-    extension: 
+    extensions: 
     desc: 'NTFS Master File Table (MFT) entry (1,024 bytes)'
   - id: none_4649
-    extension: 
+    extensions: 
     desc: 'NTFS Master File Table (MFT) entry (1,024 bytes)'
   - id: none_4B57
-    extension: 
+    extensions: 
     desc: 'KWAJ file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
   - id: none_5061
-    extension: 
+    extensions: 
     desc: 'Parrot Video Encapsulation file'
   - id: none_535A
-    extension: 
+    extensions: 
     desc: 'QBASIC SZDD file header variant. (See the SZDD or KWAJ format entries for additional information.)'
   - id: none_535A44
-    extension: 
+    extensions: 
     desc: 'SZDD file format used by DOS COMPRESS.EXE and EXPAND.EXE commands. This command compresses a single file, replacing the last character in the file name with an underscore or dollar sign, e.g., FOO.BAZ would be renamed FOO.BA_ or FOO.BA$. (See the SZDD/KWAJ page for more information.)'
   - id: none_6265
-    extension: 
+    extensions: 
     desc: 'UUencoded files start with a string: begin mode path where mode is the set of permissions as used in Linux/Unix and path is the name given to the decoded file. (See this uuencode page for more information.)'
   - id: none_6F3C
-    extension: 
+    extensions: 
     desc: 'Short Message Service (SMS), or text, message stored on a Subscriber Identification Module (SIM).'
   - id: none_6F70
-    extension: 
+    extensions: 
     desc: '1Password 4 Cloud Keychain encrypted data'
   - id: none_7F45
-    extension: 
+    extensions: 
     desc: 'Executable and Linking Format executable file (Linux/Unix)'
   - id: none_86DD
-    extension: 
+    extensions: 
     desc: 'Possibly, maybe, might be a fragment of an Ethernet frame carrying an IPv6 packet. See Hints About Looking for Network Packet Fragments.'
   - id: none_A1B2
-    extension: 
+    extensions: 
     desc: 'tcpdump (libpcap) capture file (Linux/Unix)'
   - id: none_A1B2CD
-    extension: 
+    extensions: 
     desc: 'Extended tcpdump (libpcap) capture file (Linux/Unix)'
   - id: none_ACED
-    extension: 
+    extensions: 
     desc: 'Java serialization data (see Object Serialization Stream Protocol)'
   - id: none_CD20
-    extension: 
+    extensions: 
     desc: 'Norton Anti-Virus quarantined virus file'
   - id: none_CEFA
-    extension: 
+    extensions: 
     desc: 'Apple OS X ABI Mach-O binary file (32-bit, where target system has reverse byte ordering from host running compiler)'
   - id: none_CFFA
-    extension: 
+    extensions: 
     desc: 'Apple OS X ABI Mach-O binary file (64-bit, where target system has reverse byte ordering from host running compiler)'
   - id: none_D4C3
-    extension: 
+    extensions: 
     desc: 'WinDump (winpcap) capture file (Windows)'
   - id: none_EB52
-    extension: 
+    extensions: 
     desc: 'Header of boot sector in BitLocker protected volume (Vista)'
   - id: none_EB58
-    extension: 
+    extensions: 
     desc: 'Header of boot sector in BitLocker protected volume (Windows 7)'
   - id: none_EFBB
-    extension: 
+    extensions: 
     desc: 'Byte-order mark (BOM) for 8-bit Unicode Transformation Format (UTF-8) files. (See the Unicode Home Page.)'
   - id: none_FEED
-    extension: 
+    extensions: 
     desc: 'Apple OS X ABI Mach-O binary file (32-bit)'
   - id: none_FEEDFA
-    extension: 
+    extensions: 
     desc: 'Apple OS X ABI Mach-O binary file (64-bit)'
   - id: none_FEFF
-    extension: 
+    extensions: 
     desc: 'Byte-order mark (BOM) for 16-bit Unicode Transformation Format/ 2-octet Universal Character Set (UTF-16/UCS-2), big-endian files. (See the Unicode Home Page.)'
   - id: none_FFFE
-    extension: 
+    extensions: 
     desc: 'Byte-order mark (BOM) for 16-bit Unicode Transformation Format/ 2-octet Universal Character Set (UTF-16/UCS-2), little-endian files. (See the Unicode Home Page.)'
   - id: none_FFFE00
-    extension: 
+    extensions: 
     desc: 'Byte-order mark for 32-bit Unicode Transformation Format/ 4-octet Universal Character Set (UTF-32/UCS-4), little-endian files. (See the Unicode Home Page.)'
   - id: nri
-    extension: nri
+    extensions: 
+      - "nri"
     desc: 'Nero CD Compilation'
   - id: nsf
-    extension: nsf
+    extensions: 
+      - "nsf"
     desc: 'Lotus Notes database'
   - id: nsf_4E45
-    extension: nsf
+    extensions: 
+      - "nsf"
     desc: 'NES Sound file'
   - id: ntf
-    extension: ntf
+    extensions: 
+      - "ntf"
     desc: 'Lotus Notes database template'
   - id: ntf_3031
-    extension: ntf
+    extensions: 
+      - "ntf"
     desc: 'National Transfer Format Map File'
   - id: ntf_4E49
-    extension: ntf
+    extensions: 
+      - "ntf"
     desc: 'National Imagery Transmission Format (NITF) file'
   - id: nvram
-    extension: nvram
+    extensions: 
+      - "nvram"
     desc: 'VMware BIOS (non-volatile RAM) state file'
   - id: obj
-    extension: obj
+    extensions: 
+      - "obj"
     desc: 'Microsoft Common Object File Format (COFF) relocatable object code file for an Intel 386 or later/compatible processors'
   - id: obj_80
-    extension: obj
+    extensions: 
+      - "obj"
     desc: 'Relocatable object code'
   - id: ocx
-    extension: ocx
+    extensions: 
+      - "ocx"
     desc: 'ActiveX or OLE Custom Control'
-  - id: odp
-    extension: odp
+  - id: odt,odp,ott
+    extensions: 
+      - "odt"
+      - "odp"
+      - "ott"
     desc: 'OpenDocument text document, presentation, and text document template, respectively.'
-  - id: odt
-    extension: odt
-    desc: 'OpenDocument text document, presentation, and text document template, respectively.'
-  - id: oga
-    extension: oga
-    desc: 'Ogg Vorbis Codec compressed Multimedia file'
-  - id: ogg
-    extension: ogg
-    desc: 'Ogg Vorbis Codec compressed Multimedia file'
-  - id: ogv
-    extension: ogv
-    desc: 'Ogg Vorbis Codec compressed Multimedia file'
-  - id: ogx
-    extension: ogx
+  - id: oga,ogg,ogv,ogx
+    extensions: 
+      - "oga"
+      - "ogg"
+      - "ogv"
+      - "ogx"
     desc: 'Ogg Vorbis Codec compressed Multimedia file'
   - id: olb
-    extension: olb
+    extensions: 
+      - "olb"
     desc: 'OLE object library'
   - id: one
-    extension: one
+    extensions: 
+      - "one"
     desc: 'Microsoft OneNote note'
   - id: onepkg
-    extension: onepkg
+    extensions: 
+      - "onepkg"
     desc: 'OneNote Package file'
   - id: opt
-    extension: opt
+    extensions: 
+      - "opt"
     desc: 'Developer Studio File Workspace Options file'
   - id: opt_FDFF
-    extension: opt
+    extensions: 
+      - "opt"
     desc: 'Developer Studio File Workspace Options subheader (MS Office)'
-  - id: org
-    extension: org
+  - id: org,pfc
+    extensions: 
+      - "org"
+      - "pfc"
     desc: 'AOL personal file cabinet (PFC) file NOTE: See PFC-Details.zip for PFC file format information.'
   - id: ost
-    extension: ost
+    extensions: 
+      - "ost"
     desc: 'Microsoft Outlook Offline Storage Folder File'
   - id: otf
-    extension: otf
+    extensions: 
+      - "otf"
     desc: 'OpenType font file'
-  - id: ott
-    extension: ott
-    desc: 'OpenDocument text document, presentation, and text document template, respectively.'
   - id: oxps
-    extension: oxps
+    extensions: 
+      - "oxps"
     desc: 'Microsoft Open XML paper specification file'
   - id: p10
-    extension: p10
+    extensions: 
+      - "p10"
     desc: 'Intel PROset/Wireless Profile'
   - id: pab
-    extension: pab
+    extensions: 
+      - "pab"
     desc: 'Microsoft Outlook Personal Address Book File'
   - id: pak
-    extension: pak
+    extensions: 
+      - "pak"
     desc: 'Compressed archive file (often associated with Quake Engine games)'
   - id: pak_5041
-    extension: pak
+    extensions: 
+      - "pak"
     desc: 'Quake archive file'
   - id: pat
-    extension: pat
+    extensions: 
+      - "pat"
     desc: 'Advanced Gravis Ultrasound patch file'
   - id: pat_4750
-    extension: pat
+    extensions: 
+      - "pat"
     desc: 'GIMP (GNU Image Manipulation Program) pattern file'
   - id: pax
-    extension: pax
+    extensions: 
+      - "pax"
     desc: 'PAX password protected bitmap'
   - id: pbd
-    extension: pbd
+    extensions: 
+      - "pbd"
     desc: 'SAP PowerBuilder integrated development environment file'
   - id: pch
-    extension: pch
+    extensions: 
+      - "pch"
     desc: 'Visual C PreCompiled header file'
   - id: pcs
-    extension: pcs
+    extensions: 
+      - "pcs"
     desc: 'Pfaff Home Embroidery file'
   - id: pcs_4D54
-    extension: pcs
+    extensions: 
+      - "pcs"
     desc: 'Yamaha Piano sound file'
   - id: pcx
-    extension: pcx
+    extensions: 
+      - "pcx"
     desc: 'ZSOFT Paintbrush file (where Version (nn) = 0x00, 0x02, 0x03, 0x04, or 0x05)'
   - id: pdb
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'Palmpilot Database/Document File'
   - id: pdb_4D2D
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'Merriam-Webster Pocket Dictionary file'
   - id: pdb_4D69
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'Microsoft C++ debugging symbols file'
   - id: pdb_736D
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'PalmOS SuperMemo file'
   - id: pdb_737A
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'PowerBASIC Debugger Symbols file'
   - id: pdb_ACED
-    extension: pdb
+    extensions: 
+      - "pdb"
     desc: 'BGBlitz (professional Backgammon software) position database file'
-  - id: pdf
-    extension: pdf
+  - id: pdf,fdf,ai
+    extensions: 
+      - "pdf"
+      - "fdf"
+      - "ai"
     desc: 'Adobe Portable Document Format, Forms Document Format, and Illustrator graphics files Trailers: 0A 25 25 45 4F 46 (.%%EOF) 0A 25 25 45 4F 46 0A (.%%EOF.) 0D 0A 25 25 45 4F 46 0D 0A (..%%EOF..) 0D 25 25 45 4F 46 0D (.%%EOF.) NOTE: There may be multiple end-of-file marks within the file. When carving, be sure to get the last one.'
   - id: pec
-    extension: pec
+    extensions: 
+      - "pec"
     desc: 'Brother/Babylock/Bernina Home Embroidery file'
   - id: pes
-    extension: pes
+    extensions: 
+      - "pes"
     desc: 'Brother/Babylock/Bernina Home Embroidery file'
   - id: pf
-    extension: pf
+    extensions: 
+      - "pf"
     desc: 'Windows prefetch file. The first four bytes indicate the OS: 0x11-00-00-00 = XP, 0x17-00-00-00 = Vista/Win7, and 0x1A-00-00-00 = Win8.1 (and probably Win8, as well).'
-  - id: pfc
-    extension: pfc
-    desc: 'AOL personal file cabinet (PFC) file NOTE: See PFC-Details.zip for PFC file format information.'
   - id: pgd
-    extension: pgd
+    extensions: 
+      - "pgd"
     desc: 'PGP disk image'
   - id: pgm
-    extension: pgm
+    extensions: 
+      - "pgm"
     desc: 'Portable Graymap Graphic'
   - id: pic
-    extension: pic
+    extensions: 
+      - "pic"
     desc: 'Unknown type picture file'
-  - id: pif
-    extension: pif
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: pkr
-    extension: pkr
+    extensions: 
+      - "pkr"
     desc: 'PGP public keyring file'
   - id: plist
-    extension: plist
+    extensions: 
+      - "plist"
     desc: 'Binary property list (plist) (NOTE: Next two bytes are the version number, currently 0x30-30, or "00")'
   - id: pls
-    extension: pls
+    extensions: 
+      - "pls"
     desc: 'WinAmp Playlist file'
   - id: png
-    extension: png
+    extensions: 
+      - "png"
     desc: 'Portable Network Graphics file Trailer: 49 45 4E 44 AE 42 60 82 (IEND�B`�...)'
-  - id: pps
-    extension: pps
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: ppt
-    extension: ppt
+    extensions: 
+      - "ppt"
     desc: 'PowerPoint presentation subheader (MS Office)'
-  - id: ppt_D0CF
-    extension: ppt
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
-  - id: pptx
-    extension: pptx
-    desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'
   - id: ppz
-    extension: ppz
+    extensions: 
+      - "ppz"
     desc: 'Powerpoint Packaged Presentation'
   - id: prc
-    extension: prc
+    extensions: 
+      - "prc"
     desc: 'Palmpilot resource file'
   - id: prc_7442
-    extension: prc
+    extensions: 
+      - "prc"
     desc: 'PathWay Map file, used with GPS devices'
   - id: ps
-    extension: ps
+    extensions: 
+      - "ps"
     desc: 'PostScript file'
   - id: psd
-    extension: psd
+    extensions: 
+      - "psd"
     desc: 'Photoshop image file'
   - id: psp
-    extension: psp
+    extensions: 
+      - "psp"
     desc: 'Corel Paint Shop Pro image file'
   - id: pst
-    extension: pst
+    extensions: 
+      - "pst"
     desc: 'Microsoft Outlook Personal Folder File'
   - id: pub
-    extension: pub
+    extensions: 
+      - "pub"
     desc: 'MS Publisher file'
   - id: pub_FDFF
-    extension: pub
+    extensions: 
+      - "pub"
     desc: 'MS Publisher file subheader'
   - id: puf
-    extension: puf
+    extensions: 
+      - "puf"
     desc: 'Puffer encrypted archive'
   - id: pwi
-    extension: pwi
+    extensions: 
+      - "pwi"
     desc: 'Microsoft Windows Mobile personal note file'
   - id: pwl
-    extension: pwl
+    extensions: 
+      - "pwl"
     desc: 'Windows 95 password file'
   - id: pwl_E382
-    extension: pwl
+    extensions: 
+      - "pwl"
     desc: 'Windows 98 password file'
   - id: qbb
-    extension: qbb
+    extensions: 
+      - "qbb"
     desc: 'Intuit QuickBooks backup file'
   - id: qbm
-    extension: qbm
+    extensions: 
+      - "qbm"
     desc: 'QuickBooks Portable Company File'
   - id: qcp
-    extension: qcp
+    extensions: 
+      - "qcp"
     desc: 'Resource Interchange File Format -- Qualcomm PureVoice, where xx xx xx xx is the file size (little endian)'
   - id: qdf
-    extension: qdf
+    extensions: 
+      - "qdf"
     desc: 'Quicken data file'
   - id: qel
-    extension: qel
+    extensions: 
+      - "qel"
     desc: 'Quicken data file'
   - id: qph
-    extension: qph
+    extensions: 
+      - "qph"
     desc: 'Quicken price history file'
   - id: qrp
-    extension: qrp
+    extensions: 
+      - "qrp"
     desc: 'QuickReport Report file'
-  - id: qsd
-    extension: qsd
-    desc: 'Quicken data file'
-  - id: qts
-    extension: qts
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
-  - id: qtx
-    extension: qtx
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
   - id: qxd
-    extension: qxd
+    extensions: 
+      - "qxd"
     desc: 'Quark Express document (Intel & Motorola, respectively) NOTE: It appears that the byte following the 0x52 ("R") is the language indicator; 0x33 ("3") seems to indicate English and 0x61 ("a") reportedly indicates Korean.'
   - id: ra
-    extension: ra
+    extensions: 
+      - "ra"
     desc: 'RealAudio file'
   - id: ra_2E72
-    extension: ra
+    extensions: 
+      - "ra"
     desc: 'RealAudio streaming media file'
   - id: ram
-    extension: ram
+    extensions: 
+      - "ram"
     desc: 'RealMedia metafile'
   - id: rar
-    extension: rar
+    extensions: 
+      - "rar"
     desc: 'RAR (v4.x) compressed archive file'
   - id: rar_5261
-    extension: rar
+    extensions: 
+      - "rar"
     desc: 'RAR (v5) compressed archive file'
-  - id: rbi
-    extension: rbi
-    desc: 'Thomson Speedtouch series WLAN router firmware'
   - id: rdata
-    extension: rdata
+    extensions: 
+      - "rdata"
     desc: 'R (programming language) saved work space'
   - id: reg
-    extension: reg
-    desc: 'Windows NT Registry and Registry Undo files'
-  - id: reg_FFFE
-    extension: reg
+    extensions: 
+      - "reg"
     desc: 'Windows Registry file'
+  - id: reg,sud
+    extensions: 
+      - "reg"
+      - "sud"
+    desc: 'Windows NT Registry and Registry Undo files'
   - id: rgb
-    extension: rgb
+    extensions: 
+      - "rgb"
     desc: 'Silicon Graphics RGB Bitmap'
-  - id: rm
-    extension: rm
+  - id: rm,rmvb
+    extensions: 
+      - "rm"
+      - "rmvb"
     desc: 'RealMedia streaming media file'
   - id: rmi
-    extension: rmi
+    extensions: 
+      - "rmi"
     desc: 'Resource Interchange File Format -- Windows Musical Instrument Digital Interface file, where xx xx xx xx is the file size (little endian)'
-  - id: rmvb
-    extension: rmvb
-    desc: 'RealMedia streaming media file'
   - id: rpm
-    extension: rpm
+    extensions: 
+      - "rpm"
     desc: 'RedHat Package Manager file'
   - id: rtd
-    extension: rtd
+    extensions: 
+      - "rtd"
     desc: 'RagTime document file'
   - id: rtf
-    extension: rtf
+    extensions: 
+      - "rtf"
     desc: 'Rich text format word processing file Trailer: 7D (})'
   - id: rvt
-    extension: rvt
+    extensions: 
+      - "rvt"
     desc: 'Revit Project File subheader'
   - id: rvt_D0CF
-    extension: rvt
+    extensions: 
+      - "rvt"
     desc: 'Revit Project file'
   - id: sam
-    extension: sam
+    extensions: 
+      - "sam"
     desc: 'Lotus AMI Pro document'
   - id: sav
-    extension: sav
+    extensions: 
+      - "sav"
     desc: 'SPSS Statistics (n�e Statistical Package for the Social Sciences, then Statistical Product and Service Solutions) data file'
   - id: sbv
-    extension: sbv
+    extensions: 
+      - "sbv"
     desc: '(Unknown file type)'
   - id: scr
-    extension: scr
+    extensions: 
+      - "scr"
     desc: 'Screen saver'
   - id: sct
-    extension: sct
+    extensions: 
+      - "sct"
     desc: 'SPSS Statistics (n�e Statistical Package for the Social Sciences, then Statistical Product and Service Solutions) template file'
   - id: sdr
-    extension: sdr
+    extensions: 
+      - "sdr"
     desc: 'SmartDraw Drawing file'
   - id: sh3
-    extension: sh3
+    extensions: 
+      - "sh3"
     desc: 'Harvard Graphics presentation file'
   - id: shd
-    extension: shd
+    extensions: 
+      - "shd"
     desc: 'Windows 9x printer spool file'
   - id: shd_6649
-    extension: shd
+    extensions: 
+      - "shd"
     desc: 'Windows NT printer spool file'
   - id: shd_6749
-    extension: shd
+    extensions: 
+      - "shd"
     desc: 'Windows 2000/XP printer spool file'
   - id: shd_6849
-    extension: shd
+    extensions: 
+      - "shd"
     desc: 'Windows Server 2003 printer spool file'
   - id: shw
-    extension: shw
+    extensions: 
+      - "shw"
     desc: 'Harvard Graphics DOS Ver. 2/x Presentation file'
   - id: sib
-    extension: sib
+    extensions: 
+      - "sib"
     desc: 'Sibelius Music - Score file'
   - id: sil
-    extension: sil
+    extensions: 
+      - "sil"
     desc: 'Audio compression format developed by Skype; also used by other applications.'
   - id: sit
-    extension: sit
+    extensions: 
+      - "sit"
     desc: 'StuffIt compressed archive'
   - id: skf
-    extension: skf
+    extensions: 
+      - "skf"
     desc: 'SkinCrafter skin file'
   - id: skr
-    extension: skr
+    extensions: 
+      - "skr"
     desc: 'PGP secret keyring file'
   - id: sle
-    extension: sle
+    extensions: 
+      - "sle"
     desc: 'Surfplan kite project file'
   - id: sle_4143
-    extension: sle
+    extensions: 
+      - "sle"
     desc: 'Steganos Security Suite virtual secure drive'
   - id: sln
-    extension: sln
+    extensions: 
+      - "sln"
     desc: 'Visual Studio .NET Solution file'
   - id: snm
-    extension: snm
+    extensions: 
+      - "snm"
     desc: 'Netscape Communicator (v4) mail folder'
   - id: snp
-    extension: snp
+    extensions: 
+      - "snp"
     desc: 'Microsoft Access Snapshot Viewer file'
   - id: sol
-    extension: sol
+    extensions: 
+      - "sol"
     desc: 'Adobe Flash shared object file (e.g., Flash cookies)'
   - id: sou
-    extension: sou
+    extensions: 
+      - "sou"
     desc: 'Visual Studio Solution User Options file'
   - id: spf
-    extension: spf
+    extensions: 
+      - "spf"
     desc: 'StorageCraft ShadownProtect backup file'
   - id: spl
-    extension: spl
+    extensions: 
+      - "spl"
     desc: 'Windows NT/2000/XP printer spool file'
   - id: spo
-    extension: spo
+    extensions: 
+      - "spo"
     desc: 'SPSS output file'
   - id: spvchain
-    extension: spvchain
+    extensions: 
+      - "spvchain"
     desc: 'MultiBit Bitcoin blockchain file'
   - id: stl
-    extension: stl
+    extensions: 
+      - "stl"
     desc: 'ASCII STL (STereoLithography) file for 3D printing.'
-  - id: sud
-    extension: sud
-    desc: 'Windows NT Registry and Registry Undo files'
   - id: suo
-    extension: suo
+    extensions: 
+      - "suo"
     desc: 'Visual Studio Solution User Options subheader (MS Office)'
   - id: swf
-    extension: swf
+    extensions: 
+      - "swf"
     desc: 'Macromedia Shockwave Flash player file (zlib compressed, SWF 6 and later). See SWF File Format Specification.'
   - id: swf_4657
-    extension: swf
+    extensions: 
+      - "swf"
     desc: 'Macromedia Shockwave Flash player file (uncompressed). See SWF File Format Specification.'
   - id: swf_5A57
-    extension: swf
+    extensions: 
+      - "swf"
     desc: 'Macromedia Shockwave Flash player file (LZMA compressed, SWF 13 and later). See SWF File Format Specification.'
   - id: sxc
-    extension: sxc
-    desc: 'OpenOffice spreadsheet (Calc), drawing (Draw), presentation (Impress), and word processing (Writer) files, respectively.'
-  - id: sxc_504B
-    extension: sxc
+    extensions: 
+      - "sxc"
     desc: 'StarOffice spreadsheet'
-  - id: sxd
-    extension: sxd
-    desc: 'OpenOffice spreadsheet (Calc), drawing (Draw), presentation (Impress), and word processing (Writer) files, respectively.'
-  - id: sxi
-    extension: sxi
-    desc: 'OpenOffice spreadsheet (Calc), drawing (Draw), presentation (Impress), and word processing (Writer) files, respectively.'
-  - id: sxw
-    extension: sxw
+  - id: sxc,sxd,sxi,sxw
+    extensions: 
+      - "sxc"
+      - "sxd"
+      - "sxi"
+      - "sxw"
     desc: 'OpenOffice spreadsheet (Calc), drawing (Draw), presentation (Impress), and word processing (Writer) files, respectively.'
   - id: sym
-    extension: sym
+    extensions: 
+      - "sym"
     desc: '(Unconfirmed file type. Likely type is Harvard Graphics Version 2.x graphic symbol or Windows SDK graphic symbol)'
   - id: sys
-    extension: sys
-    desc: 'Windows/DOS executable file (See The MZ EXE File Format page for the structure of an EXE file, with coverage of NE, TLINK, PE, self-extracting archives, and more.) Note: MZ are the initals of Mark Zbikowski, designer of the DOS executable file format.'
-  - id: sys_EB
-    extension: sys
-    desc: 'Windows executable file'
-  - id: sys_FF
-    extension: sys
+    extensions: 
+      - "sys"
     desc: 'Windows executable (SYS) file'
   - id: sys_FF4B
-    extension: sys
+    extensions: 
+      - "sys"
     desc: 'Keyboard driver file'
   - id: sys_FFFF
-    extension: sys
+    extensions: 
+      - "sys"
     desc: 'DOS system driver'
   - id: syw
-    extension: syw
+    extensions: 
+      - "syw"
     desc: 'Harvard Graphics symbol graphic'
   - id: tar
-    extension: tar
+    extensions: 
+      - "tar"
     desc: 'Tape Archive file (http://www.mkssoftware.com/docs/man4/tar.4.asp)'
-  - id: tar.bz2
-    extension: tar.bz2
-    desc: 'bzip2 compressed archive'
   - id: tar.z
-    extension: tar.z
+    extensions: 
+      - "tar.z"
     desc: 'Compressed tape archive file using standard (Lempel-Ziv-Welch) compression'
   - id: tar.z_1FA0
-    extension: tar.z
+    extensions: 
+      - "tar.z"
     desc: 'Compressed tape archive file using LZH (Lempel-Ziv-Huffman) compression'
-  - id: tb2
-    extension: tb2
-    desc: 'bzip2 compressed archive'
   - id: tbi
-    extension: tbi
+    extensions: 
+      - "tbi"
     desc: 'Windows Disk Image file'
   - id: tbi_0101
-    extension: tbi
+    extensions: 
+      - "tbi"
     desc: 'The Bat! secure e-mail Message Base Index file'
-  - id: tbz2
-    extension: tbz2
-    desc: 'bzip2 compressed archive'
-  - id: tgz
-    extension: tgz
-    desc: 'GZIP archive file'
   - id: thp
-    extension: thp
+    extensions: 
+      - "thp"
     desc: 'Wii/GameCube video file'
   - id: tib
-    extension: tib
+    extensions: 
+      - "tib"
     desc: 'Acronis True Image file (early versions)'
   - id: tib_CE24
-    extension: tib
+    extensions: 
+      - "tib"
     desc: 'Acronis True Image file (current versions)'
-  - id: tif
-    extension: tif
+  - id: tif,tiff
+    extensions: 
+      - "tif"
+      - "tiff"
     desc: 'Tagged Image File Format file'
-  - id: tif_4949
-    extension: tif
+  - id: tif,tiff_4949
+    extensions: 
+      - "tif"
+      - "tiff"
     desc: 'Tagged Image File Format file (little endian, i.e., LSB first in the byte; Intel)'
-  - id: tif_4D4D
-    extension: tif
+  - id: tif,tiff_4D4D
+    extensions: 
+      - "tif"
+      - "tiff"
     desc: 'Tagged Image File Format file (big endian, i.e., LSB last in the byte; Motorola)'
-  - id: tif_4D4D00
-    extension: tif
-    desc: 'BigTIFF files; Tagged Image File Format files >4 GB'
-  - id: tiff
-    extension: tiff
-    desc: 'Tagged Image File Format file'
-  - id: tiff_4949
-    extension: tiff
-    desc: 'Tagged Image File Format file (little endian, i.e., LSB first in the byte; Intel)'
-  - id: tiff_4D4D
-    extension: tiff
-    desc: 'Tagged Image File Format file (big endian, i.e., LSB last in the byte; Motorola)'
-  - id: tiff_4D4D00
-    extension: tiff
+  - id: tif,tiff_4D4D00
+    extensions: 
+      - "tif"
+      - "tiff"
     desc: 'BigTIFF files; Tagged Image File Format files >4 GB'
   - id: tlb
-    extension: tlb
+    extensions: 
+      - "tlb"
     desc: 'OLE, SPSS, or Visual C++ type library file'
   - id: torrent
-    extension: torrent
+    extensions: 
+      - "torrent"
     desc: 'Torrent file'
   - id: tpl
-    extension: tpl
+    extensions: 
+      - "tpl"
     desc: 'Wii images container'
   - id: tpl_6D73
-    extension: tpl
+    extensions: 
+      - "tpl"
     desc: 'Internet Explorer v11 Tracking Protection List file'
   - id: tr1
-    extension: tr1
+    extensions: 
+      - "tr1"
     desc: 'Novell LANalyzer capture file'
-  - id: ts
-    extension: ts
-    desc: 'MPEG transport stream file. (This is not a lot to go on, but MPEG-2 Part 1 Transport (MP2T) files are reportedly broken into 188-byte packets and the 0x47 byte is the sync byte, so should repeat every 188 bytes in the file.)'
-  - id: tsa
-    extension: tsa
-    desc: 'MPEG transport stream file. (This is not a lot to go on, but MPEG-2 Part 1 Transport (MP2T) files are reportedly broken into 188-byte packets and the 0x47 byte is the sync byte, so should repeat every 188 bytes in the file.)'
-  - id: tsv
-    extension: tsv
+  - id: ts,tsa,tsv
+    extensions: 
+      - "ts"
+      - "tsa"
+      - "tsv"
     desc: 'MPEG transport stream file. (This is not a lot to go on, but MPEG-2 Part 1 Transport (MP2T) files are reportedly broken into 188-byte packets and the 0x47 byte is the sync byte, so should repeat every 188 bytes in the file.)'
   - id: ttf
-    extension: ttf
+    extensions: 
+      - "ttf"
     desc: 'TrueType font file'
   - id: uce
-    extension: uce
+    extensions: 
+      - "uce"
     desc: 'Unicode extensions'
   - id: ufa
-    extension: ufa
+    extensions: 
+      - "ufa"
     desc: 'UFA compressed archive'
   - id: vbe
-    extension: vbe
+    extensions: 
+      - "vbe"
     desc: 'VBScript Encoded script'
   - id: vbx
-    extension: vbx
+    extensions: 
+      - "vbx"
     desc: 'VisualBASIC application'
   - id: vcd
-    extension: vcd
+    extensions: 
+      - "vcd"
     desc: 'VideoVCD (GNU VCDImager) file'
   - id: vcf
-    extension: vcf
+    extensions: 
+      - "vcf"
     desc: 'vCard file'
   - id: vcw
-    extension: vcw
+    extensions: 
+      - "vcw"
     desc: 'Microsoft Visual C++ Workbench Information File'
   - id: vhd
-    extension: vhd
+    extensions: 
+      - "vhd"
     desc: 'Virtual PC Virtual HD image'
   - id: vlt
-    extension: vlt
+    extensions: 
+      - "vlt"
     desc: 'VLC Player Skin file'
   - id: vmd
-    extension: vmd
+    extensions: 
+      - "vmd"
     desc: 'VocalTec VoIP media file'
   - id: vmdk
-    extension: vmdk
+    extensions: 
+      - "vmdk"
     desc: 'VMware 4 Virtual Disk description file (split disk)'
   - id: vmdk_434F
-    extension: vmdk
+    extensions: 
+      - "vmdk"
     desc: 'VMware 3 Virtual Disk (portion of a split disk) file'
   - id: vmdk_4B44
-    extension: vmdk
+    extensions: 
+      - "vmdk"
     desc: 'VMware 4 Virtual Disk (portion of a split disk) file'
   - id: vmdk_4B444D
-    extension: vmdk
+    extensions: 
+      - "vmdk"
     desc: 'VMware 4 Virtual Disk (monolitic disk) file'
-  - id: vob
-    extension: vob
-    desc: 'DVD Video Movie File (video/dvd, video/mpeg) or DVD MPEG2 Trailer: 00 00 01 B9 (...�)'
   - id: voc
-    extension: voc
+    extensions: 
+      - "voc"
     desc: 'Creative Voice audio file'
   - id: vsd
-    extension: vsd
+    extensions: 
+      - "vsd"
     desc: 'Visio file'
-  - id: vxd
-    extension: vxd
+  - id: vxd,386
+    extensions: 
+      - "vxd"
+      - "386"
     desc: 'Windows virtual device drivers'
   - id: wab
-    extension: wab
+    extensions: 
+      - "wab"
     desc: 'Outlook Express address book (Win95)'
   - id: wab_9CCB
-    extension: wab
+    extensions: 
+      - "wab"
     desc: 'Outlook address file'
   - id: wallet
-    extension: wallet
+    extensions: 
+      - "wallet"
     desc: 'MultiBit Bitcoin wallet file'
   - id: wav
-    extension: wav
+    extensions: 
+      - "wav"
     desc: 'Resource Interchange File Format -- Audio for Windows file, where xx xx xx xx is the file size (little endian)'
   - id: wb2
-    extension: wb2
+    extensions: 
+      - "wb2"
     desc: 'QuattroPro for Windows Spreadsheet file'
   - id: wb3
-    extension: wb3
+    extensions: 
+      - "wb3"
     desc: 'Quatro Pro for Windows 7.0 Notebook file'
   - id: webm
-    extension: webm
+    extensions: 
+      - "webm"
     desc: 'WebM video file'
   - id: webp
-    extension: webp
+    extensions: 
+      - "webp"
     desc: 'Google WebP image file, where xx xx xx xx is the file size'
   - id: wim
-    extension: wim
+    extensions: 
+      - "wim"
     desc: 'Microsoft Windows Imaging Format file'
-  - id: wiz
-    extension: wiz
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: wk1
-    extension: wk1
+    extensions: 
+      - "wk1"
     desc: 'Lotus 1-2-3 spreadsheet (v1) file'
   - id: wk3
-    extension: wk3
+    extensions: 
+      - "wk3"
     desc: 'Lotus 1-2-3 spreadsheet (v3) file'
-  - id: wk4
-    extension: wk4
-    desc: 'Lotus 1-2-3 spreadsheet (v4, v5) file'
-  - id: wk5
-    extension: wk5
+  - id: wk4,wk5
+    extensions: 
+      - "wk4"
+      - "wk5"
     desc: 'Lotus 1-2-3 spreadsheet (v4, v5) file'
   - id: wks
-    extension: wks
+    extensions: 
+      - "wks"
     desc: 'DeskMate Worksheet'
   - id: wks_FF00
-    extension: wks
+    extensions: 
+      - "wks"
     desc: 'Works for Windows spreadsheet file'
-  - id: wma
-    extension: wma
-    desc: 'Microsoft Windows Media Audio/Video File (Advanced Systems Format)'
   - id: wmf
-    extension: wmf
+    extensions: 
+      - "wmf"
     desc: 'Windows Metadata file (Win 3.x format)'
   - id: wmf_D7CD
-    extension: wmf
+    extensions: 
+      - "wmf"
     desc: 'Windows graphics metafile'
-  - id: wmv
-    extension: wmv
-    desc: 'Microsoft Windows Media Audio/Video File (Advanced Systems Format)'
   - id: wmz
-    extension: wmz
+    extensions: 
+      - "wmz"
     desc: 'Windows Media compressed skin file'
   - id: woff
-    extension: woff
+    extensions: 
+      - "woff"
     desc: 'Web Open Font Format'
   - id: woff2
-    extension: woff2
+    extensions: 
+      - "woff2"
     desc: 'Web Open Font Format 2'
-  - id: wp
-    extension: wp
-    desc: 'WordPerfect text and graphics file'
-  - id: wp5
-    extension: wp5
-    desc: 'WordPerfect text and graphics file'
-  - id: wp6
-    extension: wp6
-    desc: 'WordPerfect text and graphics file'
-  - id: wpd
-    extension: wpd
+  - id: wp,wpd,wpg,wpp,wp5,wp6
+    extensions: 
+      - "wp"
+      - "wpd"
+      - "wpg"
+      - "wpp"
+      - "wp5"
+      - "wp6"
     desc: 'WordPerfect text and graphics file'
   - id: wpf
-    extension: wpf
+    extensions: 
+      - "wpf"
     desc: 'WordPerfect text file'
-  - id: wpg
-    extension: wpg
-    desc: 'WordPerfect text and graphics file'
   - id: wpl
-    extension: wpl
+    extensions: 
+      - "wpl"
     desc: 'Windows Media Player playlist'
-  - id: wpp
-    extension: wpp
-    desc: 'WordPerfect text and graphics file'
   - id: wps
-    extension: wps
+    extensions: 
+      - "wps"
     desc: 'MSWorks text document'
   - id: wri
-    extension: wri
+    extensions: 
+      - "wri"
     desc: 'Microsoft Write file'
   - id: wri_BE00
-    extension: wri
+    extensions: 
+      - "wri"
     desc: 'MS Write file'
   - id: ws
-    extension: ws
+    extensions: 
+      - "ws"
     desc: 'WordStar Version 5.0/6.0 document'
   - id: ws2
-    extension: ws2
+    extensions: 
+      - "ws2"
     desc: 'WordStar for Windows Ver. 2 document'
   - id: wsc
-    extension: wsc
+    extensions: 
+      - "wsc"
     desc: 'Windows Script Component'
   - id: wsc_EFBB
-    extension: wsc
+    extensions: 
+      - "wsc"
     desc: 'Windows Script Component (UTF-8)'
   - id: wsf
-    extension: wsf
+    extensions: 
+      - "wsf"
     desc: 'Windows Script Component'
   - id: wsf_EFBB
-    extension: wsf
+    extensions: 
+      - "wsf"
     desc: 'Windows Script Component (UTF-8)'
   - id: xar
-    extension: xar
+    extensions: 
+      - "xar"
     desc: 'eXtensible ARchive file'
   - id: xcf
-    extension: xcf
+    extensions: 
+      - "xcf"
     desc: 'GNU Image Manipulation Program (GIMP) eXperimental Computing Facility (XCF) image file'
   - id: xdr
-    extension: xdr
+    extensions: 
+      - "xdr"
     desc: 'BizTalk XML-Data Reduced Schema file'
-  - id: xla
-    extension: xla
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
   - id: xls
-    extension: xls
+    extensions: 
+      - "xls"
     desc: 'Excel spreadsheet subheader (MS Office)'
-  - id: xls_D0CF
-    extension: xls
-    desc: 'An Object Linking and Embedding (OLE) Compound File (CF) (i.e., OLECF) file format, known as Compound Binary File format by Microsoft, used by Microsoft Office 97-2003 applications (Word, Powerpoint, Excel, Wizard). Part of Microsoft''s Structured Storage (MSS) architecture for Component Object Model (COM)-based operating systems. [See also Excel, Outlook, PowerPoint, and Word "subheaders" at byte offset 512 (0x200).] There appear to several subheader formats and a dearth of documentation. There have been reports that there are different subheaders for Windows and Mac versions of MS Office but I cannot confirm that.] Password-protected DOCX, XLSX, and PPTX files also use this signature those files are saved as OLECF files. [Note the similarity between D0 CF 11 E0 and the word "DOCFILE"!]'
-  - id: xlsx
-    extension: xlsx
-    desc: 'Microsoft Office Open XML Format (OOXML) Document NOTE: There is no subheader for MS OOXML files as there is with DOC, PPT, and XLS files. To better understand the format of these files, rename any OOXML file to have a .ZIP extension and then unZIP the file; look at the resultant file named [Content_Types].xml to see the content types. In particular, look for the <Override PartName= tag, where you will find word, ppt, or xl, respectively. Trailer: Look for 50 4B 05 06 (PK..) followed by 18 additional bytes at the end of the file.'
   - id: xpi
-    extension: xpi
+    extensions: 
+      - "xpi"
     desc: 'Mozilla Browser Archive'
   - id: xps
-    extension: xps
+    extensions: 
+      - "xps"
     desc: 'XML paper specification file'
   - id: xpt
-    extension: xpt
+    extensions: 
+      - "xpt"
     desc: 'SAS Transport dataset file format'
   - id: xpt_504B
-    extension: xpt
+    extensions: 
+      - "xpt"
     desc: 'eXact Packager Models'
   - id: xpt_5850
-    extension: xpt
+    extensions: 
+      - "xpt"
     desc: 'XPCOM type libraries for the XPIDL compiler'
   - id: xul
-    extension: xul
+    extensions: 
+      - "xul"
     desc: 'XML User Interface Language file'
   - id: xxx
-    extension: xxx
+    extensions: 
+      - "xxx"
     desc: 'Compucon/Singer embroidery design file'
   - id: xz
-    extension: xz
+    extensions: 
+      - "xz"
     desc: 'XZ archive file'
   - id: ytt
-    extension: ytt
+    extensions: 
+      - "ytt"
     desc: 'YouTube Timed Text (subtitle) file'
   - id: zap
-    extension: zap
+    extensions: 
+      - "zap"
     desc: 'ZoneAlam data file'
   - id: zip
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'PKZIP archive file (Ref. 1 | Ref. 2) Trailer: filename 50 4B 17 characters 00 00 00 Trailer: (filename PK 17 characters ...) Note: PK are the initals of Phil Katz, co-creator of the ZIP file format and author of PKZIP.'
   - id: zip_504B
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'Apple Mac OS X Dashboard Widget, Aston Shell theme, Oolite eXpansion Pack, Opera Widget, Pivot Style Template, Rockbox Theme package, Simple Machines Forums theme, SubEthaEdit Mode, Trillian zipped skin, Virtual Skipper skin'
   - id: zip_504B03
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'ZLock Pro encrypted ZIP'
   - id: zip_504B05
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'PKZIP empty archive file'
   - id: zip_504B07
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'PKZIP multivolume archive file'
   - id: zip_504B4C
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'PKLITE compressed ZIP archive (see also PKZIP)'
   - id: zip_504B53
-    extension: zip
+    extensions: 
+      - "zip"
     desc: 'PKSFX self-extracting executable compressed file (see also PKZIP)'
   - id: zoo
-    extension: zoo
+    extensions: 
+      - "zoo"
     desc: 'ZOO compressed archive'

@@ -7,8 +7,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import com.google.common.collect.Lists;
-import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.prepared.parse.bean.ParseMagic;
 import com.kylinhunter.plat.file.detector.prepared.parse.bean.YamlMessage;
 
@@ -37,7 +37,11 @@ public class MagicYamlWriter {
             lines.add("fileTypes: ");
             fileTypes.forEach(ft -> {
                 lines.add("  - id: " + ft.getId());
-                lines.add("    extension: " + ft.getExtension());
+                lines.add("    extensions: ");
+                ft.getExtensions().forEach(extension -> {
+                    lines.add("      - \"" + extension + "\"");
+
+                });
                 lines.add("    desc: '" + ft.getDesc().replace("'", "''") + "'");
 
             });
@@ -68,7 +72,12 @@ public class MagicYamlWriter {
 
             magic.getFileTypes().forEach(fileType -> {
                 lines.add("      - id: " + fileType.getId());
-                lines.add("        extension: \"" + fileType.getExtension() + "\"");
+                lines.add("        extensions: ");
+                fileType.getExtensions().forEach(extension -> {
+                    lines.add("          - \"" + extension + "\"");
+
+                });
+
                 //lines.add("        desc: '" + fileType.getDesc().replace("'", "''") + "'");
             });
 

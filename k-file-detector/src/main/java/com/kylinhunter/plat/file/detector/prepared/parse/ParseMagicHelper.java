@@ -152,8 +152,8 @@ public class ParseMagicHelper {
      * @author BiJi'an
      * @date 2022-10-28 22:25
      */
-    public static String explainExtension(String str) {
-        return SPECIAL_EXTENSIONS.getOrDefault(str.toLowerCase(), StringUtils.EMPTY);
+    public static String speicalExtension(String str) {
+        return SPECIAL_EXTENSIONS.getOrDefault(str.toLowerCase(), str);
 
     }
 

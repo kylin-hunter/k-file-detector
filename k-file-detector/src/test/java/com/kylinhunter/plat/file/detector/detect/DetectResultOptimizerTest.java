@@ -26,9 +26,9 @@ class DetectResultOptimizerTest {
                 .add(2, 2, "1234")
                 .add(31, 0, "1234")
                 .add(32, 0, "123456")
-                .add(33, 0, "123478", "0_mp3_306770805", "0_mp4")
-                .add(34, 0, "12347890", "0_mp3_306770805")
-                .add(4, 2, "123456", "0_mp3").get();
+                .add(33, 0, "123478", "mpeg,mpg,mp3", "mp4")
+                .add(34, 0, "12347890", "mpeg,mpg,mp3")
+                .add(4, 2, "123456", "mp3").get();
 
         DetectResult detectResult = detectResultOptimizer.optimize(detectConext);
 

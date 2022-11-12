@@ -15,8 +15,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestMethodOrder;
 
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.CF;
@@ -26,15 +24,14 @@ import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class FileDetectorHelper {
     private static final FileTypeManager FILE_TYPE_MANAGER = CF.get(FileTypeManager.class);
 
     private static final Map<String, FileType> SPECIAL_FILETYPES = Maps.newHashMap();
 
     static {
-        SPECIAL_FILETYPES.put("linux-execute", FILE_TYPE_MANAGER.getFileTypeById("1_29837182"));
-        SPECIAL_FILETYPES.put("mac-execute", FILE_TYPE_MANAGER.getFileTypeById("1_1600260370"));
+        SPECIAL_FILETYPES.put("linux-execute", FILE_TYPE_MANAGER.getFileTypeById("none_7F45"));
+        SPECIAL_FILETYPES.put("mac-execute", FILE_TYPE_MANAGER.getFileTypeById("none_CFFA"));
 
     }
 
@@ -47,18 +44,12 @@ class FileDetectorHelper {
 
     }
 
-    private static boolean checkExtensions(FileType fileType, String extension, String... extensions) {
-        if (extensions != null && fileType != null) {
-
-            if (fileType.extensionEquals(extension)) {
-                return true;
-            }
-
+    private static boolean checkExtensions(FileType fileType, List<String> extensions) {
+        if (extensions != null && extensions.size() > 0 && fileType != null) {
             for (String tmpExtension : extensions) {
                 if (fileType.extensionEquals(tmpExtension)) {
                     return true;
                 }
-
             }
         }
         return false;
@@ -97,7 +88,13 @@ class FileDetectorHelper {
         System.out.println("\t secondFileType=>" + secondFileType);
 
         List<FileType> allPossibleFileTypes = detectResult.getPossibleFileTypes();
-        System.out.println("\t possibleFileTypes=>" + allPossibleFileTypes);
+
+        System.out.println("\t allPossibleFileTypes=>" + allPossibleFileTypes);
+
+        for (int i = 0; i < allPossibleFileTypes.size(); i++) {
+            System.out.println("\t allPossibleFileType[" + i + "]=>" + allPossibleFileTypes.get(i));
+
+        }
 
         System.out.println("===============================================");
         System.out.println();
@@ -109,6 +106,7 @@ class FileDetectorHelper {
     }
 
     public static int assertFile(File file, DetectResult detectResult, List<Integer> targetLevels) {
+
         Assertions.assertNotNull(detectResult.getFirstFileType());
 
         List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
@@ -120,13 +118,18 @@ class FileDetectorHelper {
             fileName = fileName.substring(0, index);
         }
 
+        List<String> allExtensions = Lists.newArrayList();
+        fileName = fileName.toLowerCase();
         String extension = FilenameUtil.getExtension(fileName);
+        if (!StringUtils.isEmpty(extension)) {
+            allExtensions.add(extension);
+        }
         Pattern p = Pattern.compile("&([a-z-0-9|]+)&");
         Matcher matcher = p.matcher(fileName);
-        String[] realExtensions = new String[0];
         if (matcher.find()) {
             String realExtensionStr = matcher.group(1);
-            realExtensions = StringUtils.split(realExtensionStr, '|');
+            String[] realExtensions = StringUtils.split(realExtensionStr, '|');
+            Collections.addAll(allExtensions, realExtensions);
 
         }
 
@@ -135,7 +138,7 @@ class FileDetectorHelper {
 
             FileType fileType = possibleFileTypes.get(i);
 
-            if (checkExtensions(fileType, extension, realExtensions)) {
+            if (checkExtensions(fileType, allExtensions)) {
                 position = i + 1;
                 break;
             } else {
@@ -149,6 +152,7 @@ class FileDetectorHelper {
 
         //        System.out.println("position=>" + position);
         if (!targetLevels.contains(position)) {
+            System.out.println("\t assertFile=>" + file.getAbsolutePath());
             printDetectResult(detectResult, position);
         }
         Assertions.assertTrue(position >= 1);
@@ -164,6 +168,7 @@ class FileDetectorHelper {
         for (File file : files) {
             if (file.isFile()) {
                 String fileExtension = FilenameUtil.getExtension(file.getName());
+
                 for (String extension : FILE_TYPE_MANAGER.getAllExtensions()) {
                     if (!fileExtension.equalsIgnoreCase(extension)) {
                         File disguisFile = new File(disguiseDir, file.getName() + "#." + extension);
@@ -216,6 +221,11 @@ class FileDetectorHelper {
             }
         }
         return disguisFiles;
+
+    }
+
+    public static DetectStatstic detect(List<File> disguiseFiles, Integer... targetLevel) {
+        return detect(disguiseFiles, Arrays.asList(targetLevel));
 
     }
 

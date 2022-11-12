@@ -74,10 +74,10 @@ class MagicReaderTest {
     @Test
     void readOffices() throws IOException {
 
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office");
+        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
         System.out.println(dir.getAbsolutePath());
         Collection<File> files = FileUtils.listFiles(dir, null, true);
-        Assertions.assertEquals(13, files.size());
+        Assertions.assertEquals(7, files.size());
         for (File file : files) {
             byte[] content = FileUtils.readFileToByteArray(file);
 

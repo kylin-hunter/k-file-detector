@@ -16,6 +16,7 @@ import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ZipUtil;
@@ -42,15 +43,15 @@ public class MSOfficeDetector implements ContentDetector {
     private final FileTypeManager fileTypeManager;
     private final MagicManager magicManager;
     private Magic magic;
-    private FileType ppsx;
-    private FileType dotx;
-    private FileType xltx;
+    private FileType ppsxFileType;
+    private FileType dotxFileType;
+    private FileType xltxFileType;
 
-    private FileType docx;
-    private FileType xlsx;
-    private FileType pptx;
-    private FileType potx;
-    private static final Map<String, FileType> DIR_FILE_TYPES = Maps.newHashMap();
+    private FileType docxFileType;
+    private FileType xlsxFileType;
+    private FileType pptxFileType;
+    private FileType potxFileType;
+    private static final Map<String, FileType> DIR_NAME_TO_FILE_TYPES_MAPS = Maps.newHashMap();
 
     public MSOfficeDetector(FileTypeManager fileTypeManager, MagicManager magicManager) {
         this.fileTypeManager = fileTypeManager;
@@ -62,18 +63,25 @@ public class MSOfficeDetector implements ContentDetector {
     private void init() {
         this.magic = magicManager.getMagic("504B030414000600");
 
-        ppsx = fileTypeManager.getFileTypeById("ppsx");
-        dotx = fileTypeManager.getFileTypeById("dotx");
-        xltx = fileTypeManager.getFileTypeById("xltx");
-        potx = fileTypeManager.getFileTypeById("potx");
+        ppsxFileType = fileTypeManager.getFileTypeById("ppsx");
+        Preconditions.checkNotNull(ppsxFileType);
+        dotxFileType = fileTypeManager.getFileTypeById("dotx");
+        Preconditions.checkNotNull(dotxFileType);
+        xltxFileType = fileTypeManager.getFileTypeById("xltx");
+        Preconditions.checkNotNull(xltxFileType);
+        potxFileType = fileTypeManager.getFileTypeById("potx");
+        Preconditions.checkNotNull(potxFileType);
 
-        docx = fileTypeManager.getFileTypeById("docx");
-        xlsx = fileTypeManager.getFileTypeById("xlsx");
-        pptx = fileTypeManager.getFileTypeById("pptx");
+        docxFileType = fileTypeManager.getFileTypeById("docx");
+        Preconditions.checkNotNull(docxFileType);
+        xlsxFileType = fileTypeManager.getFileTypeById("xlsx");
+        Preconditions.checkNotNull(xlsxFileType);
+        pptxFileType = fileTypeManager.getFileTypeById("pptx");
+        Preconditions.checkNotNull(pptxFileType);
 
-        DIR_FILE_TYPES.put("word", docx);
-        DIR_FILE_TYPES.put("xl", xlsx);
-        DIR_FILE_TYPES.put("ppt", pptx);
+        DIR_NAME_TO_FILE_TYPES_MAPS.put("word", docxFileType);
+        DIR_NAME_TO_FILE_TYPES_MAPS.put("xl", xlsxFileType);
+        DIR_NAME_TO_FILE_TYPES_MAPS.put("ppt", pptxFileType);
 
     }
 
@@ -122,7 +130,7 @@ public class MSOfficeDetector implements ContentDetector {
                 for (File exFile : files) {
                     if (exFile.isDirectory()) {
                         //                        log.info(exFile.getAbsolutePath());
-                        FileType fileType = DIR_FILE_TYPES.get(exFile.getName());
+                        FileType fileType = DIR_NAME_TO_FILE_TYPES_MAPS.get(exFile.getName());
                         if (fileType != null) {
                             return checkXml(extractPath, fileType);
                         }
@@ -159,9 +167,9 @@ public class MSOfficeDetector implements ContentDetector {
             Attribute contentType = element.attribute("ContentType");
             if (partName.getValue().equals("/word/document.xml")) {
                 if (contentType.getValue().contains("document.main+xml")) {
-                    return docx;
+                    return docxFileType;
                 } else if (contentType.getValue().contains("template.main+xml")) {
-                    return dotx;
+                    return dotxFileType;
 
                 }
 
@@ -169,21 +177,21 @@ public class MSOfficeDetector implements ContentDetector {
 
             if (partName.getValue().equals("/ppt/presentation.xml")) {
                 if (contentType.getValue().contains("presentation.main+xml")) {
-                    return pptx;
+                    return pptxFileType;
                 } else if (contentType.getValue().contains("slideshow.main+xml")) {
-                    return ppsx;
+                    return ppsxFileType;
                 } else if (contentType.getValue().contains("template.main+xml")) {
-                    return potx;
+                    return potxFileType;
                 }
 
             }
 
             if (partName.getValue().equals("/xl/workbook.xml")) {
                 if (contentType.getValue().contains("sheet.main+xml")) {
-                    return xlsx;
+                    return xlsxFileType;
                 } else {
                     if (contentType.getValue().contains("template.main+xml")) {
-                        return xltx;
+                        return xltxFileType;
                     }
 
                 }

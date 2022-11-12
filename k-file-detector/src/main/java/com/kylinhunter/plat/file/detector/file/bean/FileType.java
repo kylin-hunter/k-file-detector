@@ -1,5 +1,7 @@
 package com.kylinhunter.plat.file.detector.file.bean;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +16,12 @@ public class FileType implements Comparable<FileType> {
     /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
     String id;
-    private String extension;
+    private List<String> extensions;
     private String desc;
+
+    //  calculate by  FileTypeConfigLoader
+    private FileType sameRef;
+    //  calculate by  MagicManager
     private int magicMaxLengthWithOffset;
 
     public void reCalMagicMaxLengthWithOffset(int offset, int magicLen) {
@@ -24,26 +30,25 @@ public class FileType implements Comparable<FileType> {
         }
     }
 
-    public boolean extensionEquals(String extension, String... extensions) {
-        if (this.extension != null && this.extension.length() > 0) {
-            if (this.extension.equals(extension)) {
-                return true;
+    public boolean extensionEquals(String extension) {
+
+        if (extensions.size() > 0) {
+            if (extensions.size() == 1) {
+                return extensions.get(0).equals(extension);
             } else {
-                for (String tmpExtension : extensions) {
-                    if (this.extension.equals(tmpExtension)) {
-                        return true;
-                    }
+                if (this.extensions.contains(extension)) {
+                    return true;
                 }
             }
-
         }
+
         return false;
 
     }
 
     @Override
     public String toString() {
-        return id + "/" + extension;
+        return id + "/" + extensions;
     }
 
     @Override

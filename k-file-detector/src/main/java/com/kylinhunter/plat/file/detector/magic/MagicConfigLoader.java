@@ -14,8 +14,8 @@ import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeConfigLoader;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
+import com.kylinhunter.plat.file.detector.magic.bean.AdjustMagic;
 import com.kylinhunter.plat.file.detector.magic.bean.Magic;
-import com.kylinhunter.plat.file.detector.magic.bean.MagicEx;
 
 import lombok.Data;
 
@@ -28,7 +28,7 @@ import lombok.Data;
 public class MagicConfigLoader {
     private static MagicConfig CACHED_DATA;
     private static final String MAGIC_LOCATION = "signature/magic.yml";
-    private static final String MAGIC_LOCATION_EX = "signature/magic_ex.yml";
+    private static final String MAGIC_ADJUST_LOCATION = "signature/magic_adjust.yml";
 
     /**
      * @return void
@@ -56,18 +56,17 @@ public class MagicConfigLoader {
         MagicConfig magicConfig = load0(MagicConfig.class, MAGIC_LOCATION);
         Objects.requireNonNull(magicConfig);
 
-        Map<String, Magic> magicMap = magicConfig.magics.stream()
-                .collect(Collectors.toMap(Magic::getNumber, e -> e));
+        Map<String, Magic> magicMap = magicConfig.magics.stream().collect(Collectors.toMap(Magic::getNumber, e -> e));
 
-        MagicExConfig magicExConfig = load0(MagicExConfig.class, MAGIC_LOCATION_EX);
-        Objects.requireNonNull(magicExConfig);
+        AdjustMagicConfig adjustMagicConfig = load0(AdjustMagicConfig.class, MAGIC_ADJUST_LOCATION);
+        Objects.requireNonNull(adjustMagicConfig);
 
-        for (MagicEx magicEx : magicExConfig.magics) {
-            Magic magic = magicMap.get(magicEx.getNumber());
+        for (AdjustMagic adjustMagic : adjustMagicConfig.adjustMagics) {
+            Magic magic = magicMap.get(adjustMagic.getNumber());
             if (magic != null) {
-                processMagicEx(magicEx, magic, magicMap);
+                processAdjustMagic(adjustMagic, magic, magicMap);
             } else {
-                throw new DetectException("invalid magic :" + magicEx.getNumber());
+                throw new DetectException("invalid  adjust magic :" + adjustMagic.getNumber());
             }
             if (!magic.isEnabled()) {
                 magicConfig.magics.remove(magic);
@@ -76,10 +75,10 @@ public class MagicConfigLoader {
         return magicConfig;
     }
 
-    private static void processMagicEx(MagicEx magicEx, Magic magic, Map<String, Magic> magicMap) {
-        magic.setExtensionMustMatch(magicEx.isExtensionMustMatch());
-        magic.setEnabled(magicEx.isEnabled());
-        String refMagic = magicEx.getRefMagic();
+    private static void processAdjustMagic(AdjustMagic adjustMagic, Magic magic, Map<String, Magic> magicMap) {
+        magic.setExtensionMustMatch(adjustMagic.isExtensionMustMatch());
+        magic.setEnabled(adjustMagic.isEnabled());
+        String refMagic = adjustMagic.getRefMagic();
         if (!StringUtils.isEmpty(refMagic)) {
             Magic refrenceMagic = magicMap.get(refMagic);
             if (refrenceMagic == null) {
@@ -87,22 +86,20 @@ public class MagicConfigLoader {
             }
             magic.setRefMagic(refrenceMagic);
         }
-        magic.setDetectContentSupport(magicEx.isDetectContentSupport());
-        if (magicEx.getOffset() > 0) {
-            magic.setOffset(magicEx.getOffset());
+        magic.setDetectContentSupport(adjustMagic.isDetectContentSupport());
+
+        if (!StringUtils.isEmpty(adjustMagic.getDesc())) {
+            magic.setDesc(adjustMagic.getDesc());
         }
-        if (!StringUtils.isEmpty(magicEx.getDesc())) {
-            magic.setDesc(magicEx.getDesc());
-        }
-        List<FileType> excludeFileTypes = magicEx.getExcludeFileTypes();
+        List<FileType> excludeFileTypes = adjustMagic.getExcludeFileTypes();
         if (!CollectionUtils.isEmpty(excludeFileTypes)) {
             magic.getFileTypes().removeIf(excludeFileTypes::contains);
         }
-        List<FileType> includeFileTypes = magicEx.getIncludeFileTypes();
+        List<FileType> includeFileTypes = adjustMagic.getIncludeFileTypes();
         if (!CollectionUtils.isEmpty(includeFileTypes)) {
             includeFileTypes.forEach(fileType -> magic.getFileTypes().add(fileType));
         }
-        List<FileType> topFileTypes = magicEx.getTopFileTypes();
+        List<FileType> topFileTypes = adjustMagic.getTopFileTypes();
         if (!CollectionUtils.isEmpty(topFileTypes)) {
             List<FileType> fileTypes = magic.getFileTypes();
             fileTypes.removeIf(topFileTypes::contains);
@@ -143,7 +140,7 @@ public class MagicConfigLoader {
      * @date 2022-10-02 19:55
      **/
     @Data
-    public static class MagicExConfig {
-        private List<MagicEx> magics;
+    public static class AdjustMagicConfig {
+        private List<AdjustMagic> adjustMagics;
     }
 }

@@ -23,7 +23,12 @@ public class FileTypesWrapper {
 
     public FileTypesWrapper(List<FileType> fileTypes) {
         this.fileTypes = fileTypes;
-        fileTypes.forEach(fileType -> extensions.add(fileType.getExtension()));
+        fileTypes.forEach(fileType -> fileType.getExtensions().forEach(extension -> {
+            if (!extensions.contains(extension)) {
+                extensions.add(extension);
+            }
+
+        }));
     }
 
     @Override

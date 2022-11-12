@@ -16,11 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-public class MagicEx {
+public class AdjustMagic {
     /* ==== from yaml  ===*/
     @EqualsAndHashCode.Include
     private String number;  // the magic number;
-    private int offset;
     private String desc; // the description for the magic number
     private List<FileType> includeFileTypes; // the file types
     private List<FileType> excludeFileTypes; // the file types

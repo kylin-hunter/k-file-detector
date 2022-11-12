@@ -56,13 +56,10 @@ class MagicYamlCreatorTest {
         Assertions.assertEquals(7, parseStat.getMagicInvalidNums());
         Assertions.assertEquals(544, parseStat.getMagicValidNums());
 
-        Assertions.assertEquals(644, parseStat.getExtensionNums());
         Assertions.assertEquals(37, parseStat.getExtensionNoneNums());
-        Assertions.assertEquals(666, parseStat.getFileTypeNums());
+        Assertions.assertEquals(590, parseStat.getFileTypeNums());
         Assertions.assertEquals(15, parseStat.getFileTypeDuplicateNums());
 
-        Assertions.assertEquals(parseStat.getFileTypeNums() + parseStat.getFileTypeDuplicateNums(),
-                parseStat.getExtensionNums() + parseStat.getExtensionNoneNums());
 
     }
 }

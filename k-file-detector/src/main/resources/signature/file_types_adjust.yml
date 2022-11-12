@@ -1,0 +1,50 @@
+adjustFileTypes:
+  - id: ppsx
+    create: true
+    extensions:
+      - ppsx
+    desc: 'Microsoft Office  PowerPoint  File (show mode)'
+  - id: docx
+    create: true
+    extensions:
+      - docx
+    desc: 'Microsoft Office  Word  File'
+  - id: dotx
+    create: true
+    extensions:
+      - dotx
+    desc: 'Microsoft Office  Word Template File'
+  - id: xlsx
+    create: true
+    extensions:
+      - xlsx
+    desc: 'Microsoft Office  Excel  File'
+  - id: xltx
+    create: true
+    extensions:
+      - xltx
+    desc: 'Microsoft Office  Excel Template File'
+  - id: pptx
+    create: true
+    extensions:
+      - pptx
+    desc: 'Microsoft Office  PowerPoint  File '
+  - id: potx
+    create: true
+    extensions:
+      - potx
+    desc: 'Microsoft Office  PowerPoint Template File '
+  - id: none_4649
+    sameRef: none_4241
+  - id: none_A1B2CD
+    sameRef: none_34CD
+  - id: com,dll,drv,exe,pif,qts,qtx,sys
+    extensions:
+      - "exe"
+      - "com"
+      - "dll"
+      - "drv"
+      - "pif"
+      - "qts"
+      - "qtx"
+      - "sys"

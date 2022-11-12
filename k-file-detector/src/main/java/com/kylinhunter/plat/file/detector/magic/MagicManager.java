@@ -117,6 +117,10 @@ public class MagicManager {
                     if (newFileType == null) {
                         throw new DetectException("no file type :" + oldFileType.getId());
                     }
+                    FileType sameRef = newFileType.getSameRef();
+                    if (sameRef != null) {
+                        newFileType = sameRef;
+                    }
                     newFileType.reCalMagicMaxLengthWithOffset(magic.getOffset(), magic.getLength());
                     return newFileType;
                 }).collect(Collectors.toList());

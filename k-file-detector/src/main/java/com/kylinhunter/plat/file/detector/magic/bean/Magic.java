@@ -25,6 +25,8 @@ public class Magic implements Comparable<Magic> {
     private int offset;
     private String desc; // the description for the magic number
     private List<FileType> fileTypes; // the file types
+
+
     /*===ex====*/
     private Magic refMagic;
     private boolean detectContentSupport;

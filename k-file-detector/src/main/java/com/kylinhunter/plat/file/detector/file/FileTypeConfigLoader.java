@@ -2,11 +2,17 @@ package com.kylinhunter.plat.file.detector.file;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
+import com.kylinhunter.plat.file.detector.exception.DetectException;
+import com.kylinhunter.plat.file.detector.file.bean.AdjustFileType;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 
 import lombok.Data;
@@ -19,8 +25,8 @@ import lombok.Data;
 @Data
 public class FileTypeConfigLoader {
     private static FileTypeConfig CACHED_DATA;
-    private static final String MAGIC_FILE_TYPES_LOCATION = "signature/file_types.yml";
-    private static final String MAGIC_FILE_TYPES_EX_LOCATION = "signature/file_types_ex.yml";
+    private static final String FILE_TYPES_LOCATION = "signature/file_types.yml";
+    private static final String FILE_TYPES_ADJUST_LOCATION = "signature/file_types_adjust.yml";
 
     /**
      * @return com.kylinhunter.file.detector.config.MagicConfig
@@ -52,25 +58,58 @@ public class FileTypeConfigLoader {
      */
     public static FileTypeConfig load0() {
 
-        FileTypeConfig fileTypeConfig = load0(MAGIC_FILE_TYPES_LOCATION);
+        FileTypeConfig fileTypeConfig = load0(FileTypeConfig.class, FILE_TYPES_LOCATION);
         Objects.requireNonNull(fileTypeConfig);
 
-        FileTypeConfig fileTypeConfigEx = load0(MAGIC_FILE_TYPES_EX_LOCATION);
-        Objects.requireNonNull(fileTypeConfigEx);
+        List<FileType> fileTypes = fileTypeConfig.fileTypes;
+        Map<String, FileType> fileTypeMap = fileTypes.stream()
+                .collect(Collectors.toMap(FileType::getId, e -> e));
 
-        fileTypeConfig.fileTypes.addAll(fileTypeConfigEx.getFileTypes());
+        AdjustFileTypeConfig adjustFileTypeConfig = load0(AdjustFileTypeConfig.class, FILE_TYPES_ADJUST_LOCATION);
+        Objects.requireNonNull(adjustFileTypeConfig);
+
+        for (AdjustFileType adjustFileType : adjustFileTypeConfig.adjustFileTypes) {
+            List<String> extensions = adjustFileType.getExtensions();
+            if (adjustFileType.isCreate()) {
+                FileType fileTypeNew = new FileType();
+                fileTypeNew.setId(adjustFileType.getId());
+                fileTypeNew.setExtensions(extensions);
+                fileTypeNew.setDesc(adjustFileType.getDesc());
+                if (fileTypes.contains(fileTypeNew)) {
+                    throw new DetectException("invalid  adjust file type :" + adjustFileType.getId());
+                }
+                fileTypes.add(fileTypeNew);
+
+            } else {
+                FileType fileTypeOld = fileTypeMap.get(adjustFileType.getId());
+                if (fileTypeOld == null) {
+                    throw new DetectException("invalid  adjust file type :" + adjustFileType.getId());
+                }
+                String sameRef = adjustFileType.getSameRef();
+                if (!StringUtils.isEmpty(sameRef)) {
+                    FileType fileTypeSame = fileTypeMap.get(sameRef);
+                    if (fileTypeSame == null) {
+                        throw new DetectException("invalid  same ref file type :" + adjustFileType.getId());
+                    }
+                    fileTypeOld.setSameRef(fileTypeSame);
+                }
+                if (!CollectionUtils.isEmpty(extensions)) {
+                    fileTypeOld.setExtensions(extensions);
+                }
+
+            }
+
+        }
         return fileTypeConfig;
     }
 
-    public static FileTypeConfig load0(String path) {
+    private static <T> T load0(Class<T> clazz, String path) {
 
         InputStream resource = ResourceHelper.getInputStreamInClassPath(path);
         Objects.requireNonNull(resource);
-        Yaml yaml = new Yaml();
-
-        FileTypeConfig fileTypeConfig = yaml.loadAs(resource, FileTypeConfig.class); // load config from yaml
-        Objects.requireNonNull(fileTypeConfig);
-        return fileTypeConfig;
+        T magicConfig = new Yaml().loadAs(resource, clazz);
+        Objects.requireNonNull(magicConfig);
+        return magicConfig;
     }
 
     /**
@@ -81,6 +120,11 @@ public class FileTypeConfigLoader {
     @Data
     public static class FileTypeConfig {
         private List<FileType> fileTypes;
+    }
+
+    @Data
+    public static class AdjustFileTypeConfig {
+        private List<AdjustFileType> adjustFileTypes;
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -283,26 +284,8 @@ public class MagicYamlCreator {
         if (parseMagic != null && parseMagic.isValid()) {
             if (!StringUtils.isEmpty(td0Text) && !td0Text.contains("n/a")) {
                 String extension = td0Text.toLowerCase();
-                int extensionLen = extension.length();
-                if (extensionLen < 2) {
-                    throw new DetectException("invalid extension,td0Text=> " + td0Text);
-                } else if (extensionLen <= 4) {
-                    addFile(parseContext, td0Text, td2Text, parseMagic, extension, td2Text);
-                } else {
-                    String[] extensions = StringUtils.split(extension, ",");
-                    for (String ex : extensions) {
-                        extension = ex.trim();
-                        extensionLen = extension.length();
-                        if (extensionLen < 2) {
-                            throw new DetectException("invalid extension,td0Text=> " + td0Text);
-                        } else if (extensionLen <= 5) {
-                            addFile(parseContext, td0Text, td2Text, parseMagic, extension, td2Text);
-                        } else {
-                            extension = ParseMagicHelper.explainExtension(extension);
-                            addFile(parseContext, td0Text, td2Text, parseMagic, extension, td2Text);
-                        }
-                    }
-                }
+                addFile(parseContext, td0Text, td2Text, parseMagic, extension, td2Text);
+
             } else {
                 addFile(parseContext, td0Text, td2Text, parseMagic, "", td2Text);
             }
@@ -312,19 +295,35 @@ public class MagicYamlCreator {
     private void addFile(ParseContext parseContext, String td0Text, String td2Text, ParseMagic parseMagic,
                          String extension,
                          String desc) {
+
+        List<String> extensions = Lists.newArrayList();
+
         if (StringUtils.isEmpty(extension)) {
             parseContext.getParseStat().incrementExtensionNoneNum();
             log.warn("extenion is empty,td0Text=> " + td0Text + ",td2Text=> "
                     + StringUtils.substring(td2Text, 0, 20));
         } else {
-            if (!ParseMagicHelper.isValidExtension(extension)) {
-                throw new DetectException("invalid extension,td0Text=> " + td0Text);
-            }
-            parseContext.getParseStat().incrementExtensionNum();
-        }
+            extension = ParseMagicHelper.speicalExtension(extension);
 
+            String[] extensionArr = StringUtils.split(extension, ',');
+            for (String ext : extensionArr) {
+                ext = ext.replaceAll("\\s", "");
+                if (ext.length() < 2) {
+                    throw new DetectException("invalid extension,td0Text=> " + td0Text);
+                } else {
+                    if (ParseMagicHelper.isValidExtension(ext)) {
+                        extensions.add(ext);
+
+                    } else {
+                        throw new DetectException("invalid extension,td0Text=> " + td0Text);
+                    }
+                }
+
+            }
+
+        }
         FileType fileType = new FileType();
-        fileType.setExtension(extension);
+        fileType.setExtensions(extensions);
         fileType.setDesc(desc);
         parseMagic.getFileTypes().add(fileType);
     }

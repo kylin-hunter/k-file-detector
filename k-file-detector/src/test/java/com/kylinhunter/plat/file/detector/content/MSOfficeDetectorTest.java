@@ -2,6 +2,7 @@ package com.kylinhunter.plat.file.detector.content;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
@@ -26,11 +27,11 @@ class MSOfficeDetectorTest {
             System.out.println("file=>" + file.getAbsolutePath());
             FileType fileType = msOfficeDetector.detect(file);
             System.out.println("fileType=>" + fileType);
-            Assertions.assertEquals(FilenameUtil.getExtension(file.getName()), fileType.getExtension());
+            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())), fileType.getExtensions());
 
-             fileType = msOfficeDetector.detect(FileUtils.readFileToByteArray(file));
+            fileType = msOfficeDetector.detect(FileUtils.readFileToByteArray(file));
             System.out.println("fileType=>" + fileType);
-            Assertions.assertEquals(FilenameUtil.getExtension(file.getName()), fileType.getExtension());
+            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())), fileType.getExtensions());
 
         }
 

@@ -17,7 +17,7 @@ class FileTypeManagerTest {
     private static void print(FileType fileType) {
         System.out.println("\t ======================================");
         System.out.println("\t 1、id: " + fileType.getId());
-        System.out.println("\t 2、extension: " + fileType.getExtension());
+        System.out.println("\t 2、extensions: " + fileType.getExtensions());
         System.out.println("\t 3、desc: " + fileType.getDesc());
         System.out.println("\t ======================================");
     }
@@ -77,24 +77,36 @@ class FileTypeManagerTest {
         System.out.println(allFileTypes.size());
         allFileTypes.forEach(fileType -> {
 
-            String extension = fileType.getExtension();
+            String extension = String.join(",", fileType.getExtensions());
             String desc = fileType.getDesc();
+            desc = desc.replaceAll("[\\s()-,.?:;\"!']", "");
             String duplicatStr = extension + "_" + desc;
             String duplicateFileTypeId = descs.get(duplicatStr);
             if (duplicateFileTypeId != null && duplicateFileTypeId.length() > 0) {
 
                 FileType fileTypeOld = fileTypeManager.getFileTypeById(duplicateFileTypeId);
-                System.out.println("duplicateOri :" + fileTypeOld.getId() + "/" + fileTypeOld.getExtension()
+                System.out.println("duplicateOri :" + fileTypeOld.getId() + "/" + fileTypeOld.getExtensions()
                         + "/" + fileTypeOld.getDesc());
 
-
                 System.out.println("duplicateNew :" + fileType.getId() + "/" + extension + "/" + desc);
-
 
             } else {
                 descs.put(duplicatStr, fileType.getId());
             }
         });
+        System.out.println("duplicateOri===========");
+        for (FileType fileType : fileTypeManager.getAllFileTypes()) {
+            FileType sameRef = fileType.getSameRef();
+            if (sameRef != null) {
+                System.out.println("duplicateOri :" + sameRef.getId() + "/" + sameRef.getExtensions()
+                        + "/" + sameRef.getDesc());
+
+                System.out.println("duplicateNew :" + fileType.getId() + "/" + fileType.getExtensions()
+                        + "/" + fileType.getDesc());
+
+            }
+
+        }
 
     }
 

@@ -26,10 +26,10 @@ public class FilenameUtil {
         if (extension != null && extension.length() > 0) {
             String extensionNew = SPEICAL_EXTENSION.get(extension);
             if (extensionNew != null && extensionNew.length() > 0) {
-                return extensionNew;
+                return extensionNew.toLowerCase();
             }
 
-            return extension;
+            return extension.toLowerCase();
 
         }
         return StringUtils.EMPTY;
