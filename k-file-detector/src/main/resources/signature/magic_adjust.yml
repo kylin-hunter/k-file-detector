@@ -22,12 +22,8 @@ adjustMagics:
     enabled: false
   - number: 4D5A900003000000
     enabled: false
-    extensionMustMatch: true
-  - number: FDFFFFFFxxxxxxxxxxxxxxxx04000000
-    enabled: false
   - number: 504B0304140008000800
     enabled: false
-    extensionMustMatch: true
   - number: D0CF11E0A1B11AE1
     topFileTypes:
       - id: k_doc

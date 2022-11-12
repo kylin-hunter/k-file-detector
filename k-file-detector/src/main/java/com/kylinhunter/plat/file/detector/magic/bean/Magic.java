@@ -30,7 +30,6 @@ public class Magic implements Comparable<Magic> {
     /*===ex====*/
     private Magic refMagic;
     private boolean detectContentSupport;
-    private boolean extensionMustMatch;
 
     /* ==== extended  properties===*/
     private int length; //  magic number's bytes size

@@ -3,6 +3,7 @@ package com.kylinhunter.plat.file.detector;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,7 +52,7 @@ class FileDetectorTest {
                 detectResult = FileDetector.detect(inputStream, file.getName());
             }
 
-            detectStatstic.calAssertResult(FileDetectorHelper.assertFile(file, detectResult));
+            detectStatstic.calAssertResult(FileDetectorHelper.assertFile(file, detectResult, Arrays.asList(-1)));
         }
         detectStatstic.print();
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
@@ -276,7 +277,8 @@ class FileDetectorTest {
 
         File file = ResourceHelper.getFileInClassPath("files/detected/office/97-2004/xls.xls");
         file = new File("/Users/bijian/workspace_gitee/k-file-detector/k-file-detector/"
-                + "tmp/disguise/remove_extension/ppt@ppt#_noextension");
+                + "tmp/disguise/disguise_extension/zip&zip|APK|JAR|KMZ|KWD|ODT|ODP|OT|OXPS|SXC|SXD|SXI|SXW|SXC|WMZ"
+                + "|XPI|XPS|XPT&.zip#.jar");
         FileDetectorHelper.assertFile(file, FileDetector.detect(file), Collections.EMPTY_LIST);
 
     }

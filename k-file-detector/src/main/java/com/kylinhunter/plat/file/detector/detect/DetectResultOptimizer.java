@@ -64,33 +64,6 @@ public class DetectResultOptimizer {
             sortMagics.add(sortMagic);
         }
         Collections.sort(sortMagics);
-        for (int i = 0; i < sortMagics.size(); i++) {
-            SortMagic cur = sortMagics.get(i);
-            if (cur.getMagic().isExtensionMustMatch() && !cur.isMatchExtension()) {
-                int betterParentMagicIndex = 0;
-                for (int j = i + 1; j < sortMagics.size(); j++) {
-                    SortMagic next = sortMagics.get(j);
-                    if (cur.getOffset() == 0 && next.getOffset() == 0 && cur.getNumber().startsWith(next.getNumber())) {
-
-                        if (!next.getMagic().isExtensionMustMatch()) {
-                            betterParentMagicIndex = j;
-                            break;
-                        } else {
-                            if (next.isMatchExtension()) {
-                                betterParentMagicIndex = j;
-                                break;
-                            }
-                        }
-                    } else {
-                        break;
-                    }
-                }
-                if (betterParentMagicIndex > 0) {
-                    sortMagics.set(i, sortMagics.get(betterParentMagicIndex));
-                    sortMagics.set(betterParentMagicIndex, cur);
-                }
-            }
-        }
         detectConext.setSortMagics(sortMagics);
         return sortMagics;
 

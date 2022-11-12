@@ -76,7 +76,7 @@ public class MagicConfigLoader {
     }
 
     private static void processAdjustMagic(AdjustMagic adjustMagic, Magic magic, Map<String, Magic> magicMap) {
-        magic.setExtensionMustMatch(adjustMagic.isExtensionMustMatch());
+
         magic.setEnabled(adjustMagic.isEnabled());
         String refMagic = adjustMagic.getRefMagic();
         if (!StringUtils.isEmpty(refMagic)) {
