@@ -125,32 +125,30 @@ public class DetectResultOptimizer {
                     }
                 }
             }
-            FileType firstFileType = possibleFileTypes.get(0);
-            SortMagic firstSortMagic = sortMagics.get(0);
 
             if (possibleFileTypes.size() > 1) {
-
-                for (int i = sortMagics.size() - 1; i >= 0; i--) {
-                    SortMagic sortMagic = sortMagics.get(i);
+                FileType refFileType = null;
+                for (SortMagic sortMagic : sortMagics) {
                     Magic magic = sortMagic.getMagic();
-                    if (magic.getRefMagic() == null && sortMagic.isMatchExtension()) {
-                        FileType matchFileType = sortMagic.getMatchFileType();
-                        if (!firstFileType.equals(matchFileType)) {
-                            if (firstSortMagic.getMagic().isExtensionMustMatch() && !firstSortMagic
-                                    .isMatchExtension()) {
-                                possibleFileTypes.remove(matchFileType);
-                                possibleFileTypes.add(0, matchFileType);
-                            } else {
-                                possibleFileTypes.remove(matchFileType);
-                                possibleFileTypes.add(1, matchFileType);
+                    Magic refMagic = magic.getRefMagic();
+                    if (refMagic != null) {
+                        for (SortMagic tmpSortMagic : sortMagics) {
+
+                            if (refMagic == tmpSortMagic.getMagic()) {
+                                refFileType = magic.getFirstFileType();
+                                break;
+
                             }
 
                         }
 
                     }
-
+                    if (refFileType != null) {
+                        possibleFileTypes.remove(refFileType);
+                        possibleFileTypes.add(0, refFileType);
+                        break;
+                    }
                 }
-
             }
 
         }

@@ -79,6 +79,11 @@ public class FileTypeConfigLoader {
                     throw new DetectException("invalid  adjust file type :" + adjustFileType.getId());
                 }
                 fileTypes.add(fileTypeNew);
+                FileType fileTypeOld = fileTypeMap.get(fileTypeNew.getId());
+                if (fileTypeOld != null) {
+                    throw new DetectException("invalid   file type :" + fileTypeNew.getId());
+                }
+                fileTypeMap.put(fileTypeNew.getId(), fileTypeNew);
 
             } else {
                 FileType fileTypeOld = fileTypeMap.get(adjustFileType.getId());

@@ -63,20 +63,20 @@ public class MSOfficeDetector implements ContentDetector {
     private void init() {
         this.magic = magicManager.getMagic("504B030414000600");
 
-        ppsxFileType = fileTypeManager.getFileTypeById("ppsx");
+        ppsxFileType = fileTypeManager.getFileTypeById("k_ppsx");
         Preconditions.checkNotNull(ppsxFileType);
-        dotxFileType = fileTypeManager.getFileTypeById("dotx");
+        dotxFileType = fileTypeManager.getFileTypeById("k_dotx");
         Preconditions.checkNotNull(dotxFileType);
-        xltxFileType = fileTypeManager.getFileTypeById("xltx");
+        xltxFileType = fileTypeManager.getFileTypeById("k_xltx");
         Preconditions.checkNotNull(xltxFileType);
-        potxFileType = fileTypeManager.getFileTypeById("potx");
+        potxFileType = fileTypeManager.getFileTypeById("k_potx");
         Preconditions.checkNotNull(potxFileType);
 
-        docxFileType = fileTypeManager.getFileTypeById("docx");
+        docxFileType = fileTypeManager.getFileTypeById("k_docx");
         Preconditions.checkNotNull(docxFileType);
-        xlsxFileType = fileTypeManager.getFileTypeById("xlsx");
+        xlsxFileType = fileTypeManager.getFileTypeById("k_xlsx");
         Preconditions.checkNotNull(xlsxFileType);
-        pptxFileType = fileTypeManager.getFileTypeById("pptx");
+        pptxFileType = fileTypeManager.getFileTypeById("k_pptx");
         Preconditions.checkNotNull(pptxFileType);
 
         DIR_NAME_TO_FILE_TYPES_MAPS.put("word", docxFileType);

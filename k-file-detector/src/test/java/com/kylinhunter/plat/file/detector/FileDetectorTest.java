@@ -274,8 +274,9 @@ class FileDetectorTest {
     @Order(99)
     void testTmp() {
 
-        File file = ResourceHelper.getFileInClassPath("files/detected/audio_video/m4v&mp4|m4v&.m4v");
-
+        File file = ResourceHelper.getFileInClassPath("files/detected/office/97-2004/xls.xls");
+        file = new File("/Users/bijian/workspace_gitee/k-file-detector/k-file-detector/"
+                + "tmp/disguise/remove_extension/ppt@ppt#_noextension");
         FileDetectorHelper.assertFile(file, FileDetector.detect(file), Collections.EMPTY_LIST);
 
     }

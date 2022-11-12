@@ -1,35 +1,55 @@
 adjustFileTypes:
-  - id: ppsx
+  - id: k_doc
+    create: true
+    extensions:
+      - doc
+      - dot
+    desc: 'Microsoft Office  word  File (97-2004)'
+  - id: doc_ECA5
+    sameRef: k_doc
+  - id: k_xls
+    create: true
+    extensions:
+      - xls
+      - xla
+    desc: 'Microsoft Office  Excel  File (97-2004)'
+  - id: k_ppt
+    create: true
+    extensions:
+      - ppt
+      - pps
+    desc: 'Microsoft Office  PowerPoint  File (97-2004)'
+  - id: k_ppsx
     create: true
     extensions:
       - ppsx
     desc: 'Microsoft Office  PowerPoint  File (show mode)'
-  - id: docx
+  - id: k_docx
     create: true
     extensions:
       - docx
     desc: 'Microsoft Office  Word  File'
-  - id: dotx
+  - id: k_dotx
     create: true
     extensions:
       - dotx
     desc: 'Microsoft Office  Word Template File'
-  - id: xlsx
+  - id: k_xlsx
     create: true
     extensions:
       - xlsx
     desc: 'Microsoft Office  Excel  File'
-  - id: xltx
+  - id: k_xltx
     create: true
     extensions:
       - xltx
     desc: 'Microsoft Office  Excel Template File'
-  - id: pptx
+  - id: k_pptx
     create: true
     extensions:
       - pptx
     desc: 'Microsoft Office  PowerPoint  File '
-  - id: potx
+  - id: k_potx
     create: true
     extensions:
       - potx

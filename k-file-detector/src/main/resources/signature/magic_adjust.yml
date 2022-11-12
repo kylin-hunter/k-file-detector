@@ -2,12 +2,22 @@ adjustMagics:
   - number: 504B030414000600
     detectContentSupport: true
     includeFileTypes:
-      - id: ppsx
-      - id: dotx
-      - id: xltx
-      - id: potx
+      - id: k_ppsx
+      - id: k_dotx
+      - id: k_xltx
+      - id: k_potx
   - number: 0000000000000000
-    refMagic: 504B030414000600
+    refMagic: D0CF11E0A1B11AE1
+  - number: ECA5C100
+    refMagic: D0CF11E0A1B11AE1
+  - number: 0908100000060500
+    refMagic: D0CF11E0A1B11AE1
+  - number: FDFFFFFFnnnn0000
+    refMagic: D0CF11E0A1B11AE1
+    excludeFileTypes:
+      - id: ppt
+    topFileTypes:
+      - id: k_ppt
   - number: 4D5A90000300000004000000FFFF
     enabled: false
   - number: 4D5A900003000000
@@ -19,7 +29,13 @@ adjustMagics:
     enabled: false
     extensionMustMatch: true
   - number: D0CF11E0A1B11AE1
+    topFileTypes:
+      - id: k_doc
+      - id: k_xls
+      - id: k_ppt
+      - id: doc,dot,pps,ppt,xla,xls,wiz
     desc: ' More likely，the file is  Microsoft Office file (97-2004) or some other  types '
+
   - number: 667479704D345620
     includeFileTypes:
       - id: mp4
