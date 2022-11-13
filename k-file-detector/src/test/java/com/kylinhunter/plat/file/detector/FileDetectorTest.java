@@ -40,10 +40,10 @@ class FileDetectorTest {
                 detectResult = FileDetector.detect(file);
             } else if (index == 1) {
                 byte[] bytes = FileUtils.readFileToByteArray(file);
-                detectResult = FileDetector.detect(bytes, file.getName());
+                detectResult = FileDetector.detect(bytes);
             } else {
                 FileInputStream inputStream = FileUtils.openInputStream(file);
-                detectResult = FileDetector.detect(inputStream, file.getName());
+                detectResult = FileDetector.detect(inputStream);
             }
 
             detectStatstic.calAssertResult(FileDetectorHelper.assertFile(file, detectResult,

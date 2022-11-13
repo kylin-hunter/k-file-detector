@@ -23,6 +23,20 @@ public class FileDetector {
     private static final MagicReader MAGIC_READER = CF.get(MagicReader.class);
 
     /**
+     * @param content content
+     * @return com.kylinhunter.file.detector.bean.DetectResult
+     * @title safe
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-07 10:23
+     */
+    public static DetectResult detect(byte[] content) {
+        ReadMagic readMagic = MAGIC_READER.read(content, "", false);
+        return detect(readMagic);
+
+    }
+
+    /**
      * @param content  content
      * @param fileName fileName
      * @return com.kylinhunter.file.detector.bean.DetectResult
@@ -48,6 +62,19 @@ public class FileDetector {
     public static DetectResult detect(File file) {
         ReadMagic readMagic = MAGIC_READER.read(file, false);
         return detect(readMagic);
+    }
+
+    /**
+     * @param input input
+     * @return com.kylinhunter.file.detector.bean.DetectResult
+     * @title detect
+     * @description
+     * @author BiJi'an
+     * @date 2022-10-22 02:35
+     */
+    public static DetectResult detect(InputStream input) {
+        return detect(input, "", -1L);
+
     }
 
     /**
