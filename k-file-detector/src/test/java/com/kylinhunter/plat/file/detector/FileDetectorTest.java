@@ -219,7 +219,7 @@ class FileDetectorTest {
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
-        DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles, -1);
+        DetectStatstic detectStatstic = FileDetectorHelper.detect(disguiseFiles);
         Assertions.assertEquals(1, detectStatstic.getFirstFileTypeMatchRatio());
 
     }
