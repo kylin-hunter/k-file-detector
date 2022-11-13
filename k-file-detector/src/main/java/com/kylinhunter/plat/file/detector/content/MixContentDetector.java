@@ -37,7 +37,7 @@ public class MixContentDetector {
     private Map<String, ContentDetector> magicContentDetectors = Maps.newHashMap();
     private List<ContentDetector> defaultContentDetectors = Lists.newArrayList();
     private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 10,
-            120L, TimeUnit.SECONDS, new LinkedBlockingDeque<>(10));
+            10L, TimeUnit.SECONDS, new LinkedBlockingDeque<>(1000));
 
     public MixContentDetector(List<ContentDetector> detectors) {
         threadPoolExecutor.allowCoreThreadTimeOut(true);

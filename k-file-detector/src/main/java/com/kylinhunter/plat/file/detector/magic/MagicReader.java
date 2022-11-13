@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.FilenameUtil;
@@ -68,39 +67,6 @@ public class MagicReader {
                 readMagic.setContent(content);
             }
             return readMagic;
-        }
-        return null;
-    }
-
-    /**
-     * @param file file
-     * @return java.lang.String
-     * @title read magic
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-02 16:47
-     */
-
-    public ReadMagic read(MultipartFile file) {
-        return read(file, false);
-
-    }
-
-    /**
-     * @param file     file
-     * @param accurate accurate
-     * @return java.lang.String
-     * @title read
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-04 17:09
-     */
-    public ReadMagic read(MultipartFile file, boolean accurate) {
-
-        try (InputStream is = file.getInputStream()) {
-            return read(is, file.getOriginalFilename(), file.getSize(), accurate);
-        } catch (Exception e) {
-            log.error("read magic number error", e);
         }
         return null;
     }

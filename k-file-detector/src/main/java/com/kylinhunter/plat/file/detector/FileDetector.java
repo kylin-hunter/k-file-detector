@@ -3,13 +3,11 @@ package com.kylinhunter.plat.file.detector;
 import java.io.File;
 import java.io.InputStream;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.kylinhunter.plat.file.detector.common.component.CF;
 import com.kylinhunter.plat.file.detector.detect.DetectManager;
+import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 import com.kylinhunter.plat.file.detector.magic.MagicReader;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
-import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,20 +35,6 @@ public class FileDetector {
         ReadMagic readMagic = MAGIC_READER.read(content, fileName, false);
         return detect(readMagic);
 
-    }
-
-    /**
-     * @param file file
-     * @return com.kylinhunter.file.detector.bean.DetectResult
-     * @title safe
-     * @description
-     * @author BiJi'an
-     * @date 2022-10-07 10:23
-     */
-
-    public static DetectResult detect(MultipartFile file) {
-        ReadMagic readMagic = MAGIC_READER.read(file, false);
-        return detect(readMagic);
     }
 
     /**

@@ -27,7 +27,7 @@ plugins {
 }
 
 allprojects {
-    group 'com.kylinhunter.nlp'
+    group 'com.kylinhunter.plat'
 //    version '1.0.0-SNAPSHOT'
     version '1.0.1'
     sourceCompatibility = JavaVersion.VERSION_1_8

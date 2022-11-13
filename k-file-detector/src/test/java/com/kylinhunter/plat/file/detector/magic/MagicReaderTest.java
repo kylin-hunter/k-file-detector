@@ -8,10 +8,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
@@ -36,29 +34,10 @@ class MagicReaderTest {
         System.out.println(read1);
         Assertions.assertEquals("25504446", read1);
 
-        MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
-
-        ReadMagic readMagic2 = magicReader.read(multipartFile);
-        String read2 = readMagic2.getPossibleMagicNumber();
-        System.out.println(read2);
-        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read2.length());
-        Assertions.assertEquals("25504446", read2.substring(0, 8));
-
-        readMagic2 = magicReader.read(multipartFile, true);
-        read2 = readMagic2.getPossibleMagicNumber();
-        System.out.println(read2);
-        Assertions.assertEquals("25504446", read2);
-
         byte[] bytes = FileUtils.readFileToByteArray(file);
 
-        ReadMagic readMagic3 = magicReader.read(multipartFile);
+        ReadMagic readMagic3 = magicReader.read(bytes, "1.pdf", true);
         String read3 = readMagic3.getPossibleMagicNumber();
-        System.out.println(read3);
-        Assertions.assertEquals("25504446", read3.substring(0, 8));
-        Assertions.assertEquals(magicManager.getMagicMaxLengthWitOffset() * 2, read3.length());
-
-        readMagic3 = magicReader.read(bytes, "1.pdf", true);
-        read3 = readMagic3.getPossibleMagicNumber();
         System.out.println(read3);
         Assertions.assertEquals("25504446", read3);
 

@@ -5,17 +5,13 @@ dependencies {
     api(rootProject.dep['commons-collections4'])
     api('org.yaml:snakeyaml')
     api(rootProject.dep['reflections'])
+    api 'org.dom4j:dom4j:2.1.3'
+    api 'jaxen:jaxen:1.2.0'
+    api 'org.apache.commons:commons-compress:1.22'
 
-    implementation 'org.apache.poi:poi-ooxml-full:5.2.3'
-    implementation 'org.apache.poi:poi:5.2.3'
-    implementation 'org.apache.poi:poi-examples:5.2.3'
-
-    implementation(rootProject.dep['commons-fileupload'])
-    implementation('org.springframework:spring-web')
     implementation(rootProject.dep['jsoup'])
-    implementation 'org.apache.commons:commons-compress:1.22'
-    implementation 'org.dom4j:dom4j:2.1.3'
-    implementation 'jaxen:jaxen:1.2.0'
+
+
 
 }
 

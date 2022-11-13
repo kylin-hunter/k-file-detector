@@ -13,10 +13,8 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kylinhunter.plat.file.detector.common.component.CF;
-import com.kylinhunter.plat.file.detector.common.util.MultipartFileHelper;
 import com.kylinhunter.plat.file.detector.common.util.ResourceHelper;
 import com.kylinhunter.plat.file.detector.common.util.UserDirUtil;
 import com.kylinhunter.plat.file.detector.detect.bean.DetectResult;
@@ -36,14 +34,11 @@ class FileDetectorTest {
         DetectStatstic detectStatstic = new DetectStatstic(files.length);
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            int index = i % 4;
+            int index = i % 3;
             DetectResult detectResult;
             if (index == 0) {
                 detectResult = FileDetector.detect(file);
             } else if (index == 1) {
-                MultipartFile multipartFile = MultipartFileHelper.getMultipartFile(file);
-                detectResult = FileDetector.detect(multipartFile);
-            } else if (index == 2) {
                 byte[] bytes = FileUtils.readFileToByteArray(file);
                 detectResult = FileDetector.detect(bytes, file.getName());
             } else {
@@ -275,10 +270,8 @@ class FileDetectorTest {
     @Order(99)
     void testTmp() {
 
-        File file = ResourceHelper.getFileInClassPath("files/detected/office/97-2004/xls.xls");
-        file = new File("/Users/bijian/workspace_gitee/k-file-detector/k-file-detector/"
-                + "tmp/disguise/disguise_extension/zip&zip|APK|JAR|KMZ|KWD|ODT|ODP|OT|OXPS|SXC|SXD|SXI|SXW|SXC|WMZ"
-                + "|XPI|XPS|XPT&.zip#.jar");
+        File file = ResourceHelper.getFileInClassPath("files/detected/other/html4.html");
+
         FileDetectorHelper.assertFile(file, FileDetector.detect(file), Collections.EMPTY_LIST);
 
     }
