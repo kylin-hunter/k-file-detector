@@ -54,6 +54,17 @@ adjustFileTypes:
     extensions:
       - potx
     desc: 'Microsoft Office  PowerPoint Template File '
+  - id: k_xml
+    create: true
+    extensions:
+      - xml
+    desc: 'Extensible Markup Language'
+  - id: k_html
+    create: true
+    extensions:
+      - html
+      - xhtml
+    desc: 'Hypertext Markup Language'
   - id: none_4649
     sameRef: none_4241
   - id: none_A1B2CD

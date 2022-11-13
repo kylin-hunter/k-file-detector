@@ -20,13 +20,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.kylinhunter.plat.file.detector.common.component.C;
 import com.kylinhunter.plat.file.detector.common.util.ZipUtil;
-import com.kylinhunter.plat.file.detector.content.bean.DetectConext;
+import com.kylinhunter.plat.file.detector.content.constant.ContentDetectType;
 import com.kylinhunter.plat.file.detector.exception.DetectException;
 import com.kylinhunter.plat.file.detector.file.FileTypeManager;
 import com.kylinhunter.plat.file.detector.file.bean.FileType;
 import com.kylinhunter.plat.file.detector.magic.MagicManager;
-import com.kylinhunter.plat.file.detector.magic.bean.Magic;
-import com.kylinhunter.plat.file.detector.magic.bean.ReadMagic;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -39,10 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @C
 @Getter
-public class MSOfficeDetector implements ContentDetector {
+public class MSOfficeDetector extends AbstractContentDetector implements ContentDetector {
     private final FileTypeManager fileTypeManager;
     private final MagicManager magicManager;
-    private Magic magic;
+    private final ContentDetectType contentDetectType = ContentDetectType.MS_OFFICE_2007;
     private FileType ppsxFileType;
     private FileType dotxFileType;
     private FileType xltxFileType;
@@ -61,7 +59,6 @@ public class MSOfficeDetector implements ContentDetector {
     }
 
     private void init() {
-        this.magic = magicManager.getMagic("504B030414000600");
 
         ppsxFileType = fileTypeManager.getFileTypeById("k_ppsx");
         Preconditions.checkNotNull(ppsxFileType);
@@ -85,41 +82,26 @@ public class MSOfficeDetector implements ContentDetector {
 
     }
 
-    @Override
-    public DetectConext detect(DetectConext detectConext) {
-        ReadMagic readMagic = detectConext.getReadMagic();
-        detectConext.addContentFileType(detect(readMagic.getContent()));
-        return detectConext;
-    }
 
-    public FileType detect(byte[] bytes) {
+    @Override
+    public FileType[] detectContent(byte[] bytes) {
         try {
-            if (bytes != null && bytes.length > 0) {
-                File tempDirectory = FileUtils.getTempDirectory();
-                File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
-                ZipUtil.unzip(bytes, extractPath);
-                return detectUnzipContent(extractPath);
-            } else {
-                return null;
+            File tempDirectory = FileUtils.getTempDirectory();
+            File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
+            ZipUtil.unzip(bytes, extractPath);
+            FileType fileType = detectUnzipContent(extractPath);
+            if (fileType != null) {
+                return new FileType[] {fileType};
             }
 
         } catch (IOException e) {
             throw new DetectException("check error", e);
 
         }
+        return EMTPY;
     }
 
-    public FileType detect(File file) {
-        try {
-            File tempDirectory = FileUtils.getTempDirectory();
-            File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
-            ZipUtil.unzip(file, extractPath);
-            return detectUnzipContent(extractPath);
-        } catch (IOException e) {
-            throw new DetectException("check error", e);
 
-        }
-    }
 
     public FileType detectUnzipContent(File extractPath) {
 
@@ -153,6 +135,7 @@ public class MSOfficeDetector implements ContentDetector {
 
     private FileType checkXml(File extractPath, FileType defaultFileType) throws DocumentException {
         File contentXml = new File(extractPath, "[Content_Types].xml");
+
         SAXReader reader = new SAXReader();
         Document document = reader.read(contentXml);
         Map<String, String> xmlMap = new HashMap<>();

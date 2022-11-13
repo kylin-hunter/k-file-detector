@@ -25,13 +25,15 @@ class MSOfficeDetectorTest {
 
         for (File file : files) {
             System.out.println("file=>" + file.getAbsolutePath());
-            FileType fileType = msOfficeDetector.detect(file);
-            System.out.println("fileType=>" + fileType);
-            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())), fileType.getExtensions());
+            FileType[] fileTypes = msOfficeDetector.detect(file);
+            System.out.println("fileType=>" + fileTypes);
+            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())),
+                    fileTypes[0].getExtensions());
 
-            fileType = msOfficeDetector.detect(FileUtils.readFileToByteArray(file));
-            System.out.println("fileType=>" + fileType);
-            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())), fileType.getExtensions());
+            fileTypes = msOfficeDetector.detect(FileUtils.readFileToByteArray(file));
+            System.out.println("fileType=>" + fileTypes);
+            Assertions.assertEquals(Collections.singletonList(FilenameUtil.getExtension(file.getName())),
+                    fileTypes[0].getExtensions());
 
         }
 

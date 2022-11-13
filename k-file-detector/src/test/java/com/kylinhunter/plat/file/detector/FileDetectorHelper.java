@@ -190,8 +190,12 @@ class FileDetectorHelper {
 
     }
 
-    @SuppressWarnings({"ResultOfMethodCallIgnored"})
     public static List<File> disguiseRemoveExtension(File[] files, File disguiseDir) throws IOException {
+        return disguiseRemoveExtension(files, disguiseDir, false);
+    }
+
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
+    public static List<File> disguiseRemoveExtension(File[] files, File disguiseDir, boolean force) throws IOException {
 
         List<File> disguisFiles = Lists.newArrayList();
         for (File file : files) {
@@ -204,7 +208,7 @@ class FileDetectorHelper {
                     if (disguisFile.exists() && disguisFile.lastModified() < file.lastModified()) {
                         disguiseDir.delete();
                     }
-                    if (!disguisFile.exists()) {
+                    if (force || !disguisFile.exists()) {
                         FileUtils.copyFile(file, disguisFile);
                     }
                     disguisFiles.add(disguisFile);

@@ -1,9 +1,18 @@
 package com.kylinhunter.plat.file.detector.content.content;
 
-import com.kylinhunter.plat.file.detector.common.component.C;
-import com.kylinhunter.plat.file.detector.content.bean.DetectConext;
-import com.kylinhunter.plat.file.detector.magic.bean.Magic;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
+import com.kylinhunter.plat.file.detector.common.component.C;
+import com.kylinhunter.plat.file.detector.content.constant.ContentDetectType;
+import com.kylinhunter.plat.file.detector.file.FileTypeManager;
+import com.kylinhunter.plat.file.detector.file.bean.FileType;
+
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -13,15 +22,61 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @C
-public class XmlDetector implements ContentDetector {
+public class XmlDetector extends AbstractContentDetector implements ContentDetector {
+    @Getter
+    private final ContentDetectType contentDetectType = ContentDetectType.XML;
 
-    @Override
-    public Magic getMagic() {
-        return null;
+    private final FileType xmlFileType;
+    private final FileType htmlFileType;
+
+    public XmlDetector(FileTypeManager fileTypeManager) {
+        this.xmlFileType = fileTypeManager.getFileTypeById("k_xml");
+        this.htmlFileType = fileTypeManager.getFileTypeById("k_html");
     }
 
     @Override
-    public DetectConext detect(DetectConext detectConext) {
+    public FileType[] detectContent(byte[] bytes) {
+        String text = new String(bytes, StandardCharsets.UTF_8);
+
+        Element xmlRootElement = checkXml(text);
+        if (xmlRootElement != null) {
+            if (xmlRootElement.getName().equalsIgnoreCase("html")) {
+                return new FileType[] {htmlFileType};
+            } else {
+                return new FileType[] {xmlFileType};
+            }
+        } else {
+
+            String headText = StringUtils.substring(text, 0, 250).toString().trim();
+            String tailText = StringUtils.substring(text, -20).toString().trim();
+            if (headText.contains("<html") && tailText.endsWith("html>")) {
+                return new FileType[] {htmlFileType};
+            }
+
+        }
+
+        return EMTPY;
+    }
+
+    /**
+     * @param text text
+     * @return boolean
+     * @title checkXml
+     * @description
+     * @author BiJi'an
+     * @date 2022-11-13 15:41
+     */
+    Element checkXml(String text) {
+        try {
+            Document document = DocumentHelper.parseText(text);
+            if (document != null) {
+                return document.getRootElement();
+            }
+
+        } catch (Exception e) {
+            log.error("not xml");
+        }
         return null;
     }
+
 }

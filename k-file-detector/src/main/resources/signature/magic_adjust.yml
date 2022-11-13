@@ -24,6 +24,14 @@ adjustMagics:
     enabled: false
   - number: 504B0304140008000800
     enabled: false
+  - number: 3C
+    enabled: false
+  - number: 3C3F786D6C2076657273696F6E3D
+    detectContentSupport: true
+  - number: 3C3F786D6C2076657273696F6E3D22312E30223F3E
+    detectContentSupport: true
+  - number: 3C3F786D6C2076657273696F6E3D22312E30223F3E0D0A3C4D4D435F436F6E736F6C6546696C6520436F6E736F6C6556657273696F6E3D22
+    detectContentSupport: true
   - number: D0CF11E0A1B11AE1
     topFileTypes:
       - id: k_doc
@@ -40,5 +48,3 @@ adjustMagics:
     includeFileTypes:
       - id: mp4
       - id: mp4_6674
-  - number: 4D5A
-  - number: FFD8FFE0xxxx4A46494600
