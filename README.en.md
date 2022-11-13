@@ -10,11 +10,16 @@ a tool for detect file type
 2. reference xml/ooxml
 
 #### Installation
-#####1、gradle (gradle.org)
+#####1、build and publish to local
+
 ```java
-implementation 'com.kylinhunter.plat:k-file-detector:1.0.1'
+        gradle clean build publishToMavenLocal -x test
 ```
-#####2、maven (maven.apache.org)
+#####2、gradle (gradle.org)
+```java
+        implementation 'com.kylinhunter.plat:k-file-detector:1.0.1'
+```
+#####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>com.kylinhunter.plat</groupId>

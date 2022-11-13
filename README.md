@@ -12,12 +12,16 @@
 
 
 #### 安装教程
+#####1、编译并发布到本地
 
-#####1、gradle (gradle.org)
 ```java
-implementation 'com.kylinhunter.plat:k-file-detector:1.0.1'
+        gradle clean build publishToMavenLocal -x test
 ```
-#####2、maven (maven.apache.org)
+#####2、gradle (gradle.org)
+```java
+        implementation 'com.kylinhunter.plat:k-file-detector:1.0.1'
+```
+#####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>com.kylinhunter.plat</groupId>
