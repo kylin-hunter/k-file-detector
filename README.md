@@ -15,14 +15,14 @@
 
 #####1、gradle (gradle.org)
 ```java
-implementation 'com.kylinhunter.plat:k-file-detector:x.x.x'
+implementation 'com.kylinhunter.plat:k-file-detector:1.0.1'
 ```
 #####2、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>com.kylinhunter.plat</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>x.x.x</version>
+          <version>1.0.1</version>
         </dependency>
 ```
 
