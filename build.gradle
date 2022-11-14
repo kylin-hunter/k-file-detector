@@ -29,7 +29,7 @@ plugins {
 allprojects {
     group 'io.github.kylin-hunter'
 //    version '1.0.0-SNAPSHOT'
-    version '1.0.2'
+    version '1.0.3'
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
     repositories {
