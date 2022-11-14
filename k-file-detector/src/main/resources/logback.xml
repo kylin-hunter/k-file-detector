@@ -34,5 +34,5 @@
         <appender-ref ref="file"/>
     </root>
 
-    <logger name="com.kylinhunter.plat.file.detector" level="info"/>
+    <logger name="io.github.kylinhunter.plat.file.detector" level="info"/>
 </configuration>

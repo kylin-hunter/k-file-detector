@@ -27,7 +27,7 @@ plugins {
 }
 
 allprojects {
-    group 'com.kylinhunter.plat'
+    group 'io.github.kylin-hunter'
 //    version '1.0.0-SNAPSHOT'
     version '1.0.1'
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -42,6 +42,10 @@ allprojects {
         }
         mavenCentral()
     }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
 }
 
 subprojects {
@@ -49,6 +53,8 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'signing'
+
     apply from: "$rootProject.rootDir/script/gradle-script/ext-func-subprojects.gradle"
 
 
@@ -109,7 +115,7 @@ subprojects {
 
     java{
         withSourcesJar()
-//        withJavadocJar()
+        withJavadocJar()
 
     }
 
@@ -117,19 +123,67 @@ subprojects {
     // 解决javadoc打包乱码
     javadoc {
         options {
-            encoding "UTF-8"
-            charSet 'UTF-8'
-            author true
-            version true
+            encoding = "UTF-8"
+            charSet = 'UTF-8'
+            author = true
+            version = true
+            locale = "en_US"
         }
+        failOnError = false
+
     }
 
     publishing {
         publications {
             mavenJava(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
                 from components.java
+                pom {
+
+                    name = 'k-file-detector'
+                    description = 'a tool for detect file type'
+                    url = 'https://github.com/kylin-hunter/k-file-detector'
+                    licenses {
+                        license {
+                            name = 'The Apache Software License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    // 开发者信息
+                    developers {
+                        developer {
+                            name = 'kylin-hunter'
+                            email = 'kylinhunter@163.com'
+                        }
+                    }
+                    scm {
+                        url = 'https://github.com/kylin-hunter/k-file-detector'
+                        connection = 'scm:git:https://github.com/kylin-hunter/k-file-detector.git'
+                        developerConnection = 'scm:git:https://github.com/kylin-hunter/k-file-detector.git'
+                    }
+                }
             }
         }
+
+        // 定义发布到哪里
+        repositories {
+            maven {
+
+//                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username = "${sonatypeUsername}"
+                    password = "${sonatypePassword}"
+                }
+            }
+        }
+
+    }
+
+    signing {
+        sign publishing.publications.mavenJava
     }
 
 
