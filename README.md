@@ -17,14 +17,14 @@ a tool for detect file type
 ```
 #####2、gradle (gradle.org)
 ```java
-        implementation 'io.github.kylin-hunter:k-file-detector:1.0.1'
+        implementation 'io.github.kylin-hunter:k-file-detector:1.0.3'
 ```
 #####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>io.github.kylin-hunter</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>1.0.1</version>
+          <version>1.0.3</version>
         </dependency>
 ```
 
