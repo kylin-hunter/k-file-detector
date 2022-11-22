@@ -9,6 +9,7 @@ dependencies {
     api(rootProject.dependency_management['commons-compress'])
     implementation(rootProject.dependency_management['jsoup'])
     api('org.yaml:snakeyaml')
+    api 'io.github.kylin-hunter:k-commons:1.0.2'
 
 }
 

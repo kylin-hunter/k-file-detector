@@ -31,6 +31,9 @@ allprojects {
         maven {
             url "https://maven.aliyun.com/repository/public"
         }
+//        maven {
+//            url "https://s01.oss.sonatype.org/content/repositories/snapshots"
+//        }
         mavenCentral()
     }
 
@@ -105,8 +108,6 @@ subprojects {
     }
 
 
-
-
     publishing {
 
 
@@ -134,9 +135,9 @@ subprojects {
                         }
                     }
                     scm {
-                        url =  "${KYLIN_MVN_CONFIG.url}"
-                        connection =  "${KYLIN_MVN_CONFIG.connection}"
-                        developerConnection =  "${KYLIN_MVN_CONFIG.developerConnection}"
+                        url = "${KYLIN_MVN_CONFIG.url}"
+                        connection = "${KYLIN_MVN_CONFIG.connection}"
+                        developerConnection = "${KYLIN_MVN_CONFIG.developerConnection}"
                     }
                 }
             }
@@ -146,8 +147,8 @@ subprojects {
 
             maven {
                 url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                if (KYLIN_VERION.endsWith("SNAPSHOT")){
-                    url  "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                if (KYLIN_VERION.endsWith("SNAPSHOT")) {
+                    url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 }
 
                 credentials {
