@@ -48,11 +48,9 @@ subprojects {
     apply from: "$rootProject.rootDir/script/gradle-script/k-gradle-subprojects.gradle"
 
     group 'io.github.kylin-hunter'
-    version '1.0.1'
+    version "${KYLIN_VERION}"
     kylinLoadSecretProperties()
-    jar {
-        manifest.attributes provider: 'gradle'
-    }
+
 
     dependencies {
 
@@ -72,16 +70,10 @@ subprojects {
 
     }
 
-    test {
-//        exclude 'com/kylinhunter/**/Suite**'
-        useJUnitPlatform()
-        testLogging {
-            outputs.upToDateWhen { true }
-            showStandardStreams = true
-        }
+    jar {
+        archiveClassifier = ''
+        manifest.attributes provider: 'gradle'
     }
-
-    classes.finalizedBy(kylinTaskChangeActiveProfile)
 
     java {
         withSourcesJar()
@@ -100,6 +92,20 @@ subprojects {
         failOnError = false
 
     }
+    classes.finalizedBy(kylinTaskChangeActiveProfile)
+
+
+    test {
+//        exclude 'com/kylinhunter/**/Suite**'
+        useJUnitPlatform()
+        testLogging {
+            outputs.upToDateWhen { true }
+            showStandardStreams = true
+        }
+    }
+
+
+
 
     publishing {
 
@@ -139,8 +145,11 @@ subprojects {
 
 
             maven {
-//                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
                 url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                if (KYLIN_VERION.endsWith("SNAPSHOT")){
+                    url  "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                }
+
                 credentials {
 
                     println "maven=>${sonatypeUsername} : ${sonatypePassword}"
