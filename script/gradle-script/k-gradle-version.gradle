@@ -1,7 +1,7 @@
 ext {
-    springBootVersion = '2.3.12.RELEASE'
-    springCloudVersion = 'Hoxton.SR12'
-    springCloudAlibabaVersion = '2.2.7.RELEASE'
+    springBootVersion = '2.6.13'
+    springCloudVersion = '2021.0.5'
+    springCloudAlibabaVersion = '2021.0.4.0'
 
 
 //    dubboVersion = '2.7.11'
@@ -10,9 +10,11 @@ ext {
             "gradle-docker-plugin"     : "com.bmuschko:gradle-docker-plugin:6.6.1",
             "spring-boot-gradle-plugin": "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
     ]
-
-    dep = [
-
+    dependency_management = [
+            "jaxen"                           : "jaxen:jaxen:1.2.0",
+            "dom4j"                           : "org.dom4j:dom4j:2.1.3",
+            "commons-codec"                   : "commons-codec:commons-codec:1.15",
+            "commons-compress"                : "org.apache.commons:commons-compress:1.22",
             "commons-collections4"            : "org.apache.commons:commons-collections4:4.4",
             "commons-fileupload"              : "commons-fileupload:commons-fileupload:1.4",
             "commons-io"                      : "commons-io:commons-io:2.10.0",
@@ -21,8 +23,8 @@ ext {
             'dubbo-spring-boot-starter'       : "org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion",
             'dubbo-dependencies-zookeeper'    : "org.apache.dubbo:dubbo-dependencies-zookeeper:$dubboVersion",
             "apollo-client"                   : 'com.ctrip.framework.apollo:apollo-client:1.7.0',
-            "springfox-swagger2"              : 'io.springfox:springfox-swagger2:2.9.2',
-            "springfox-swagger-ui"            : 'io.springfox:springfox-swagger-ui:2.9.2',
+            "springfox-swagger2"              : 'io.springfox:springfox-swagger2:3.0.0',
+            "springfox-swagger-ui"            : 'io.springfox:springfox-swagger-ui:3.0.0',
 
             'mybatis-spring-boot-starter'     : 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4',
             'mybatis-plus'                    : 'com.baomidou:mybatis-plus:3.4.3.1',
@@ -59,11 +61,5 @@ ext {
             'IKAnalyzer'                      : 'com.github.magese:ik-analyzer:8.5.0'
 
     ]
-
-
-    inner_dep = [
-
-    ]
-
 
 }

@@ -1,15 +1,15 @@
 buildscript {
-    apply from: "./script/gradle-script/ext-config.gradle"
-    apply from: "./script/gradle-script/ext-version.gradle"
-    apply from: "./script/gradle-script/ext-func-allprojects.gradle"
+    apply from: "./script/gradle-script/k-gradle-config.gradle"
+    apply from: "./script/gradle-script/k-gradle-version.gradle"
+
+
     repositories {
         mavenLocal()
-//        maven {
-//            url "https://maven.aliyun.com/repository/public-snapshots"
-//        }
+
         maven {
             url "https://maven.aliyun.com/repository/public"
         }
+
         mavenCentral()
     }
     dependencies {
@@ -19,17 +19,11 @@ buildscript {
 
 }
 
-
-plugins {
-    id 'java-library'
-    id 'maven-publish'
-
-}
-
 allprojects {
-    group 'io.github.kylin-hunter'
-//    version '1.0.0-SNAPSHOT'
-    version '1.0.6'
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply from: "$rootProject.rootDir/script/gradle-script/k-gradle-allprojects.gradle"
+
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
     repositories {
@@ -46,15 +40,16 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'java-library'
-    apply plugin: 'maven-publish'
+
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.bmuschko.docker-remote-api'
     apply plugin: 'signing'
+    apply from: "$rootProject.rootDir/script/gradle-script/k-gradle-subprojects.gradle"
 
-    apply from: "$rootProject.rootDir/script/gradle-script/ext-func-subprojects.gradle"
-
-
+    group 'io.github.kylin-hunter'
+    version '1.0.1'
+    kylinLoadSecretProperties()
     jar {
         manifest.attributes provider: 'gradle'
     }
@@ -66,28 +61,14 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
 
 
-
-
-
         testImplementation("org.projectlombok:lombok")
         testAnnotationProcessor 'org.projectlombok:lombok'
 
         testImplementation('org.springframework.boot:spring-boot-starter-test')
-
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-        testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-        testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-        testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
-
-        testImplementation 'org.junit.platform:junit-platform-suite-api:1.8.2'
-        testImplementation 'org.junit.platform:junit-platform-suite:1.8.2'
-        testImplementation 'org.junit.platform:junit-platform-engine:1.8.2'
-        testImplementation 'org.junit.platform:junit-platform-commons:1.8.2'
-        testImplementation 'org.junit.platform:junit-platform-launcher:1.8.2'
+        testImplementation 'org.junit.platform:junit-platform-suite'
 
 
-        testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.2'
-        testImplementation(rootProject.dep['jmockit'])
+        testImplementation(rootProject.dependency_management['jmockit'])
 
     }
 
@@ -95,29 +76,19 @@ subprojects {
 //        exclude 'com/kylinhunter/**/Suite**'
         useJUnitPlatform()
         testLogging {
-            outputs.upToDateWhen { false }
+            outputs.upToDateWhen { true }
             showStandardStreams = true
         }
-
     }
 
-    task taskChangeActiveProfile {
-        doLast {
-            changeActiveProfile(project.profile)
-        }
-    }
-    classes.finalizedBy(taskChangeActiveProfile)
-    addDockerBuildTask(project.name)
+    classes.finalizedBy(kylinTaskChangeActiveProfile)
 
-
-    java{
+    java {
         withSourcesJar()
         withJavadocJar()
 
     }
 
-
-    // 解决javadoc打包乱码
     javadoc {
         options {
             encoding = "UTF-8"
@@ -131,6 +102,8 @@ subprojects {
     }
 
     publishing {
+
+
         publications {
             mavenJava(MavenPublication) {
                 groupId project.group
@@ -139,38 +112,38 @@ subprojects {
                 from components.java
                 pom {
 
-                    name = 'k-file-detector'
-                    description = 'a tool for detect file type'
-                    url = 'https://github.com/kylin-hunter/k-file-detector'
+                    name = "${KYLIN_MVN_CONFIG.name}"
+                    description = "${KYLIN_MVN_CONFIG.description}"
+                    url = "${KYLIN_MVN_CONFIG.url}"
                     licenses {
                         license {
-                            name = 'The Apache Software License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            name = "${KYLIN_MVN_CONFIG.license.name}"
+                            url = "${KYLIN_MVN_CONFIG.license.url}"
                         }
                     }
-                    // 开发者信息
                     developers {
                         developer {
-                            name = 'kylin-hunter'
-                            email = 'kylinhunter@163.com'
+                            name = "${KYLIN_MVN_CONFIG.developer.name}"
+                            email = "${KYLIN_MVN_CONFIG.developer.email}"
                         }
                     }
                     scm {
-                        url = 'https://github.com/kylin-hunter/k-file-detector'
-                        connection = 'scm:git:https://github.com/kylin-hunter/k-file-detector.git'
-                        developerConnection = 'scm:git:https://github.com/kylin-hunter/k-file-detector.git'
+                        url =  "${KYLIN_MVN_CONFIG.url}"
+                        connection =  "${KYLIN_MVN_CONFIG.connection}"
+                        developerConnection =  "${KYLIN_MVN_CONFIG.developerConnection}"
                     }
                 }
             }
         }
-
-        // 定义发布到哪里
         repositories {
-            maven {
 
+
+            maven {
 //                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
                 url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                 credentials {
+
+                    println "maven=>${sonatypeUsername} : ${sonatypePassword}"
                     username = "${sonatypeUsername}"
                     password = "${sonatypePassword}"
                 }
@@ -179,10 +152,10 @@ subprojects {
 
     }
 
+
     signing {
         sign publishing.publications.mavenJava
     }
-
 
 
 }

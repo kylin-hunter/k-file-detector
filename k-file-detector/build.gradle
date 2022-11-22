@@ -1,17 +1,14 @@
 dependencies {
-    api(rootProject.dep['commons-io'])
-    api(rootProject.dep['commons-lang3'])
-    api(rootProject.dep['guava'])
-    api(rootProject.dep['commons-collections4'])
+    api(rootProject.dependency_management['commons-io'])
+    api(rootProject.dependency_management['commons-lang3'])
+    api(rootProject.dependency_management['guava'])
+    api(rootProject.dependency_management['commons-collections4'])
+    api(rootProject.dependency_management['reflections'])
+    api(rootProject.dependency_management['dom4j'])
+    api(rootProject.dependency_management['jaxen'])
+    api(rootProject.dependency_management['commons-compress'])
+    implementation(rootProject.dependency_management['jsoup'])
     api('org.yaml:snakeyaml')
-    api(rootProject.dep['reflections'])
-    api 'org.dom4j:dom4j:2.1.3'
-    api 'jaxen:jaxen:1.2.0'
-    api 'org.apache.commons:commons-compress:1.22'
-
-    implementation(rootProject.dep['jsoup'])
-
-
 
 }
 
