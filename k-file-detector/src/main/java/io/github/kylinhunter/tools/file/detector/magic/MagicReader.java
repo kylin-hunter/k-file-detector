@@ -12,7 +12,7 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import io.github.kylinhunter.tools.file.detector.common.component.C;
+import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.tools.file.detector.common.util.FilenameUtil;
 import io.github.kylinhunter.tools.file.detector.common.util.HexUtil;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;

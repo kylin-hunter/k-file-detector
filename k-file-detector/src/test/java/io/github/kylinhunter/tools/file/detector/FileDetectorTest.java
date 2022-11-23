@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
-import io.github.kylinhunter.tools.file.detector.common.util.ResourceHelper;
-import io.github.kylinhunter.tools.file.detector.common.util.UserDirUtil;
+import io.github.kylinhunter.commons.component.CF;
+import io.github.kylinhunter.commons.io.ResourceHelper;
+import io.github.kylinhunter.commons.io.file.UserDirUtils;
 import io.github.kylinhunter.tools.file.detector.detect.bean.DetectResult;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
 
@@ -61,7 +61,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(9, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         int expectedFileNum = (fileTypeManager.getAllExtensions().size() - 1) * files.length;
         Assertions.assertEquals(expectedFileNum, disguiseFiles.size());
@@ -79,7 +79,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(9, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -95,7 +95,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(13, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals(6021, disguiseFiles.size());
 
@@ -111,7 +111,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(13, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -127,7 +127,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(5, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.getAllExtensions().size() - 1) * files.length,
                 disguiseFiles.size());
@@ -144,7 +144,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(5, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -160,7 +160,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(7, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         int expectedFileNums = (fileTypeManager.getAllExtensions().size() - 1) * files.length;
         Assertions.assertEquals(expectedFileNums, disguiseFiles.size());
@@ -177,7 +177,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(7, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -193,7 +193,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(8, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         int expectedFileNums = (fileTypeManager.getAllExtensions().size() - 1) * files.length;
         Assertions.assertEquals(expectedFileNums, disguiseFiles.size());
@@ -210,7 +210,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(8, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -226,7 +226,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(6, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/disguise_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/disguise_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseByExtension(files, disguiseDir);
         Assertions.assertEquals((fileTypeManager.getAllExtensions().size() - 1) * files.length,
                 disguiseFiles.size());
@@ -243,7 +243,7 @@ class FileDetectorTest {
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(6, files.length);
 
-        File disguiseDir = UserDirUtil.getDir("tmp/disguise/remove_extension", true);
+        File disguiseDir = UserDirUtils.getDir("tmp/disguise/remove_extension", true);
         List<File> disguiseFiles = FileDetectorHelper.disguiseRemoveExtension(files, disguiseDir);
         Assertions.assertEquals(files.length, disguiseFiles.size());
 
@@ -266,6 +266,7 @@ class FileDetectorTest {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     @Order(99)
     void testTmp() {

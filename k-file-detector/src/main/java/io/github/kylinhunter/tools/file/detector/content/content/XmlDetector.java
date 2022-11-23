@@ -7,7 +7,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import io.github.kylinhunter.tools.file.detector.common.component.C;
+import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.tools.file.detector.content.constant.ContentDetectType;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;

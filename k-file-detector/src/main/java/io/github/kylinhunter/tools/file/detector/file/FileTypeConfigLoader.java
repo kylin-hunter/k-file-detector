@@ -10,7 +10,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import io.github.kylinhunter.tools.file.detector.common.util.ResourceHelper;
+import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.bean.AdjustFileType;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;

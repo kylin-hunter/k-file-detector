@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.compress.utils.Lists;
 
 import com.google.common.collect.Maps;
-import io.github.kylinhunter.tools.file.detector.common.component.C;
+import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.tools.file.detector.content.bean.DetectConext;
 import io.github.kylinhunter.tools.file.detector.content.constant.ContentDetectType;
 import io.github.kylinhunter.tools.file.detector.content.content.ContentDetector;

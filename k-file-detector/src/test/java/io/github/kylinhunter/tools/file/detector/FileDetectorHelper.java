@@ -17,7 +17,7 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 
 import com.google.common.collect.Maps;
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
+import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.common.util.FilenameUtil;
 import io.github.kylinhunter.tools.file.detector.detect.bean.DetectResult;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;

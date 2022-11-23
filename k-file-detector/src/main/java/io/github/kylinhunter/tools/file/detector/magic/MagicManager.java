@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import io.github.kylinhunter.tools.file.detector.common.component.C;
+import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;

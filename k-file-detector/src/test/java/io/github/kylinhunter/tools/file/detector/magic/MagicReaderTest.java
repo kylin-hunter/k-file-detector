@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
-import io.github.kylinhunter.tools.file.detector.common.util.ResourceHelper;
+import io.github.kylinhunter.commons.component.CF;
+import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.magic.bean.ReadMagic;
 
 class MagicReaderTest {
@@ -53,7 +53,7 @@ class MagicReaderTest {
     @Test
     void readOffices() throws IOException {
 
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/office/2007");
         System.out.println(dir.getAbsolutePath());
         Collection<File> files = FileUtils.listFiles(dir, null, true);
         Assertions.assertEquals(7, files.size());

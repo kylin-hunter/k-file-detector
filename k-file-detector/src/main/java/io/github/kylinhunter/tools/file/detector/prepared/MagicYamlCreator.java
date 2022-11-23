@@ -22,8 +22,8 @@ import org.jsoup.select.Elements;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import io.github.kylinhunter.tools.file.detector.common.component.C;
-import io.github.kylinhunter.tools.file.detector.common.util.ResourceHelper;
+import io.github.kylinhunter.commons.component.C;
+import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 import io.github.kylinhunter.tools.file.detector.prepared.parse.MagicYamlWriter;

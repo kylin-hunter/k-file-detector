@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Maps;
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
+import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 
 class FileTypeManagerTest {

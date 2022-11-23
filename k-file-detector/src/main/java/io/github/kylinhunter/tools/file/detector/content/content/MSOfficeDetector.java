@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
+ import org.apache.commons.io.FileUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -18,8 +18,8 @@ import org.dom4j.io.SAXReader;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import io.github.kylinhunter.tools.file.detector.common.component.C;
-import io.github.kylinhunter.tools.file.detector.common.util.ZipUtil;
+import io.github.kylinhunter.commons.component.C;
+import io.github.kylinhunter.commons.compress.ZipUtils;
 import io.github.kylinhunter.tools.file.detector.content.constant.ContentDetectType;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
@@ -88,7 +88,7 @@ public class MSOfficeDetector extends AbstractContentDetector implements Content
         try {
             File tempDirectory = FileUtils.getTempDirectory();
             File extractPath = new File(tempDirectory, UUID.randomUUID().toString());
-            ZipUtil.unzip(bytes, extractPath);
+            ZipUtils.unzip(bytes, extractPath);
             FileType fileType = detectUnzipContent(extractPath);
             if (fileType != null) {
                 return new FileType[] {fileType};

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import org.apache.commons.compress.utils.Lists;
 
 import io.github.kylinhunter.tools.file.detector.content.bean.DetectConext;
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
+import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.magic.bean.ReadMagic;
 import io.github.kylinhunter.tools.file.detector.magic.bean.Magic;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;

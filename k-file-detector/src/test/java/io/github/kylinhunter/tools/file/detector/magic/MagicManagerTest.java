@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
+import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.magic.bean.Magic;
 
 class MagicManagerTest {

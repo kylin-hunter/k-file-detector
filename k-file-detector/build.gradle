@@ -1,22 +1,19 @@
 dependencies {
-    api(rootProject.dependency_management['commons-io'])
-    api(rootProject.dependency_management['commons-lang3'])
-    api(rootProject.dependency_management['guava'])
     api(rootProject.dependency_management['commons-collections4'])
-    api(rootProject.dependency_management['reflections'])
     api(rootProject.dependency_management['dom4j'])
     api(rootProject.dependency_management['jaxen'])
     api(rootProject.dependency_management['commons-compress'])
-    implementation(rootProject.dependency_management['jsoup'])
     api('org.yaml:snakeyaml')
     api 'io.github.kylin-hunter:k-commons:1.0.2'
 
+    implementation(rootProject.dependency_management['jsoup'])
 }
 
 jar.enabled = true
 bootJar.enabled(false)
 
 test {
+    exclude 'io/github/**/FileDetectorTest**'
     jvmArgs "-javaagent:${classpath.find { it.name.contains("jmockit") }.absolutePath}"
     println jvmArgs
 }

@@ -1,6 +1,7 @@
 package io.github.kylinhunter.tools.file.detector.detect;
 
-import io.github.kylinhunter.tools.file.detector.common.component.C;
+import io.github.kylinhunter.commons.component.C;
+import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.tools.file.detector.content.MixContentDetector;
 import io.github.kylinhunter.tools.file.detector.content.bean.DetectConext;
 import io.github.kylinhunter.tools.file.detector.detect.bean.DetectResult;

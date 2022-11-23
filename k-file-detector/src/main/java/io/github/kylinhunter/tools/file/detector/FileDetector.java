@@ -3,7 +3,7 @@ package io.github.kylinhunter.tools.file.detector;
 import java.io.File;
 import java.io.InputStream;
 
-import io.github.kylinhunter.tools.file.detector.common.component.CF;
+import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.detect.DetectManager;
 import io.github.kylinhunter.tools.file.detector.detect.bean.DetectResult;
 import io.github.kylinhunter.tools.file.detector.magic.MagicReader;
