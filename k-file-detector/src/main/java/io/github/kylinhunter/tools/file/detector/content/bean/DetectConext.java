@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.compress.utils.Lists;
 
-import io.github.kylinhunter.tools.file.detector.common.util.FilenameUtil;
+import io.github.kylinhunter.commons.util.FilenameUtils;
 import io.github.kylinhunter.tools.file.detector.detect.bean.SortMagic;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 import io.github.kylinhunter.tools.file.detector.magic.bean.Magic;
@@ -35,7 +35,7 @@ public class DetectConext {
         String fileName = readMagic.getFileName();
         if (fileName != null && fileName.length() > 0) {
             this.fileName = fileName;
-            this.extension = FilenameUtil.getExtension(fileName);
+            this.extension = FilenameUtils.getExtension(fileName);
             if (this.extension != null) {
                 this.extension = extension.toLowerCase();
             }

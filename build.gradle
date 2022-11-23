@@ -91,6 +91,7 @@ subprojects {
             author = true
             version = true
             locale = "en_US"
+            tags = [ "description","date","title" ]
         }
         failOnError = false
 
@@ -106,6 +107,8 @@ subprojects {
             showStandardStreams = true
         }
     }
+
+
 
 
     publishing {
@@ -135,9 +138,9 @@ subprojects {
                         }
                     }
                     scm {
-                        url = "${KYLIN_MVN_CONFIG.url}"
-                        connection = "${KYLIN_MVN_CONFIG.connection}"
-                        developerConnection = "${KYLIN_MVN_CONFIG.developerConnection}"
+                        url =  "${KYLIN_MVN_CONFIG.url}"
+                        connection =  "${KYLIN_MVN_CONFIG.connection}"
+                        developerConnection =  "${KYLIN_MVN_CONFIG.developerConnection}"
                     }
                 }
             }
@@ -147,8 +150,8 @@ subprojects {
 
             maven {
                 url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                if (KYLIN_VERION.endsWith("SNAPSHOT")) {
-                    url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                if (KYLIN_VERION.endsWith("SNAPSHOT")){
+                    url  "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 }
 
                 credentials {

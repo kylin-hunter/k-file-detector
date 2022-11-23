@@ -28,7 +28,7 @@ class FileDetectorTest {
     @Test
     @Order(11)
     void detectAll() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected");
+        File dir = ResourceHelper.getDirInClassPath("files/detected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(48, files.length);
         DetectStatstic detectStatstic = new DetectStatstic(files.length);
@@ -57,7 +57,7 @@ class FileDetectorTest {
     @Test
     @Order(21)
     void detectAudioVideoDisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/audio_video");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/audio_video");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(9, files.length);
 
@@ -75,7 +75,7 @@ class FileDetectorTest {
     @Test
     @Order(22)
     void detectAudioVideoDisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/audio_video");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/audio_video");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(9, files.length);
 
@@ -91,7 +91,7 @@ class FileDetectorTest {
     @Test
     @Order(31)
     void detectExecuteDisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/execute");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/execute");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(13, files.length);
 
@@ -107,7 +107,7 @@ class FileDetectorTest {
     @Test
     @Order(32)
     void detectExecuteDisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/execute");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/execute");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(13, files.length);
 
@@ -123,7 +123,7 @@ class FileDetectorTest {
     @Test
     @Order(41)
     void detectOffice97DisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(5, files.length);
 
@@ -140,7 +140,7 @@ class FileDetectorTest {
     @Test
     @Order(42)
     void detectOffice97DisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office/97-2004");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/office/97-2004");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(5, files.length);
 
@@ -156,7 +156,7 @@ class FileDetectorTest {
     @Test
     @Order(43)
     void detectOffice2007DisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/office/2007");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(7, files.length);
 
@@ -173,7 +173,7 @@ class FileDetectorTest {
     @Test
     @Order(44)
     void detectOffice2007DisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/office/2007");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/office/2007");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(7, files.length);
 
@@ -189,7 +189,7 @@ class FileDetectorTest {
     @Test
     @Order(51)
     void detectOtherDisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/other");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/other");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(8, files.length);
 
@@ -206,7 +206,7 @@ class FileDetectorTest {
     @Test
     @Order(52)
     void detectOtherDisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/other");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/other");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(8, files.length);
 
@@ -222,7 +222,7 @@ class FileDetectorTest {
     @Test
     @Order(61)
     void detectPicDisguiseByExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/pic");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/pic");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(6, files.length);
 
@@ -239,7 +239,7 @@ class FileDetectorTest {
     @Test
     @Order(62)
     void detectPicDisguiseWithRemoveExtension() throws IOException {
-        File dir = ResourceHelper.getFileInClassPath("files/detected/pic");
+        File dir = ResourceHelper.getDirInClassPath("files/detected/pic");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(6, files.length);
 
@@ -255,7 +255,7 @@ class FileDetectorTest {
     @Test
     @Order(98)
     void allUndetected() {
-        File dir = ResourceHelper.getFileInClassPath("files/undetected");
+        File dir = ResourceHelper.getDirInClassPath("files/undetected");
         File[] files = FileUtils.listFiles(dir, null, true).toArray(new File[0]);
         Assertions.assertEquals(1, files.length);
         for (File file : files) {

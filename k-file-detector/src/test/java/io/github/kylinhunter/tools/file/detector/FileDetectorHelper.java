@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 
 import com.google.common.collect.Maps;
 import io.github.kylinhunter.commons.component.CF;
-import io.github.kylinhunter.tools.file.detector.common.util.FilenameUtil;
+import io.github.kylinhunter.commons.util.FilenameUtils;
 import io.github.kylinhunter.tools.file.detector.detect.bean.DetectResult;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
@@ -120,7 +120,7 @@ class FileDetectorHelper {
 
         List<String> allExtensions = Lists.newArrayList();
         fileName = fileName.toLowerCase();
-        String extension = FilenameUtil.getExtension(fileName);
+        String extension = FilenameUtils.getExtension(fileName);
         if (!StringUtils.isEmpty(extension)) {
             allExtensions.add(extension);
         }
@@ -167,7 +167,7 @@ class FileDetectorHelper {
         List<File> disguisFiles = Lists.newArrayList();
         for (File file : files) {
             if (file.isFile()) {
-                String fileExtension = FilenameUtil.getExtension(file.getName());
+                String fileExtension = FilenameUtils.getExtension(file.getName());
 
                 for (String extension : FILE_TYPE_MANAGER.getAllExtensions()) {
                     if (!fileExtension.equalsIgnoreCase(extension)) {
@@ -200,7 +200,7 @@ class FileDetectorHelper {
         List<File> disguisFiles = Lists.newArrayList();
         for (File file : files) {
             if (file.isFile()) {
-                String fileExtension = FilenameUtil.getExtension(file.getName());
+                String fileExtension = FilenameUtils.getExtension(file.getName());
 
                 if (!StringUtils.isEmpty(fileExtension)) {
 

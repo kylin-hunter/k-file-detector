@@ -13,14 +13,13 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import io.github.kylinhunter.commons.component.C;
-import io.github.kylinhunter.tools.file.detector.common.util.FilenameUtil;
-import io.github.kylinhunter.tools.file.detector.common.util.HexUtil;
+import io.github.kylinhunter.commons.util.FilenameUtils;
+import io.github.kylinhunter.commons.util.HexUtils;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeManager;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 import io.github.kylinhunter.tools.file.detector.magic.bean.Magic;
 import io.github.kylinhunter.tools.file.detector.magic.bean.ReadMagic;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,7 +59,7 @@ public class MagicReader {
         if (content != null && content.length > 0) {
 
             int magicLen = calMacgiclen(fileName, content.length, accurate);
-            String possibleNumber = HexUtil.toString(content, 0, magicLen);
+            String possibleNumber = HexUtils.toString(content, 0, magicLen);
             ReadMagic readMagic = new ReadMagic(fileName, possibleNumber);
             detectContentSupport(readMagic);
             if (readMagic.isDetectContent()) {
@@ -116,7 +115,7 @@ public class MagicReader {
             byte[] headContent = new byte[calMacgiclen(fileName, fileSize, accurate)];
             int len = inputStream.read(headContent);
             if (len > 0) {
-                String possibleMagic = HexUtil.toString(headContent, 0, len);
+                String possibleMagic = HexUtils.toString(headContent, 0, len);
                 ReadMagic readMagic = new ReadMagic(fileName, possibleMagic);
                 detectContentSupport(readMagic);
                 if (readMagic.isDetectContent()) {
@@ -149,7 +148,7 @@ public class MagicReader {
     private int calMacgiclen(String fileName, long fileSize, boolean accurate) {
         int magicLen = 0;
         if (accurate && !StringUtils.isEmpty(fileName)) {
-            String extension = FilenameUtil.getExtension(fileName);
+            String extension = FilenameUtils.getExtension(fileName);
             Set<FileType> fileTypes = this.fileTypeManager.getFileTypesByExtension(extension);
             for (FileType fileType : fileTypes) {
                 if (fileType.getMagicMaxLengthWithOffset() > magicLen) {

@@ -99,6 +99,7 @@ public class FileTypeManager {
      * @author BiJi'an
      * @date 2022-10-24 01:54
      */
+    @SuppressWarnings("unchecked")
     private void check(FileType fileType) {
         List<String> extensions = fileType.getExtensions();
         if (!CollectionUtils.isEmpty(extensions)) {
@@ -156,10 +157,6 @@ public class FileTypeManager {
 
         return idToFileTyes.get(id);
 
-    }
-
-    public int allExtensionSize() {
-        return allExtensions.size();
     }
 
 }
