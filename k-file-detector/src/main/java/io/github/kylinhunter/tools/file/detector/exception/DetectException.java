@@ -1,6 +1,6 @@
 package io.github.kylinhunter.tools.file.detector.exception;
 
-import io.github.kylinhunter.commons.exception.builtin.biz.BizException;
+import io.github.kylinhunter.commons.exception.embed.biz.BizException;
 
 /**
  * @author BiJi'an

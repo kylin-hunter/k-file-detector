@@ -1,38 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="true">
-    <contextName>logback</contextName>
+    <include resource="io/github/kylinhunter/commons/app/kylinhunter-app-default.xml"/>
+    <property name="app.name" value="k-file-detector-prepare"/>
+    <property name="app.logging.log_file_path_prefix" value="./logs/${app.name}"/>
+    <property name="app.logging.log_level" value="ERROR"/>
+    <include resource="io/github/kylinhunter/commons/app/kylinhunter-app.xml"/>
+    <logger name="io.github.kylinhunter" level="INFO"/>
 
-    <property name="log.path" value="./logs/k-file-detector.log"/>
-
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <!--
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <depLevel>ERROR</depLevel>
-        </filter>
-        -->
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n
-            </pattern>
-        </encoder>
-    </appender>
-
-    <appender name="file"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}.%d{yyyy-MM-dd}.zip</fileNamePattern>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>%date %level [%thread] %logger{36} [%file : %line] %msg%n
-            </pattern>
-        </encoder>
-    </appender>
-
-    <root level="error">
-        <appender-ref ref="console"/>
-        <appender-ref ref="file"/>
-    </root>
-
-    <logger name="io.github.kylinhunter.plat.file.detector" level="info"/>
 </configuration>
