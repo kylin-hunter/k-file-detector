@@ -1,10 +1,10 @@
 ext {
     profile = "local"
 //    KYLIN_VERION = "1.0.2-SNAPSHOT"
-    KYLIN_VERION = "1.0.1"
+    KYLIN_VERION = "1.0.6"
     KYLIN_IMAGE_REPO = "私服地址"
     KYLIN_IMAGE_VERSION = "v1"
-    KYLIN_GRADLE_SECRET_PATH = "/Users/bijian/gradle-secret.properties";
+    KYLIN_GRADLE_SECRET_PATH = "/Users/bijian/gradle-secret.properties"
     KYLIN_MVN_CONFIG = [
             name               : 'k-file-detector',
             description        : 'k-file-detector',
