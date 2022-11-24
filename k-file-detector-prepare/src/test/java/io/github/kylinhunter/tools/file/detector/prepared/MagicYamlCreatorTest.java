@@ -16,7 +16,7 @@ class MagicYamlCreatorTest {
     MagicYamlCreator magicYamlCreator = new MagicYamlCreator();
 
     @Test
-    void readMagicNumberByReg() {
+    void processTdsMagicDefault() {
         String td0Text = "[12 byte offset] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00";
         ParseMagic parseMagic = magicYamlCreator.processTdsMagicDefault(td0Text);
         Assertions.assertEquals(12, parseMagic.getOffset());
