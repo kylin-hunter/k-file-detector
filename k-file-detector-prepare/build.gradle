@@ -1,0 +1,17 @@
+dependencies {
+    implementation project(":k-file-detector")
+    implementation(rootProject.dependency_management['jsoup'])
+
+}
+
+jar.enabled = true
+bootJar.enabled(false)
+
+test {
+    jvmArgs "-javaagent:${classpath.find { it.name.contains("jmockit") }.absolutePath}"
+    println jvmArgs
+}
+
+
+
+
