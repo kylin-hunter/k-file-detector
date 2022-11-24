@@ -19,14 +19,14 @@
 ```
 #####2、gradle (gradle.org)
 ```java
-        implementation 'io.github.kylin-hunter:k-file-detector:1.0.1'
+        implementation 'io.github.kylin-hunter:k-file-detector:1.0.6'
 ```
 #####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>io.github.kylin-hunter</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>1.0.1</version>
+          <version>1.0.6</version>
         </dependency>
 ```
 
@@ -35,7 +35,7 @@
 1. 通过file检测
 ```java
 
-        DetectResult detectResult = FileDetector.detect(new File("xxxx.pdf"));  //通过file检测
+        DetectResult detectResult = FileDetector.detect(new File("xxxx.xxx"));  //通过file检测
         List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
         for (FileType fileType : possibleFileTypes) {
             System.out.println("id=" + fileType.getId()); // 文件类型唯一编号
@@ -47,8 +47,8 @@
 2. 通过文件流检测
 ```java
 
-        try (InputStream in = new FileInputStream(new File("xxx.pdf"))) {
-            DetectResult detectResult = FileDetector.detect(in); // 如果知道文件名也可以调用  FileDetector.detect(in,"xxx.pdf)
+        try (InputStream in = new FileInputStream(new File("xxx.xxx"))) {
+            DetectResult detectResult = FileDetector.detect(in); // 如果知道文件名也可以调用  FileDetector.detect(in,"xxx.xxx)
             List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
             for (FileType fileType : possibleFileTypes) {
                 System.out.println("id=" + fileType.getId()); // 文件类型唯一编号
@@ -60,8 +60,8 @@
 
 3. 通过字节检测
 ```java
-        byte[] content = FileUtils.readFileToByteArray(new File("xxx.pdf"));
-        DetectResult detectResult = FileDetector.detect(content); // 如果知道文件名也可以调用  FileDetector.detect(content,"xxx.pdf)
+        byte[] content = FileUtils.readFileToByteArray(new File("xxx.xxx"));
+        DetectResult detectResult = FileDetector.detect(content); // 如果知道文件名也可以调用  FileDetector.detect(content,"xxx.xxx)
         List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
         for (FileType fileType : possibleFileTypes) {
             System.out.println("id=" + fileType.getId()); // 文件类型唯一编号

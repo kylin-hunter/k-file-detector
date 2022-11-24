@@ -1,24 +1,19 @@
 dependencies {
-    api(rootProject.dep['commons-io'])
-    api(rootProject.dep['commons-lang3'])
-    api(rootProject.dep['guava'])
-    api(rootProject.dep['commons-collections4'])
+    api(rootProject.dependency_management['commons-collections4'])
+    api(rootProject.dependency_management['dom4j'])
+    api(rootProject.dependency_management['jaxen'])
+    api(rootProject.dependency_management['commons-compress'])
     api('org.yaml:snakeyaml')
-    api(rootProject.dep['reflections'])
-    api 'org.dom4j:dom4j:2.1.3'
-    api 'jaxen:jaxen:1.2.0'
-    api 'org.apache.commons:commons-compress:1.22'
+    api 'io.github.kylin-hunter:k-commons:1.0.3'
 
-    implementation(rootProject.dep['jsoup'])
-
-
-
+    implementation(rootProject.dependency_management['jsoup'])
 }
 
 jar.enabled = true
 bootJar.enabled(false)
 
 test {
+//    exclude 'io/github/**/FileDetectorTest**'
     jvmArgs "-javaagent:${classpath.find { it.name.contains("jmockit") }.absolutePath}"
     println jvmArgs
 }

@@ -17,14 +17,14 @@ a tool for detect file type
 ```
 #####2、gradle (gradle.org)
 ```java
-        implementation 'io.github.kylin-hunter:k-file-detector:1.0.1'
+        implementation 'io.github.kylin-hunter:k-file-detector:1.0.6'
 ```
 #####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>io.github.kylin-hunter</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>1.0.1</version>
+          <version>1.0.6</version>
         </dependency>
 ```
 
@@ -32,7 +32,7 @@ a tool for detect file type
 1. by file
 ```java
 
-        DetectResult detectResult = FileDetector.detect(new File("xxxx.pdf"));  //by file
+        DetectResult detectResult = FileDetector.detect(new File("xxxx.xxx"));  //by file
         List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
         for (FileType fileType : possibleFileTypes) {
             System.out.println("id=" + fileType.getId()); // file type id
@@ -44,8 +44,8 @@ a tool for detect file type
 2. by InputStream
 ```java
 
-        try (InputStream in = new FileInputStream(new File("xxx.pdf"))) {
-            // if  know the file name， you can invoke:  FileDetector.detect(in,"xxx.pdf)
+        try (InputStream in = new FileInputStream(new File("xxx.xxx"))) {
+            // if  know the file name， you can invoke:  FileDetector.detect(in,"xxx.xxx)
             DetectResult detectResult = FileDetector.detect(in); 
             List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
             for (FileType fileType : possibleFileTypes) {
@@ -58,8 +58,8 @@ a tool for detect file type
 
 3. by bytes
 ```java
-        byte[] content = FileUtils.readFileToByteArray(new File("xxx.pdf"));
-        // if  know the file name， you can invoke:  FileDetector.detect(content,"xxx.pdf)
+        byte[] content = FileUtils.readFileToByteArray(new File("xxx.xxx"));
+        // if  know the file name， you can invoke:  FileDetector.detect(content,"xxx.xxx)
         DetectResult detectResult = FileDetector.detect(content); 
         List<FileType> possibleFileTypes = detectResult.getPossibleFileTypes();
         for (FileType fileType : possibleFileTypes) {

@@ -1,0 +1,115 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath(app_plugins['spring-boot-gradle-plugin'])
+        classpath(app_plugins['gradle-docker-plugin'])
+    }
+}
+
+task kylinTaskChangeActiveProfile {
+    doLast {
+        println("@@ change active profile ==> " + "$buildDir/resources/main/application.yml")
+        File applicaitonFile = new File("$buildDir/resources/main/application.yml")
+        if (applicaitonFile.exists() && applicaitonFile.getAbsolutePath().indexOf("server") > 0) {
+            def list = []
+            println("@@ change active profile ==> " + profile)
+            applicaitonFile.withReader('UTF-8') { reader ->
+                reader.eachLine {
+                    if (it.startsWith('    active:')) {
+                        it = "    active: $profile"
+                        println("@@ change spring.profiles.active success ==> " + profile)
+                    }
+                    list.add(it)
+                }
+                applicaitonFile.withWriter('UTF-8') { writer ->
+                    list.each {
+                        writer.writeLine(it)
+                    }
+                }
+            }
+        }
+    }
+}
+
+task kylinTaskDockerImagePrepare(dependsOn: build) {
+
+    doLast {
+        def sourceFile = file("$rootProject.buildDir/docker-${project.name}/${project.name}-${project.version}.jar")
+        def distFile = file("$rootProject.buildDir/docker-${project.name}/${project.name}.jar")
+
+        copy {
+            from distFile
+            into "$rootProject.buildDir/docker-" + project.name
+        }
+        copy {
+            from 'src/main/resources/docker'
+            into "$rootProject.buildDir/docker-" + project.name
+            include 'Dockerfile'
+            include '/bin/*.sh'
+        }
+        copy {
+            from 'output/libs'
+            into "$rootProject.buildDir/docker-" + project.name
+            include '**/*.jar'
+
+
+        }
+        copy {
+            from configurations.compile
+            into "$rootProject.buildDir/docker-" + project.name + "/lib"
+        }
+
+        sourceFile.renameTo(distFile)
+
+
+    }
+
+
+}
+
+task kylinTaskDockerImageBuild(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage, dependsOn: kylinTaskDockerImagePrepare) {
+    inputDir = file("$rootProject.buildDir/docker-" + project.name)
+    images.add(KYLIN_IMAGE_REPO + project.name + ":" + rootProject.KYLIN_IMAGE_VERSION)
+}
+
+
+ext.kylinLoadSecretProperties = {
+    def localProperties = new Properties()
+    def dis = null
+    try {
+        def localFile = rootProject.file(KYLIN_GRADLE_SECRET_PATH)
+        if (localFile.exists()) {
+            dis = localFile.newDataInputStream()
+            localProperties.load(dis)
+            def sonatypeUsername = localProperties.getProperty("sonatypeUsername");
+            def sonatypePassword = localProperties.getProperty("sonatypePassword")
+            def signingKeyId = localProperties.getProperty("signing.keyId");
+            def signingPassword = localProperties.getProperty("signing.password")
+            def signingSecretKeyRingFile = localProperties.getProperty("signing.secretKeyRingFile")
+            ext.sonatypeUsername =sonatypeUsername
+            ext.sonatypePassword =sonatypePassword
+            ext."signing.keyId" =signingKeyId
+            ext."signing.password" = signingPassword
+            ext."signing.secretKeyRingFile" =signingSecretKeyRingFile
+
+            println "gradle-secret=>${sonatypeUsername} : ${sonatypePassword}: ${signingKeyId} : ${signingPassword}: ${signingSecretKeyRingFile}}"
+        }
+    } finally {
+        if (dis != null) {
+            dis.close()
+        }
+    }
+
+}
+
+
+
+
+
+

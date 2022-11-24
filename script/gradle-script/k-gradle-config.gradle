@@ -1,0 +1,26 @@
+ext {
+    profile = "local"
+//    KYLIN_VERION = "1.0.2-SNAPSHOT"
+    KYLIN_VERION = "1.0.6"
+    KYLIN_IMAGE_REPO = "私服地址"
+    KYLIN_IMAGE_VERSION = "v1"
+    KYLIN_GRADLE_SECRET_PATH = "/Users/bijian/gradle-secret.properties"
+    KYLIN_MVN_CONFIG = [
+            name               : 'k-file-detector',
+            description        : 'k-file-detector',
+            url                : 'https://github.com/kylin-hunter/k-file-detector',
+            connection         : 'scm:git:https://github.com/kylin-hunter/k-file-detector.git',
+            developerConnection: 'scm:git:https://github.com/kylin-hunter/k-file-detector.git',
+            developer          : [
+                    name : 'kylin-hunter',
+                    email: 'kylinhunter@163.com'
+            ],
+            license            : [
+                    name: 'The Apache Software License, Version 2.0',
+                    url : 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            ]
+    ]
+
+
+}
+

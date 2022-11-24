@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="true">
     <include resource="io/github/kylinhunter/commons/app/kylinhunter-app-default.xml"/>
-    <property name="app.name" value="k-file-detector"/>
+    <property name="app.name" value="k-file-detector-prepare"/>
     <property name="app.logging.log_file_path_prefix" value="./logs/${app.name}"/>
     <property name="app.logging.log_level" value="ERROR"/>
     <include resource="io/github/kylinhunter/commons/app/kylinhunter-app.xml"/>
