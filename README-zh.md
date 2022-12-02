@@ -32,7 +32,7 @@
 
 
 #### 使用说明
-支持的文件类型
+支持的文件类型:
 https://github.com/kylin-hunter/k-file-detector/blob/main/k-file-detector/src/main/resources/signature/file_types.yml
 1. 通过file检测
 ```java

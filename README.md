@@ -29,8 +29,11 @@ a tool for detect file type
 ```
 
 #### Instructions
-#####all supported file types
+#####
+
+all supported file types:
 https://github.com/kylin-hunter/k-file-detector/blob/main/k-file-detector/src/main/resources/signature/file_types.yml
+
 1. by file
 ```java
 
