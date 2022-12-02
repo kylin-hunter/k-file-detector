@@ -1,7 +1,7 @@
 ext {
     profile = "local"
 //    KYLIN_VERION = "1.0.2-SNAPSHOT"
-    KYLIN_VERION = "1.0.9"
+    KYLIN_VERION = "1.0.10"
     KYLIN_IMAGE_REPO = "私服地址"
     KYLIN_IMAGE_VERSION = "v1"
     KYLIN_GRADLE_SECRET_PATH = "/Users/bijian/gradle-secret.properties"
