@@ -19,14 +19,14 @@
 ```
 #####2、gradle (gradle.org)
 ```java
-        implementation 'io.github.kylin-hunter:k-file-detector:1.0.8'
+        implementation 'io.github.kylin-hunter:k-file-detector:1.0.9'
 ```
 #####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>io.github.kylin-hunter</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>1.0.8</version>
+          <version>1.0.9</version>
         </dependency>
 ```
 
