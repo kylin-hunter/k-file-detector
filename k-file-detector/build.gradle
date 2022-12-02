@@ -11,7 +11,9 @@ dependencies {
 
 jar.enabled = true
 bootJar.enabled(false)
-
+jar{
+    exclude("logback.xml")
+}
 test {
 //    exclude 'io/github/**/FileDetectorTest**'
     jvmArgs "-javaagent:${classpath.find { it.name.contains("jmockit") }.absolutePath}"
