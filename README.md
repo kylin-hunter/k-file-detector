@@ -17,18 +17,23 @@ a tool for detect file type
 ```
 #####2、gradle (gradle.org)
 ```java
-        implementation 'io.github.kylin-hunter:k-file-detector:1.0.6'
+        implementation 'io.github.kylin-hunter:k-file-detector:1.0.7'
 ```
 #####3、maven (maven.apache.org)
 ```java
         <dependency>
           <groupId>io.github.kylin-hunter</groupId>
             <artifactId>k-file-detector</artifactId>
-          <version>1.0.6</version>
+          <version>1.0.7</version>
         </dependency>
 ```
 
 #### Instructions
+#####
+
+all supported file types:
+https://github.com/kylin-hunter/k-file-detector/blob/main/k-file-detector/src/main/resources/signature/file_types.yml
+
 1. by file
 ```java
 
