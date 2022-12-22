@@ -1,5 +1,6 @@
 package io.github.kylinhunter.tools.file.detector.file;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,11 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import io.github.kylinhunter.commons.exception.embed.InitException;
 import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.bean.AdjustFileType;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
-
 import lombok.Data;
 
 /**
@@ -109,12 +110,16 @@ public class FileTypeConfigLoader {
     }
 
     private static <T> T load0(Class<T> clazz, String path) {
+        try (InputStream resource = ResourceHelper.getInputStreamInClassPath(path)) {
 
-        InputStream resource = ResourceHelper.getInputStreamInClassPath(path);
-        Objects.requireNonNull(resource);
-        T magicConfig = new Yaml().loadAs(resource, clazz);
-        Objects.requireNonNull(magicConfig);
-        return magicConfig;
+            Objects.requireNonNull(resource);
+            T magicConfig = new Yaml().loadAs(resource, clazz);
+            Objects.requireNonNull(magicConfig);
+            return magicConfig;
+        } catch (IOException e) {
+            throw new InitException("load error", e);
+        }
+
     }
 
     /**

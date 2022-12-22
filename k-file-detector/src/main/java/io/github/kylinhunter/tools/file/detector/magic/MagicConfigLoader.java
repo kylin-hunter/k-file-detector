@@ -1,5 +1,6 @@
 package io.github.kylinhunter.tools.file.detector.magic;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -10,13 +11,13 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import io.github.kylinhunter.commons.exception.embed.InitException;
 import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
 import io.github.kylinhunter.tools.file.detector.file.FileTypeConfigLoader;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 import io.github.kylinhunter.tools.file.detector.magic.bean.AdjustMagic;
 import io.github.kylinhunter.tools.file.detector.magic.bean.Magic;
-
 import lombok.Data;
 
 /**
@@ -117,11 +118,16 @@ public class MagicConfigLoader {
      */
     private static <T> T load0(Class<T> clazz, String path) {
 
-        InputStream resource = ResourceHelper.getInputStreamInClassPath(path);
-        Objects.requireNonNull(resource);
-        T magicConfig = new Yaml().loadAs(resource, clazz);
-        Objects.requireNonNull(magicConfig);
-        return magicConfig;
+        try (InputStream resource = ResourceHelper.getInputStreamInClassPath(path)) {
+
+            Objects.requireNonNull(resource);
+            T magicConfig = new Yaml().loadAs(resource, clazz);
+            Objects.requireNonNull(magicConfig);
+            return magicConfig;
+        } catch (IOException e) {
+            throw new InitException("load error", e);
+        }
+
     }
 
     /**
