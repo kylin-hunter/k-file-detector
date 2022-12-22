@@ -22,6 +22,7 @@ import org.jsoup.select.Elements;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+
 import io.github.kylinhunter.commons.component.C;
 import io.github.kylinhunter.commons.io.ResourceHelper;
 import io.github.kylinhunter.tools.file.detector.exception.DetectException;
@@ -31,7 +32,6 @@ import io.github.kylinhunter.tools.file.detector.prepared.parse.ParseMagicHelper
 import io.github.kylinhunter.tools.file.detector.prepared.parse.bean.ParseContext;
 import io.github.kylinhunter.tools.file.detector.prepared.parse.bean.ParseMagic;
 import io.github.kylinhunter.tools.file.detector.prepared.parse.bean.YamlMessage;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -54,8 +54,7 @@ public class MagicYamlCreator {
      * @date 2022-10-27 00:47
      */
     private String readHtml() {
-        try {
-            InputStream inputStreamInClassPath = ResourceHelper.getInputStreamInClassPath(HTML_PATH);
+        try (InputStream inputStreamInClassPath = ResourceHelper.getInputStreamInClassPath(HTML_PATH)) {
             return IOUtils.toString(inputStreamInClassPath, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DetectException("read html error", e);

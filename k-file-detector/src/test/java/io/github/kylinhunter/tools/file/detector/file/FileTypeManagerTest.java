@@ -1,13 +1,17 @@
 package io.github.kylinhunter.tools.file.detector.file;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Maps;
+
 import io.github.kylinhunter.commons.component.CF;
 import io.github.kylinhunter.tools.file.detector.file.bean.FileType;
 
@@ -25,11 +29,39 @@ class FileTypeManagerTest {
     @Test
     void getAllFileTypes() {
         List<FileType> allFileTypes = fileTypeManager.getAllFileTypes();
+
+        Set<String> all = new HashSet<>();
         allFileTypes.forEach(fileType -> {
             System.out.println(fileType.getId());
+            fileType.getExtensions().forEach(e -> {
+                all.add(e);
+            });
+
             FileTypeManagerTest.print(fileType);
         });
         Assertions.assertTrue(allFileTypes.size() > 0);
+
+        System.out.println(all.size());
+        all.remove("doc");
+        all.remove("docx");
+        all.remove("xls");
+        all.remove("xlsx");
+        all.remove("ppt");
+        all.remove("pptx");
+        all.remove("pdf");
+        all.remove("jpg");
+        all.remove("png");
+        all.remove("jpe");
+        all.remove("jpeg");
+        all.remove("mp4");
+        all.remove("mp3");
+        StringJoiner sj = new StringJoiner(",");
+        all.forEach(e -> {
+            sj.add(e);
+        });
+        System.out.println(all.size());
+
+        System.out.println(sj.toString());
 
     }
 
